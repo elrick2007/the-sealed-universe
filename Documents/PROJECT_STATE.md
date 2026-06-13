@@ -60,7 +60,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Tape measure/Caton measurement mechanic.
 - Library shelf-gap / Caton margin-mark clue.
 - December 2 / Incomplete casebook pressure line.
-- 2:47 scheduler hook for reserved Living Ledger events.
+- 2:47 scheduler with Kitchen clock overnight event trigger.
 - Conservatory-to-Sealed Wing transition gate.
 - Act 1 progression lock and next-route gate.
 
@@ -80,7 +80,8 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 12. Sealed Wing boundary stub: the boundary refuses to open and points toward a living name in the records.
 13. Martin Caldwell living record: after the sealed boundary asks for a living name, the Kitchen black-book record reveals Caldwell as `Status: Living` and recruiter.
 14. Mara December 2 / Incomplete seed: after Caldwell is exposed, Mara's own black-book line rewrites from a death date to `Incomplete`, seeding a subtle casebook countdown pressure line and reserving the next 2:47 Living Ledger event.
-15. Return to the unwritten door: after the Incomplete beat is armed, the sealed boundary accepts the word as a future route condition, pins new evidence, writes `2:47 AM - A Door In Draft`, and reveals the East/Sealed Wing as the next drafted space.
+15. Kitchen 2:47 clock: the Kitchen clock resolves the reserved page, writes `2:47 AM - Incomplete Writes Back`, completes the reserved-page objective, and changes the casebook line to `2:47 WROTE: INCOMPLETE`.
+16. Return to the unwritten door: after the Incomplete beat is armed or written, the sealed boundary accepts the word as a future route condition, pins new evidence, writes `2:47 AM - A Door In Draft`, and reveals the East/Sealed Wing as the next drafted space.
 
 ## Important Documents
 
@@ -165,4 +166,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to convert the reserved 2:47 hook into a fuller overnight event flow, or begin shaping the Sealed Wing drafted route into a playable Act 2/Act 3 threshold.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to shape the Sealed Wing drafted route into a playable Act 2/Act 3 threshold, or deepen the Library/Study puzzle into a stronger evidence-board dependency.

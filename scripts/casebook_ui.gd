@@ -158,7 +158,9 @@ func incomplete_status_line() -> String:
 	if not incomplete_countdown_active():
 		return ""
 	var line := "BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"
-	if bool(get_tree().root.get_meta("incomplete_247_armed", false)):
+	if bool(get_tree().root.get_meta("incomplete_247_fired", false)):
+		line += " / 2:47 WROTE: INCOMPLETE"
+	elif bool(get_tree().root.get_meta("incomplete_247_armed", false)):
 		line += " / NEXT 2:47 RESERVED"
 	return line
 

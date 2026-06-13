@@ -7,7 +7,7 @@ func get_prompt(_player: Node) -> String:
 	var root := get_tree().root
 	if transition_ready or bool(root.get_meta("sealed_wing_transition_ready", false)):
 		return "E - Touch unwritten door"
-	if bool(root.get_meta("incomplete_247_armed", false)):
+	if _has_incomplete_route_condition():
 		return "E - Offer Incomplete"
 	return "E - Test sealed boundary"
 
@@ -22,7 +22,7 @@ func interact(player: Node) -> void:
 	if bool(root.get_meta("sealed_wing_transition_ready", false)):
 		player.show_message("The door is still unwritten, but now it knows Mara's name. The next page will have to draw it.", 7.0)
 		return
-	if tested and bool(root.get_meta("incomplete_247_armed", false)):
+	if tested and _has_incomplete_route_condition():
 		_open_transition(player)
 		return
 	if tested:
@@ -46,6 +46,10 @@ func interact(player: Node) -> void:
 	)
 	player.add_journal_objective("find_living_name", "Find the living name that keeps the sealed wing unwritten.")
 	player.show_message("The sealed wing remains unwritten. The door is waiting for a living name, not another key.", 8.0)
+
+func _has_incomplete_route_condition() -> bool:
+	var root := get_tree().root
+	return bool(root.get_meta("incomplete_247_armed", false)) or bool(root.get_meta("incomplete_247_fired", false))
 
 func _open_transition(player: Node) -> void:
 	transition_ready = true

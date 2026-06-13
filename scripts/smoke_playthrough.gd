@@ -43,6 +43,7 @@ func _run() -> void:
 	var sealed_boundary: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingBoundary")
 	var caldwell_record: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord")
 	var mara_incomplete_entry: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/MaraIncompleteEntry")
+	var kitchen_clock_247: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenClock247")
 	var evidence_wall_warning: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapWallWarning")
 	var evidence_plans: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapPlans")
 	var evidence_kitchen_recording: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapKitchenRecording")
@@ -432,6 +433,19 @@ func _run() -> void:
 	_assert(_has_objective(hud, "return_to_unwritten_door"), "2:47 scheduler sends Mara back to the unwritten door")
 	_assert(evidence_incomplete.visible, "Incomplete entry reveals physical evidence scrap")
 
+	kitchen_clock_247.interact(player)
+	await process_frame
+	_assert(not clock_scheduler.is_incomplete_event_armed(), "2:47 event clears the armed scheduler state")
+	_assert(clock_scheduler.has_incomplete_event_fired(), "Kitchen clock fires the reserved 2:47 event")
+	_assert(not bool(scene.get_tree().root.get_meta("incomplete_247_armed", false)), "2:47 event clears reserved root state")
+	_assert(bool(scene.get_tree().root.get_meta("incomplete_247_fired", false)), "2:47 event exposes fired root state")
+	_assert(String(scene.get_tree().root.get_meta("last_247_event_id", "")) == "mara_incomplete", "2:47 event records the last fired event")
+	_assert(_objective_complete(hud, "watch_247_ledger"), "Kitchen clock completes the reserved-page objective")
+	_assert(_has_note(hud, "two_forty_seven_incomplete"), "Kitchen clock adds 2:47 written note")
+	_assert(_has_evidence(hud, "two_forty_seven_incomplete"), "Kitchen clock pins 2:47 written evidence")
+	_assert(_has_ledger_entry(hud, "two_forty_seven_incomplete"), "Kitchen clock writes Living Ledger event")
+	_assert(hud.incomplete_status_line().contains("2:47 WROTE: INCOMPLETE"), "Casebook shows fired 2:47 status after Kitchen clock")
+
 	sealed_boundary.interact(player)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("sealed_wing_transition_ready", false)), "Incomplete entry lets the sealed boundary accept the future route")
@@ -448,20 +462,24 @@ func _run() -> void:
 
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
+	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
 	var transition_note_count: int = _count_note(hud, "sealed_wing_transition_ready")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
 	_assert(_count_note(hud, "two_forty_seven_reserved") == reserved_note_count, "Repeated Incomplete entry inspection does not duplicate 2:47 reservation")
+	kitchen_clock_247.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "two_forty_seven_incomplete") == fired_note_count, "Repeated Kitchen clock inspection does not duplicate 2:47 event note")
 	sealed_boundary.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "sealed_wing_transition_ready") == transition_note_count, "Repeated sealed transition inspection does not duplicate future-route note")
 	hud.open_ledger()
 	await process_frame
-	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / NEXT 2:47 RESERVED"), "Living Ledger shows subtle Incomplete scheduler line")
+	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
 	hud.open_evidence_board()
 	await process_frame
-	_assert(hud.evidence_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / NEXT 2:47 RESERVED"), "Evidence board shows subtle Incomplete scheduler line")
+	_assert(hud.evidence_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Evidence board shows subtle Incomplete scheduler line")
 	hud._close_panels()
 
 	var rose_note_count: int = _count_note(hud, "rose_scent_trace")
