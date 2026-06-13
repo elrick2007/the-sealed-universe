@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=59 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://scripts/sealed_wing_boundary.gd" id="29"]
 [ext_resource type="Script" path="res://scripts/caldwell_record_interaction.gd" id="30"]
 [ext_resource type="Script" path="res://scripts/mara_incomplete_entry.gd" id="31"]
+[ext_resource type="Script" path="res://scripts/clock_scheduler.gd" id="32"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -147,6 +148,9 @@ environment = SubResource("Environment_slice")
 
 [node name="ProceduralDrone" type="AudioStreamPlayer" parent="."]
 script = ExtResource("7")
+
+[node name="ClockScheduler" type="Node" parent="."]
+script = ExtResource("32")
 
 [node name="HallLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)

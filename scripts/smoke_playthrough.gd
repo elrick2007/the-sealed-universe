@@ -14,6 +14,7 @@ func _run() -> void:
 
 	var player: Node = scene.get_node("Player")
 	var hud: Node = scene.get_node("HUD")
+	var clock_scheduler: Node = scene.get_node("ClockScheduler")
 	var director: Node = scene.get_node("WallHorrorDirector")
 	var recorder: Node = scene.get_node("Props/Recorder")
 	var key: Node = scene.get_node("Props/ServiceKey")
@@ -49,6 +50,8 @@ func _run() -> void:
 
 	_assert(not player.has_recorder, "Player starts without recorder")
 	_assert(not player.has_item("service_key"), "Player starts without service key")
+	_assert(not clock_scheduler.is_incomplete_event_armed(), "2:47 scheduler starts unarmed")
+	_assert(not bool(scene.get_tree().root.get_meta("incomplete_247_armed", false)), "2:47 scheduler root state starts unarmed")
 	_assert(not evidence_wall_warning.visible, "Evidence board starts with wall warning scrap hidden")
 	_assert(not evidence_plans.visible, "Evidence board starts with plan scrap hidden")
 	_assert(not evidence_caldwell.visible, "Evidence board starts with Caldwell record scrap hidden")
@@ -363,6 +366,7 @@ func _run() -> void:
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("mara_incomplete_seeded", false)), "Mara's Incomplete entry waits for Caldwell's living record")
+	_assert(not clock_scheduler.is_incomplete_event_armed(), "2:47 scheduler does not arm before Caldwell's living record")
 
 	kitchen_trigger._on_body_entered(player)
 	await process_frame
@@ -395,13 +399,20 @@ func _run() -> void:
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("mara_incomplete_seeded", false)), "Mara's Incomplete entry sets countdown seed state")
 	_assert(bool(scene.get_tree().root.get_meta("incomplete_countdown_seeded", false)), "Incomplete entry exposes countdown seed flag")
+	_assert(clock_scheduler.is_incomplete_event_armed(), "Incomplete entry arms the first 2:47 scheduler hook")
+	_assert(bool(scene.get_tree().root.get_meta("incomplete_247_armed", false)), "2:47 scheduler exposes armed root state")
+	_assert(String(scene.get_tree().root.get_meta("next_247_event_id", "")) == "mara_incomplete", "2:47 scheduler reserves Mara's Incomplete event")
 	_assert(hud.incomplete_countdown_active(), "Casebook exposes active Incomplete countdown state")
 	_assert(hud.incomplete_status_line().contains("DECEMBER 2 / INCOMPLETE"), "Casebook exposes subtle Incomplete status line")
+	_assert(hud.incomplete_status_line().contains("NEXT 2:47 RESERVED"), "Casebook exposes subtle reserved 2:47 status")
 	_assert(_objective_complete(hud, "trace_caldwell_recruiter"), "Incomplete entry completes Caldwell recruiter follow-up")
 	_assert(_has_note(hud, "mara_incomplete_entry"), "Incomplete entry adds December 2 note")
+	_assert(_has_note(hud, "two_forty_seven_reserved"), "2:47 scheduler adds reserved page note")
 	_assert(_has_evidence(hud, "mara_incomplete_entry"), "Incomplete entry pins December 2 evidence")
 	_assert(_has_ledger_entry(hud, "mara_incomplete_entry"), "Incomplete entry writes Living Ledger beat")
+	_assert(_has_ledger_entry(hud, "two_forty_seven_reserved"), "2:47 scheduler writes Living Ledger reservation")
 	_assert(_has_objective(hud, "decode_incomplete"), "Incomplete entry adds countdown follow-up objective")
+	_assert(_has_objective(hud, "watch_247_ledger"), "2:47 scheduler adds reserved-page objective")
 	_assert(evidence_incomplete.visible, "Incomplete entry reveals physical evidence scrap")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
@@ -410,15 +421,17 @@ func _run() -> void:
 	_assert(_count_note(hud, "caldwell_living_record") == caldwell_note_count, "Repeated Caldwell record inspection does not duplicate note")
 
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
+	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
+	_assert(_count_note(hud, "two_forty_seven_reserved") == reserved_note_count, "Repeated Incomplete entry inspection does not duplicate 2:47 reservation")
 	hud.open_ledger()
 	await process_frame
-	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"), "Living Ledger shows subtle Incomplete countdown line")
+	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / NEXT 2:47 RESERVED"), "Living Ledger shows subtle Incomplete scheduler line")
 	hud.open_evidence_board()
 	await process_frame
-	_assert(hud.evidence_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"), "Evidence board shows subtle Incomplete countdown line")
+	_assert(hud.evidence_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / NEXT 2:47 RESERVED"), "Evidence board shows subtle Incomplete scheduler line")
 	hud._close_panels()
 
 	var rose_note_count: int = _count_note(hud, "rose_scent_trace")

@@ -31,4 +31,7 @@ func interact(player: Node) -> void:
 		"Black Book"
 	)
 	player.add_journal_objective("decode_incomplete", "Find why Mara's December 2 entry rewrites to Incomplete.")
+	var scheduler := get_node_or_null("/root/Main/ClockScheduler")
+	if scheduler != null and scheduler.has_method("arm_incomplete_event"):
+		scheduler.arm_incomplete_event(player)
 	player.show_message("Mara Voss. December 2. The ink hesitates, then rewrites itself: Incomplete.", 8.0)

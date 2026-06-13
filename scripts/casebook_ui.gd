@@ -157,7 +157,10 @@ func incomplete_countdown_active() -> bool:
 func incomplete_status_line() -> String:
 	if not incomplete_countdown_active():
 		return ""
-	return "BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"
+	var line := "BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"
+	if bool(get_tree().root.get_meta("incomplete_247_armed", false)):
+		line += " / NEXT 2:47 RESERVED"
+	return line
 
 func add_evidence(id: String, title: String, detail: String, category := "Evidence") -> void:
 	for item in evidence_items:
