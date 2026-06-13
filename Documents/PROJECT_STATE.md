@@ -74,6 +74,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 10. Rose-scent trace: after the lemon tree is witnessed, the player can trace the impossible rose scent toward the sealed-wing boundary.
 11. Kitchen rose-trace return: the Kitchen accepts the rose contradiction and sends Mara back to test the sealed edge.
 12. Sealed Wing boundary stub: the boundary refuses to open and points toward a living name in the records.
+13. Martin Caldwell living record: after the sealed boundary asks for a living name, the Kitchen black-book record reveals Caldwell as `Status: Living` and recruiter.
 
 ## Important Documents
 
@@ -109,7 +110,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Sealed Wing Boundary Stub v1:
+Last known validation after Martin Caldwell Living Record v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -158,5 +159,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is the Conservatory rose-scent misdirection into the sealed-wing clue chain, followed by a route-lock review before replacing blockout rooms with Blender claymation architecture.
-After the sealed-wing boundary stub, the likely next playable beat is the Martin Caldwell / living-name setup: seed the estate-agent record as the first explicit recruiter clue before building the full sealed wing.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is the December 2 / Incomplete countdown seed: turn Mara's death-date rewrite into a visible ledger or black-book mechanic before building the full sealed wing.

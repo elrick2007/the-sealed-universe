@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=57 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://scripts/lemon_tree_interaction.gd" id="27"]
 [ext_resource type="Script" path="res://scripts/rose_scent_trace.gd" id="28"]
 [ext_resource type="Script" path="res://scripts/sealed_wing_boundary.gd" id="29"]
+[ext_resource type="Script" path="res://scripts/caldwell_record_interaction.gd" id="30"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -745,6 +746,22 @@ surface_material_override/0 = SubResource("Mat_paper")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Kitchen/KitchenRouteGate"]
 shape = SubResource("BoxShape_prop")
 
+[node name="CaldwellLivingRecord" type="StaticBody3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.54, 0, 0.1, 0, 0.1, 0, -0.1, 0, 0.34, 6.05, 0.98, -22.66)
+script = ExtResource("30")
+
+[node name="RecordPage" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="StatusStamp" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord"]
+transform = Transform3D(0.28, 0, 0.02, 0, 0.08, 0, -0.02, 0, 0.1, 0.16, 0.18, -0.04)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord"]
+shape = SubResource("BoxShape_prop")
+
 [node name="KitchenEvidenceBoard" type="StaticBody3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.18, 0, 0, 0, 0.42, 0, 0, 0, 0.05, 7.78, 1.55, -22.25)
 script = ExtResource("23")
@@ -791,6 +808,11 @@ transform = Transform3D(0.64, 0, 0, 0, 1.08, 0, 0, 0, 0.08, 8.36, 1.28, -22.18)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_paper")
 
+[node name="EvidenceScrapCaldwell" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.54, 0, 0, 0, 1.04, 0, 0, 0, 0.08, 8.48, 2.1, -22.18)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
 [node name="EvidencePinWallWarning" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 7.02, 1.86, -22.13)
 mesh = SubResource("BoxMesh_key")
@@ -823,6 +845,11 @@ surface_material_override/0 = SubResource("Mat_pin")
 
 [node name="EvidencePinKitchenRecording" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 8.5, 1.4, -22.13)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="EvidencePinCaldwell" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 8.62, 2.22, -22.13)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_pin")
 

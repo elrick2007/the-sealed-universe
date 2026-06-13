@@ -39,14 +39,17 @@ func _run() -> void:
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
 	var sealed_boundary: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingBoundary")
+	var caldwell_record: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord")
 	var evidence_wall_warning: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapWallWarning")
 	var evidence_plans: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapPlans")
 	var evidence_kitchen_recording: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapKitchenRecording")
+	var evidence_caldwell: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapCaldwell")
 
 	_assert(not player.has_recorder, "Player starts without recorder")
 	_assert(not player.has_item("service_key"), "Player starts without service key")
 	_assert(not evidence_wall_warning.visible, "Evidence board starts with wall warning scrap hidden")
 	_assert(not evidence_plans.visible, "Evidence board starts with plan scrap hidden")
+	_assert(not evidence_caldwell.visible, "Evidence board starts with Caldwell record scrap hidden")
 	next_route_gate.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("next_route_gate_open", false)), "Next route gate starts closed")
@@ -351,6 +354,9 @@ func _run() -> void:
 	sealed_boundary.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("sealed_wing_boundary_tested", false)), "Sealed boundary waits until rose trace is pinned in Kitchen")
+	caldwell_record.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("caldwell_record_found", false)), "Caldwell record stays blank before the sealed boundary asks for a living name")
 
 	kitchen_trigger._on_body_entered(player)
 	await process_frame
@@ -368,6 +374,21 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "sealed_wing_boundary"), "Sealed boundary test pins threshold evidence")
 	_assert(_has_ledger_entry(hud, "sealed_wing_boundary"), "Sealed boundary test writes Living Ledger beat")
 	_assert(_has_objective(hud, "find_living_name"), "Sealed boundary test adds living-name objective")
+
+	caldwell_record.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caldwell_record_found", false)), "Caldwell record sets living-name state")
+	_assert(_objective_complete(hud, "find_living_name"), "Caldwell record completes living-name objective")
+	_assert(_has_note(hud, "caldwell_living_record"), "Caldwell record adds living-name note")
+	_assert(_has_evidence(hud, "caldwell_living_record"), "Caldwell record pins living-name evidence")
+	_assert(_has_ledger_entry(hud, "caldwell_living_record"), "Caldwell record writes Living Ledger beat")
+	_assert(_has_objective(hud, "trace_caldwell_recruiter"), "Caldwell record adds recruiter follow-up objective")
+	_assert(evidence_caldwell.visible, "Caldwell record reveals physical evidence scrap")
+
+	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
+	caldwell_record.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caldwell_living_record") == caldwell_note_count, "Repeated Caldwell record inspection does not duplicate note")
 
 	var rose_note_count: int = _count_note(hud, "rose_scent_trace")
 	rose_trace.interact(player)
