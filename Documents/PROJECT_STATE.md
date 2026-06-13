@@ -71,6 +71,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 7. Dining Room route: table inspection, thirteenth-place puzzle, Eleanor place card, recorder response.
 8. Kitchen hub: ledger, evidence board, recorder dock, route gating.
 9. Conservatory Lemon Tree setup: route opens from Kitchen/Act 1 gate; lemon tree reveals the lemon/rose canon split.
+10. Rose-scent trace: after the lemon tree is witnessed, the player can trace the impossible rose scent toward the sealed-wing boundary.
 
 ## Important Documents
 
@@ -106,7 +107,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Conservatory Lemon Tree Setup v1:
+Last known validation after Conservatory Rose-Scent Trace v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -156,3 +157,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 ## Next Build Step
 
 Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is the Conservatory rose-scent misdirection into the sealed-wing clue chain, followed by a route-lock review before replacing blockout rooms with Blender claymation architecture.
+After the rose-scent trace, the likely next playable beat is either a Kitchen return acknowledgement for the sealed-wing clue or the first Conservatory-to-Sealed-Wing gate stub.

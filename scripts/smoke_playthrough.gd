@@ -37,6 +37,7 @@ func _run() -> void:
 	var next_route_gate: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenRouteGate")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
+	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
 	var evidence_wall_warning: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapWallWarning")
 	var evidence_plans: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapPlans")
 	var evidence_kitchen_recording: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapKitchenRecording")
@@ -321,6 +322,11 @@ func _run() -> void:
 	_assert(_has_note(hud, "conservatory_found"), "Conservatory entry records lemon/no-roses note")
 	_assert(_has_ledger_entry(hud, "conservatory_found"), "Conservatory entry writes Living Ledger beat")
 
+	rose_trace.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("rose_scent_traced", false)), "Rose scent trace waits until lemon tree is witnessed")
+	_assert(not _objective_complete(hud, "find_rose_scent_source"), "Rose scent objective cannot complete before lemon tree truth")
+
 	player.global_position = Vector3(12.7, 0.95, -22.6)
 	lemon_tree.interact(player)
 	await process_frame
@@ -330,6 +336,21 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "lemon_tree_witness"), "Lemon tree inspection pins witness evidence")
 	_assert(_has_ledger_entry(hud, "lemon_tree_witness"), "Lemon tree inspection writes Living Ledger beat")
 	_assert(_has_objective(hud, "find_rose_scent_source"), "Lemon tree inspection points rose scent toward sealed wing")
+
+	rose_trace.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("rose_scent_traced", false)), "Rose scent trace sets sealed-wing clue state")
+	_assert(_objective_complete(hud, "find_rose_scent_source"), "Rose scent trace completes source objective")
+	_assert(_has_note(hud, "rose_scent_trace"), "Rose scent trace adds sealed-wing scent note")
+	_assert(_has_evidence(hud, "rose_scent_trace"), "Rose scent trace pins scent evidence")
+	_assert(_has_ledger_entry(hud, "rose_scent_trace"), "Rose scent trace writes Living Ledger beat")
+	_assert(_has_objective(hud, "return_rose_trace_to_kitchen"), "Rose scent trace adds Kitchen return objective")
+	_assert(hud.discovered_map.has("east_wing"), "Rose scent trace keeps sealed wing edge known on the map")
+
+	var rose_note_count: int = _count_note(hud, "rose_scent_trace")
+	rose_trace.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "rose_scent_trace") == rose_note_count, "Repeated rose scent trace does not duplicate note")
 
 	player.use_tape_measure_on_surface("conservatory")
 	await process_frame

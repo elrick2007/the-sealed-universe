@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=55 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" path="res://scripts/next_route_gate.gd" id="25"]
 [ext_resource type="Script" path="res://scripts/conservatory_entry_trigger.gd" id="26"]
 [ext_resource type="Script" path="res://scripts/lemon_tree_interaction.gd" id="27"]
+[ext_resource type="Script" path="res://scripts/rose_scent_trace.gd" id="28"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -932,6 +933,22 @@ script = ExtResource("26")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger"]
 shape = SubResource("BoxShape_hall_trigger")
+
+[node name="RoseScentTrace" type="StaticBody3D" parent="Architecture/WestWingHallway/Conservatory"]
+transform = Transform3D(0.18, 0, 0, 0, 0.62, 0, 0, 0, 0.12, 15.06, 1.28, -22.15)
+script = ExtResource("28")
+
+[node name="ScentSmear" type="MeshInstance3D" parent="Architecture/WestWingHallway/Conservatory/RoseScentTrace"]
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="ScentThread" type="MeshInstance3D" parent="Architecture/WestWingHallway/Conservatory/RoseScentTrace"]
+transform = Transform3D(0.08, 0, 0.12, 0, 0.08, 0, -0.12, 0, 0.08, -0.22, -0.34, 0.06)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Conservatory/RoseScentTrace"]
+shape = SubResource("BoxShape_prop")
 
 [node name="HallEndWall" type="StaticBody3D" parent="Architecture/WestWingHallway"]
 transform = Transform3D(0.42, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -20.1)
