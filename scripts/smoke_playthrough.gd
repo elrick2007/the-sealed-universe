@@ -41,6 +41,7 @@ func _run() -> void:
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
 	var sealed_boundary: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingBoundary")
+	var sealed_draft_threshold: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingDraftThreshold")
 	var caldwell_record: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord")
 	var mara_incomplete_entry: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/MaraIncompleteEntry")
 	var kitchen_clock_247: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenClock247")
@@ -454,6 +455,17 @@ func _run() -> void:
 	_assert(_has_note(hud, "sealed_wing_transition_ready"), "Sealed transition adds future-route note")
 	_assert(_has_evidence(hud, "sealed_wing_transition_ready"), "Sealed transition pins future-route evidence")
 	_assert(_has_ledger_entry(hud, "sealed_wing_transition_ready"), "Sealed transition writes Living Ledger future-route beat")
+	_assert(_has_objective(hud, "enter_drafted_sealed_wing"), "Sealed transition adds drafted threshold objective")
+
+	sealed_draft_threshold.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("sealed_wing_draft_witnessed", false)), "Drafted threshold sets witnessed state")
+	_assert(_objective_complete(hud, "enter_drafted_sealed_wing"), "Drafted threshold completes its objective")
+	_assert(_has_note(hud, "sealed_wing_draft_witnessed"), "Drafted threshold adds east-west contradiction note")
+	_assert(_has_evidence(hud, "sealed_wing_draft_witnessed"), "Drafted threshold pins pencil corridor evidence")
+	_assert(_has_ledger_entry(hud, "sealed_wing_draft_witnessed"), "Drafted threshold writes Living Ledger pencil-corridor beat")
+	_assert(_has_objective(hud, "find_eleanor_journal_map"), "Drafted threshold adds Eleanor journal-map objective")
+	_assert(hud.visited_map.has("east_wing"), "Drafted threshold marks sealed wing edge visited")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -464,6 +476,7 @@ func _run() -> void:
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
 	var transition_note_count: int = _count_note(hud, "sealed_wing_transition_ready")
+	var draft_note_count: int = _count_note(hud, "sealed_wing_draft_witnessed")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -474,6 +487,9 @@ func _run() -> void:
 	sealed_boundary.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "sealed_wing_transition_ready") == transition_note_count, "Repeated sealed transition inspection does not duplicate future-route note")
+	sealed_draft_threshold.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "sealed_wing_draft_witnessed") == draft_note_count, "Repeated drafted threshold inspection does not duplicate pencil-corridor note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

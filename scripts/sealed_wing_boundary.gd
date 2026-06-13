@@ -73,4 +73,5 @@ func _open_transition(player: Node) -> void:
 		"Threshold"
 	)
 	player.reveal_map_area("east_wing")
+	player.add_journal_objective("enter_drafted_sealed_wing", "Step into the drafted sealed-wing threshold.")
 	player.show_message("The sealed wing does not open. It drafts itself around the word Incomplete.", 8.0)
