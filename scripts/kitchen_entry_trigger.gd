@@ -9,6 +9,8 @@ func _on_body_entered(body: Node) -> void:
 	if not body.has_method("show_message"):
 		return
 	body.visit_map_area("kitchen")
+	if _acknowledge_rose_trace_return(body):
+		return
 	if visited_once:
 		body.show_message(_return_message(body), 7.0)
 		return
@@ -32,6 +34,8 @@ func _return_message(body: Node) -> String:
 
 func _return_reasons(body: Node) -> Array:
 	var reasons := []
+	if bool(get_tree().root.get_meta("rose_scent_traced", false)) and not bool(get_tree().root.get_meta("rose_trace_returned", false)):
+		reasons.append("rose-scent contradiction ready")
 	if body.has_method("ledger_unread_count") and body.ledger_unread_count() > 0:
 		reasons.append("new ledger page")
 	if body.has_method("evidence_unread_count") and body.evidence_unread_count() > 0:
@@ -40,6 +44,24 @@ func _return_reasons(body: Node) -> Array:
 	if pending > 0:
 		reasons.append("recorder transcription ready")
 	return reasons
+
+func _acknowledge_rose_trace_return(body: Node) -> bool:
+	var root := get_tree().root
+	if not bool(root.get_meta("rose_scent_traced", false)):
+		return false
+	if bool(root.get_meta("rose_trace_returned", false)):
+		return false
+	root.set_meta("rose_trace_returned", true)
+	body.complete_journal_objective("return_rose_trace_to_kitchen")
+	body.add_journal_note("rose_trace_pinned", "Back in the Kitchen, the rose scent files as a contradiction: lemons witnessed the murder, but roses mark the sealed door.")
+	body.add_ledger_entry(
+		"rose_trace_pinned",
+		"Mara brought the smell of roses back to the Kitchen and pinned it beside the lemon-tree witness. The board did not solve the lie. It gave the lie a direction.",
+		"2:47 AM - Pinned Scent"
+	)
+	body.add_journal_objective("approach_sealed_wing_edge", "Return to the rose trace and test the sealed wing boundary.")
+	body.show_message("The Kitchen accepts the rose trace as evidence. The sealed edge of the house is ready to test.", 8.0)
+	return true
 
 func _join_reasons(reasons: Array) -> String:
 	if reasons.size() == 1:

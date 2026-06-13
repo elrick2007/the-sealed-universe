@@ -38,6 +38,7 @@ func _run() -> void:
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
+	var sealed_boundary: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingBoundary")
 	var evidence_wall_warning: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapWallWarning")
 	var evidence_plans: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapPlans")
 	var evidence_kitchen_recording: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapKitchenRecording")
@@ -346,6 +347,27 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "rose_scent_trace"), "Rose scent trace writes Living Ledger beat")
 	_assert(_has_objective(hud, "return_rose_trace_to_kitchen"), "Rose scent trace adds Kitchen return objective")
 	_assert(hud.discovered_map.has("east_wing"), "Rose scent trace keeps sealed wing edge known on the map")
+
+	sealed_boundary.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("sealed_wing_boundary_tested", false)), "Sealed boundary waits until rose trace is pinned in Kitchen")
+
+	kitchen_trigger._on_body_entered(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("rose_trace_returned", false)), "Kitchen return acknowledges rose trace")
+	_assert(_objective_complete(hud, "return_rose_trace_to_kitchen"), "Kitchen return completes rose trace return objective")
+	_assert(_has_note(hud, "rose_trace_pinned"), "Kitchen return records pinned scent note")
+	_assert(_has_ledger_entry(hud, "rose_trace_pinned"), "Kitchen return writes pinned scent Living Ledger beat")
+	_assert(_has_objective(hud, "approach_sealed_wing_edge"), "Kitchen return adds sealed boundary objective")
+
+	sealed_boundary.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("sealed_wing_boundary_tested", false)), "Sealed boundary test sets route-gate state")
+	_assert(_objective_complete(hud, "approach_sealed_wing_edge"), "Sealed boundary test completes approach objective")
+	_assert(_has_note(hud, "sealed_wing_boundary"), "Sealed boundary test adds threshold note")
+	_assert(_has_evidence(hud, "sealed_wing_boundary"), "Sealed boundary test pins threshold evidence")
+	_assert(_has_ledger_entry(hud, "sealed_wing_boundary"), "Sealed boundary test writes Living Ledger beat")
+	_assert(_has_objective(hud, "find_living_name"), "Sealed boundary test adds living-name objective")
 
 	var rose_note_count: int = _count_note(hud, "rose_scent_trace")
 	rose_trace.interact(player)
