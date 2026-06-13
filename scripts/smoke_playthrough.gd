@@ -23,6 +23,7 @@ func _run() -> void:
 	var plans: Node = scene.get_node("Props/ManorPlans")
 	var library_trigger: Node = scene.get_node("Architecture/WestWingHallway/Library/LibraryEntryTrigger")
 	var library_wall: Node3D = scene.get_node("Architecture/WestWingHallway/Library/LibraryWhisperWall")
+	var library_shelf_gap: Node = scene.get_node("Architecture/WestWingHallway/Library/LibraryShelfGap")
 	var study_trigger: Node = scene.get_node("Architecture/WestWingHallway/Study/StudyEntryTrigger")
 	var tape_measure: Node = scene.get_node("Props/TapeMeasure")
 	var dining_trigger: Node = scene.get_node("Architecture/WestWingHallway/DiningRoom/DiningEntryTrigger")
@@ -150,11 +151,26 @@ func _run() -> void:
 	player.global_position = Vector3(-5.65, 0.95, -14.2)
 	player.use_tape_measure_on_surface("library_wall")
 	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("library_missing_inch_measured", false)), "Library wall measurement exposes shelf-gap state")
 	_assert(_has_note(hud, "measure_library_discrepancy"), "Tape measure records Library wall discrepancy")
 	_assert(_objective_complete(hud, "measure_library_wall"), "Library wall measurement completes contradiction objective")
+	_assert(_has_objective(hud, "check_shelf_gap"), "Library wall measurement adds shelf-gap objective")
 	_assert(_has_objective(hud, "follow_missing_inch"), "Library wall measurement adds follow-up objective")
 	_assert(_has_evidence(hud, "library_measurement"), "Library wall measurement pins required evidence")
 	_assert(_has_ledger_entry(hud, "measure_library_ledger"), "Library wall measurement writes Living Ledger entry")
+
+	library_shelf_gap.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_margin_mark_found", false)), "Shelf gap inspection finds Caton's margin mark")
+	_assert(_objective_complete(hud, "check_shelf_gap"), "Shelf gap inspection completes shelf-gap objective")
+	_assert(_has_note(hud, "caton_margin_mark"), "Shelf gap inspection adds Caton mark note")
+	_assert(_has_evidence(hud, "caton_margin_mark"), "Shelf gap inspection pins Caton mark evidence")
+	_assert(_has_ledger_entry(hud, "caton_margin_mark"), "Shelf gap inspection writes Living Ledger entry")
+
+	var caton_mark_note_count: int = _count_note(hud, "caton_margin_mark")
+	library_shelf_gap.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caton_margin_mark") == caton_mark_note_count, "Repeated shelf gap inspection does not duplicate Caton mark note")
 
 	player.global_position = Vector3(0.0, 0.95, -14.0)
 	player.use_tape_measure_on_surface("west_wing_wall")

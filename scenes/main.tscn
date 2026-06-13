@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=60 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" path="res://scripts/caldwell_record_interaction.gd" id="30"]
 [ext_resource type="Script" path="res://scripts/mara_incomplete_entry.gd" id="31"]
 [ext_resource type="Script" path="res://scripts/clock_scheduler.gd" id="32"]
+[ext_resource type="Script" path="res://scripts/library_shelf_gap_interaction.gd" id="33"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -380,6 +381,17 @@ surface_material_override/0 = SubResource("Mat_wood")
 transform = Transform3D(0.48, 0, 0, 0, 1.1, 0, 0, 0, 0.14, -5.65, 1.15, -17.12)
 mesh = SubResource("BoxMesh_wall_short")
 surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="LibraryShelfGap" type="StaticBody3D" parent="Architecture/WestWingHallway/Library"]
+transform = Transform3D(0.1, 0, 0, 0, 0.75, 0, 0, 0, 0.055, -5.65, 1.12, -16.88)
+script = ExtResource("33")
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/Library/LibraryShelfGap"]
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Library/LibraryShelfGap"]
+shape = SubResource("BoxShape_prop")
 
 [node name="LibraryEntryTrigger" type="Area3D" parent="Architecture/WestWingHallway/Library"]
 transform = Transform3D(1.45, 0, 0, 0, 1, 0, 0, 0, 1.25, -5.2, 1.0, -14.1)

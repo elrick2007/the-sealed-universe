@@ -58,6 +58,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Kitchen hub return loop.
 - Recorder yield system.
 - Tape measure/Caton measurement mechanic.
+- Library shelf-gap / Caton margin-mark clue.
 - December 2 / Incomplete casebook pressure line.
 - 2:47 scheduler hook for reserved Living Ledger events.
 - Conservatory-to-Sealed Wing transition gate.
@@ -70,7 +71,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 3. West Wing Door: open after the recorder/key sequence.
 4. West Wing Hall: trigger threshold scare and new objective.
 5. Manor Plans: collect map and reveal partial ground floor.
-6. Library/Study route: inspect Library wall, open Study access, collect tape measure, measure true/false spaces.
+6. Library/Study route: inspect Library wall, open Study access, collect tape measure, measure true/false spaces, then inspect the shelf gap to find Caton's missing-inch margin mark.
 7. Dining Room route: table inspection, thirteenth-place puzzle, Eleanor place card, recorder response.
 8. Kitchen hub: ledger, evidence board, recorder dock, route gating.
 9. Conservatory Lemon Tree setup: route opens from Kitchen/Act 1 gate; lemon tree reveals the lemon/rose canon split.
@@ -115,7 +116,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Conservatory to Sealed Wing Transition v1:
+Last known validation after Library/Study Deeper Puzzle v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -164,4 +165,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to either convert the reserved 2:47 hook into a fuller overnight event flow, or expand the Library/Study deeper puzzle now that the Sealed Wing route condition is drafted.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to convert the reserved 2:47 hook into a fuller overnight event flow, or begin shaping the Sealed Wing drafted route into a playable Act 2/Act 3 threshold.

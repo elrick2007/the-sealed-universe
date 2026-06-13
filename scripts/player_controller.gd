@@ -206,10 +206,12 @@ func _apply_tape_measurement(surface_id: String) -> void:
 		add_journal_objective("measure_library_wall", "Measure the Library wall the shelves were facing.")
 	elif surface_id == "library_wall":
 		show_message("Library wall: 18 ft by 14 ft, but one inch vanishes behind the shelf line.", 7.0)
+		get_tree().root.set_meta("library_missing_inch_measured", true)
 		add_journal_note("measure_library_discrepancy", "The Library wall is missing one inch. The house is not hiding rooms; it is shaving truth from them.")
 		add_evidence("library_measurement", "Library Missing Inch", "The tape measure proves the Library wall is one inch shorter than the room should allow.", "Measurement")
 		add_ledger_entry("measure_library_ledger", "The Library wall lost an inch under the tape. Mara wrote the number down before the house could decide it had always been otherwise.", "2:47 AM - The Missing Inch")
 		complete_journal_objective("measure_library_wall")
+		add_journal_objective("check_shelf_gap", "Check the shelf gap where the inch disappears.")
 		add_journal_objective("follow_missing_inch", "Follow the missing inch toward the Dining Room.")
 	elif surface_id == "west_wing_hall" or surface_id == "west_wing_wall":
 		show_message("West Wing Hall: Caton's plan says 42 ft. The tape says 47.", 7.0)
