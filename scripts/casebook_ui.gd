@@ -151,6 +151,14 @@ func evidence_unread_count() -> int:
 func is_act_1_ready() -> bool:
 	return act_1_ready
 
+func incomplete_countdown_active() -> bool:
+	return bool(get_tree().root.get_meta("incomplete_countdown_seeded", false))
+
+func incomplete_status_line() -> String:
+	if not incomplete_countdown_active():
+		return ""
+	return "BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"
+
 func add_evidence(id: String, title: String, detail: String, category := "Evidence") -> void:
 	for item in evidence_items:
 		if item.id == id:
@@ -366,6 +374,9 @@ func _refresh_journal() -> void:
 	if journal_content == null:
 		return
 	var lines := ["[b]JOURNAL[/b]", "", "[b]Objectives[/b]"]
+	_add_incomplete_casebook_line(lines)
+	if incomplete_countdown_active():
+		lines.append("")
 	for objective in objectives:
 		var marker := "x" if objective.complete else " "
 		lines.append("[indent][%s] %s[/indent]" % [marker, objective.text])
@@ -480,6 +491,9 @@ func _refresh_ledger() -> void:
 	if ledger_content == null:
 		return
 	var lines := ["[b]LIVING LEDGER[/b]", ""]
+	_add_incomplete_casebook_line(lines)
+	if incomplete_countdown_active():
+		lines.append("")
 	if unread_ledger_entries > 0:
 		var page_word := "page" if unread_ledger_entries == 1 else "pages"
 		lines.append("[i]%d new %s written since Mara last looked.[/i]" % [unread_ledger_entries, page_word])
@@ -507,6 +521,9 @@ func _refresh_evidence_board() -> void:
 		"Required proof pinned: %d / %d" % [found_required, required_total],
 		""
 	]
+	_add_incomplete_casebook_line(lines)
+	if incomplete_countdown_active():
+		lines.append("")
 	if unread_evidence_items > 0:
 		var proof_word := "piece" if unread_evidence_items == 1 else "pieces"
 		lines.append("[i]%d new %s of proof pinned since Mara last looked.[/i]" % [unread_evidence_items, proof_word])
@@ -521,6 +538,12 @@ func _refresh_evidence_board() -> void:
 			lines.append("")
 	lines.append("[center]Press ESC to return to game[/center]")
 	evidence_content.text = "\n".join(lines)
+
+func _add_incomplete_casebook_line(lines: Array) -> void:
+	var status := incomplete_status_line()
+	if status == "":
+		return
+	lines.append("[color=#d8b06f99][i]%s[/i][/color]" % status)
 
 func _refresh_map() -> void:
 	if map_content == null:

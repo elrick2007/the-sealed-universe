@@ -395,6 +395,8 @@ func _run() -> void:
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("mara_incomplete_seeded", false)), "Mara's Incomplete entry sets countdown seed state")
 	_assert(bool(scene.get_tree().root.get_meta("incomplete_countdown_seeded", false)), "Incomplete entry exposes countdown seed flag")
+	_assert(hud.incomplete_countdown_active(), "Casebook exposes active Incomplete countdown state")
+	_assert(hud.incomplete_status_line().contains("DECEMBER 2 / INCOMPLETE"), "Casebook exposes subtle Incomplete status line")
 	_assert(_objective_complete(hud, "trace_caldwell_recruiter"), "Incomplete entry completes Caldwell recruiter follow-up")
 	_assert(_has_note(hud, "mara_incomplete_entry"), "Incomplete entry adds December 2 note")
 	_assert(_has_evidence(hud, "mara_incomplete_entry"), "Incomplete entry pins December 2 evidence")
@@ -411,6 +413,13 @@ func _run() -> void:
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
+	hud.open_ledger()
+	await process_frame
+	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"), "Living Ledger shows subtle Incomplete countdown line")
+	hud.open_evidence_board()
+	await process_frame
+	_assert(hud.evidence_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE"), "Evidence board shows subtle Incomplete countdown line")
+	hud._close_panels()
 
 	var rose_note_count: int = _count_note(hud, "rose_scent_trace")
 	rose_trace.interact(player)

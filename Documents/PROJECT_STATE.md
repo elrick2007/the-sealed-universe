@@ -58,6 +58,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Kitchen hub return loop.
 - Recorder yield system.
 - Tape measure/Caton measurement mechanic.
+- December 2 / Incomplete casebook pressure line.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -75,7 +76,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 11. Kitchen rose-trace return: the Kitchen accepts the rose contradiction and sends Mara back to test the sealed edge.
 12. Sealed Wing boundary stub: the boundary refuses to open and points toward a living name in the records.
 13. Martin Caldwell living record: after the sealed boundary asks for a living name, the Kitchen black-book record reveals Caldwell as `Status: Living` and recruiter.
-14. Mara December 2 / Incomplete seed: after Caldwell is exposed, Mara's own black-book line rewrites from a death date to `Incomplete`, seeding the future countdown mechanic.
+14. Mara December 2 / Incomplete seed: after Caldwell is exposed, Mara's own black-book line rewrites from a death date to `Incomplete`, seeding a subtle casebook countdown pressure line.
 
 ## Important Documents
 
@@ -111,7 +112,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after December 2 / Incomplete Countdown Seed v1:
+Last known validation after Countdown UI v2:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -160,4 +161,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is Countdown UI v2: give the December 2 / Incomplete seed a visible clock-facing reminder without making it feel like a normal quest timer.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to turn the Incomplete pressure into the first 2:47 scheduler hook, or move onward into the next authored room branch if we want more playable space first.
