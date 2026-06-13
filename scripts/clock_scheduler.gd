@@ -35,6 +35,7 @@ func arm_incomplete_event(player: Node = null) -> void:
 		)
 	if player.has_method("add_journal_objective"):
 		player.add_journal_objective("watch_247_ledger", "Watch what the Living Ledger writes at 2:47.")
+		player.add_journal_objective("return_to_unwritten_door", "Return to the unwritten door with Mara's Incomplete entry.")
 
 func is_incomplete_event_armed() -> bool:
 	return incomplete_event_armed or bool(get_tree().root.get_meta("incomplete_247_armed", false))

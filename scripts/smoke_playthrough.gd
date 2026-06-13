@@ -413,7 +413,17 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "two_forty_seven_reserved"), "2:47 scheduler writes Living Ledger reservation")
 	_assert(_has_objective(hud, "decode_incomplete"), "Incomplete entry adds countdown follow-up objective")
 	_assert(_has_objective(hud, "watch_247_ledger"), "2:47 scheduler adds reserved-page objective")
+	_assert(_has_objective(hud, "return_to_unwritten_door"), "2:47 scheduler sends Mara back to the unwritten door")
 	_assert(evidence_incomplete.visible, "Incomplete entry reveals physical evidence scrap")
+
+	sealed_boundary.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("sealed_wing_transition_ready", false)), "Incomplete entry lets the sealed boundary accept the future route")
+	_assert(_objective_complete(hud, "decode_incomplete"), "Sealed transition completes the Incomplete decoding objective")
+	_assert(_objective_complete(hud, "return_to_unwritten_door"), "Sealed transition completes the return-to-door objective")
+	_assert(_has_note(hud, "sealed_wing_transition_ready"), "Sealed transition adds future-route note")
+	_assert(_has_evidence(hud, "sealed_wing_transition_ready"), "Sealed transition pins future-route evidence")
+	_assert(_has_ledger_entry(hud, "sealed_wing_transition_ready"), "Sealed transition writes Living Ledger future-route beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -422,10 +432,14 @@ func _run() -> void:
 
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
+	var transition_note_count: int = _count_note(hud, "sealed_wing_transition_ready")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
 	_assert(_count_note(hud, "two_forty_seven_reserved") == reserved_note_count, "Repeated Incomplete entry inspection does not duplicate 2:47 reservation")
+	sealed_boundary.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "sealed_wing_transition_ready") == transition_note_count, "Repeated sealed transition inspection does not duplicate future-route note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / NEXT 2:47 RESERVED"), "Living Ledger shows subtle Incomplete scheduler line")
