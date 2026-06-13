@@ -10,7 +10,8 @@ var evidence_visuals := {
 	"dining_table": ["EvidenceScrapDiningTable", "EvidencePinDiningTable"],
 	"eleanor_place_card": ["EvidenceScrapEleanorCard", "EvidencePinEleanorCard"],
 	"kitchen_wall_recording": ["EvidenceScrapKitchenRecording", "EvidencePinKitchenRecording", "EvidenceThreadAB", "EvidenceThreadBC", "EvidenceThreadFinal"],
-	"caldwell_living_record": ["EvidenceScrapCaldwell", "EvidencePinCaldwell"]
+	"caldwell_living_record": ["EvidenceScrapCaldwell", "EvidencePinCaldwell"],
+	"mara_incomplete_entry": ["EvidenceScrapIncomplete", "EvidencePinIncomplete"]
 }
 
 func _ready() -> void:
