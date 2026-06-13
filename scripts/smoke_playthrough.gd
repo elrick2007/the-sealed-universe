@@ -42,6 +42,7 @@ func _run() -> void:
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
 	var sealed_boundary: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingBoundary")
 	var sealed_draft_threshold: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/SealedWingDraftThreshold")
+	var eleanor_journal_map: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/EleanorJournalMap")
 	var caldwell_record: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/CaldwellLivingRecord")
 	var mara_incomplete_entry: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/MaraIncompleteEntry")
 	var kitchen_clock_247: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenClock247")
@@ -467,6 +468,17 @@ func _run() -> void:
 	_assert(_has_objective(hud, "find_eleanor_journal_map"), "Drafted threshold adds Eleanor journal-map objective")
 	_assert(hud.visited_map.has("east_wing"), "Drafted threshold marks sealed wing edge visited")
 
+	eleanor_journal_map.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("eleanor_journal_map_found", false)), "Eleanor journal map sets found state")
+	_assert(bool(scene.get_tree().root.get_meta("impossible_corridor_seeded", false)), "Eleanor journal map seeds impossible corridor state")
+	_assert(player.has_item("eleanor_journal_map"), "Eleanor journal map becomes an inventory document")
+	_assert(_objective_complete(hud, "find_eleanor_journal_map"), "Eleanor journal map completes its objective")
+	_assert(_has_note(hud, "eleanor_journal_map_found"), "Eleanor journal map adds the 42 ft contradiction note")
+	_assert(_has_evidence(hud, "eleanor_journal_map_found"), "Eleanor journal map pins sealed-wing map evidence")
+	_assert(_has_ledger_entry(hud, "eleanor_journal_map_found"), "Eleanor journal map writes Living Ledger map beat")
+	_assert(_has_objective(hud, "measure_impossible_corridor"), "Eleanor journal map adds impossible-corridor measurement objective")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -477,6 +489,7 @@ func _run() -> void:
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
 	var transition_note_count: int = _count_note(hud, "sealed_wing_transition_ready")
 	var draft_note_count: int = _count_note(hud, "sealed_wing_draft_witnessed")
+	var eleanor_map_note_count: int = _count_note(hud, "eleanor_journal_map_found")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -490,6 +503,9 @@ func _run() -> void:
 	sealed_draft_threshold.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "sealed_wing_draft_witnessed") == draft_note_count, "Repeated drafted threshold inspection does not duplicate pencil-corridor note")
+	eleanor_journal_map.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "eleanor_journal_map_found") == eleanor_map_note_count, "Repeated Eleanor journal map reading does not duplicate map note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

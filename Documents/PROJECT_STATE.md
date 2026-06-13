@@ -63,6 +63,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - 2:47 scheduler with Kitchen clock overnight event trigger.
 - Conservatory-to-Sealed Wing transition gate.
 - Sealed Wing drafted threshold stub.
+- Eleanor's hand-drawn sealed-wing map pickup.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -84,6 +85,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 15. Kitchen 2:47 clock: the Kitchen clock resolves the reserved page, writes `2:47 AM - Incomplete Writes Back`, completes the reserved-page objective, and changes the casebook line to `2:47 WROTE: INCOMPLETE`.
 16. Return to the unwritten door: after the Incomplete beat is armed or written, the sealed boundary accepts the word as a future route condition, pins new evidence, writes `2:47 AM - A Door In Draft`, and reveals the East/Sealed Wing as the next drafted space.
 17. Drafted Sealed Wing threshold: a small pencilled threshold takes weight, completes the drafted-door objective, marks the East/Sealed Wing as visited, and adds the next objective to find Eleanor's hand-drawn sealed-wing map.
+18. Eleanor's hand-drawn map: a small iron-gall map page in the drafted threshold completes the map objective, pins the `42 ft / it is not` contradiction, and seeds the next impossible-corridor measurement objective.
 
 ## Important Documents
 
@@ -168,4 +170,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to begin Eleanor's hand-drawn sealed-wing map / impossible-corridor setup, or deepen the Library/Study puzzle into a stronger evidence-board dependency.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to make the sealed-wing impossible corridor measurable with the tape, then use the result as an Act 2 gate.

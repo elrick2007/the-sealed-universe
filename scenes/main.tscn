@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=63 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" path="res://scripts/library_shelf_gap_interaction.gd" id="33"]
 [ext_resource type="Script" path="res://scripts/kitchen_247_clock_interaction.gd" id="34"]
 [ext_resource type="Script" path="res://scripts/sealed_wing_draft_threshold.gd" id="35"]
+[ext_resource type="Script" path="res://scripts/eleanor_journal_map_interaction.gd" id="36"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1085,6 +1086,27 @@ surface_material_override/0 = SubResource("Mat_pin")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Conservatory/SealedWingDraftThreshold"]
 shape = SubResource("BoxShape_prop")
+
+[node name="EleanorJournalMap" type="Area3D" parent="Architecture/WestWingHallway/Conservatory"]
+transform = Transform3D(0.36, 0, -0.18, 0, 0.08, 0, 0.18, 0, 0.36, 14.55, 0.92, -23.02)
+script = ExtResource("36")
+
+[node name="Paper" type="MeshInstance3D" parent="Architecture/WestWingHallway/Conservatory/EleanorJournalMap"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="FortyTwoLine" type="MeshInstance3D" parent="Architecture/WestWingHallway/Conservatory/EleanorJournalMap"]
+transform = Transform3D(0.72, 0, 0.08, 0, 0.08, 0, -0.08, 0, 0.12, 0.0, 0.12, -0.04)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="ItIsNotMark" type="MeshInstance3D" parent="Architecture/WestWingHallway/Conservatory/EleanorJournalMap"]
+transform = Transform3D(0.46, 0, -0.08, 0, 0.08, 0, 0.08, 0, 0.1, 0.06, -0.1, 0.06)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Conservatory/EleanorJournalMap"]
+shape = SubResource("BoxShape_key")
 
 [node name="HallEndWall" type="StaticBody3D" parent="Architecture/WestWingHallway"]
 transform = Transform3D(0.42, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -20.1)
