@@ -40,6 +40,7 @@ func _run() -> void:
 	var first_floor_stairs: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/FirstFloorStairs")
 	var gallery_landing_trigger: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/GalleryLandingTrigger")
 	var chandelier_handprint: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/ChandelierHandprint")
+	var unnumbered_guest_room: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -79,6 +80,9 @@ func _run() -> void:
 	chandelier_handprint.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("chandelier_handprint_found", false)), "Chandelier handprint waits until Gallery Landing is reached")
+	unnumbered_guest_room.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("unnumbered_guest_room_found", false)), "Unnumbered guest room waits until chandelier photo proof")
 
 	recorder.interact(player)
 	await process_frame
@@ -558,6 +562,16 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "chandelier_handprint_photo"), "Camera photo writes Living Ledger beat")
 	_assert(_has_objective(hud, "find_unnumbered_guest_room"), "Camera photo adds unnumbered guest room objective")
 
+	unnumbered_guest_room.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("unnumbered_guest_room_found", false)), "Unnumbered guest room sets found state")
+	_assert(bool(scene.get_tree().root.get_meta("unnumbered_room_trade_seeded", false)), "Unnumbered guest room seeds bed trade state")
+	_assert(_objective_complete(hud, "find_unnumbered_guest_room"), "Unnumbered guest room completes objective")
+	_assert(_has_note(hud, "unnumbered_guest_room"), "Unnumbered guest room adds note")
+	_assert(_has_evidence(hud, "unnumbered_guest_room"), "Unnumbered guest room pins room evidence")
+	_assert(_has_ledger_entry(hud, "unnumbered_guest_room"), "Unnumbered guest room writes Living Ledger beat")
+	_assert(_has_objective(hud, "test_unnumbered_bed_trade"), "Unnumbered guest room adds trade objective")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -575,6 +589,7 @@ func _run() -> void:
 	var gallery_landing_note_count: int = _count_note(hud, "gallery_landing_reached")
 	var chandelier_handprint_note_count: int = _count_note(hud, "chandelier_handprint")
 	var chandelier_photo_note_count: int = _count_note(hud, "chandelier_handprint_photo")
+	var unnumbered_room_note_count: int = _count_note(hud, "unnumbered_guest_room")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -609,6 +624,9 @@ func _run() -> void:
 	player._photograph_chandelier_handprint()
 	await process_frame
 	_assert(_count_note(hud, "chandelier_handprint_photo") == chandelier_photo_note_count, "Repeated chandelier photo does not duplicate handprint photo note")
+	unnumbered_guest_room.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "unnumbered_guest_room") == unnumbered_room_note_count, "Repeated unnumbered room inspection does not duplicate note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

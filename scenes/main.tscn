@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=67 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" path="res://scripts/first_floor_stairs_interaction.gd" id="37"]
 [ext_resource type="Script" path="res://scripts/gallery_landing_trigger.gd" id="38"]
 [ext_resource type="Script" path="res://scripts/chandelier_handprint_interaction.gd" id="39"]
+[ext_resource type="Script" path="res://scripts/unnumbered_guest_room_interaction.gd" id="40"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1212,13 +1213,23 @@ surface_material_override/0 = SubResource("Mat_wall")
 shape = SubResource("BoxShape_wall_long")
 
 [node name="LandingRightWall" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
-transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.24, 2.9, 4.45, -5.2)
+transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.08, 2.9, 4.45, -6.55)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWall"]
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="LandingRightWallSouth" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.08, 2.9, 4.45, -3.85)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWallSouth"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWallSouth"]
 shape = SubResource("BoxShape_wall_long")
 
 [node name="LandingVoid" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding"]
@@ -1273,6 +1284,69 @@ script = ExtResource("38")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/GalleryLandingTrigger"]
 shape = SubResource("BoxShape_hall_trigger")
+
+[node name="UnnumberedGuestRoom" type="Node3D" parent="Architecture/FirstFloor"]
+
+[node name="GuestRoomFloor" type="StaticBody3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.46, 0, 0, 0, 1, 0, 0, 0, 0.24, 5.45, 3.0, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomFloor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="GuestRoomBackWall" type="StaticBody3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.46, 0, 0, 0, 0.82, 0, 0, 0, 1, 5.45, 4.45, -7.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomBackWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomBackWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="GuestRoomRightWall" type="StaticBody3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.24, 8.0, 4.45, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomRightWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomRightWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="GuestRoomFrontWall" type="StaticBody3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.46, 0, 0, 0, 0.82, 0, 0, 0, 1, 5.45, 4.45, -3.35)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomFrontWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/GuestRoomFrontWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="UnnumberedBed" type="StaticBody3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(1.25, 0, 0, 0, 0.34, 0, 0, 0, 1.85, 6.0, 3.36, -5.95)
+script = ExtResource("40")
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed"]
+shape = SubResource("BoxShape_prop")
+
+[node name="GuestBook" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.55, 0, 0.0, 0, 0.08, 0, 0.0, 0, 0.42, 4.2, 3.55, -4.35)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="FreshWaterEwer" type="MeshInstance3D" parent="Architecture/FirstFloor/UnnumberedGuestRoom"]
+transform = Transform3D(0.24, 0, 0, 0, 0.45, 0, 0, 0, 0.24, 4.0, 3.66, -4.7)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_metal")
 
 [node name="Props" type="Node3D" parent="."]
 

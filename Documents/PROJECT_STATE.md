@@ -70,6 +70,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - First Floor stair / Act 2 transition stub.
 - Gallery Landing v1 with chandelier handprint evidence beat.
 - Chandelier handprint photo proof that gates the unnumbered guest bedroom lead.
+- Unnumbered Guest Bedroom v1 blockout with guest-book evidence and bed-trade seed.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -97,6 +98,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 21. First Floor stair stub: after the Kitchen accepts the borrowed five feet, Mara can find a provisional staircase, start Act 2, and receive the Gallery Landing objective.
 22. Gallery Landing v1: the borrowed stairs now place Mara on a blockout First Floor landing, reframe the Entrance Hall from above, and seed the raised chandelier handprint clue toward the unnumbered guest bedroom route.
 23. Camera / Photo Verb v1: Mara carries a camera from the start, but the verb only matters once the house leaves visible proof. Photographing the opened chandelier links pins a photo-evidence beat and unlocks the unnumbered guest bedroom objective.
+24. Unnumbered Guest Bedroom v1: after the chandelier photo, the family-side wrong room can be entered. The guest book and too-ready bed pin the room as missing from household records and seed the future overnight trade puzzle.
 
 ## Important Documents
 
@@ -132,7 +134,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Camera / Photo Verb v1:
+Last known validation after Unnumbered Guest Bedroom v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -181,4 +183,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Unnumbered Guest Bedroom v1 from the photographed chandelier route.
+Build the Unnumbered Guest Bedroom bed-trade v1, using the burnt page fragment as the first altered item.

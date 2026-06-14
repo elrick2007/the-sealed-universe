@@ -60,6 +60,7 @@ Target runtime:
 10. Return to the Kitchen hub for ledger pages, evidence board progress, recorder transcription, and Act 1 route gating.
 11. Open the Conservatory/Lemon Tree setup, correcting the canon: Eleanor's murder belongs to lemon trees; the rose scent belongs to the sealed wing.
 12. Photograph visible proof the house leaves behind before the next route opens.
+13. Enter the unnumbered guest bedroom and seed the bed-trade puzzle.
 
 ## Project Memory
 
@@ -90,6 +91,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
+- Build the unnumbered guest bedroom's overnight trade puzzle.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.
