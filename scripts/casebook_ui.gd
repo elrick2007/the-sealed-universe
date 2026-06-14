@@ -702,6 +702,8 @@ func _use_inventory_item(id: String) -> void:
 		player.show_message("The altered fragment reads: ...ASHFORD, E... not burned, not saved, just returned.", 7.0)
 	elif id == "not_glass_marble":
 		player.show_message("The not-glass marble is warm in Mara's palm. It belongs in a lock that pretends to be a child's game.", 7.0)
+	elif id == "caton_field_book":
+		player.show_message("Caton's Field Book keeps two sets of numbers: the dimensions he submitted, and the dimensions the house allowed.", 7.0)
 	else:
 		player.show_message("Mara turns the item over, but it offers no answer yet.")
 

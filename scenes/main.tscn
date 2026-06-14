@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=75 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -47,6 +47,7 @@
 [ext_resource type="Script" path="res://scripts/long_attic_wire_interaction.gd" id="45"]
 [ext_resource type="Script" path="res://scripts/sick_room_chart_interaction.gd" id="46"]
 [ext_resource type="Script" path="res://scripts/water_tank_interaction.gd" id="47"]
+[ext_resource type="Script" path="res://scripts/mirror_chest_interaction.gd" id="48"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1618,6 +1619,23 @@ transform = Transform3D(0.42, 0, 0, 0, 0.45, 0, 0, 0, 0.42, -12.05, 6.42, -8.0)
 mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_wood")
 
+[node name="NorthMirrorChest" type="StaticBody3D" parent="Architecture/Attic/LongAttic/SickRooms/NorthSickRoom"]
+transform = Transform3D(0.8, 0, 0, 0, 0.32, 0, 0, 0, 0.55, -12.35, 6.31, -8.78)
+script = ExtResource("48")
+chest_side = "north"
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthMirrorChest"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="Socket" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthMirrorChest"]
+transform = Transform3D(0.18, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0.72, -0.58)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthMirrorChest"]
+shape = SubResource("BoxShape_prop")
+
 [node name="NorthFeverChart" type="StaticBody3D" parent="Architecture/Attic/LongAttic/SickRooms/NorthSickRoom"]
 transform = Transform3D(0.38, 0, 0, 0, 0.62, 0, 0, 0, 0.08, -13.05, 6.95, -9.05)
 script = ExtResource("46")
@@ -1671,6 +1689,24 @@ surface_material_override/0 = SubResource("Mat_shadow")
 transform = Transform3D(0.42, 0, 0, 0, 0.45, 0, 0, 0, 0.42, -7.95, 6.42, -8.0)
 mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="SouthMirrorChest" type="StaticBody3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom"]
+transform = Transform3D(0.8, 0, 0, 0, 0.32, 0, 0, 0, 0.55, -7.65, 6.31, -8.78)
+script = ExtResource("48")
+chest_side = "south"
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="CatonFieldBook" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest"]
+visible = false
+transform = Transform3D(0.52, 0, 0, 0, 0.08, 0, 0, 0, 0.36, 0, 0.78, -0.02)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest"]
+shape = SubResource("BoxShape_prop")
 
 [node name="SouthFeverChart" type="StaticBody3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom"]
 transform = Transform3D(0.38, 0, 0, 0, 0.62, 0, 0, 0, 0.08, -6.95, 6.95, -9.05)

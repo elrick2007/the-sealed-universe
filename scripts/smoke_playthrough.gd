@@ -49,6 +49,8 @@ func _run() -> void:
 	var blank_bell_wire: Node = scene.get_node("Architecture/Attic/LongAttic/BlankBellWire")
 	var north_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthFeverChart")
 	var south_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthFeverChart")
+	var north_mirror_chest: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthMirrorChest")
+	var south_mirror_chest: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest")
 	var water_tank: Node = scene.get_node("Architecture/Attic/LongAttic/WaterTankRoom/WaterTank")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -765,6 +767,23 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "water_tank_soldered_tin"), "Water Tank writes Living Ledger entry")
 	_assert(hud.discovered_map.has("water_tank_room"), "Water Tank marks its room known on map")
 
+	south_mirror_chest.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("caton_field_book_found", false)), "South mirror chest waits for its north twin")
+	north_mirror_chest.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("mirror_chest_unlocked", false)), "North mirror chest unlocks mirrored chest state")
+	_assert(bool(scene.get_tree().root.get_meta("caton_field_book_found", false)), "Mirror chest route finds Caton's Field Book")
+	_assert(bool(scene.get_tree().root.get_meta("caton_overlay_unlocked", false)), "Caton's Field Book unlocks Caton overlay state")
+	_assert(bool(scene.get_tree().root.get_meta("measurement_overlay_unlocked", false)), "Caton's Field Book unlocks measurement overlay state")
+	_assert(not player.has_item("not_glass_marble"), "Mirror chest consumes not-glass marble inventory item")
+	_assert(player.has_item("caton_field_book"), "Mirror chest grants Caton's Field Book inventory item")
+	_assert(_objective_complete(hud, "open_mirror_chest"), "Mirror chest completes chest objective")
+	_assert(_has_objective(hud, "use_caton_field_book"), "Mirror chest opens Caton Field Book objective")
+	_assert(_has_note(hud, "caton_field_book_found"), "Mirror chest adds Caton Field Book note")
+	_assert(_has_evidence(hud, "caton_field_book_found"), "Mirror chest pins Caton Field Book evidence")
+	_assert(_has_ledger_entry(hud, "caton_field_book_found"), "Mirror chest writes Caton Field Book ledger entry")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -800,6 +819,7 @@ func _run() -> void:
 	var south_sick_chart_note_count: int = _count_note(hud, "sick_room_south_chart")
 	var ada_contradiction_note_count: int = _count_note(hud, "ada_sick_room_contradiction")
 	var water_tank_note_count: int = _count_note(hud, "water_tank_soldered_tin")
+	var caton_field_book_note_count: int = _count_note(hud, "caton_field_book_found")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -872,6 +892,11 @@ func _run() -> void:
 	water_tank.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "water_tank_soldered_tin") == water_tank_note_count, "Repeated Water Tank inspection does not duplicate soldered tin note")
+	north_mirror_chest.interact(player)
+	await process_frame
+	south_mirror_chest.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caton_field_book_found") == caton_field_book_note_count, "Repeated mirror chest inspections do not duplicate Caton Field Book note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
