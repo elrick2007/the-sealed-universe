@@ -13,6 +13,8 @@ func _on_body_entered(body: Node) -> void:
 		return
 	if _acknowledge_impossible_measure_return(body):
 		return
+	if _acknowledge_void_recording_return(body):
+		return
 	if visited_once:
 		body.show_message(_return_message(body), 7.0)
 		return
@@ -41,6 +43,8 @@ func _return_reasons(body: Node) -> Array:
 		reasons.append("rose-scent contradiction ready")
 	if bool(root.get_meta("impossible_corridor_measured", false)) and not bool(root.get_meta("impossible_measure_returned", false)):
 		reasons.append("impossible measurement ready")
+	if bool(root.get_meta("attic_void_recorder_yield_found", false)) and not bool(root.get_meta("attic_void_recording_returned", false)):
+		reasons.append("attic void recording ready")
 	if body.has_method("ledger_unread_count") and body.ledger_unread_count() > 0:
 		reasons.append("new ledger page")
 	if body.has_method("evidence_unread_count") and body.evidence_unread_count() > 0:
@@ -89,6 +93,31 @@ func _acknowledge_impossible_measure_return(body: Node) -> bool:
 		body.unlock_map_floor("first_floor")
 	body.add_journal_objective("find_first_floor_stairs", "Use the borrowed five feet to find the staircase to the First Floor.")
 	body.show_message("The Kitchen accepts the impossible measurement. A first-floor plan unlocks in the map.", 8.0)
+	return true
+
+func _acknowledge_void_recording_return(body: Node) -> bool:
+	var root := get_tree().root
+	if not bool(root.get_meta("attic_void_recorder_yield_found", false)):
+		return false
+	if bool(root.get_meta("attic_void_recording_returned", false)):
+		return false
+	root.set_meta("attic_void_recording_returned", true)
+	root.set_meta("attic_void_recording_pinned", true)
+	body.complete_journal_objective("return_void_recording_to_kitchen")
+	body.add_journal_note("attic_void_recording_pinned", "Back in the Kitchen, the attic void recording files as proof that the house is cataloguing Mara before she is gone.")
+	body.add_evidence(
+		"attic_void_recording_pinned",
+		"Kitchen Pin: Filed Alive",
+		"The void recording is copied to the Kitchen board: shelving sounds, a patient male voice, and Mara handled as an item before she is missing.",
+		"Recording"
+	)
+	body.add_ledger_entry(
+		"attic_void_recording_pinned",
+		"Mara pinned the attic void recording to the Kitchen board. The voice had not threatened her. It had filed her. That was worse; threats still believed she could answer.",
+		"2:47 AM - Filed to the Board"
+	)
+	body.add_journal_objective("trace_filing_voice_source", "Trace where the filing voice is shelving Mara's name.")
+	body.show_message("The Kitchen accepts the void recording. Mara has been filed before she is missing.", 8.0)
 	return true
 
 func _join_reasons(reasons: Array) -> String:

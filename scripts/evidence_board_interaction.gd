@@ -12,7 +12,8 @@ var evidence_visuals := {
 	"kitchen_wall_recording": ["EvidenceScrapKitchenRecording", "EvidencePinKitchenRecording", "EvidenceThreadAB", "EvidenceThreadBC", "EvidenceThreadFinal"],
 	"caldwell_living_record": ["EvidenceScrapCaldwell", "EvidencePinCaldwell"],
 	"mara_incomplete_entry": ["EvidenceScrapIncomplete", "EvidencePinIncomplete"],
-	"act_2_first_floor_gate": ["EvidenceScrapAct2Gate", "EvidencePinAct2Gate"]
+	"act_2_first_floor_gate": ["EvidenceScrapAct2Gate", "EvidencePinAct2Gate"],
+	"attic_void_recording_pinned": ["EvidenceScrapAtticVoid", "EvidencePinAtticVoid"]
 }
 
 func _ready() -> void:

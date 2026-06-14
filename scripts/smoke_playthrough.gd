@@ -811,6 +811,15 @@ func _run() -> void:
 	_assert(_has_note(hud, "attic_void_recorder_yield"), "Attic void recording adds filed-voice note")
 	_assert(_has_evidence(hud, "attic_void_recorder_yield"), "Attic void recording pins filed-voice evidence")
 	_assert(_has_ledger_entry(hud, "attic_void_recorder_yield"), "Attic void recording writes Living Ledger beat")
+	kitchen_trigger._on_body_entered(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("attic_void_recording_returned", false)), "Kitchen return accepts the attic void recording")
+	_assert(bool(scene.get_tree().root.get_meta("attic_void_recording_pinned", false)), "Kitchen return pins the attic void recording")
+	_assert(_objective_complete(hud, "return_void_recording_to_kitchen"), "Kitchen return completes void recording return objective")
+	_assert(_has_note(hud, "attic_void_recording_pinned"), "Kitchen return adds filed-alive board note")
+	_assert(_has_evidence(hud, "attic_void_recording_pinned"), "Kitchen return pins filed-alive board evidence")
+	_assert(_has_ledger_entry(hud, "attic_void_recording_pinned"), "Kitchen return writes filed-alive Living Ledger beat")
+	_assert(_has_objective(hud, "trace_filing_voice_source"), "Kitchen return opens filing voice source objective")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -851,6 +860,7 @@ func _run() -> void:
 	var caton_overlay_west_wing_note_count: int = _count_note(hud, "caton_overlay_west_wing")
 	var caton_overlay_attic_void_note_count: int = _count_note(hud, "caton_overlay_attic_void")
 	var attic_void_recorder_note_count: int = _count_note(hud, "attic_void_recorder_yield")
+	var attic_void_recording_pinned_note_count: int = _count_note(hud, "attic_void_recording_pinned")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -937,6 +947,9 @@ func _run() -> void:
 	director.use_recorder(attic_void_wall.global_position)
 	await process_frame
 	_assert(_count_note(hud, "attic_void_recorder_yield") == attic_void_recorder_note_count, "Repeated attic void recording does not duplicate filed-voice note")
+	kitchen_trigger._on_body_entered(player)
+	await process_frame
+	_assert(_count_note(hud, "attic_void_recording_pinned") == attic_void_recording_pinned_note_count, "Repeated Kitchen return does not duplicate attic void board note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

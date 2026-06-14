@@ -83,6 +83,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Caton Field Book overlay payoff v1, turning the Field Book into a tape-measure modifier that compares Caton's submitted dimensions against the house's true dimensions.
 - Attic Void / Caton overlay payoff v1, using Caton's Field Book on the attic void to compare exterior dimensions against the chain fed through the wire hole.
 - Attic Void recorder yield v1, capturing the wrong male filing voice behind the no-access wall after Caton's overlay proof.
+- Attic Void Kitchen return beat v1, pinning the filed-alive recording to the Kitchen evidence board and opening the filing-voice source lead.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -124,6 +125,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 35. Caton Field Book overlay payoff v1: after the mirrored chest route, using the tape on the West Wing Hall now overlays Caton's submitted `42 ft` against the house's true `47 ft`, pins a submitted/true measurement proof, completes the Field Book objective, and opens the attic-void measurement lead.
 36. Attic Void / Caton overlay payoff v1: using Caton's overlay on the attic void after tracing the blank bell wire proves the exterior `9 x 12 ft` dimensions cannot contain the `41 ft` chain measurement, pins the void-measurement evidence, writes the `2:47 AM - The Room That Refused` ledger beat, completes the attic-void objective, and opens the recorder objective for the void wall.
 37. Attic Void recorder yield v1: recording the void wall after Caton's proof captures shelving sounds and a patient male dictation, `Item: one journalist, lapsed`, pins the filed-voice evidence, writes `2:47 AM - Filed Alive`, and opens the Kitchen return objective for the void recording.
+38. Attic Void Kitchen return beat v1: returning to the Kitchen after the void recording completes the return objective, pins `Kitchen Pin: Filed Alive` to the board, writes `2:47 AM - Filed to the Board`, and opens the objective to trace where the filing voice is shelving Mara's name.
 
 ## Important Documents
 
@@ -159,7 +161,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Attic Void recorder yield v1:
+Last known validation after Attic Void Kitchen return beat v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -208,4 +210,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Kitchen return/evidence-board beat for the attic void recording.
+Build the filing-voice source route opened by the Kitchen-pinned attic void recording.

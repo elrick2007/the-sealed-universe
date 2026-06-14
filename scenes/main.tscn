@@ -956,6 +956,11 @@ transform = Transform3D(0.5, 0, 0, 0, 0.95, 0, 0, 0, 0.08, 8.92, 1.68, -22.18)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_paper")
 
+[node name="EvidenceScrapAtticVoid" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.5, 0, 0, 0, 0.95, 0, 0, 0, 0.08, 8.92, 2.08, -22.18)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
 [node name="EvidencePinWallWarning" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 7.02, 1.86, -22.13)
 mesh = SubResource("BoxMesh_key")
@@ -1003,6 +1008,11 @@ surface_material_override/0 = SubResource("Mat_pin")
 
 [node name="EvidencePinAct2Gate" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 9.04, 1.8, -22.13)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="EvidencePinAtticVoid" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 9.04, 2.2, -22.13)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_pin")
 
