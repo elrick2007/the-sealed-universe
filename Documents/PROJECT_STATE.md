@@ -73,6 +73,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Unnumbered Guest Bedroom bed-trade v1 with burnt-page offer, 2:47 return, altered-fragment evidence, and comparison follow-up.
 - Altered-fragment guest-book comparison v1, opening a Housekeeper household-record lead into the next First Floor branch.
 - Housekeeper sewing-box v1, yielding the chatelaine and stopped clock pendulum from the unnumbered-room cipher.
+- Hall-clock pendulum hook v1, restoring the Entrance Hall grandfather clock and unlocking scheduled 2:47 events.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -104,6 +105,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 25. Unnumbered bed trade v1: the Library's burnt black-book fragment can be left on the unnumbered bed, resolved through the Kitchen 2:47 clock, and returned as an altered fragment with new evidence, ledger, journal, and guest-book comparison follow-up.
 26. Altered-fragment guest-book comparison v1: reading the returned fragment beside the blank guest-book line now pins comparison evidence, opens the Housekeeper-record thread, and lets Mara read a folded household record that points toward the Housekeeper's sewing box.
 27. Housekeeper sewing-box v1: the folded household record unlocks the Housekeeper's thread-dial sewing box. Opening it completes the sewing-box objective, adds the Housekeeper's chatelaine and stopped clock pendulum to inventory, pins evidence, writes a Living Ledger beat, and opens the hall-clock and attic-stair objectives.
+28. Hall-clock pendulum hook v1: the Entrance Hall grandfather clock now records its missing pendulum before the Housekeeper branch, accepts the stopped pendulum after the sewing box, unlocks deliberate 2:47 scheduling, pins evidence, writes two Living Ledger beats, and opens the first scheduled-event objective.
 
 ## Important Documents
 
@@ -139,7 +141,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Housekeeper sewing-box v1:
+Last known validation after Hall-clock pendulum hook v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -188,4 +190,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the hall-clock pendulum hook v1, letting the stopped clock pendulum turn the 2:47 events from accidental returns into scheduled events.
+Build the first scheduled 2:47 payoff v1, using the restored grandfather clock to let Mara choose a night event instead of stumbling into it.

@@ -16,6 +16,7 @@ func _run() -> void:
 	var hud: Node = scene.get_node("HUD")
 	var clock_scheduler: Node = scene.get_node("ClockScheduler")
 	var director: Node = scene.get_node("WallHorrorDirector")
+	var hall_clock: Node = scene.get_node("Architecture/HallGrandfatherClock")
 	var recorder: Node = scene.get_node("Props/Recorder")
 	var key: Node = scene.get_node("Props/ServiceKey")
 	var door: Node = scene.get_node("Architecture/WestWingDoor")
@@ -64,6 +65,12 @@ func _run() -> void:
 	_assert(not player.has_item("service_key"), "Player starts without service key")
 	_assert(not clock_scheduler.is_incomplete_event_armed(), "2:47 scheduler starts unarmed")
 	_assert(not bool(scene.get_tree().root.get_meta("incomplete_247_armed", false)), "2:47 scheduler root state starts unarmed")
+	_assert(not bool(scene.get_tree().root.get_meta("time_scheduling_unlocked", false)), "2:47 scheduling starts locked")
+	hall_clock.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("hall_clock_pendulum_installed", false)), "Hall clock starts without pendulum")
+	_assert(not bool(scene.get_tree().root.get_meta("time_scheduling_unlocked", false)), "Hall clock inspection does not unlock scheduling before pendulum")
+	_assert(_has_note(hud, "hall_clock_missing_pendulum"), "Hall clock inspection notes the missing pendulum")
 	_assert(not evidence_wall_warning.visible, "Evidence board starts with wall warning scrap hidden")
 	_assert(not evidence_plans.visible, "Evidence board starts with plan scrap hidden")
 	_assert(not evidence_caldwell.visible, "Evidence board starts with Caldwell record scrap hidden")
@@ -639,6 +646,19 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "housekeeper_sewing_box_opened"), "Housekeeper sewing box writes Living Ledger entry")
 	_assert(_has_objective(hud, "return_clock_pendulum"), "Housekeeper sewing box opens hall-clock objective")
 	_assert(_has_objective(hud, "find_attic_stair_door"), "Housekeeper sewing box opens attic-stair objective")
+	hall_clock.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("hall_clock_pendulum_installed", false)), "Hall clock accepts returned pendulum")
+	_assert(bool(scene.get_tree().root.get_meta("time_scheduling_unlocked", false)), "Returned pendulum unlocks 2:47 scheduling")
+	_assert(bool(scene.get_tree().root.get_meta("scheduled_247_available", false)), "Returned pendulum marks scheduled 2:47 as available")
+	_assert(clock_scheduler.is_time_scheduling_unlocked(), "Clock scheduler reports player-controlled time unlocked")
+	_assert(_objective_complete(hud, "return_clock_pendulum"), "Hall clock completes pendulum-return objective")
+	_assert(_has_note(hud, "scheduled_247_unlocked"), "Hall clock adds scheduling-unlocked note")
+	_assert(_has_note(hud, "hall_clock_pendulum_returned"), "Hall clock adds returned-pendulum note")
+	_assert(_has_evidence(hud, "hall_clock_pendulum_returned"), "Hall clock pins returned-pendulum evidence")
+	_assert(_has_ledger_entry(hud, "scheduled_247_unlocked"), "Hall clock writes scheduler Living Ledger entry")
+	_assert(_has_ledger_entry(hud, "hall_clock_pendulum_returned"), "Hall clock writes returned-pendulum Living Ledger entry")
+	_assert(_has_objective(hud, "schedule_247_event"), "Hall clock opens scheduled-2:47 objective")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -664,6 +684,8 @@ func _run() -> void:
 	var altered_fragment_match_note_count: int = _count_note(hud, "altered_fragment_guest_book_match")
 	var housekeeper_record_note_count: int = _count_note(hud, "housekeeper_unnumbered_record")
 	var housekeeper_sewing_box_note_count: int = _count_note(hud, "housekeeper_sewing_box_opened")
+	var hall_clock_returned_note_count: int = _count_note(hud, "hall_clock_pendulum_returned")
+	var scheduled_note_count: int = _count_note(hud, "scheduled_247_unlocked")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -711,6 +733,10 @@ func _run() -> void:
 	housekeeper_sewing_box.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "housekeeper_sewing_box_opened") == housekeeper_sewing_box_note_count, "Repeated Housekeeper sewing box inspection does not duplicate sewing-box note")
+	hall_clock.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "hall_clock_pendulum_returned") == hall_clock_returned_note_count, "Repeated hall clock inspection does not duplicate returned-pendulum note")
+	_assert(_count_note(hud, "scheduled_247_unlocked") == scheduled_note_count, "Repeated hall clock inspection does not duplicate scheduling-unlocked note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

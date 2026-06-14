@@ -686,6 +686,10 @@ func _use_inventory_item(id: String) -> void:
 		player.use_tape_measure_from_inventory()
 	elif id == "camera":
 		player.use_camera_from_inventory()
+	elif id == "clock_pendulum":
+		player.use_clock_pendulum_from_inventory()
+	elif id == "chatelaine":
+		player.show_message("The chatelaine is for servant-side locks. Mara has not found the right door yet.", 6.0)
 	elif id == "burnt_page_fragment":
 		player.show_message("The burnt fragment resists the inventory. The unnumbered bed feels like the place to test it.", 6.0)
 	elif id == "altered_burnt_page_fragment":

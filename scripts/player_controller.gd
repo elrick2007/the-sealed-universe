@@ -160,6 +160,19 @@ func use_tape_measure_from_inventory() -> void:
 func use_camera_from_inventory() -> void:
 	_use_camera()
 
+func use_clock_pendulum_from_inventory() -> void:
+	if not has_item("clock_pendulum"):
+		show_message("Mara reaches for the pendulum, then remembers she has not found it.")
+		return
+	var hall_clock := get_node_or_null("/root/Main/Architecture/HallGrandfatherClock")
+	if hall_clock == null or not hall_clock.has_method("interact"):
+		show_message("The pendulum is heavy in Mara's hand. Somewhere, a clock is waiting for it.", 6.0)
+		return
+	if global_position.distance_to(hall_clock.global_position) > 5.0:
+		show_message("The pendulum belongs to the Entrance Hall grandfather clock.", 6.0)
+		return
+	hall_clock.interact(self)
+
 func use_tape_measure_on_surface(surface_id: String) -> void:
 	if not has_item("tape_measure"):
 		show_message("Mara reaches for the tape measure, then remembers she has not found it.")

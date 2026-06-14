@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=70 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -42,6 +42,7 @@
 [ext_resource type="Script" path="res://scripts/unnumbered_guest_room_interaction.gd" id="40"]
 [ext_resource type="Script" path="res://scripts/housekeeper_record_interaction.gd" id="41"]
 [ext_resource type="Script" path="res://scripts/housekeeper_sewing_box_interaction.gd" id="42"]
+[ext_resource type="Script" path="res://scripts/hall_clock_interaction.gd" id="43"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -261,6 +262,27 @@ surface_material_override/0 = SubResource("Mat_wall")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/BackWall"]
 shape = SubResource("BoxShape_wall_short")
+
+[node name="HallGrandfatherClock" type="StaticBody3D" parent="Architecture"]
+transform = Transform3D(0.62, 0, 0, 0, 1.45, 0, 0, 0, 0.32, -4.75, 1.2, 3.2)
+script = ExtResource("43")
+
+[node name="Case" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="Face" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.06, 0, 0.32, -0.2)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_plate")
+
+[node name="PendulumShadow" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
+transform = Transform3D(0.08, 0, 0, 0, 0.88, 0, 0, 0, 0.04, 0, -0.28, -0.2)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/HallGrandfatherClock"]
+shape = SubResource("BoxShape_prop")
 
 [node name="FrontWallLeft" type="StaticBody3D" parent="Architecture"]
 transform = Transform3D(0.36, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.7, -8)

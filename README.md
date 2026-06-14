@@ -63,6 +63,7 @@ Target runtime:
 13. Enter the unnumbered guest bedroom, leave the burnt black-book fragment on the bed, and use the 2:47 Kitchen clock to receive the altered fragment.
 14. Compare the altered fragment with the blank guest-book line, then read the folded Housekeeper record to open the sewing-box branch.
 15. Open the Housekeeper's sewing box to gain the chatelaine and stopped clock pendulum.
+16. Return the pendulum to the Entrance Hall grandfather clock to unlock deliberate 2:47 scheduling.
 
 ## Project Memory
 
@@ -93,7 +94,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the hall-clock pendulum hook so the 2:47 events become something Mara can deliberately schedule.
+- Build the first scheduled 2:47 payoff, using the restored clock to let Mara choose a night event instead of stumbling into it.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

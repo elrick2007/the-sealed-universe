@@ -6,14 +6,38 @@ const FIRED_NOTE_ID := "two_forty_seven_incomplete"
 
 var incomplete_event_armed := false
 var incomplete_event_fired := false
+var time_scheduling_unlocked := false
 
 func _ready() -> void:
 	var root := get_tree().root
 	root.set_meta("clock_scheduler_active", true)
 	root.set_meta("incomplete_247_armed", false)
 	root.set_meta("incomplete_247_fired", false)
+	root.set_meta("time_scheduling_unlocked", false)
+	root.set_meta("scheduled_247_available", false)
 	root.set_meta("next_247_event_id", "")
 	root.set_meta("last_247_event_id", "")
+
+func unlock_time_scheduling(player: Node = null) -> void:
+	if time_scheduling_unlocked or bool(get_tree().root.get_meta("time_scheduling_unlocked", false)):
+		return
+	time_scheduling_unlocked = true
+	var root := get_tree().root
+	root.set_meta("time_scheduling_unlocked", true)
+	root.set_meta("scheduled_247_available", true)
+	if player == null:
+		return
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"scheduled_247_unlocked",
+			"With the pendulum returned, Mara can wait for 2:47 deliberately instead of stumbling into it."
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"scheduled_247_unlocked",
+			"The clock did not start. It resumed, as if it had only been holding its breath until Mara supplied the missing weight.",
+			"2:47 AM - Scheduled Time"
+		)
 
 func arm_incomplete_event(player: Node = null) -> void:
 	if incomplete_event_armed or incomplete_event_fired:
@@ -81,9 +105,14 @@ func is_incomplete_event_armed() -> bool:
 func has_incomplete_event_fired() -> bool:
 	return incomplete_event_fired or bool(get_tree().root.get_meta("incomplete_247_fired", false))
 
+func is_time_scheduling_unlocked() -> bool:
+	return time_scheduling_unlocked or bool(get_tree().root.get_meta("time_scheduling_unlocked", false))
+
 func scheduler_status_line() -> String:
 	if has_incomplete_event_fired():
 		return "2:47 WROTE: INCOMPLETE"
-	if not is_incomplete_event_armed():
-		return ""
-	return "NEXT 2:47 RESERVED"
+	if is_incomplete_event_armed():
+		return "NEXT 2:47 RESERVED"
+	if is_time_scheduling_unlocked():
+		return "2:47 CAN BE SCHEDULED"
+	return ""
