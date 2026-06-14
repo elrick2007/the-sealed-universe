@@ -66,6 +66,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Eleanor's hand-drawn sealed-wing map pickup.
 - Impossible corridor tape-measure proof.
 - Kitchen impossible-measure return and first-floor plan unlock.
+- First Floor stair / Act 2 transition stub.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -90,6 +91,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 18. Eleanor's hand-drawn map: a small iron-gall map page in the drafted threshold completes the map objective, pins the `42 ft / it is not` contradiction, and seeds the next impossible-corridor measurement objective.
 19. Impossible corridor measurement: using the tape on the drafted sealed-wing corridor after finding Eleanor's map proves the `42 ft` note is unstable, records a `47 ft -> 42 ft` contradiction, and sends Mara back toward the Kitchen evidence loop.
 20. Kitchen impossible-measure return: the Kitchen accepts the borrowed five feet, pins an Act 2 gate proof, unlocks the First Floor map tab, and gives Mara the next objective to find the First Floor staircase.
+21. First Floor stair stub: after the Kitchen accepts the borrowed five feet, Mara can find a provisional staircase, start Act 2, and receive the Gallery Landing objective.
 
 ## Important Documents
 
@@ -125,7 +127,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Library/Study Deeper Puzzle v1:
+Last known validation after First Floor Stair / Act 2 Transition Stub v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -174,4 +176,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to make the Kitchen accept the impossible-corridor measurement, then use that proof as the first Act 2 gate.
+Build the Gallery Landing v1 as the first true Act 2 space, keeping it blockout-first and driven by the First Floor map/story gates.

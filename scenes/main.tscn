@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=64 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://scripts/kitchen_247_clock_interaction.gd" id="34"]
 [ext_resource type="Script" path="res://scripts/sealed_wing_draft_threshold.gd" id="35"]
 [ext_resource type="Script" path="res://scripts/eleanor_journal_map_interaction.gd" id="36"]
+[ext_resource type="Script" path="res://scripts/first_floor_stairs_interaction.gd" id="37"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -764,6 +765,27 @@ mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_paper")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Kitchen/KitchenRouteGate"]
+shape = SubResource("BoxShape_prop")
+
+[node name="FirstFloorStairs" type="StaticBody3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.72, 0, -0.22, 0, 0.22, 0, 0.22, 0, 0.52, 3.75, 0.96, -23.38)
+script = ExtResource("37")
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen/FirstFloorStairs"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="StepGhostA" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen/FirstFloorStairs"]
+transform = Transform3D(0.78, 0, 0, 0, 0.08, 0, 0, 0, 0.16, 0.0, 0.24, -0.18)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="StepGhostB" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen/FirstFloorStairs"]
+transform = Transform3D(0.72, 0, 0, 0, 0.08, 0, 0, 0, 0.16, 0.0, 0.42, -0.36)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/Kitchen/FirstFloorStairs"]
 shape = SubResource("BoxShape_prop")
 
 [node name="CaldwellLivingRecord" type="StaticBody3D" parent="Architecture/WestWingHallway/Kitchen"]

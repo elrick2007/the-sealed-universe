@@ -37,6 +37,7 @@ func _run() -> void:
 	var evidence_board: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenEvidenceBoard")
 	var recorder_dock: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenRecorderDock")
 	var next_route_gate: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenRouteGate")
+	var first_floor_stairs: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/FirstFloorStairs")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -66,6 +67,10 @@ func _run() -> void:
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("next_route_gate_open", false)), "Next route gate starts closed")
 	_assert(not _has_objective(hud, "find_conservatory_route"), "Next route gate does not reveal route before Act 1 is ready")
+	first_floor_stairs.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("act_2_started", false)), "First-floor stairs stay closed before Act 2 gate")
+	_assert(not _has_objective(hud, "reach_gallery_landing"), "First-floor stairs do not reveal landing objective before Act 2 gate")
 
 	recorder.interact(player)
 	await process_frame
@@ -503,6 +508,18 @@ func _run() -> void:
 	_assert(hud.unlocked_map_floors.has("first_floor"), "Kitchen return unlocks first-floor map tab")
 	_assert(evidence_act_2_gate.visible, "Evidence board reveals Act 2 gate scrap after Kitchen return")
 
+	first_floor_stairs.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("act_2_started", false)), "First-floor stairs seed Act 2")
+	_assert(int(scene.get_tree().root.get_meta("current_act", 0)) == 2, "First-floor stairs expose current act 2")
+	_assert(bool(scene.get_tree().root.get_meta("first_floor_stairs_found", false)), "First-floor stairs set found state")
+	_assert(bool(scene.get_tree().root.get_meta("first_floor_landing_seeded", false)), "First-floor stairs seed Gallery Landing route state")
+	_assert(_objective_complete(hud, "find_first_floor_stairs"), "First-floor stairs complete staircase objective")
+	_assert(_has_note(hud, "first_floor_stairs_found"), "First-floor stairs add route note")
+	_assert(_has_evidence(hud, "first_floor_stairs_found"), "First-floor stairs pin route evidence")
+	_assert(_has_ledger_entry(hud, "first_floor_stairs_found"), "First-floor stairs write Living Ledger route beat")
+	_assert(_has_objective(hud, "reach_gallery_landing"), "First-floor stairs add Gallery Landing objective")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -516,6 +533,7 @@ func _run() -> void:
 	var eleanor_map_note_count: int = _count_note(hud, "eleanor_journal_map_found")
 	var impossible_corridor_note_count: int = _count_note(hud, "measure_impossible_corridor")
 	var impossible_measure_pinned_count: int = _count_note(hud, "impossible_measure_pinned")
+	var first_floor_stairs_note_count: int = _count_note(hud, "first_floor_stairs_found")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -538,6 +556,9 @@ func _run() -> void:
 	kitchen_trigger._on_body_entered(player)
 	await process_frame
 	_assert(_count_note(hud, "impossible_measure_pinned") == impossible_measure_pinned_count, "Repeated Kitchen return does not duplicate impossible-measure note")
+	first_floor_stairs.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "first_floor_stairs_found") == first_floor_stairs_note_count, "Repeated first-floor stair inspection does not duplicate route note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
