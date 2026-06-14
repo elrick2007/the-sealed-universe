@@ -75,6 +75,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Housekeeper sewing-box v1, yielding the chatelaine and stopped clock pendulum from the unnumbered-room cipher.
 - Hall-clock pendulum hook v1, restoring the Entrance Hall grandfather clock and unlocking scheduled 2:47 events.
 - First scheduled 2:47 payoff v1, letting Mara set a chosen appointment at the restored hall clock and resolve it through the Kitchen clock.
+- Attic Stair Door v1, joining the Housekeeper's chatelaine to the chosen 2:47 proof and unlocking the first attic-route stub.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -108,6 +109,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 27. Housekeeper sewing-box v1: the folded household record unlocks the Housekeeper's thread-dial sewing box. Opening it completes the sewing-box objective, adds the Housekeeper's chatelaine and stopped clock pendulum to inventory, pins evidence, writes a Living Ledger beat, and opens the hall-clock and attic-stair objectives.
 28. Hall-clock pendulum hook v1: the Entrance Hall grandfather clock now records its missing pendulum before the Housekeeper branch, accepts the stopped pendulum after the sewing box, unlocks deliberate 2:47 scheduling, pins evidence, writes two Living Ledger beats, and opens the first scheduled-event objective.
 29. First scheduled 2:47 payoff v1: interacting with the restored grandfather clock sets Mara's chosen 2:47 appointment, completes the scheduling objective, writes an appointment ledger beat, and lets the Kitchen clock resolve the chosen-hour payoff with a new note, evidence pin, and Living Ledger entry.
+30. Attic Stair Door v1: the Housekeeper's chatelaine now has a physical servant-side door. It refuses before the chosen 2:47 route proof, then opens the attic route stub, unlocks the Attic map tab, completes the attic-stair objectives, and seeds the blank-bell wire objective.
 
 ## Important Documents
 
@@ -192,4 +194,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build Attic Stair Door v1, using the chatelaine and chosen 2:47 proof to open the first attic route stub.
+Build Long Attic Wire Trace v1, using the opened attic stair to seed the blank-bell thread.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=71 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" path="res://scripts/housekeeper_record_interaction.gd" id="41"]
 [ext_resource type="Script" path="res://scripts/housekeeper_sewing_box_interaction.gd" id="42"]
 [ext_resource type="Script" path="res://scripts/hall_clock_interaction.gd" id="43"]
+[ext_resource type="Script" path="res://scripts/attic_stair_door_interaction.gd" id="44"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1470,6 +1471,27 @@ surface_material_override/0 = SubResource("Mat_shadow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/HousekeeperRoom/HousekeeperSewingBox"]
 shape = SubResource("BoxShape_prop")
+
+[node name="AtticStairDoor" type="StaticBody3D" parent="Architecture/FirstFloor/HousekeeperRoom"]
+transform = Transform3D(0.35, 0, 0, 0, 0.92, 0, 0, 0, 0.13, -7.05, 4.25, -4.35)
+script = ExtResource("44")
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor"]
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="KeyPlate" type="MeshInstance3D" parent="Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.45, 0.02, 0.65)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="StairBreathGap" type="MeshInstance3D" parent="Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor"]
+transform = Transform3D(0.65, 0, 0, 0, 0.04, 0, 0, 0, 0.35, 0, 1.15, 0.08)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor"]
+shape = SubResource("BoxShape_door")
 
 [node name="Props" type="Node3D" parent="."]
 

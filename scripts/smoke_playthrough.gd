@@ -45,6 +45,7 @@ func _run() -> void:
 	var unnumbered_guest_room: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed")
 	var housekeeper_folded_record: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/HousekeeperFoldedRecord")
 	var housekeeper_sewing_box: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/HousekeeperSewingBox")
+	var attic_stair_door: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -587,6 +588,10 @@ func _run() -> void:
 	_assert(not bool(scene.get_tree().root.get_meta("housekeeper_sewing_box_opened", false)), "Housekeeper sewing box stays closed before household record")
 	_assert(not player.has_item("chatelaine"), "Housekeeper sewing box does not grant chatelaine before household record")
 	_assert(not player.has_item("clock_pendulum"), "Housekeeper sewing box does not grant clock pendulum before household record")
+	attic_stair_door.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("attic_stair_unlocked", false)), "Attic stair door stays locked before chatelaine")
+	_assert(not hud.unlocked_map_floors.has("attic"), "Attic map tab stays locked before attic stair door")
 
 	unnumbered_guest_room.interact(player)
 	await process_frame
@@ -646,6 +651,9 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "housekeeper_sewing_box_opened"), "Housekeeper sewing box writes Living Ledger entry")
 	_assert(_has_objective(hud, "return_clock_pendulum"), "Housekeeper sewing box opens hall-clock objective")
 	_assert(_has_objective(hud, "find_attic_stair_door"), "Housekeeper sewing box opens attic-stair objective")
+	attic_stair_door.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("attic_stair_unlocked", false)), "Attic stair door requires chosen 2:47 proof even with chatelaine")
 	hall_clock.interact(player)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("hall_clock_pendulum_installed", false)), "Hall clock accepts returned pendulum")
@@ -685,6 +693,19 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "scheduled_attic_route_gate"), "Chosen 2:47 payoff pins attic-stair route evidence")
 	_assert(_has_ledger_entry(hud, "scheduled_attic_route_gate"), "Chosen 2:47 payoff writes attic-stair route ledger entry")
 	_assert(hud.discovered_map.has("cellar_stairs"), "Chosen 2:47 payoff keeps stair-core map knowledge revealed")
+	attic_stair_door.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("attic_stair_unlocked", false)), "Attic stair door unlocks with chatelaine and chosen 2:47 proof")
+	_assert(bool(scene.get_tree().root.get_meta("attic_route_stub_open", false)), "Attic stair door opens attic route stub")
+	_assert(bool(scene.get_tree().root.get_meta("attic_plan_unlocked", false)), "Attic stair door unlocks attic map floor")
+	_assert(bool(scene.get_tree().root.get_meta("act_3_route_seeded", false)), "Attic stair door seeds Act 3 route state")
+	_assert(_objective_complete(hud, "find_attic_stair_door"), "Attic stair door completes attic-stair objective")
+	_assert(_objective_complete(hud, "follow_chosen_247_to_attic"), "Attic stair door completes chosen-2:47 route objective")
+	_assert(_has_note(hud, "attic_stair_door_opened"), "Attic stair door adds route note")
+	_assert(_has_evidence(hud, "attic_stair_door_opened"), "Attic stair door pins route evidence")
+	_assert(_has_ledger_entry(hud, "attic_stair_door_opened"), "Attic stair door writes Living Ledger beat")
+	_assert(_has_objective(hud, "trace_blank_bell_wire"), "Attic stair door opens blank-bell wire objective")
+	_assert(hud.unlocked_map_floors.has("attic"), "Attic stair door unlocks attic map tab")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -715,6 +736,7 @@ func _run() -> void:
 	var scheduled_armed_note_count: int = _count_note(hud, "scheduled_hall_watch_armed")
 	var scheduled_fired_note_count: int = _count_note(hud, "scheduled_hall_watch_fired")
 	var scheduled_route_gate_note_count: int = _count_note(hud, "scheduled_attic_route_gate")
+	var attic_stair_door_note_count: int = _count_note(hud, "attic_stair_door_opened")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -771,6 +793,9 @@ func _run() -> void:
 	await process_frame
 	_assert(_count_note(hud, "scheduled_hall_watch_fired") == scheduled_fired_note_count, "Repeated Kitchen clock inspection does not duplicate chosen-2:47 payoff note")
 	_assert(_count_note(hud, "scheduled_attic_route_gate") == scheduled_route_gate_note_count, "Repeated Kitchen clock inspection does not duplicate chosen-2:47 route-gate note")
+	attic_stair_door.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "attic_stair_door_opened") == attic_stair_door_note_count, "Repeated attic stair door inspection does not duplicate route note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

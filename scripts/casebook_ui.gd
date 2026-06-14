@@ -689,7 +689,13 @@ func _use_inventory_item(id: String) -> void:
 	elif id == "clock_pendulum":
 		player.use_clock_pendulum_from_inventory()
 	elif id == "chatelaine":
-		player.show_message("The chatelaine is for servant-side locks. Mara has not found the right door yet.", 6.0)
+		var root := get_tree().root
+		if bool(root.get_meta("attic_stair_unlocked", false)):
+			player.show_message("The chatelaine has opened the attic stair. Its other keys still wait for cupboards and linen presses.", 6.0)
+		elif bool(root.get_meta("scheduled_247_route_gate_ready", false)):
+			player.show_message("The chatelaine is ready for the attic stair door. Find the servant-side lock.", 6.0)
+		else:
+			player.show_message("The chatelaine is for servant-side locks. The right door has not been named yet.", 6.0)
 	elif id == "burnt_page_fragment":
 		player.show_message("The burnt fragment resists the inventory. The unnumbered bed feels like the place to test it.", 6.0)
 	elif id == "altered_burnt_page_fragment":
