@@ -38,6 +38,7 @@ Target runtime:
 - `E`: interact
 - `R`: use recorder
 - `T`: use tape measure
+- `C`: use camera
 - `J`: open/close journal
 - `I`: open/close inventory
 - `M`: open/close map
@@ -58,6 +59,7 @@ Target runtime:
 9. Solve the Dining Room thirteenth-place beat.
 10. Return to the Kitchen hub for ledger pages, evidence board progress, recorder transcription, and Act 1 route gating.
 11. Open the Conservatory/Lemon Tree setup, correcting the canon: Eleanor's murder belongs to lemon trees; the rose scent belongs to the sealed wing.
+12. Photograph visible proof the house leaves behind before the next route opens.
 
 ## Project Memory
 

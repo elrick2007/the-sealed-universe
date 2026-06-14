@@ -546,7 +546,17 @@ func _run() -> void:
 	_assert(_has_note(hud, "chandelier_handprint"), "Chandelier inspection adds handprint note")
 	_assert(_has_evidence(hud, "chandelier_handprint"), "Chandelier inspection pins handprint evidence")
 	_assert(_has_ledger_entry(hud, "chandelier_handprint"), "Chandelier inspection writes Living Ledger beat")
-	_assert(_has_objective(hud, "find_unnumbered_guest_room"), "Chandelier inspection adds unnumbered guest room objective")
+	_assert(_has_objective(hud, "photograph_chandelier_handprint"), "Chandelier inspection adds photo objective")
+	_assert(not _has_objective(hud, "find_unnumbered_guest_room"), "Unnumbered room waits until the handprint is photographed")
+
+	player._photograph_chandelier_handprint()
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("chandelier_handprint_photographed", false)), "Camera photo sets handprint photographed state")
+	_assert(_objective_complete(hud, "photograph_chandelier_handprint"), "Camera photo completes photo objective")
+	_assert(_has_note(hud, "chandelier_handprint_photo"), "Camera photo adds handprint photo note")
+	_assert(_has_evidence(hud, "chandelier_handprint_photo"), "Camera photo pins photo evidence")
+	_assert(_has_ledger_entry(hud, "chandelier_handprint_photo"), "Camera photo writes Living Ledger beat")
+	_assert(_has_objective(hud, "find_unnumbered_guest_room"), "Camera photo adds unnumbered guest room objective")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -564,6 +574,7 @@ func _run() -> void:
 	var first_floor_stairs_note_count: int = _count_note(hud, "first_floor_stairs_found")
 	var gallery_landing_note_count: int = _count_note(hud, "gallery_landing_reached")
 	var chandelier_handprint_note_count: int = _count_note(hud, "chandelier_handprint")
+	var chandelier_photo_note_count: int = _count_note(hud, "chandelier_handprint_photo")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -595,6 +606,9 @@ func _run() -> void:
 	chandelier_handprint.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "chandelier_handprint") == chandelier_handprint_note_count, "Repeated chandelier inspection does not duplicate handprint note")
+	player._photograph_chandelier_handprint()
+	await process_frame
+	_assert(_count_note(hud, "chandelier_handprint_photo") == chandelier_photo_note_count, "Repeated chandelier photo does not duplicate handprint photo note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

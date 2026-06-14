@@ -125,7 +125,7 @@ func _start_game() -> void:
 func _show_options() -> void:
 	detail_panel.visible = true
 	detail_title.text = "Controls"
-	detail_body.text = "[b]Movement[/b]\nWASD or arrow keys\n\n[b]Investigation[/b]\nE interact\nR use recorder\nJ open journal\nI open inventory\nM open map\nEsc close panels / release mouse"
+	detail_body.text = "[b]Movement[/b]\nWASD or arrow keys\n\n[b]Investigation[/b]\nE interact\nR use recorder\nT use tape measure\nC use camera\nJ open journal\nI open inventory\nM open map\nEsc close panels / release mouse"
 
 func _quit_game() -> void:
 	get_tree().quit()

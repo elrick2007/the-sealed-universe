@@ -40,5 +40,5 @@ func interact(player: Node) -> void:
 		"Opened brass links and an elongated five-finger print prove the fall was handled, not accidental.",
 		"Physical"
 	)
-	player.add_journal_objective("find_unnumbered_guest_room", "Find the guest bedroom that the First Floor plan refuses to number.")
-	player.show_message("The chain links are opened, not snapped. The handprint is too long.", 7.0)
+	player.add_journal_objective("photograph_chandelier_handprint", "Photograph the opened chandelier links.")
+	player.show_message("The chain links are opened, not snapped. Press C to photograph the handprint before it changes.", 7.0)

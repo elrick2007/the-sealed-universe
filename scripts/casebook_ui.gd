@@ -680,6 +680,8 @@ func _use_inventory_item(id: String) -> void:
 		player.show_message("The service key is a prototype stand-in. The true iron key belongs to the sealed wing later.")
 	elif id == "tape_measure":
 		player.use_tape_measure_from_inventory()
+	elif id == "camera":
+		player.use_camera_from_inventory()
 	else:
 		player.show_message("Mara turns the item over, but it offers no answer yet.")
 

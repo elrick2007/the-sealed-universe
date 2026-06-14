@@ -23,6 +23,7 @@ var message_time := 0.0
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ray.collide_with_areas = true
+	add_inventory_item("camera", "Camera", "Press C to photograph proof the house tries to move.")
 	show_message("Press J for journal. Press L for the Living Ledger once the Kitchen reveals it.", 6.0)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -43,6 +44,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_use_recorder()
 	if event.is_action_pressed("use_tape_measure"):
 		_use_tape_measure()
+	if event.is_action_pressed("use_camera"):
+		_use_camera()
 
 func _physics_process(delta: float) -> void:
 	if get_tree().root.get_meta("ui_panel_open", false):
@@ -149,6 +152,9 @@ func use_recorder_from_inventory() -> void:
 func use_tape_measure_from_inventory() -> void:
 	_use_tape_measure()
 
+func use_camera_from_inventory() -> void:
+	_use_camera()
+
 func use_tape_measure_on_surface(surface_id: String) -> void:
 	if not has_item("tape_measure"):
 		show_message("Mara reaches for the tape measure, then remembers she has not found it.")
@@ -200,6 +206,43 @@ func _use_tape_measure() -> void:
 		_apply_tape_measurement("conservatory")
 	else:
 		_apply_tape_measurement("entrance_hall")
+
+func _use_camera() -> void:
+	if not has_item("camera"):
+		show_message("Mara reaches for the camera, then remembers she left it with the rest of her certainty.")
+		return
+	if not bool(get_tree().root.get_meta("camera_verb_seeded", false)):
+		show_message("The camera waits. Mara needs something the house has visibly touched.", 5.0)
+		return
+	var subject_id := _current_photo_subject()
+	if subject_id == "chandelier_handprint":
+		_photograph_chandelier_handprint()
+	else:
+		show_message("The shutter clicks, but the frame gives Mara nothing the board can use yet.", 5.0)
+
+func _photograph_chandelier_handprint() -> void:
+	if not bool(get_tree().root.get_meta("chandelier_handprint_found", false)):
+		show_message("The camera will not make sense of the chandelier until Mara inspects the links.")
+		return
+	if bool(get_tree().root.get_meta("chandelier_handprint_photographed", false)):
+		show_message("The photo already holds the opened links and the long handprint.", 5.0)
+		return
+	get_tree().root.set_meta("chandelier_handprint_photographed", true)
+	complete_journal_objective("photograph_chandelier_handprint")
+	add_journal_note("chandelier_handprint_photo", "The camera caught the chandelier handprint before the dust could settle into something more ordinary.")
+	add_ledger_entry(
+		"chandelier_handprint_photo",
+		"Mara photographed the opened links. In the picture, the long fingers looked closer to the lens than they had been in the room.",
+		"2:47 AM - Proof In The Glass"
+	)
+	add_evidence(
+		"chandelier_handprint_photo",
+		"Photograph: Opened Chandelier Links",
+		"The camera records the long handprint and opened chain links before the house can explain them away.",
+		"Photo"
+	)
+	add_journal_objective("find_unnumbered_guest_room", "Find the guest bedroom that the First Floor plan refuses to number.")
+	show_message("The camera catches the opened links. In the photo, the fingers look too close.", 7.0)
 
 func _apply_tape_measurement(surface_id: String) -> void:
 	if surface_id == "study" or surface_id == "study_wall":
@@ -283,6 +326,17 @@ func _current_measurement_surface() -> String:
 		return "conservatory_wall"
 	if target_name == "SealedWingDraftThreshold":
 		return "impossible_corridor"
+	return ""
+
+func _current_photo_subject() -> String:
+	if not ray.is_colliding():
+		return ""
+	var target := ray.get_collider()
+	if target == null:
+		return ""
+	var target_name := String(target.name)
+	if target_name == "ChandelierHandprint":
+		return "chandelier_handprint"
 	return ""
 
 func _current_measurement_area() -> String:

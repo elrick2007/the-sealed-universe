@@ -55,6 +55,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Fogged manor map with visited/known areas and locked floor tabs.
 - Living Ledger entries.
 - Evidence Board and progression meter.
+- Camera / Photo Verb v1 with `C` input and inventory use.
 - Kitchen hub return loop.
 - Recorder yield system.
 - Tape measure/Caton measurement mechanic.
@@ -68,6 +69,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Kitchen impossible-measure return and first-floor plan unlock.
 - First Floor stair / Act 2 transition stub.
 - Gallery Landing v1 with chandelier handprint evidence beat.
+- Chandelier handprint photo proof that gates the unnumbered guest bedroom lead.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -94,6 +96,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 20. Kitchen impossible-measure return: the Kitchen accepts the borrowed five feet, pins an Act 2 gate proof, unlocks the First Floor map tab, and gives Mara the next objective to find the First Floor staircase.
 21. First Floor stair stub: after the Kitchen accepts the borrowed five feet, Mara can find a provisional staircase, start Act 2, and receive the Gallery Landing objective.
 22. Gallery Landing v1: the borrowed stairs now place Mara on a blockout First Floor landing, reframe the Entrance Hall from above, and seed the raised chandelier handprint clue toward the unnumbered guest bedroom route.
+23. Camera / Photo Verb v1: Mara carries a camera from the start, but the verb only matters once the house leaves visible proof. Photographing the opened chandelier links pins a photo-evidence beat and unlocks the unnumbered guest bedroom objective.
 
 ## Important Documents
 
@@ -129,7 +132,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Gallery Landing v1:
+Last known validation after Camera / Photo Verb v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -178,4 +181,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Unnumbered Guest Bedroom v1 from the Gallery Landing route, or add the camera/photo verb v1 so the chandelier handprint can become photographed evidence.
+Build the Unnumbered Guest Bedroom v1 from the photographed chandelier route.
