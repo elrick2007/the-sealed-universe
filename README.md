@@ -65,6 +65,7 @@ Target runtime:
 15. Open the Housekeeper's sewing box to gain the chatelaine and stopped clock pendulum.
 16. Return the pendulum to the Entrance Hall grandfather clock to unlock deliberate 2:47 scheduling.
 17. Set a chosen 2:47 appointment at the restored hall clock, then resolve it at the Kitchen clock to prove the house can answer a time Mara chooses.
+18. Open the attic route, compare both duplicated Sick Room fever charts, then drain the Water Tank to recover the not-glass marble.
 
 ## Project Memory
 

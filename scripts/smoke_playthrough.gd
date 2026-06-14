@@ -49,6 +49,7 @@ func _run() -> void:
 	var blank_bell_wire: Node = scene.get_node("Architecture/Attic/LongAttic/BlankBellWire")
 	var north_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthFeverChart")
 	var south_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthFeverChart")
+	var water_tank: Node = scene.get_node("Architecture/Attic/LongAttic/WaterTankRoom/WaterTank")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -663,6 +664,9 @@ func _run() -> void:
 	north_sick_chart.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("sick_room_north_chart_read", false)), "North sick-room chart waits for blank bell wire route")
+	water_tank.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("not_glass_marble_found", false)), "Water Tank waits for Ada contradiction before yielding the not-glass marble")
 	hall_clock.interact(player)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("hall_clock_pendulum_installed", false)), "Hall clock accepts returned pendulum")
@@ -747,6 +751,20 @@ func _run() -> void:
 	_assert(_has_objective(hud, "find_not_glass_marble"), "Ada contradiction opens not-glass marble objective")
 	_assert(hud.discovered_map.has("servants_sick_rooms"), "Sick-room charts mark Sick Rooms known on map")
 
+	water_tank.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("water_tank_drained", false)), "Water Tank drain sets drained state")
+	_assert(bool(scene.get_tree().root.get_meta("marble_bag_found", false)), "Water Tank reveals marble bag state")
+	_assert(bool(scene.get_tree().root.get_meta("not_glass_marble_found", false)), "Water Tank yields not-glass marble state")
+	_assert(bool(scene.get_tree().root.get_meta("mirror_chest_route_seeded", false)), "Not-glass marble seeds mirror chest route")
+	_assert(player.has_item("not_glass_marble"), "Water Tank grants not-glass marble inventory item")
+	_assert(_objective_complete(hud, "find_not_glass_marble"), "Water Tank completes not-glass marble objective")
+	_assert(_has_objective(hud, "open_mirror_chest"), "Water Tank opens mirror chest objective")
+	_assert(_has_note(hud, "water_tank_soldered_tin"), "Water Tank adds soldered tin note")
+	_assert(_has_evidence(hud, "water_tank_soldered_tin"), "Water Tank pins soldered tin evidence")
+	_assert(_has_ledger_entry(hud, "water_tank_soldered_tin"), "Water Tank writes Living Ledger entry")
+	_assert(hud.discovered_map.has("water_tank_room"), "Water Tank marks its room known on map")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -781,6 +799,7 @@ func _run() -> void:
 	var north_sick_chart_note_count: int = _count_note(hud, "sick_room_north_chart")
 	var south_sick_chart_note_count: int = _count_note(hud, "sick_room_south_chart")
 	var ada_contradiction_note_count: int = _count_note(hud, "ada_sick_room_contradiction")
+	var water_tank_note_count: int = _count_note(hud, "water_tank_soldered_tin")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -850,6 +869,9 @@ func _run() -> void:
 	_assert(_count_note(hud, "sick_room_north_chart") == north_sick_chart_note_count, "Repeated north fever chart inspection does not duplicate note")
 	_assert(_count_note(hud, "sick_room_south_chart") == south_sick_chart_note_count, "Repeated south fever chart inspection does not duplicate note")
 	_assert(_count_note(hud, "ada_sick_room_contradiction") == ada_contradiction_note_count, "Repeated fever chart inspections do not duplicate Ada contradiction")
+	water_tank.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "water_tank_soldered_tin") == water_tank_note_count, "Repeated Water Tank inspection does not duplicate soldered tin note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

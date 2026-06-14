@@ -78,6 +78,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Attic Stair Door v1, joining the Housekeeper's chatelaine to the chosen 2:47 proof and unlocking the first attic-route stub.
 - Long Attic Wire Trace v1, resolving the blank-bell objective and seeding the duplicated Servant's Sick Rooms.
 - Duplicated Sick Rooms v1, comparing Ada's recovered/deceased fever charts and opening the not-glass marble route.
+- Water Tank / Not-Glass Marble v1, gating the drowned tin behind Ada's contradiction and turning the not-glass marble into an inventory key for the mirror chest route.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -114,6 +115,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 30. Attic Stair Door v1: the Housekeeper's chatelaine now has a physical servant-side door. It refuses before the chosen 2:47 route proof, then opens the attic route stub, unlocks the Attic map tab, completes the attic-stair objectives, and seeds the blank-bell wire objective.
 31. Long Attic Wire Trace v1: after the attic stair opens, Mara can enter the Long Attic, trace the blank bell wire, pin duplicated Sick Rooms evidence, write a Living Ledger beat, and open the objective to compare both Servant's Sick Rooms.
 32. Duplicated Sick Rooms v1: after the blank bell wire is traced, Mara can read both mirrored fever charts. One lets Ada recover, one files her death at 2:47, resolving the first explicit attic contradiction and opening the not-glass marble objective.
+33. Water Tank / Not-Glass Marble v1: after Ada's contradiction is resolved, Mara can drain the Water Tank, recover a soldered tin and wrong marble, complete the not-glass objective, pin evidence, write a Living Ledger beat, and open the north mirror-chest objective.
 
 ## Important Documents
 
@@ -149,7 +151,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Duplicated Sick Rooms v1:
+Last known validation after Water Tank / Not-Glass Marble v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.

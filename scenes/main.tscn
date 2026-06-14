@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=74 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -46,6 +46,7 @@
 [ext_resource type="Script" path="res://scripts/attic_stair_door_interaction.gd" id="44"]
 [ext_resource type="Script" path="res://scripts/long_attic_wire_interaction.gd" id="45"]
 [ext_resource type="Script" path="res://scripts/sick_room_chart_interaction.gd" id="46"]
+[ext_resource type="Script" path="res://scripts/water_tank_interaction.gd" id="47"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1697,6 +1698,64 @@ surface_material_override/0 = SubResource("Mat_red")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthFeverChart"]
 shape = SubResource("BoxShape_prop")
+
+[node name="WaterTankRoom" type="Node3D" parent="Architecture/Attic/LongAttic"]
+
+[node name="WaterTankFloor" type="StaticBody3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.42, 0, 0, 0, 1, 0, 0, 0, 0.22, -16.25, 6.01, -7.65)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankFloor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="WaterTankBackWall" type="StaticBody3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.46, 0, 0, 0, 0.58, 0, 0, 0, 0.12, -16.25, 6.92, -9.15)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankBackWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankBackWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="WaterTankSideWall" type="StaticBody3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.1, 0, 0, 0, 0.58, 0, 0, 0, 0.22, -18.2, 6.92, -7.65)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankSideWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTankSideWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="WaterTank" type="StaticBody3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(1.35, 0, 0, 0, 0.42, 0, 0, 0, 0.82, -16.25, 6.52, -7.65)
+script = ExtResource("47")
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTank"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/WaterTankRoom/WaterTank"]
+shape = SubResource("BoxShape_prop")
+
+[node name="SolderedTin" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.35, 0, 0, 0, 0.16, 0, 0, 0, 0.25, -15.72, 6.82, -7.38)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="MarbleBag" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.24, 0, 0, 0, 0.13, 0, 0, 0, 0.2, -16.68, 6.83, -7.22)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="WrongMarble" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/WaterTankRoom"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -16.42, 6.94, -7.0)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
 
 [node name="Props" type="Node3D" parent="."]
 
