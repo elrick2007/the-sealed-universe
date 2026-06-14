@@ -76,6 +76,11 @@ func add_inventory_item(item_id: String, item_name: String, description: String)
 	if journal_ui.has_method("add_inventory_item"):
 		journal_ui.add_inventory_item(item_id, item_name, description)
 
+func remove_inventory_item(item_id: String) -> void:
+	inventory.erase(item_id)
+	if journal_ui.has_method("remove_inventory_item"):
+		journal_ui.remove_inventory_item(item_id)
+
 func has_item(item_id: String) -> bool:
 	return inventory.has(item_id)
 

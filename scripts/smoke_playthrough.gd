@@ -24,6 +24,7 @@ func _run() -> void:
 	var library_trigger: Node = scene.get_node("Architecture/WestWingHallway/Library/LibraryEntryTrigger")
 	var library_wall: Node3D = scene.get_node("Architecture/WestWingHallway/Library/LibraryWhisperWall")
 	var library_shelf_gap: Node = scene.get_node("Architecture/WestWingHallway/Library/LibraryShelfGap")
+	var burnt_page_fragment: Node = scene.get_node("Architecture/WestWingHallway/Library/BurntPageFragment")
 	var study_trigger: Node = scene.get_node("Architecture/WestWingHallway/Study/StudyEntryTrigger")
 	var tape_measure: Node = scene.get_node("Props/TapeMeasure")
 	var dining_trigger: Node = scene.get_node("Architecture/WestWingHallway/DiningRoom/DiningEntryTrigger")
@@ -193,6 +194,13 @@ func _run() -> void:
 	library_shelf_gap.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "caton_margin_mark") == caton_mark_note_count, "Repeated shelf gap inspection does not duplicate Caton mark note")
+	burnt_page_fragment.interact(player)
+	await process_frame
+	_assert(player.has_item("burnt_page_fragment"), "Burnt page fragment pickup grants inventory item")
+	_assert(_has_note(hud, "burnt_page_fragment"), "Burnt page fragment pickup adds note")
+	_assert(_has_evidence(hud, "burnt_page_fragment"), "Burnt page fragment pickup pins document evidence")
+	_assert(_has_ledger_entry(hud, "burnt_page_fragment"), "Burnt page fragment pickup writes Living Ledger entry")
+	_assert(_has_objective(hud, "bring_fragment_to_unnumbered_bed"), "Burnt page fragment adds unnumbered-bed objective")
 
 	player.global_position = Vector3(0.0, 0.95, -14.0)
 	player.use_tape_measure_on_surface("west_wing_wall")
@@ -571,6 +579,31 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "unnumbered_guest_room"), "Unnumbered guest room pins room evidence")
 	_assert(_has_ledger_entry(hud, "unnumbered_guest_room"), "Unnumbered guest room writes Living Ledger beat")
 	_assert(_has_objective(hud, "test_unnumbered_bed_trade"), "Unnumbered guest room adds trade objective")
+	unnumbered_guest_room.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("unnumbered_page_trade_armed", false)), "Unnumbered bed arms burnt-page trade")
+	_assert(not player.has_item("burnt_page_fragment"), "Unnumbered bed removes original burnt fragment")
+	_assert(_objective_complete(hud, "test_unnumbered_bed_trade"), "Unnumbered bed completes trade-test objective")
+	_assert(_objective_complete(hud, "bring_fragment_to_unnumbered_bed"), "Unnumbered bed completes burnt-fragment objective")
+	_assert(_has_note(hud, "unnumbered_trade_offered"), "Unnumbered bed adds offered-fragment note")
+	_assert(_has_ledger_entry(hud, "unnumbered_trade_offered"), "Unnumbered bed writes offered-fragment Living Ledger entry")
+	_assert(_has_objective(hud, "wait_247_bed_trade"), "Unnumbered bed adds 2:47 wait objective")
+	kitchen_clock_247.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("unnumbered_page_trade_complete", false)), "2:47 clock resolves unnumbered bed trade")
+	_assert(not bool(scene.get_tree().root.get_meta("unnumbered_page_trade_armed", false)), "2:47 clock clears bed trade armed state")
+	_assert(String(scene.get_tree().root.get_meta("last_247_trade_id", "")) == "unnumbered_bed_trade", "2:47 clock records bed trade id")
+	_assert(player.has_item("altered_burnt_page_fragment"), "2:47 trade grants altered fragment inventory item")
+	_assert(_objective_complete(hud, "wait_247_bed_trade"), "2:47 trade completes bed-trade wait objective")
+	_assert(_has_note(hud, "unnumbered_trade_returned"), "2:47 trade adds returned-fragment note")
+	_assert(_has_evidence(hud, "altered_burnt_page_fragment"), "2:47 trade pins altered-fragment evidence")
+	_assert(_has_ledger_entry(hud, "unnumbered_trade_returned"), "2:47 trade writes returned-fragment Living Ledger entry")
+	_assert(_has_objective(hud, "read_altered_fragment"), "2:47 trade adds altered-fragment comparison objective")
+	unnumbered_guest_room.interact(player)
+	await process_frame
+	_assert(_objective_complete(hud, "read_altered_fragment"), "Reading altered fragment completes comparison objective")
+	_assert(_has_note(hud, "altered_fragment_read"), "Reading altered fragment adds guest-book comparison note")
+	_assert(_has_ledger_entry(hud, "altered_fragment_read"), "Reading altered fragment writes comparison Living Ledger entry")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -590,6 +623,9 @@ func _run() -> void:
 	var chandelier_handprint_note_count: int = _count_note(hud, "chandelier_handprint")
 	var chandelier_photo_note_count: int = _count_note(hud, "chandelier_handprint_photo")
 	var unnumbered_room_note_count: int = _count_note(hud, "unnumbered_guest_room")
+	var unnumbered_trade_offered_note_count: int = _count_note(hud, "unnumbered_trade_offered")
+	var unnumbered_trade_returned_note_count: int = _count_note(hud, "unnumbered_trade_returned")
+	var altered_fragment_read_note_count: int = _count_note(hud, "altered_fragment_read")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -597,6 +633,7 @@ func _run() -> void:
 	kitchen_clock_247.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "two_forty_seven_incomplete") == fired_note_count, "Repeated Kitchen clock inspection does not duplicate 2:47 event note")
+	_assert(_count_note(hud, "unnumbered_trade_returned") == unnumbered_trade_returned_note_count, "Repeated Kitchen clock inspection does not duplicate bed-trade return note")
 	sealed_boundary.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "sealed_wing_transition_ready") == transition_note_count, "Repeated sealed transition inspection does not duplicate future-route note")
@@ -627,6 +664,8 @@ func _run() -> void:
 	unnumbered_guest_room.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "unnumbered_guest_room") == unnumbered_room_note_count, "Repeated unnumbered room inspection does not duplicate note")
+	_assert(_count_note(hud, "unnumbered_trade_offered") == unnumbered_trade_offered_note_count, "Repeated unnumbered room inspection does not duplicate bed-trade offer note")
+	_assert(_count_note(hud, "altered_fragment_read") == altered_fragment_read_note_count, "Repeated altered-fragment reading does not duplicate comparison note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

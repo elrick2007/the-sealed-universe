@@ -202,6 +202,10 @@ func add_inventory_item(id: String, item_name: String, description: String) -> v
 	}
 	_refresh_inventory()
 
+func remove_inventory_item(id: String) -> void:
+	inventory_items.erase(id)
+	_refresh_inventory()
+
 func reveal_map_area(id: String) -> void:
 	discovered_map[id] = true
 	_refresh_map()
@@ -682,6 +686,10 @@ func _use_inventory_item(id: String) -> void:
 		player.use_tape_measure_from_inventory()
 	elif id == "camera":
 		player.use_camera_from_inventory()
+	elif id == "burnt_page_fragment":
+		player.show_message("The burnt fragment resists the inventory. The unnumbered bed feels like the place to test it.", 6.0)
+	elif id == "altered_burnt_page_fragment":
+		player.show_message("The altered fragment reads: ...ASHFORD, E... not burned, not saved, just returned.", 7.0)
 	else:
 		player.show_message("Mara turns the item over, but it offers no answer yet.")
 
