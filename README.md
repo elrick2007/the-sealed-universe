@@ -95,7 +95,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build Duplicated Sick Rooms v1, comparing the two fever charts and resolving the recovered/dead contradiction.
+- Build Water Tank / Not-Glass Marble v1, giving the attic a physical route toward the mirror chest and Caton's Field Book.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

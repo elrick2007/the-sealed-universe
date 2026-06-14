@@ -77,6 +77,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - First scheduled 2:47 payoff v1, letting Mara set a chosen appointment at the restored hall clock and resolve it through the Kitchen clock.
 - Attic Stair Door v1, joining the Housekeeper's chatelaine to the chosen 2:47 proof and unlocking the first attic-route stub.
 - Long Attic Wire Trace v1, resolving the blank-bell objective and seeding the duplicated Servant's Sick Rooms.
+- Duplicated Sick Rooms v1, comparing Ada's recovered/deceased fever charts and opening the not-glass marble route.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -112,6 +113,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 29. First scheduled 2:47 payoff v1: interacting with the restored grandfather clock sets Mara's chosen 2:47 appointment, completes the scheduling objective, writes an appointment ledger beat, and lets the Kitchen clock resolve the chosen-hour payoff with a new note, evidence pin, and Living Ledger entry.
 30. Attic Stair Door v1: the Housekeeper's chatelaine now has a physical servant-side door. It refuses before the chosen 2:47 route proof, then opens the attic route stub, unlocks the Attic map tab, completes the attic-stair objectives, and seeds the blank-bell wire objective.
 31. Long Attic Wire Trace v1: after the attic stair opens, Mara can enter the Long Attic, trace the blank bell wire, pin duplicated Sick Rooms evidence, write a Living Ledger beat, and open the objective to compare both Servant's Sick Rooms.
+32. Duplicated Sick Rooms v1: after the blank bell wire is traced, Mara can read both mirrored fever charts. One lets Ada recover, one files her death at 2:47, resolving the first explicit attic contradiction and opening the not-glass marble objective.
 
 ## Important Documents
 
@@ -147,7 +149,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Long Attic Wire Trace v1:
+Last known validation after Duplicated Sick Rooms v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -196,4 +198,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build Duplicated Sick Rooms v1, comparing the two fever charts and resolving the recovered/dead contradiction.
+Build Water Tank / Not-Glass Marble v1, giving the attic a physical route toward the mirror chest and Caton's Field Book.

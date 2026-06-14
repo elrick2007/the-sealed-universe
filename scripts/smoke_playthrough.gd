@@ -47,6 +47,8 @@ func _run() -> void:
 	var housekeeper_sewing_box: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/HousekeeperSewingBox")
 	var attic_stair_door: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor")
 	var blank_bell_wire: Node = scene.get_node("Architecture/Attic/LongAttic/BlankBellWire")
+	var north_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthFeverChart")
+	var south_sick_chart: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthFeverChart")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -658,6 +660,9 @@ func _run() -> void:
 	attic_stair_door.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("attic_stair_unlocked", false)), "Attic stair door requires chosen 2:47 proof even with chatelaine")
+	north_sick_chart.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("sick_room_north_chart_read", false)), "North sick-room chart waits for blank bell wire route")
 	hall_clock.interact(player)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("hall_clock_pendulum_installed", false)), "Hall clock accepts returned pendulum")
@@ -720,6 +725,27 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "long_attic_blank_bell_wire"), "Blank bell wire writes Living Ledger beat")
 	_assert(_has_objective(hud, "compare_servants_sick_rooms"), "Blank bell wire opens duplicated sick-room objective")
 	_assert(hud.discovered_map.has("long_attic"), "Blank bell wire marks Long Attic visited on map")
+	north_sick_chart.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("sick_room_north_chart_read", false)), "North fever chart sets read state")
+	_assert(_has_note(hud, "sick_room_north_chart"), "North fever chart adds note")
+	_assert(_has_evidence(hud, "sick_room_north_chart"), "North fever chart pins evidence")
+	_assert(_has_ledger_entry(hud, "sick_room_north_chart"), "North fever chart writes ledger")
+	_assert(not bool(scene.get_tree().root.get_meta("sick_room_contradiction_resolved", false)), "Ada contradiction waits for both fever charts")
+	south_sick_chart.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("sick_room_south_chart_read", false)), "South fever chart sets read state")
+	_assert(bool(scene.get_tree().root.get_meta("sick_room_contradiction_resolved", false)), "Reading both fever charts resolves Ada contradiction")
+	_assert(bool(scene.get_tree().root.get_meta("caton_field_book_route_seeded", false)), "Ada contradiction seeds Caton field-book route")
+	_assert(_objective_complete(hud, "compare_servants_sick_rooms"), "Ada contradiction completes sick-room comparison objective")
+	_assert(_has_note(hud, "sick_room_south_chart"), "South fever chart adds note")
+	_assert(_has_evidence(hud, "sick_room_south_chart"), "South fever chart pins evidence")
+	_assert(_has_ledger_entry(hud, "sick_room_south_chart"), "South fever chart writes ledger")
+	_assert(_has_note(hud, "ada_sick_room_contradiction"), "Ada contradiction adds note")
+	_assert(_has_evidence(hud, "ada_sick_room_contradiction"), "Ada contradiction pins evidence")
+	_assert(_has_ledger_entry(hud, "ada_sick_room_contradiction"), "Ada contradiction writes ledger")
+	_assert(_has_objective(hud, "find_not_glass_marble"), "Ada contradiction opens not-glass marble objective")
+	_assert(hud.discovered_map.has("servants_sick_rooms"), "Sick-room charts mark Sick Rooms known on map")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -752,6 +778,9 @@ func _run() -> void:
 	var scheduled_route_gate_note_count: int = _count_note(hud, "scheduled_attic_route_gate")
 	var attic_stair_door_note_count: int = _count_note(hud, "attic_stair_door_opened")
 	var blank_bell_wire_note_count: int = _count_note(hud, "long_attic_blank_bell_wire")
+	var north_sick_chart_note_count: int = _count_note(hud, "sick_room_north_chart")
+	var south_sick_chart_note_count: int = _count_note(hud, "sick_room_south_chart")
+	var ada_contradiction_note_count: int = _count_note(hud, "ada_sick_room_contradiction")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -814,6 +843,13 @@ func _run() -> void:
 	blank_bell_wire.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "long_attic_blank_bell_wire") == blank_bell_wire_note_count, "Repeated blank bell wire inspection does not duplicate attic note")
+	north_sick_chart.interact(player)
+	await process_frame
+	south_sick_chart.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "sick_room_north_chart") == north_sick_chart_note_count, "Repeated north fever chart inspection does not duplicate note")
+	_assert(_count_note(hud, "sick_room_south_chart") == south_sick_chart_note_count, "Repeated south fever chart inspection does not duplicate note")
+	_assert(_count_note(hud, "ada_sick_room_contradiction") == ada_contradiction_note_count, "Repeated fever chart inspections do not duplicate Ada contradiction")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
