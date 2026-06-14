@@ -793,6 +793,16 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "caton_overlay_west_wing"), "Caton overlay pins submitted-vs-true evidence")
 	_assert(_has_ledger_entry(hud, "caton_overlay_west_wing"), "Caton overlay writes submitted-vs-true Living Ledger beat")
 
+	player.use_tape_measure_on_surface("attic_void")
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_overlay_attic_void_read", false)), "Caton overlay reads the attic void measurement contradiction")
+	_assert(bool(scene.get_tree().root.get_meta("attic_void_measurement_proved", false)), "Attic void measurement proof state is recorded")
+	_assert(_objective_complete(hud, "measure_attic_void_with_caton"), "Attic void measurement completes Caton void objective")
+	_assert(_has_objective(hud, "record_attic_void_wall"), "Attic void measurement opens recorder objective")
+	_assert(_has_note(hud, "caton_overlay_attic_void"), "Attic void measurement adds void contradiction note")
+	_assert(_has_evidence(hud, "caton_overlay_attic_void"), "Attic void measurement pins void contradiction evidence")
+	_assert(_has_ledger_entry(hud, "caton_overlay_attic_void"), "Attic void measurement writes Living Ledger beat")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -830,6 +840,7 @@ func _run() -> void:
 	var water_tank_note_count: int = _count_note(hud, "water_tank_soldered_tin")
 	var caton_field_book_note_count: int = _count_note(hud, "caton_field_book_found")
 	var caton_overlay_west_wing_note_count: int = _count_note(hud, "caton_overlay_west_wing")
+	var caton_overlay_attic_void_note_count: int = _count_note(hud, "caton_overlay_attic_void")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -910,6 +921,9 @@ func _run() -> void:
 	player.use_tape_measure_on_surface("west_wing_wall")
 	await process_frame
 	_assert(_count_note(hud, "caton_overlay_west_wing") == caton_overlay_west_wing_note_count, "Repeated Caton overlay measurement does not duplicate west wing note")
+	player.use_tape_measure_on_surface("attic_void")
+	await process_frame
+	_assert(_count_note(hud, "caton_overlay_attic_void") == caton_overlay_attic_void_note_count, "Repeated Caton overlay measurement does not duplicate attic void note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

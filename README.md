@@ -68,6 +68,7 @@ Target runtime:
 18. Open the attic route, compare both duplicated Sick Room fever charts, then drain the Water Tank to recover the not-glass marble.
 19. Use the not-glass marble on the north Sick Room chest, then recover Caton's Field Book from its southern twin.
 20. Use Caton's Field Book with the tape measure to compare submitted dimensions against the house's true dimensions.
+21. Measure the attic void with Caton's overlay and prove the room is larger through the wire hole than it is from the outside.
 
 ## Project Memory
 
@@ -98,7 +99,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the attic void payoff for Caton's submitted/true measurement overlay.
+- Add the recorder yield for the attic void wall after Caton's overlay proves the numbers cannot fill it.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

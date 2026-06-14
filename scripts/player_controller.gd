@@ -337,6 +337,19 @@ func _try_apply_caton_overlay(surface_id: String) -> bool:
 		complete_journal_objective("use_caton_field_book")
 		add_journal_objective("measure_attic_void_with_caton", "Use Caton's overlay on the attic void that should not have dimensions.")
 		return true
+	if surface_id == "attic_void" or surface_id == "attic_void_wall":
+		if not bool(get_tree().root.get_meta("long_attic_wire_traced", false)):
+			show_message("Caton's figures blur at the attic wall. Mara needs to know which wire enters it first.", 7.0)
+			return true
+		show_message("Caton's overlay cannot fill the void: OUTSIDE 9 x 12 ft. CHAIN 41 ft. NO ACCESS.", 8.0)
+		get_tree().root.set_meta("caton_overlay_attic_void_read", true)
+		get_tree().root.set_meta("attic_void_measurement_proved", true)
+		add_journal_note("caton_overlay_attic_void", "Caton's overlay fails around the attic void: exterior walls say 9 by 12 ft, but Caton's chain paid out 41 ft through the wire hole.")
+		add_evidence("caton_overlay_attic_void", "Caton Overlay: Attic Void", "Exterior: 9 by 12 ft. Chain through the wire hole: 41 ft. The map refuses to fill the room-shaped absence.", "Measurement")
+		add_ledger_entry("caton_overlay_attic_void", "Caton's Field Book drew numbers around the void, never inside it. Nine by twelve outside. Forty-one feet of chain swallowed through the wire hole. The room did not open. It filed the attempt.", "2:47 AM - The Room That Refused")
+		complete_journal_objective("measure_attic_void_with_caton")
+		add_journal_objective("record_attic_void_wall", "Use the recorder on the attic void wall.")
+		return true
 	if surface_id == "library_wall":
 		show_message("Caton's overlay finds the Library lie: SUBMITTED 14 ft. TRUE 13 ft 11 in. One inch was filed away.", 7.0)
 		get_tree().root.set_meta("caton_overlay_library_read", true)
@@ -365,6 +378,8 @@ func _current_measurement_surface() -> String:
 		return "library_wall"
 	if target_name == "HallLeftWall" or target_name == "HallRightWall" or target_name == "HallEndWall":
 		return "west_wing_wall"
+	if target_name == "LongAtticBackWall" or target_name == "AtticVoidWall":
+		return "attic_void_wall"
 	if target_name.begins_with("Dining"):
 		return "dining_room"
 	if target_name.begins_with("Kitchen"):
