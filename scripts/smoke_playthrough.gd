@@ -46,6 +46,7 @@ func _run() -> void:
 	var housekeeper_folded_record: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/HousekeeperFoldedRecord")
 	var housekeeper_sewing_box: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/HousekeeperSewingBox")
 	var attic_stair_door: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor")
+	var blank_bell_wire: Node = scene.get_node("Architecture/Attic/LongAttic/BlankBellWire")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -592,6 +593,9 @@ func _run() -> void:
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("attic_stair_unlocked", false)), "Attic stair door stays locked before chatelaine")
 	_assert(not hud.unlocked_map_floors.has("attic"), "Attic map tab stays locked before attic stair door")
+	blank_bell_wire.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("long_attic_wire_traced", false)), "Blank bell wire stays unreadable before attic route opens")
 
 	unnumbered_guest_room.interact(player)
 	await process_frame
@@ -706,6 +710,16 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "attic_stair_door_opened"), "Attic stair door writes Living Ledger beat")
 	_assert(_has_objective(hud, "trace_blank_bell_wire"), "Attic stair door opens blank-bell wire objective")
 	_assert(hud.unlocked_map_floors.has("attic"), "Attic stair door unlocks attic map tab")
+	blank_bell_wire.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("long_attic_wire_traced", false)), "Blank bell wire sets traced state")
+	_assert(bool(scene.get_tree().root.get_meta("duplicated_sick_room_route_seeded", false)), "Blank bell wire seeds duplicated sick-room route")
+	_assert(_objective_complete(hud, "trace_blank_bell_wire"), "Blank bell wire completes attic wire objective")
+	_assert(_has_note(hud, "long_attic_blank_bell_wire"), "Blank bell wire adds attic note")
+	_assert(_has_evidence(hud, "long_attic_blank_bell_wire"), "Blank bell wire pins attic evidence")
+	_assert(_has_ledger_entry(hud, "long_attic_blank_bell_wire"), "Blank bell wire writes Living Ledger beat")
+	_assert(_has_objective(hud, "compare_servants_sick_rooms"), "Blank bell wire opens duplicated sick-room objective")
+	_assert(hud.discovered_map.has("long_attic"), "Blank bell wire marks Long Attic visited on map")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -737,6 +751,7 @@ func _run() -> void:
 	var scheduled_fired_note_count: int = _count_note(hud, "scheduled_hall_watch_fired")
 	var scheduled_route_gate_note_count: int = _count_note(hud, "scheduled_attic_route_gate")
 	var attic_stair_door_note_count: int = _count_note(hud, "attic_stair_door_opened")
+	var blank_bell_wire_note_count: int = _count_note(hud, "long_attic_blank_bell_wire")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -796,6 +811,9 @@ func _run() -> void:
 	attic_stair_door.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "attic_stair_door_opened") == attic_stair_door_note_count, "Repeated attic stair door inspection does not duplicate route note")
+	blank_bell_wire.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "long_attic_blank_bell_wire") == blank_bell_wire_note_count, "Repeated blank bell wire inspection does not duplicate attic note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

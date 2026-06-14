@@ -95,7 +95,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build Long Attic Wire Trace v1, using the opened attic stair to seed the blank-bell thread.
+- Build Duplicated Sick Rooms v1, comparing the two fever charts and resolving the recovered/dead contradiction.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

@@ -1,6 +1,6 @@
 # Project State - The Sealed Universe / Game 01
 
-Last updated: 2026-06-13
+Last updated: 2026-06-14
 
 ## Repository
 
@@ -76,6 +76,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Hall-clock pendulum hook v1, restoring the Entrance Hall grandfather clock and unlocking scheduled 2:47 events.
 - First scheduled 2:47 payoff v1, letting Mara set a chosen appointment at the restored hall clock and resolve it through the Kitchen clock.
 - Attic Stair Door v1, joining the Housekeeper's chatelaine to the chosen 2:47 proof and unlocking the first attic-route stub.
+- Long Attic Wire Trace v1, resolving the blank-bell objective and seeding the duplicated Servant's Sick Rooms.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -110,6 +111,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 28. Hall-clock pendulum hook v1: the Entrance Hall grandfather clock now records its missing pendulum before the Housekeeper branch, accepts the stopped pendulum after the sewing box, unlocks deliberate 2:47 scheduling, pins evidence, writes two Living Ledger beats, and opens the first scheduled-event objective.
 29. First scheduled 2:47 payoff v1: interacting with the restored grandfather clock sets Mara's chosen 2:47 appointment, completes the scheduling objective, writes an appointment ledger beat, and lets the Kitchen clock resolve the chosen-hour payoff with a new note, evidence pin, and Living Ledger entry.
 30. Attic Stair Door v1: the Housekeeper's chatelaine now has a physical servant-side door. It refuses before the chosen 2:47 route proof, then opens the attic route stub, unlocks the Attic map tab, completes the attic-stair objectives, and seeds the blank-bell wire objective.
+31. Long Attic Wire Trace v1: after the attic stair opens, Mara can enter the Long Attic, trace the blank bell wire, pin duplicated Sick Rooms evidence, write a Living Ledger beat, and open the objective to compare both Servant's Sick Rooms.
 
 ## Important Documents
 
@@ -145,7 +147,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after First scheduled 2:47 payoff v1:
+Last known validation after Long Attic Wire Trace v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -194,4 +196,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build Long Attic Wire Trace v1, using the opened attic stair to seed the blank-bell thread.
+Build Duplicated Sick Rooms v1, comparing the two fever charts and resolving the recovered/dead contradiction.

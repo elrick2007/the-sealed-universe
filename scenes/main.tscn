@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=72 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" path="res://scripts/housekeeper_sewing_box_interaction.gd" id="42"]
 [ext_resource type="Script" path="res://scripts/hall_clock_interaction.gd" id="43"]
 [ext_resource type="Script" path="res://scripts/attic_stair_door_interaction.gd" id="44"]
+[ext_resource type="Script" path="res://scripts/long_attic_wire_interaction.gd" id="45"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1492,6 +1493,94 @@ surface_material_override/0 = SubResource("Mat_shadow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/HousekeeperRoom/AtticStairDoor"]
 shape = SubResource("BoxShape_door")
+
+[node name="Attic" type="Node3D" parent="Architecture"]
+
+[node name="LongAttic" type="Node3D" parent="Architecture/Attic"]
+
+[node name="LongAtticSpawn" type="Marker3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0, 6.25, -5.2)
+
+[node name="LongAtticFloor" type="StaticBody3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.86, 0, 0, 0, 1, 0, 0, 0, 0.22, -10.0, 6.0, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/LongAtticFloor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/LongAtticFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="LongAtticLeftWall" type="StaticBody3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.42, 0, 0, 0, 0.72, 0, 0, 0, 0.22, -14.35, 7.18, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/LongAtticLeftWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/LongAtticLeftWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="LongAtticRightWall" type="StaticBody3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.42, 0, 0, 0, 0.72, 0, 0, 0, 0.22, -5.65, 7.18, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/LongAtticRightWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/LongAtticRightWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="LongAtticBackWall" type="StaticBody3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.86, 0, 0, 0, 0.72, 0, 0, 0, 0.28, -10.0, 7.18, -7.0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/LongAtticBackWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/LongAtticBackWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="BlankBellWire" type="StaticBody3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.82, 0, 0, 0, 0.38, 0, 0, 0, 0.12, -10.0, 6.95, -6.7)
+script = ExtResource("45")
+
+[node name="BellBoard" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="BlankLabel" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+transform = Transform3D(0.52, 0, 0, 0, 0.12, 0, 0, 0, 0.08, 0, 0.28, 0.82)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="WireStem" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 1.4, 0, -0.15, 0.9)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="WireLeft" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+transform = Transform3D(1.6, 0, 0, 0, 0.06, 0, 0, 0, 0.06, -1.0, -0.42, 0.95)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="WireRight" type="MeshInstance3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+transform = Transform3D(1.6, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 1.0, -0.42, 0.95)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Attic/LongAttic/BlankBellWire"]
+shape = SubResource("BoxShape_door")
+
+[node name="SickRoomLeftMarker" type="MeshInstance3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.42, 0, 0, 0, 0.55, 0, 0, 0, 0.08, -13.15, 6.75, -6.25)
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="SickRoomRightMarker" type="MeshInstance3D" parent="Architecture/Attic/LongAttic"]
+transform = Transform3D(0.42, 0, 0, 0, 0.55, 0, 0, 0, 0.08, -6.85, 6.75, -6.25)
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("Mat_shadow")
 
 [node name="Props" type="Node3D" parent="."]
 

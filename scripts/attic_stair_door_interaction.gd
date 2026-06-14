@@ -15,6 +15,7 @@ func get_prompt(player: Node) -> String:
 func interact(player: Node) -> void:
 	var root := get_tree().root
 	if bool(root.get_meta("attic_stair_unlocked", false)) or opened:
+		_move_player_to_attic(player)
 		if player.has_method("show_message"):
 			player.show_message("The attic stair door is open. Above it, the house keeps its stored breath.", 6.0)
 		return
@@ -59,8 +60,15 @@ func interact(player: Node) -> void:
 		player.add_journal_objective("trace_blank_bell_wire", "Follow the blank bell's wire into the Long Attic.")
 	if player.has_method("unlock_map_floor"):
 		player.unlock_map_floor("attic")
+	_move_player_to_attic(player)
 	if player.has_method("show_message"):
 		player.show_message("The chatelaine turns. The attic stair answers with five careful creaks.", 8.0)
 
 func _player_has_chatelaine(player: Node) -> bool:
 	return player != null and player.has_method("has_item") and bool(player.has_item("chatelaine"))
+
+func _move_player_to_attic(player: Node) -> void:
+	var attic_spawn := get_node_or_null("/root/Main/Architecture/Attic/LongAttic/LongAtticSpawn") as Node3D
+	if attic_spawn != null and player is Node3D:
+		var player_3d := player as Node3D
+		player_3d.global_position = attic_spawn.global_position
