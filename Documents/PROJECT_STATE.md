@@ -64,6 +64,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Conservatory-to-Sealed Wing transition gate.
 - Sealed Wing drafted threshold stub.
 - Eleanor's hand-drawn sealed-wing map pickup.
+- Impossible corridor tape-measure proof.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -86,6 +87,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 16. Return to the unwritten door: after the Incomplete beat is armed or written, the sealed boundary accepts the word as a future route condition, pins new evidence, writes `2:47 AM - A Door In Draft`, and reveals the East/Sealed Wing as the next drafted space.
 17. Drafted Sealed Wing threshold: a small pencilled threshold takes weight, completes the drafted-door objective, marks the East/Sealed Wing as visited, and adds the next objective to find Eleanor's hand-drawn sealed-wing map.
 18. Eleanor's hand-drawn map: a small iron-gall map page in the drafted threshold completes the map objective, pins the `42 ft / it is not` contradiction, and seeds the next impossible-corridor measurement objective.
+19. Impossible corridor measurement: using the tape on the drafted sealed-wing corridor after finding Eleanor's map proves the `42 ft` note is unstable, records a `47 ft -> 42 ft` contradiction, and sends Mara back toward the Kitchen evidence loop.
 
 ## Important Documents
 
@@ -170,4 +172,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to make the sealed-wing impossible corridor measurable with the tape, then use the result as an Act 2 gate.
+Continue Act 1 ground-floor route work from the Kitchen hub. The likely next playable beat is to make the Kitchen accept the impossible-corridor measurement, then use that proof as the first Act 2 gate.

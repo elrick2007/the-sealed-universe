@@ -479,6 +479,15 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "eleanor_journal_map_found"), "Eleanor journal map writes Living Ledger map beat")
 	_assert(_has_objective(hud, "measure_impossible_corridor"), "Eleanor journal map adds impossible-corridor measurement objective")
 
+	player.use_tape_measure_on_surface("impossible_corridor")
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("impossible_corridor_measured", false)), "Tape measure records impossible corridor measurement state")
+	_assert(_objective_complete(hud, "measure_impossible_corridor"), "Tape measure completes impossible-corridor objective")
+	_assert(_has_note(hud, "measure_impossible_corridor"), "Tape measure adds impossible-corridor note")
+	_assert(_has_evidence(hud, "impossible_corridor_measurement"), "Tape measure pins impossible-corridor evidence")
+	_assert(_has_ledger_entry(hud, "measure_impossible_corridor_ledger"), "Tape measure writes impossible-corridor Living Ledger beat")
+	_assert(_has_objective(hud, "return_impossible_measure_to_kitchen"), "Tape measure adds Kitchen return objective")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -490,6 +499,7 @@ func _run() -> void:
 	var transition_note_count: int = _count_note(hud, "sealed_wing_transition_ready")
 	var draft_note_count: int = _count_note(hud, "sealed_wing_draft_witnessed")
 	var eleanor_map_note_count: int = _count_note(hud, "eleanor_journal_map_found")
+	var impossible_corridor_note_count: int = _count_note(hud, "measure_impossible_corridor")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -506,6 +516,9 @@ func _run() -> void:
 	eleanor_journal_map.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "eleanor_journal_map_found") == eleanor_map_note_count, "Repeated Eleanor journal map reading does not duplicate map note")
+	player.use_tape_measure_on_surface("impossible_corridor")
+	await process_frame
+	_assert(_count_note(hud, "measure_impossible_corridor") == impossible_corridor_note_count, "Repeated impossible corridor measurement does not duplicate note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

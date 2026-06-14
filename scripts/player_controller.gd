@@ -242,6 +242,17 @@ func _apply_tape_measurement(surface_id: String) -> void:
 		show_message("Conservatory: 18 ft by 10 ft. The glass agrees. The lemon tree does not.", 7.0)
 		add_journal_note("measure_conservatory", "The Conservatory frame measures true, but the lemon tree sits one pace closer than the plan allows.")
 		add_ledger_entry("measure_conservatory_ledger", "The Conservatory glass accepted the tape. The lemon tree did not. Mara wrote down the numbers and then the scent changed.", "2:47 AM - Lemon Measure")
+	elif surface_id == "impossible_corridor" or surface_id == "sealed_wing_draft":
+		if not bool(get_tree().root.get_meta("eleanor_journal_map_found", false)):
+			show_message("The tape slides over pencil and refuses to catch. Mara needs Eleanor's map before the number means anything.", 7.0)
+			return
+		show_message("Eleanor wrote 42 ft. The tape reaches 47, then retracts to 42 while Mara is still holding it.", 8.0)
+		get_tree().root.set_meta("impossible_corridor_measured", true)
+		add_journal_note("measure_impossible_corridor", "Eleanor's sealed-wing corridor measures 47 ft under the tape, then rewrites itself back to 42 ft.")
+		add_evidence("impossible_corridor_measurement", "Impossible Corridor Measurement", "Eleanor's map says 42 ft. Mara's tape reaches 47 ft before the house corrects the number.", "Measurement")
+		add_ledger_entry("measure_impossible_corridor_ledger", "The sealed corridor gave Mara forty-seven feet and then took five of them back while the tape was still warm in her hand.", "2:47 AM - The Borrowed Five Feet")
+		complete_journal_objective("measure_impossible_corridor")
+		add_journal_objective("return_impossible_measure_to_kitchen", "Return the impossible measurement to the Kitchen evidence board.")
 	else:
 		show_message("The tape ticks against skirting and damp plaster. Nothing here argues with the plan yet.", 5.0)
 		add_journal_note("measure_entrance_hall", "The entrance hall has not started lying in numbers yet.")
@@ -266,6 +277,8 @@ func _current_measurement_surface() -> String:
 		return "kitchen_wall"
 	if target_name.begins_with("Conservatory") or target_name == "LemonTree":
 		return "conservatory_wall"
+	if target_name == "SealedWingDraftThreshold":
+		return "impossible_corridor"
 	return ""
 
 func _current_measurement_area() -> String:
