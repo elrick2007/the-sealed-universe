@@ -6,6 +6,7 @@ const FIRED_NOTE_ID := "two_forty_seven_incomplete"
 const SCHEDULED_WATCH_EVENT_ID := "hall_clock_watch"
 const SCHEDULED_WATCH_ARMED_NOTE_ID := "scheduled_hall_watch_armed"
 const SCHEDULED_WATCH_FIRED_NOTE_ID := "scheduled_hall_watch_fired"
+const SCHEDULED_ROUTE_GATE_ID := "scheduled_attic_route_gate"
 
 var incomplete_event_armed := false
 var incomplete_event_fired := false
@@ -22,6 +23,8 @@ func _ready() -> void:
 	root.set_meta("scheduled_247_available", false)
 	root.set_meta("scheduled_hall_watch_armed", false)
 	root.set_meta("scheduled_hall_watch_fired", false)
+	root.set_meta("scheduled_247_route_gate_ready", false)
+	root.set_meta("attic_stair_route_revealed", false)
 	root.set_meta("next_247_event_id", "")
 	root.set_meta("next_scheduled_247_event_id", "")
 	root.set_meta("last_247_event_id", "")
@@ -109,9 +112,39 @@ func trigger_scheduled_hall_watch_event(player: Node = null) -> bool:
 			"After the pendulum was returned, Mara could choose a 2:47 appointment. The ledger answered at the chosen hour.",
 			"Clock"
 		)
+	_open_scheduled_route_gate(player)
 	if player.has_method("show_message"):
 		player.show_message("At the chosen 2:47, the ledger opens before the clock finishes striking.", 7.0)
 	return true
+
+func _open_scheduled_route_gate(player: Node) -> void:
+	var root := get_tree().root
+	if bool(root.get_meta("scheduled_247_route_gate_ready", false)):
+		return
+	root.set_meta("scheduled_247_route_gate_ready", true)
+	root.set_meta("attic_stair_route_revealed", true)
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective("follow_chosen_247_to_attic", "Use the chosen 2:47 proof to find the attic stair door.")
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			SCHEDULED_ROUTE_GATE_ID,
+			"The chosen 2:47 page points back to the Housekeeper's chatelaine and the stair that was waiting to be named."
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			SCHEDULED_ROUTE_GATE_ID,
+			"The page did not draw a door. It drew a time beside a stair, and Mara understood that the house opens some routes only after they have been appointed.",
+			"2:47 AM - A Stair Answers"
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			SCHEDULED_ROUTE_GATE_ID,
+			"Chosen 2:47 Route Gate",
+			"The scheduled appointment links the returned pendulum, the Housekeeper's chatelaine, and the attic stair route.",
+			"Clock"
+		)
+	if player.has_method("reveal_map_area"):
+		player.reveal_map_area("cellar_stairs")
 
 func arm_incomplete_event(player: Node = null) -> void:
 	if incomplete_event_armed or incomplete_event_fired:
@@ -189,6 +222,8 @@ func has_scheduled_hall_watch_fired() -> bool:
 	return scheduled_hall_watch_fired or bool(get_tree().root.get_meta("scheduled_hall_watch_fired", false))
 
 func scheduler_status_line() -> String:
+	if bool(get_tree().root.get_meta("scheduled_247_route_gate_ready", false)):
+		return "CHOSEN 2:47 ROUTE OPEN"
 	if has_scheduled_hall_watch_fired():
 		return "CHOSEN 2:47 ANSWERED"
 	if is_scheduled_hall_watch_armed():

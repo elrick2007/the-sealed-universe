@@ -192,4 +192,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the next scheduled 2:47 route gate, using the proven chosen-time loop to unlock a new house response instead of only a one-off ledger beat.
+Build Attic Stair Door v1, using the chatelaine and chosen 2:47 proof to open the first attic route stub.

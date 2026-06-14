@@ -678,6 +678,13 @@ func _run() -> void:
 	_assert(_has_note(hud, "scheduled_hall_watch_fired"), "Kitchen clock adds chosen-2:47 payoff note")
 	_assert(_has_evidence(hud, "scheduled_hall_watch_fired"), "Kitchen clock pins chosen-2:47 payoff evidence")
 	_assert(_has_ledger_entry(hud, "scheduled_hall_watch_fired"), "Kitchen clock writes chosen-2:47 payoff ledger entry")
+	_assert(bool(scene.get_tree().root.get_meta("scheduled_247_route_gate_ready", false)), "Chosen 2:47 payoff opens a route gate")
+	_assert(bool(scene.get_tree().root.get_meta("attic_stair_route_revealed", false)), "Chosen 2:47 payoff reveals attic-stair route state")
+	_assert(_has_objective(hud, "follow_chosen_247_to_attic"), "Chosen 2:47 payoff opens attic-stair route objective")
+	_assert(_has_note(hud, "scheduled_attic_route_gate"), "Chosen 2:47 payoff adds attic-stair route note")
+	_assert(_has_evidence(hud, "scheduled_attic_route_gate"), "Chosen 2:47 payoff pins attic-stair route evidence")
+	_assert(_has_ledger_entry(hud, "scheduled_attic_route_gate"), "Chosen 2:47 payoff writes attic-stair route ledger entry")
+	_assert(hud.discovered_map.has("cellar_stairs"), "Chosen 2:47 payoff keeps stair-core map knowledge revealed")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -707,6 +714,7 @@ func _run() -> void:
 	var scheduled_note_count: int = _count_note(hud, "scheduled_247_unlocked")
 	var scheduled_armed_note_count: int = _count_note(hud, "scheduled_hall_watch_armed")
 	var scheduled_fired_note_count: int = _count_note(hud, "scheduled_hall_watch_fired")
+	var scheduled_route_gate_note_count: int = _count_note(hud, "scheduled_attic_route_gate")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -762,6 +770,7 @@ func _run() -> void:
 	kitchen_clock_247.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "scheduled_hall_watch_fired") == scheduled_fired_note_count, "Repeated Kitchen clock inspection does not duplicate chosen-2:47 payoff note")
+	_assert(_count_note(hud, "scheduled_attic_route_gate") == scheduled_route_gate_note_count, "Repeated Kitchen clock inspection does not duplicate chosen-2:47 route-gate note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
