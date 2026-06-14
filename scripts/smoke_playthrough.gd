@@ -43,6 +43,7 @@ func _run() -> void:
 	var chandelier_handprint: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/ChandelierHandprint")
 	var unnumbered_guest_room: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed")
 	var housekeeper_folded_record: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/HousekeeperFoldedRecord")
+	var housekeeper_sewing_box: Node = scene.get_node("Architecture/FirstFloor/HousekeeperRoom/HousekeeperSewingBox")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -574,6 +575,11 @@ func _run() -> void:
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("housekeeper_unnumbered_record_found", false)), "Housekeeper folded record stays closed before altered-fragment comparison")
 	_assert(not _has_objective(hud, "find_housekeeper_sewing_box"), "Housekeeper record does not reveal sewing-box objective before comparison")
+	housekeeper_sewing_box.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("housekeeper_sewing_box_opened", false)), "Housekeeper sewing box stays closed before household record")
+	_assert(not player.has_item("chatelaine"), "Housekeeper sewing box does not grant chatelaine before household record")
+	_assert(not player.has_item("clock_pendulum"), "Housekeeper sewing box does not grant clock pendulum before household record")
 
 	unnumbered_guest_room.interact(player)
 	await process_frame
@@ -622,6 +628,17 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "housekeeper_unnumbered_record"), "Housekeeper folded record pins household-record evidence")
 	_assert(_has_ledger_entry(hud, "housekeeper_unnumbered_record"), "Housekeeper folded record writes Living Ledger entry")
 	_assert(_has_objective(hud, "find_housekeeper_sewing_box"), "Housekeeper folded record opens sewing-box objective")
+	housekeeper_sewing_box.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("housekeeper_sewing_box_opened", false)), "Housekeeper sewing box opens after household record")
+	_assert(_objective_complete(hud, "find_housekeeper_sewing_box"), "Housekeeper sewing box completes sewing-box objective")
+	_assert(player.has_item("chatelaine"), "Housekeeper sewing box grants chatelaine")
+	_assert(player.has_item("clock_pendulum"), "Housekeeper sewing box grants clock pendulum")
+	_assert(_has_note(hud, "housekeeper_sewing_box_opened"), "Housekeeper sewing box adds note")
+	_assert(_has_evidence(hud, "housekeeper_sewing_box_opened"), "Housekeeper sewing box pins evidence")
+	_assert(_has_ledger_entry(hud, "housekeeper_sewing_box_opened"), "Housekeeper sewing box writes Living Ledger entry")
+	_assert(_has_objective(hud, "return_clock_pendulum"), "Housekeeper sewing box opens hall-clock objective")
+	_assert(_has_objective(hud, "find_attic_stair_door"), "Housekeeper sewing box opens attic-stair objective")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -646,6 +663,7 @@ func _run() -> void:
 	var altered_fragment_read_note_count: int = _count_note(hud, "altered_fragment_read")
 	var altered_fragment_match_note_count: int = _count_note(hud, "altered_fragment_guest_book_match")
 	var housekeeper_record_note_count: int = _count_note(hud, "housekeeper_unnumbered_record")
+	var housekeeper_sewing_box_note_count: int = _count_note(hud, "housekeeper_sewing_box_opened")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -690,6 +708,9 @@ func _run() -> void:
 	housekeeper_folded_record.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "housekeeper_unnumbered_record") == housekeeper_record_note_count, "Repeated Housekeeper folded record reading does not duplicate household-record note")
+	housekeeper_sewing_box.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "housekeeper_sewing_box_opened") == housekeeper_sewing_box_note_count, "Repeated Housekeeper sewing box inspection does not duplicate sewing-box note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
