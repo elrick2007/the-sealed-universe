@@ -3,10 +3,15 @@ extends Node
 const INCOMPLETE_EVENT_ID := "mara_incomplete"
 const RESERVED_NOTE_ID := "two_forty_seven_reserved"
 const FIRED_NOTE_ID := "two_forty_seven_incomplete"
+const SCHEDULED_WATCH_EVENT_ID := "hall_clock_watch"
+const SCHEDULED_WATCH_ARMED_NOTE_ID := "scheduled_hall_watch_armed"
+const SCHEDULED_WATCH_FIRED_NOTE_ID := "scheduled_hall_watch_fired"
 
 var incomplete_event_armed := false
 var incomplete_event_fired := false
 var time_scheduling_unlocked := false
+var scheduled_hall_watch_armed := false
+var scheduled_hall_watch_fired := false
 
 func _ready() -> void:
 	var root := get_tree().root
@@ -15,7 +20,10 @@ func _ready() -> void:
 	root.set_meta("incomplete_247_fired", false)
 	root.set_meta("time_scheduling_unlocked", false)
 	root.set_meta("scheduled_247_available", false)
+	root.set_meta("scheduled_hall_watch_armed", false)
+	root.set_meta("scheduled_hall_watch_fired", false)
 	root.set_meta("next_247_event_id", "")
+	root.set_meta("next_scheduled_247_event_id", "")
 	root.set_meta("last_247_event_id", "")
 
 func unlock_time_scheduling(player: Node = null) -> void:
@@ -38,6 +46,72 @@ func unlock_time_scheduling(player: Node = null) -> void:
 			"The clock did not start. It resumed, as if it had only been holding its breath until Mara supplied the missing weight.",
 			"2:47 AM - Scheduled Time"
 		)
+
+func schedule_hall_watch_event(player: Node = null) -> bool:
+	if not is_time_scheduling_unlocked():
+		return false
+	if has_scheduled_hall_watch_fired() or is_scheduled_hall_watch_armed():
+		return false
+	scheduled_hall_watch_armed = true
+	var root := get_tree().root
+	root.set_meta("scheduled_hall_watch_armed", true)
+	root.set_meta("next_scheduled_247_event_id", SCHEDULED_WATCH_EVENT_ID)
+	if player == null:
+		return true
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("schedule_247_event")
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			SCHEDULED_WATCH_ARMED_NOTE_ID,
+			"Mara set the grandfather clock for a deliberate 2:47 watch. The house now has an appointment she chose."
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			SCHEDULED_WATCH_ARMED_NOTE_ID,
+			"Mara moved the hands to 2:47 and felt the house notice the difference between being hunted by a time and arriving at it willingly.",
+			"2:47 AM - Appointment Set"
+		)
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective("wait_scheduled_247", "Return to the Kitchen clock and keep Mara's chosen 2:47 appointment.")
+	if player.has_method("show_message"):
+		player.show_message("Mara sets the clock for 2:47. This time, the appointment is hers.", 7.0)
+	return true
+
+func trigger_scheduled_hall_watch_event(player: Node = null) -> bool:
+	if has_scheduled_hall_watch_fired() or not is_scheduled_hall_watch_armed():
+		return false
+	scheduled_hall_watch_armed = false
+	scheduled_hall_watch_fired = true
+	var root := get_tree().root
+	root.set_meta("scheduled_hall_watch_armed", false)
+	root.set_meta("scheduled_hall_watch_fired", true)
+	root.set_meta("next_scheduled_247_event_id", "")
+	root.set_meta("last_247_event_id", SCHEDULED_WATCH_EVENT_ID)
+	if player == null:
+		return true
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("wait_scheduled_247")
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			SCHEDULED_WATCH_FIRED_NOTE_ID,
+			"At Mara's chosen 2:47, the Living Ledger wrote a line before the grandfather clock struck. The house can keep appointments."
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			SCHEDULED_WATCH_FIRED_NOTE_ID,
+			"At 2:47, the ledger opened to a clean page. Mara had chosen the hour, but the house chose the sentence.",
+			"2:47 AM - The Chosen Hour"
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			SCHEDULED_WATCH_FIRED_NOTE_ID,
+			"Scheduled 2:47 Ledger Page",
+			"After the pendulum was returned, Mara could choose a 2:47 appointment. The ledger answered at the chosen hour.",
+			"Clock"
+		)
+	if player.has_method("show_message"):
+		player.show_message("At the chosen 2:47, the ledger opens before the clock finishes striking.", 7.0)
+	return true
 
 func arm_incomplete_event(player: Node = null) -> void:
 	if incomplete_event_armed or incomplete_event_fired:
@@ -108,7 +182,17 @@ func has_incomplete_event_fired() -> bool:
 func is_time_scheduling_unlocked() -> bool:
 	return time_scheduling_unlocked or bool(get_tree().root.get_meta("time_scheduling_unlocked", false))
 
+func is_scheduled_hall_watch_armed() -> bool:
+	return scheduled_hall_watch_armed or bool(get_tree().root.get_meta("scheduled_hall_watch_armed", false))
+
+func has_scheduled_hall_watch_fired() -> bool:
+	return scheduled_hall_watch_fired or bool(get_tree().root.get_meta("scheduled_hall_watch_fired", false))
+
 func scheduler_status_line() -> String:
+	if has_scheduled_hall_watch_fired():
+		return "CHOSEN 2:47 ANSWERED"
+	if is_scheduled_hall_watch_armed():
+		return "CHOSEN 2:47 WAITING"
 	if has_incomplete_event_fired():
 		return "2:47 WROTE: INCOMPLETE"
 	if is_incomplete_event_armed():

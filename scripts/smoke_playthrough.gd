@@ -659,6 +659,25 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "scheduled_247_unlocked"), "Hall clock writes scheduler Living Ledger entry")
 	_assert(_has_ledger_entry(hud, "hall_clock_pendulum_returned"), "Hall clock writes returned-pendulum Living Ledger entry")
 	_assert(_has_objective(hud, "schedule_247_event"), "Hall clock opens scheduled-2:47 objective")
+	hall_clock.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("scheduled_hall_watch_armed", false)), "Hall clock arms a chosen 2:47 watch")
+	_assert(String(scene.get_tree().root.get_meta("next_scheduled_247_event_id", "")) == "hall_clock_watch", "Hall clock records the chosen 2:47 event id")
+	_assert(clock_scheduler.is_scheduled_hall_watch_armed(), "Clock scheduler reports chosen 2:47 armed")
+	_assert(_objective_complete(hud, "schedule_247_event"), "Hall clock completes scheduling objective")
+	_assert(_has_note(hud, "scheduled_hall_watch_armed"), "Hall clock adds chosen-2:47 appointment note")
+	_assert(_has_ledger_entry(hud, "scheduled_hall_watch_armed"), "Hall clock writes chosen-2:47 appointment ledger entry")
+	_assert(_has_objective(hud, "wait_scheduled_247"), "Hall clock opens chosen-2:47 wait objective")
+	kitchen_clock_247.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("scheduled_hall_watch_armed", false)), "Kitchen clock clears chosen 2:47 armed state")
+	_assert(bool(scene.get_tree().root.get_meta("scheduled_hall_watch_fired", false)), "Kitchen clock fires chosen 2:47 event")
+	_assert(clock_scheduler.has_scheduled_hall_watch_fired(), "Clock scheduler reports chosen 2:47 fired")
+	_assert(String(scene.get_tree().root.get_meta("last_247_event_id", "")) == "hall_clock_watch", "Kitchen clock records chosen 2:47 as last event")
+	_assert(_objective_complete(hud, "wait_scheduled_247"), "Kitchen clock completes chosen-2:47 wait objective")
+	_assert(_has_note(hud, "scheduled_hall_watch_fired"), "Kitchen clock adds chosen-2:47 payoff note")
+	_assert(_has_evidence(hud, "scheduled_hall_watch_fired"), "Kitchen clock pins chosen-2:47 payoff evidence")
+	_assert(_has_ledger_entry(hud, "scheduled_hall_watch_fired"), "Kitchen clock writes chosen-2:47 payoff ledger entry")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -686,6 +705,8 @@ func _run() -> void:
 	var housekeeper_sewing_box_note_count: int = _count_note(hud, "housekeeper_sewing_box_opened")
 	var hall_clock_returned_note_count: int = _count_note(hud, "hall_clock_pendulum_returned")
 	var scheduled_note_count: int = _count_note(hud, "scheduled_247_unlocked")
+	var scheduled_armed_note_count: int = _count_note(hud, "scheduled_hall_watch_armed")
+	var scheduled_fired_note_count: int = _count_note(hud, "scheduled_hall_watch_fired")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -737,6 +758,10 @@ func _run() -> void:
 	await process_frame
 	_assert(_count_note(hud, "hall_clock_pendulum_returned") == hall_clock_returned_note_count, "Repeated hall clock inspection does not duplicate returned-pendulum note")
 	_assert(_count_note(hud, "scheduled_247_unlocked") == scheduled_note_count, "Repeated hall clock inspection does not duplicate scheduling-unlocked note")
+	_assert(_count_note(hud, "scheduled_hall_watch_armed") == scheduled_armed_note_count, "Repeated hall clock inspection does not duplicate chosen-2:47 appointment note")
+	kitchen_clock_247.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "scheduled_hall_watch_fired") == scheduled_fired_note_count, "Repeated Kitchen clock inspection does not duplicate chosen-2:47 payoff note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

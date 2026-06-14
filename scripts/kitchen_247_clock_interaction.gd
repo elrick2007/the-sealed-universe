@@ -6,6 +6,10 @@ func get_prompt(_player: Node) -> String:
 		return "E - Wait for bed trade"
 	if bool(root.get_meta("unnumbered_page_trade_complete", false)):
 		return "E - Check altered page"
+	if bool(root.get_meta("scheduled_hall_watch_armed", false)):
+		return "E - Wait for chosen 2:47"
+	if bool(root.get_meta("scheduled_hall_watch_fired", false)):
+		return "E - Read chosen 2:47 page"
 	if bool(root.get_meta("incomplete_247_fired", false)):
 		return "E - Read 2:47 page"
 	if bool(root.get_meta("incomplete_247_armed", false)):
@@ -16,6 +20,16 @@ func interact(player: Node) -> void:
 	var root := get_tree().root
 	if bool(root.get_meta("unnumbered_page_trade_armed", false)) and not bool(root.get_meta("unnumbered_page_trade_complete", false)):
 		_resolve_unnumbered_trade(player)
+		return
+	if bool(root.get_meta("scheduled_hall_watch_armed", false)):
+		var scheduler := get_node_or_null("/root/Main/ClockScheduler")
+		if scheduler == null or not scheduler.has_method("trigger_scheduled_hall_watch_event"):
+			player.show_message("The Kitchen clock reaches for the appointment, but the hall clock does not answer.", 6.0)
+			return
+		scheduler.trigger_scheduled_hall_watch_event(player)
+		return
+	if bool(root.get_meta("scheduled_hall_watch_fired", false)):
+		player.show_message("The Kitchen clock is quiet. Mara's chosen 2:47 already wrote back.", 6.0)
 		return
 	if bool(root.get_meta("unnumbered_page_trade_complete", false)) and bool(root.get_meta("incomplete_247_fired", false)):
 		player.show_message("The Kitchen clock is stopped at 2:47. The altered fragment is no longer warm.", 6.0)

@@ -4,6 +4,10 @@ extends StaticBody3D
 func get_prompt(player: Node) -> String:
 	var root := get_tree().root
 	if bool(root.get_meta("hall_clock_pendulum_installed", false)):
+		if bool(root.get_meta("scheduled_hall_watch_armed", false)):
+			return "E - Check chosen 2:47"
+		if not bool(root.get_meta("scheduled_hall_watch_fired", false)):
+			return "E - Set 2:47 appointment"
 		return "E - Check grandfather clock"
 	if player.has_method("has_item") and player.has_item("clock_pendulum"):
 		return "E - Return pendulum"
@@ -13,7 +17,7 @@ func get_prompt(player: Node) -> String:
 func interact(player: Node) -> void:
 	var root := get_tree().root
 	if bool(root.get_meta("hall_clock_pendulum_installed", false)):
-		player.show_message("The grandfather clock keeps time again. 2:47 is no longer only something Mara waits for.", 7.0)
+		_schedule_or_check(player)
 		return
 	if not player.has_method("has_item") or not player.has_item("clock_pendulum"):
 		player.show_message("The grandfather clock is stopped at 2:47. Inside the case, the pendulum hook hangs empty.", 7.0)
@@ -51,3 +55,19 @@ func _install_pendulum(player: Node) -> void:
 	)
 	player.add_journal_objective("schedule_247_event", "Use the restored clock to choose when Mara waits for 2:47.")
 	player.show_message("The pendulum starts moving. The house has a time now, and Mara can choose to meet it.", 8.0)
+
+
+func _schedule_or_check(player: Node) -> void:
+	var root := get_tree().root
+	if bool(root.get_meta("scheduled_hall_watch_fired", false)):
+		player.show_message("The grandfather clock keeps time again. Mara chose 2:47 once, and the house answered.", 7.0)
+		return
+	if bool(root.get_meta("scheduled_hall_watch_armed", false)):
+		player.show_message("The grandfather clock waits at the chosen hour. The Kitchen clock will know when 2:47 arrives.", 7.0)
+		return
+	var scheduler := get_node_or_null("/root/Main/ClockScheduler")
+	if scheduler == null or not scheduler.has_method("schedule_hall_watch_event"):
+		player.show_message("The grandfather clock keeps time again, but Mara cannot make the house keep an appointment yet.", 7.0)
+		return
+	if not scheduler.schedule_hall_watch_event(player):
+		player.show_message("The grandfather clock keeps time again. 2:47 is no longer only something Mara waits for.", 7.0)
