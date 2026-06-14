@@ -64,6 +64,7 @@ var evidence_required := {
 }
 var inventory_items := {}
 var discovered_map := {}
+var unlocked_map_floors := {"ground_floor": true}
 var visited_map := {}
 var current_map_area := "entrance_hall"
 
@@ -209,6 +210,11 @@ func visit_map_area(id: String) -> void:
 	discovered_map[id] = true
 	visited_map[id] = true
 	current_map_area = id
+	_refresh_map()
+
+func unlock_map_floor(id: String) -> void:
+	unlocked_map_floors[id] = true
+	get_tree().root.set_meta("%s_plan_unlocked" % id, true)
 	_refresh_map()
 
 func _build_journal() -> void:
@@ -579,9 +585,9 @@ func _draw_map() -> void:
 func _draw_map_floor_tabs() -> void:
 	var tabs := [
 		{"id": "ground_floor", "label": "Ground", "locked": false},
-		{"id": "first_floor", "label": "First Floor", "locked": true},
-		{"id": "attic", "label": "Attic", "locked": true},
-		{"id": "cellar", "label": "Cellar", "locked": true}
+		{"id": "first_floor", "label": "First Floor", "locked": not (unlocked_map_floors.has("first_floor") or bool(get_tree().root.get_meta("first_floor_plan_unlocked", false)))},
+		{"id": "attic", "label": "Attic", "locked": not (unlocked_map_floors.has("attic") or bool(get_tree().root.get_meta("attic_plan_unlocked", false)))},
+		{"id": "cellar", "label": "Cellar", "locked": not (unlocked_map_floors.has("cellar") or bool(get_tree().root.get_meta("cellar_plan_unlocked", false)))}
 	]
 	var x: float = 0.0
 	for tab in tabs:

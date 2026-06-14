@@ -139,6 +139,10 @@ func visit_map_area(id: String) -> void:
 	if journal_ui.has_method("visit_map_area"):
 		journal_ui.visit_map_area(id)
 
+func unlock_map_floor(id: String) -> void:
+	if journal_ui.has_method("unlock_map_floor"):
+		journal_ui.unlock_map_floor(id)
+
 func use_recorder_from_inventory() -> void:
 	_use_recorder()
 

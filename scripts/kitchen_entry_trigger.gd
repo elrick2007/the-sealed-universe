@@ -11,6 +11,8 @@ func _on_body_entered(body: Node) -> void:
 	body.visit_map_area("kitchen")
 	if _acknowledge_rose_trace_return(body):
 		return
+	if _acknowledge_impossible_measure_return(body):
+		return
 	if visited_once:
 		body.show_message(_return_message(body), 7.0)
 		return
@@ -34,13 +36,16 @@ func _return_message(body: Node) -> String:
 
 func _return_reasons(body: Node) -> Array:
 	var reasons := []
-	if bool(get_tree().root.get_meta("rose_scent_traced", false)) and not bool(get_tree().root.get_meta("rose_trace_returned", false)):
+	var root := get_tree().root
+	if bool(root.get_meta("rose_scent_traced", false)) and not bool(root.get_meta("rose_trace_returned", false)):
 		reasons.append("rose-scent contradiction ready")
+	if bool(root.get_meta("impossible_corridor_measured", false)) and not bool(root.get_meta("impossible_measure_returned", false)):
+		reasons.append("impossible measurement ready")
 	if body.has_method("ledger_unread_count") and body.ledger_unread_count() > 0:
 		reasons.append("new ledger page")
 	if body.has_method("evidence_unread_count") and body.evidence_unread_count() > 0:
 		reasons.append("new evidence pinned")
-	var pending := int(get_tree().root.get_meta("pending_transcription_count", 0))
+	var pending := int(root.get_meta("pending_transcription_count", 0))
 	if pending > 0:
 		reasons.append("recorder transcription ready")
 	return reasons
@@ -61,6 +66,29 @@ func _acknowledge_rose_trace_return(body: Node) -> bool:
 	)
 	body.add_journal_objective("approach_sealed_wing_edge", "Return to the rose trace and test the sealed wing boundary.")
 	body.show_message("The Kitchen accepts the rose trace as evidence. The sealed edge of the house is ready to test.", 8.0)
+	return true
+
+func _acknowledge_impossible_measure_return(body: Node) -> bool:
+	var root := get_tree().root
+	if not bool(root.get_meta("impossible_corridor_measured", false)):
+		return false
+	if bool(root.get_meta("impossible_measure_returned", false)):
+		return false
+	root.set_meta("impossible_measure_returned", true)
+	root.set_meta("act_2_gate_seeded", true)
+	root.set_meta("first_floor_plan_unlocked", true)
+	body.complete_journal_objective("return_impossible_measure_to_kitchen")
+	body.add_journal_note("impossible_measure_pinned", "Back in the Kitchen, the 47 ft measurement gives the house a new floor to answer for.")
+	body.add_evidence("act_2_first_floor_gate", "Act 2 Gate: Borrowed Five Feet", "The impossible corridor gives Mara enough missing distance to begin looking above the ground floor.", "Gate")
+	body.add_ledger_entry(
+		"impossible_measure_pinned",
+		"Mara pinned the borrowed five feet to the Kitchen board. The ground floor did not get longer. Somewhere above it, a staircase remembered being owed a room.",
+		"2:47 AM - Borrowed Space"
+	)
+	if body.has_method("unlock_map_floor"):
+		body.unlock_map_floor("first_floor")
+	body.add_journal_objective("find_first_floor_stairs", "Use the borrowed five feet to find the staircase to the First Floor.")
+	body.show_message("The Kitchen accepts the impossible measurement. A first-floor plan unlocks in the map.", 8.0)
 	return true
 
 func _join_reasons(reasons: Array) -> String:

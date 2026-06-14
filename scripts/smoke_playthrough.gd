@@ -51,6 +51,7 @@ func _run() -> void:
 	var evidence_kitchen_recording: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapKitchenRecording")
 	var evidence_caldwell: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapCaldwell")
 	var evidence_incomplete: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapIncomplete")
+	var evidence_act_2_gate: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapAct2Gate")
 
 	_assert(not player.has_recorder, "Player starts without recorder")
 	_assert(not player.has_item("service_key"), "Player starts without service key")
@@ -60,6 +61,7 @@ func _run() -> void:
 	_assert(not evidence_plans.visible, "Evidence board starts with plan scrap hidden")
 	_assert(not evidence_caldwell.visible, "Evidence board starts with Caldwell record scrap hidden")
 	_assert(not evidence_incomplete.visible, "Evidence board starts with Incomplete scrap hidden")
+	_assert(not evidence_act_2_gate.visible, "Evidence board starts with Act 2 gate scrap hidden")
 	next_route_gate.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("next_route_gate_open", false)), "Next route gate starts closed")
@@ -488,6 +490,19 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "measure_impossible_corridor_ledger"), "Tape measure writes impossible-corridor Living Ledger beat")
 	_assert(_has_objective(hud, "return_impossible_measure_to_kitchen"), "Tape measure adds Kitchen return objective")
 
+	kitchen_trigger._on_body_entered(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("impossible_measure_returned", false)), "Kitchen accepts returned impossible corridor measurement")
+	_assert(bool(scene.get_tree().root.get_meta("act_2_gate_seeded", false)), "Kitchen seeds Act 2 gate state from impossible measurement")
+	_assert(bool(scene.get_tree().root.get_meta("first_floor_plan_unlocked", false)), "Kitchen return unlocks first-floor plan state")
+	_assert(_objective_complete(hud, "return_impossible_measure_to_kitchen"), "Kitchen return completes impossible-measure objective")
+	_assert(_has_note(hud, "impossible_measure_pinned"), "Kitchen return adds impossible-measure pinned note")
+	_assert(_has_evidence(hud, "act_2_first_floor_gate"), "Kitchen return pins Act 2 gate evidence")
+	_assert(_has_ledger_entry(hud, "impossible_measure_pinned"), "Kitchen return writes Living Ledger Act 2 gate beat")
+	_assert(_has_objective(hud, "find_first_floor_stairs"), "Kitchen return adds first-floor stairs objective")
+	_assert(hud.unlocked_map_floors.has("first_floor"), "Kitchen return unlocks first-floor map tab")
+	_assert(evidence_act_2_gate.visible, "Evidence board reveals Act 2 gate scrap after Kitchen return")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -500,6 +515,7 @@ func _run() -> void:
 	var draft_note_count: int = _count_note(hud, "sealed_wing_draft_witnessed")
 	var eleanor_map_note_count: int = _count_note(hud, "eleanor_journal_map_found")
 	var impossible_corridor_note_count: int = _count_note(hud, "measure_impossible_corridor")
+	var impossible_measure_pinned_count: int = _count_note(hud, "impossible_measure_pinned")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -519,6 +535,9 @@ func _run() -> void:
 	player.use_tape_measure_on_surface("impossible_corridor")
 	await process_frame
 	_assert(_count_note(hud, "measure_impossible_corridor") == impossible_corridor_note_count, "Repeated impossible corridor measurement does not duplicate note")
+	kitchen_trigger._on_body_entered(player)
+	await process_frame
+	_assert(_count_note(hud, "impossible_measure_pinned") == impossible_measure_pinned_count, "Repeated Kitchen return does not duplicate impossible-measure note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

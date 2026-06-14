@@ -65,6 +65,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Sealed Wing drafted threshold stub.
 - Eleanor's hand-drawn sealed-wing map pickup.
 - Impossible corridor tape-measure proof.
+- Kitchen impossible-measure return and first-floor plan unlock.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -88,6 +89,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 17. Drafted Sealed Wing threshold: a small pencilled threshold takes weight, completes the drafted-door objective, marks the East/Sealed Wing as visited, and adds the next objective to find Eleanor's hand-drawn sealed-wing map.
 18. Eleanor's hand-drawn map: a small iron-gall map page in the drafted threshold completes the map objective, pins the `42 ft / it is not` contradiction, and seeds the next impossible-corridor measurement objective.
 19. Impossible corridor measurement: using the tape on the drafted sealed-wing corridor after finding Eleanor's map proves the `42 ft` note is unstable, records a `47 ft -> 42 ft` contradiction, and sends Mara back toward the Kitchen evidence loop.
+20. Kitchen impossible-measure return: the Kitchen accepts the borrowed five feet, pins an Act 2 gate proof, unlocks the First Floor map tab, and gives Mara the next objective to find the First Floor staircase.
 
 ## Important Documents
 

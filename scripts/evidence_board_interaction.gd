@@ -11,7 +11,8 @@ var evidence_visuals := {
 	"eleanor_place_card": ["EvidenceScrapEleanorCard", "EvidencePinEleanorCard"],
 	"kitchen_wall_recording": ["EvidenceScrapKitchenRecording", "EvidencePinKitchenRecording", "EvidenceThreadAB", "EvidenceThreadBC", "EvidenceThreadFinal"],
 	"caldwell_living_record": ["EvidenceScrapCaldwell", "EvidencePinCaldwell"],
-	"mara_incomplete_entry": ["EvidenceScrapIncomplete", "EvidencePinIncomplete"]
+	"mara_incomplete_entry": ["EvidenceScrapIncomplete", "EvidencePinIncomplete"],
+	"act_2_first_floor_gate": ["EvidenceScrapAct2Gate", "EvidencePinAct2Gate"]
 }
 
 func _ready() -> void:
