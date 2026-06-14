@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=66 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -37,6 +37,8 @@
 [ext_resource type="Script" path="res://scripts/sealed_wing_draft_threshold.gd" id="35"]
 [ext_resource type="Script" path="res://scripts/eleanor_journal_map_interaction.gd" id="36"]
 [ext_resource type="Script" path="res://scripts/first_floor_stairs_interaction.gd" id="37"]
+[ext_resource type="Script" path="res://scripts/gallery_landing_trigger.gd" id="38"]
+[ext_resource type="Script" path="res://scripts/chandelier_handprint_interaction.gd" id="39"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -205,6 +207,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, 2.35, -22.45)
 light_color = Color(0.86, 0.72, 0.42, 1)
 light_energy = 0.62
 omni_range = 6.2
+shadow_enabled = true
+
+[node name="GalleryLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 5.1, -5.2)
+light_color = Color(0.78, 0.55, 0.38, 1)
+light_energy = 0.82
+omni_range = 6.0
 shadow_enabled = true
 
 [node name="Architecture" type="Node3D" parent="."]
@@ -1163,6 +1172,106 @@ hall_light_path = NodePath("../../../WestWingLight")
 shadow_path = NodePath("../HallShadow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/WestWingHallway/WestWingScareTrigger"]
+shape = SubResource("BoxShape_hall_trigger")
+
+[node name="FirstFloor" type="Node3D" parent="Architecture"]
+
+[node name="GalleryLanding" type="Node3D" parent="Architecture/FirstFloor"]
+
+[node name="LandingSpawn" type="Marker3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 3.25, -5.2)
+
+[node name="LandingFloor" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.58, 0, 0, 0, 1, 0, 0, 0, 0.24, 0.0, 3.0, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingFloor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="LandingBackWall" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.58, 0, 0, 0, 0.82, 0, 0, 0, 1, 0.0, 4.45, -7.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingBackWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingBackWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="LandingLeftWall" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.24, -2.9, 4.45, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingLeftWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingLeftWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="LandingRightWall" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.45, 0, 0, 0, 0.82, 0, 0, 0, 0.24, 2.9, 4.45, -5.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/LandingRightWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="LandingVoid" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(2.7, 0, 0, 0, 0.08, 0, 0, 0, 0.58, 0.0, 2.96, -3.25)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="Balustrade" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(3.4, 0, 0, 0, 0.16, 0, 0, 0, 0.12, 0.0, 3.85, -3.55)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="OpenedChainA" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.08, 0, 0.04, 0, 0.56, 0, -0.04, 0, 0.08, -0.18, 4.95, -4.15)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="OpenedChainB" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.08, 0, -0.04, 0, 0.48, 0, 0.04, 0, 0.08, 0.18, 4.82, -4.18)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="ChandelierHandprint" type="StaticBody3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(0.42, 0, 0.0, 0, 0.18, 0, 0.0, 0, 0.42, 0.0, 4.5, -4.25)
+script = ExtResource("39")
+
+[node name="BrassPlate" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/ChandelierHandprint"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="LongFingerMarkA" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/ChandelierHandprint"]
+transform = Transform3D(0.08, 0, 0.0, 0, 0.08, 0, 0.0, 0, 0.42, -0.18, 0.12, 0.02)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="LongFingerMarkB" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/ChandelierHandprint"]
+transform = Transform3D(0.08, 0, 0.0, 0, 0.08, 0, 0.0, 0, 0.46, 0.0, 0.14, 0.02)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="LongFingerMarkC" type="MeshInstance3D" parent="Architecture/FirstFloor/GalleryLanding/ChandelierHandprint"]
+transform = Transform3D(0.08, 0, 0.0, 0, 0.08, 0, 0.0, 0, 0.38, 0.18, 0.12, 0.02)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/ChandelierHandprint"]
+shape = SubResource("BoxShape_prop")
+
+[node name="GalleryLandingTrigger" type="Area3D" parent="Architecture/FirstFloor/GalleryLanding"]
+transform = Transform3D(1.45, 0, 0, 0, 1, 0, 0, 0, 1.35, 0.0, 3.7, -5.2)
+script = ExtResource("38")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/FirstFloor/GalleryLanding/GalleryLandingTrigger"]
 shape = SubResource("BoxShape_hall_trigger")
 
 [node name="Props" type="Node3D" parent="."]

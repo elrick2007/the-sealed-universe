@@ -38,6 +38,8 @@ func _run() -> void:
 	var recorder_dock: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenRecorderDock")
 	var next_route_gate: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/KitchenRouteGate")
 	var first_floor_stairs: Node = scene.get_node("Architecture/WestWingHallway/Kitchen/FirstFloorStairs")
+	var gallery_landing_trigger: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/GalleryLandingTrigger")
+	var chandelier_handprint: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/ChandelierHandprint")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -71,6 +73,12 @@ func _run() -> void:
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("act_2_started", false)), "First-floor stairs stay closed before Act 2 gate")
 	_assert(not _has_objective(hud, "reach_gallery_landing"), "First-floor stairs do not reveal landing objective before Act 2 gate")
+	gallery_landing_trigger._on_body_entered(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("gallery_landing_reached", false)), "Gallery Landing stays unwritten before staircase seed")
+	chandelier_handprint.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("chandelier_handprint_found", false)), "Chandelier handprint waits until Gallery Landing is reached")
 
 	recorder.interact(player)
 	await process_frame
@@ -520,6 +528,26 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "first_floor_stairs_found"), "First-floor stairs write Living Ledger route beat")
 	_assert(_has_objective(hud, "reach_gallery_landing"), "First-floor stairs add Gallery Landing objective")
 
+	gallery_landing_trigger._on_body_entered(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("gallery_landing_reached", false)), "Gallery Landing trigger sets reached state")
+	_assert(_objective_complete(hud, "reach_gallery_landing"), "Gallery Landing completes landing objective")
+	_assert(hud.visited_map.has("gallery_landing"), "Gallery Landing marks its map area visited")
+	_assert(_has_note(hud, "gallery_landing_reached"), "Gallery Landing adds route note")
+	_assert(_has_evidence(hud, "gallery_landing_reached"), "Gallery Landing pins route evidence")
+	_assert(_has_ledger_entry(hud, "gallery_landing_reached"), "Gallery Landing writes Living Ledger route beat")
+	_assert(_has_objective(hud, "inspect_chandelier_handprint"), "Gallery Landing adds chandelier inspection objective")
+
+	chandelier_handprint.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("chandelier_handprint_found", false)), "Chandelier inspection sets handprint state")
+	_assert(bool(scene.get_tree().root.get_meta("camera_verb_seeded", false)), "Chandelier inspection seeds camera verb state")
+	_assert(_objective_complete(hud, "inspect_chandelier_handprint"), "Chandelier inspection completes objective")
+	_assert(_has_note(hud, "chandelier_handprint"), "Chandelier inspection adds handprint note")
+	_assert(_has_evidence(hud, "chandelier_handprint"), "Chandelier inspection pins handprint evidence")
+	_assert(_has_ledger_entry(hud, "chandelier_handprint"), "Chandelier inspection writes Living Ledger beat")
+	_assert(_has_objective(hud, "find_unnumbered_guest_room"), "Chandelier inspection adds unnumbered guest room objective")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -534,6 +562,8 @@ func _run() -> void:
 	var impossible_corridor_note_count: int = _count_note(hud, "measure_impossible_corridor")
 	var impossible_measure_pinned_count: int = _count_note(hud, "impossible_measure_pinned")
 	var first_floor_stairs_note_count: int = _count_note(hud, "first_floor_stairs_found")
+	var gallery_landing_note_count: int = _count_note(hud, "gallery_landing_reached")
+	var chandelier_handprint_note_count: int = _count_note(hud, "chandelier_handprint")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -559,6 +589,12 @@ func _run() -> void:
 	first_floor_stairs.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "first_floor_stairs_found") == first_floor_stairs_note_count, "Repeated first-floor stair inspection does not duplicate route note")
+	gallery_landing_trigger._on_body_entered(player)
+	await process_frame
+	_assert(_count_note(hud, "gallery_landing_reached") == gallery_landing_note_count, "Repeated Gallery Landing trigger does not duplicate route note")
+	chandelier_handprint.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "chandelier_handprint") == chandelier_handprint_note_count, "Repeated chandelier inspection does not duplicate handprint note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

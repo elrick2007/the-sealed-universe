@@ -67,6 +67,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Impossible corridor tape-measure proof.
 - Kitchen impossible-measure return and first-floor plan unlock.
 - First Floor stair / Act 2 transition stub.
+- Gallery Landing v1 with chandelier handprint evidence beat.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -92,6 +93,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 19. Impossible corridor measurement: using the tape on the drafted sealed-wing corridor after finding Eleanor's map proves the `42 ft` note is unstable, records a `47 ft -> 42 ft` contradiction, and sends Mara back toward the Kitchen evidence loop.
 20. Kitchen impossible-measure return: the Kitchen accepts the borrowed five feet, pins an Act 2 gate proof, unlocks the First Floor map tab, and gives Mara the next objective to find the First Floor staircase.
 21. First Floor stair stub: after the Kitchen accepts the borrowed five feet, Mara can find a provisional staircase, start Act 2, and receive the Gallery Landing objective.
+22. Gallery Landing v1: the borrowed stairs now place Mara on a blockout First Floor landing, reframe the Entrance Hall from above, and seed the raised chandelier handprint clue toward the unnumbered guest bedroom route.
 
 ## Important Documents
 
@@ -127,7 +129,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after First Floor Stair / Act 2 Transition Stub v1:
+Last known validation after Gallery Landing v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -176,4 +178,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Gallery Landing v1 as the first true Act 2 space, keeping it blockout-first and driven by the First Floor map/story gates.
+Build the Unnumbered Guest Bedroom v1 from the Gallery Landing route, or add the camera/photo verb v1 so the chandelier handprint can become photographed evidence.

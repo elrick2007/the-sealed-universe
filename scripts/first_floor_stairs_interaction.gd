@@ -45,4 +45,8 @@ func interact(player: Node) -> void:
 	player.add_journal_objective("reach_gallery_landing", "Reach the Gallery Landing on the First Floor.")
 	if player.has_method("unlock_map_floor"):
 		player.unlock_map_floor("first_floor")
+	var landing_spawn := get_node_or_null("/root/Main/Architecture/FirstFloor/GalleryLanding/LandingSpawn") as Node3D
+	if landing_spawn != null and player is Node3D:
+		var player_3d := player as Node3D
+		player_3d.global_position = landing_spawn.global_position
 	player.show_message("Act II: The floor above begins in borrowed space. The Gallery Landing is next.", 8.0)
