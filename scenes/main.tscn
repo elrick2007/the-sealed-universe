@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=78 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -50,6 +50,7 @@
 [ext_resource type="Script" path="res://scripts/mirror_chest_interaction.gd" id="48"]
 [ext_resource type="Script" path="res://scripts/filing_voice_source_interaction.gd" id="49"]
 [ext_resource type="Script" path="res://scripts/caton_pillar_interaction.gd" id="50"]
+[ext_resource type="Script" path="res://scripts/caton_chisel_interaction.gd" id="51"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1902,6 +1903,27 @@ mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_red")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CatonPillar"]
+shape = SubResource("BoxShape_prop")
+
+[node name="CatonChisel" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(0.42, 0, 0, 0, 0.18, 0, 0, 0, 0.12, 13.55, -2.22, -4.55)
+script = ExtResource("51")
+
+[node name="Handle" type="MeshInstance3D" parent="Architecture/Cellar/CatonChisel"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="Blade" type="MeshInstance3D" parent="Architecture/Cellar/CatonChisel"]
+transform = Transform3D(0.7, 0, 0, 0, 0.36, 0, 0, 0, 0.38, 0.56, 0.0, 0.0)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="Oilcloth" type="MeshInstance3D" parent="Architecture/Cellar/CatonChisel"]
+transform = Transform3D(0.95, 0, 0, 0, 0.12, 0, 0, 0, 0.72, -0.1, 0.38, 0.0)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CatonChisel"]
 shape = SubResource("BoxShape_prop")
 
 [node name="Props" type="Node3D" parent="."]

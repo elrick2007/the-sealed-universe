@@ -73,6 +73,7 @@ Target runtime:
 23. Return the void recording to the Kitchen evidence board so Mara can pin the filed-alive proof and open the filing-voice source lead.
 24. Trace the filing voice to the attic shelf labelled `CATON / LIVING / BELOW`, opening the Caton Pillar thread.
 25. Follow `CATON / LIVING / BELOW` to the first cellar blockout, inspect the Caton Pillar, and unlock the cellar map tab/chisel thread.
+26. Recover Caton's chisel, mark the pillar with a witness mark instead of Mara's name, and open the Foundation Chamber lead.
 
 ## Project Memory
 
@@ -103,7 +104,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the chisel / consent-mark route from the Caton Pillar.
+- Build the Foundation Chamber / coal-below route from the new pillar mark.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

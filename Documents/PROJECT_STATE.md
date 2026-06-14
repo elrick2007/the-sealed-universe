@@ -86,6 +86,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Attic Void Kitchen return beat v1, pinning the filed-alive recording to the Kitchen evidence board and opening the filing-voice source lead.
 - Filing Voice Source Route v1, gating an attic filing shelf behind the Kitchen-pinned void recording and turning `CATON / LIVING / BELOW` into the next Caton Pillar route objective.
 - Caton Pillar / cellar route seed v1, unlocking the Cellar map tab and chisel thread after the filing voice points below.
+- Chisel / consent-mark route v1, turning Caton's chisel into a witness-mark payoff and opening the Foundation Chamber lead.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -130,6 +131,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 38. Attic Void Kitchen return beat v1: returning to the Kitchen after the void recording completes the return objective, pins `Kitchen Pin: Filed Alive` to the board, writes `2:47 AM - Filed to the Board`, and opens the objective to trace where the filing voice is shelving Mara's name.
 39. Filing Voice Source Route v1: after the Kitchen board accepts the void recording, the Long Attic filing shelf answers with `CATON / LIVING / BELOW`, completes the filing-source objective, pins evidence, writes `2:47 AM - Filed Under Living`, and opens the Caton Pillar objective.
 40. Caton Pillar / cellar route seed v1: after the filing shelf points below, Mara can inspect the cellar pillar, complete the Caton Pillar objective, unlock the Cellar map tab, pin forty-seven initials evidence, write the Stone Ledger beat, and open the chisel objective.
+41. Chisel / consent-mark route v1: once the Caton Pillar asks for a tool, Mara can recover Caton's chisel, add it to inventory, return to the pillar, carve a witness mark instead of her name, pin consent-mark evidence, write `2:47 AM - Consent in Stone`, and open the Foundation Chamber objective.
 
 ## Important Documents
 
@@ -165,7 +167,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Caton Pillar / cellar route seed v1:
+Last known validation after Chisel / consent-mark route v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -214,4 +216,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the chisel / consent-mark route from the Caton Pillar.
+Build the Foundation Chamber / coal-below route from the new pillar mark.

@@ -54,6 +54,7 @@ func _run() -> void:
 	var water_tank: Node = scene.get_node("Architecture/Attic/LongAttic/WaterTankRoom/WaterTank")
 	var filing_voice_shelf: Node = scene.get_node("Architecture/Attic/LongAttic/FilingVoiceShelf")
 	var caton_pillar: Node = scene.get_node("Architecture/Cellar/CatonPillar")
+	var caton_chisel: Node = scene.get_node("Architecture/Cellar/CatonChisel")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -813,6 +814,9 @@ func _run() -> void:
 	_assert(_has_note(hud, "attic_void_recorder_yield"), "Attic void recording adds filed-voice note")
 	_assert(_has_evidence(hud, "attic_void_recorder_yield"), "Attic void recording pins filed-voice evidence")
 	_assert(_has_ledger_entry(hud, "attic_void_recorder_yield"), "Attic void recording writes Living Ledger beat")
+	caton_chisel.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("caton_chisel_found", false)), "Caton chisel waits until the pillar asks for it")
 	caton_pillar.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("caton_pillar_found", false)), "Caton Pillar waits until the filing voice points below")
@@ -850,6 +854,27 @@ func _run() -> void:
 	_assert(_has_note(hud, "caton_pillar_found"), "Caton Pillar adds carved-initials note")
 	_assert(_has_evidence(hud, "caton_pillar_found"), "Caton Pillar pins cellar evidence")
 	_assert(_has_ledger_entry(hud, "caton_pillar_found"), "Caton Pillar writes Living Ledger beat")
+	caton_chisel.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_chisel_found", false)), "Caton chisel can be taken after the pillar route opens")
+	_assert(bool(scene.get_tree().root.get_meta("caton_consent_mark_ready", false)), "Caton chisel readies the consent mark")
+	_assert(player.has_item("caton_chisel"), "Caton chisel enters inventory")
+	_assert(_objective_complete(hud, "find_chisel_for_caton_pillar"), "Caton chisel completes chisel objective")
+	_assert(_has_objective(hud, "mark_caton_pillar"), "Caton chisel opens pillar-mark objective")
+	_assert(_has_note(hud, "caton_chisel_found"), "Caton chisel adds cellar tool note")
+	_assert(_has_evidence(hud, "caton_chisel_found"), "Caton chisel pins tool evidence")
+	_assert(_has_ledger_entry(hud, "caton_chisel_found"), "Caton chisel writes Living Ledger beat")
+	caton_pillar.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_pillar_consent_marked", false)), "Caton Pillar accepts the chisel witness-mark")
+	_assert(bool(scene.get_tree().root.get_meta("caton_pillar_consent_route_seeded", false)), "Caton Pillar seeds the consent route")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_route_seeded", false)), "Caton Pillar seeds the foundation chamber lead")
+	_assert(not player.has_item("caton_chisel"), "Caton Pillar consumes the chisel after the mark")
+	_assert(_objective_complete(hud, "mark_caton_pillar"), "Caton Pillar completes mark objective")
+	_assert(_has_objective(hud, "find_foundation_chamber"), "Caton Pillar opens foundation chamber objective")
+	_assert(_has_note(hud, "caton_pillar_consent_mark"), "Caton Pillar adds consent-mark note")
+	_assert(_has_evidence(hud, "caton_pillar_consent_mark"), "Caton Pillar pins consent-mark evidence")
+	_assert(_has_ledger_entry(hud, "caton_pillar_consent_mark"), "Caton Pillar writes consent-mark ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -893,6 +918,8 @@ func _run() -> void:
 	var attic_void_recording_pinned_note_count: int = _count_note(hud, "attic_void_recording_pinned")
 	var filing_voice_source_note_count: int = _count_note(hud, "filing_voice_source_found")
 	var caton_pillar_note_count: int = _count_note(hud, "caton_pillar_found")
+	var caton_chisel_note_count: int = _count_note(hud, "caton_chisel_found")
+	var caton_consent_note_count: int = _count_note(hud, "caton_pillar_consent_mark")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -988,6 +1015,12 @@ func _run() -> void:
 	caton_pillar.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "caton_pillar_found") == caton_pillar_note_count, "Repeated Caton Pillar inspection does not duplicate carved-initials note")
+	caton_chisel.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caton_chisel_found") == caton_chisel_note_count, "Repeated Caton chisel inspection does not duplicate tool note")
+	caton_pillar.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caton_pillar_consent_mark") == caton_consent_note_count, "Repeated marked pillar inspection does not duplicate consent-mark note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
