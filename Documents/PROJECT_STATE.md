@@ -71,6 +71,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Gallery Landing v1 with chandelier handprint evidence beat.
 - Chandelier handprint photo proof that gates the unnumbered guest bedroom lead.
 - Unnumbered Guest Bedroom bed-trade v1 with burnt-page offer, 2:47 return, altered-fragment evidence, and comparison follow-up.
+- Altered-fragment guest-book comparison v1, opening a Housekeeper household-record lead into the next First Floor branch.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -100,6 +101,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 23. Camera / Photo Verb v1: Mara carries a camera from the start, but the verb only matters once the house leaves visible proof. Photographing the opened chandelier links pins a photo-evidence beat and unlocks the unnumbered guest bedroom objective.
 24. Unnumbered Guest Bedroom v1: after the chandelier photo, the family-side wrong room can be entered. The guest book and too-ready bed pin the room as missing from household records.
 25. Unnumbered bed trade v1: the Library's burnt black-book fragment can be left on the unnumbered bed, resolved through the Kitchen 2:47 clock, and returned as an altered fragment with new evidence, ledger, journal, and guest-book comparison follow-up.
+26. Altered-fragment guest-book comparison v1: reading the returned fragment beside the blank guest-book line now pins comparison evidence, opens the Housekeeper-record thread, and lets Mara read a folded household record that points toward the Housekeeper's sewing box.
 
 ## Important Documents
 
@@ -135,7 +137,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Unnumbered Guest Bedroom bed-trade v1:
+Last known validation after Altered-fragment guest-book comparison v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -184,4 +186,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the altered-fragment guest-book comparison v1, using the returned page to open the next First Floor evidence branch.
+Build Housekeeper sewing-box v1 on the First Floor, using the folded household record as the route lead.

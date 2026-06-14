@@ -28,16 +28,33 @@ func interact(player: Node) -> void:
 		return
 
 	if bool(root.get_meta("unnumbered_page_trade_complete", false)):
+		root.set_meta("altered_fragment_compared", true)
 		player.complete_journal_objective("read_altered_fragment")
 		player.add_journal_note(
 			"altered_fragment_read",
 			"The altered fragment now gives a partial name: ASHFORD, E. The guest book's blank line feels less empty."
+		)
+		player.add_journal_note(
+			"altered_fragment_guest_book_match",
+			"The returned fragment belongs beside the guest book's blank line. The room did not restore a full name; it restored enough to point at the household records."
+		)
+		player.add_evidence(
+			"altered_fragment_guest_book_match",
+			"Altered Fragment + Blank Guest Line",
+			"The returned page fragment reads ASHFORD, E., matching the blank line in the unnumbered room's guest book.",
+			"First Floor"
 		)
 		player.add_ledger_entry(
 			"altered_fragment_read",
 			"Mara compared the corrected fragment with the guest book. The room had not changed the past. It had returned one name to the page.",
 			"2:47 AM - A Name Comes Back"
 		)
+		player.add_ledger_entry(
+			"altered_fragment_guest_book_match",
+			"Mara laid the returned page beside the guest book. The blank line did not fill in, but the room breathed as if a name had been spoken at the right height.",
+			"2:47 AM - The Blank Line Answers"
+		)
+		player.add_journal_objective("follow_guest_book_thread", "Follow the guest-book thread toward the Housekeeper's records.")
 		player.show_message("The altered fragment names only enough to hurt: ASHFORD, E. The guest book still refuses the rest.", 8.0)
 		return
 	if bool(root.get_meta("unnumbered_page_trade_armed", false)):

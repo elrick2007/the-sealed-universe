@@ -42,6 +42,7 @@ func _run() -> void:
 	var gallery_landing_trigger: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/GalleryLandingTrigger")
 	var chandelier_handprint: Node = scene.get_node("Architecture/FirstFloor/GalleryLanding/ChandelierHandprint")
 	var unnumbered_guest_room: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/UnnumberedBed")
+	var housekeeper_folded_record: Node = scene.get_node("Architecture/FirstFloor/UnnumberedGuestRoom/HousekeeperFoldedRecord")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -569,6 +570,10 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "chandelier_handprint_photo"), "Camera photo pins photo evidence")
 	_assert(_has_ledger_entry(hud, "chandelier_handprint_photo"), "Camera photo writes Living Ledger beat")
 	_assert(_has_objective(hud, "find_unnumbered_guest_room"), "Camera photo adds unnumbered guest room objective")
+	housekeeper_folded_record.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("housekeeper_unnumbered_record_found", false)), "Housekeeper folded record stays closed before altered-fragment comparison")
+	_assert(not _has_objective(hud, "find_housekeeper_sewing_box"), "Housekeeper record does not reveal sewing-box objective before comparison")
 
 	unnumbered_guest_room.interact(player)
 	await process_frame
@@ -601,9 +606,22 @@ func _run() -> void:
 	_assert(_has_objective(hud, "read_altered_fragment"), "2:47 trade adds altered-fragment comparison objective")
 	unnumbered_guest_room.interact(player)
 	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("altered_fragment_compared", false)), "Reading altered fragment sets guest-book comparison state")
 	_assert(_objective_complete(hud, "read_altered_fragment"), "Reading altered fragment completes comparison objective")
 	_assert(_has_note(hud, "altered_fragment_read"), "Reading altered fragment adds guest-book comparison note")
+	_assert(_has_note(hud, "altered_fragment_guest_book_match"), "Reading altered fragment adds blank-line match note")
+	_assert(_has_evidence(hud, "altered_fragment_guest_book_match"), "Reading altered fragment pins blank-line match evidence")
 	_assert(_has_ledger_entry(hud, "altered_fragment_read"), "Reading altered fragment writes comparison Living Ledger entry")
+	_assert(_has_ledger_entry(hud, "altered_fragment_guest_book_match"), "Reading altered fragment writes blank-line Living Ledger entry")
+	_assert(_has_objective(hud, "follow_guest_book_thread"), "Reading altered fragment opens Housekeeper-record objective")
+	housekeeper_folded_record.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("housekeeper_unnumbered_record_found", false)), "Housekeeper folded record sets found state after comparison")
+	_assert(_objective_complete(hud, "follow_guest_book_thread"), "Housekeeper folded record completes guest-book thread objective")
+	_assert(_has_note(hud, "housekeeper_unnumbered_record"), "Housekeeper folded record adds household-record note")
+	_assert(_has_evidence(hud, "housekeeper_unnumbered_record"), "Housekeeper folded record pins household-record evidence")
+	_assert(_has_ledger_entry(hud, "housekeeper_unnumbered_record"), "Housekeeper folded record writes Living Ledger entry")
+	_assert(_has_objective(hud, "find_housekeeper_sewing_box"), "Housekeeper folded record opens sewing-box objective")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -626,6 +644,8 @@ func _run() -> void:
 	var unnumbered_trade_offered_note_count: int = _count_note(hud, "unnumbered_trade_offered")
 	var unnumbered_trade_returned_note_count: int = _count_note(hud, "unnumbered_trade_returned")
 	var altered_fragment_read_note_count: int = _count_note(hud, "altered_fragment_read")
+	var altered_fragment_match_note_count: int = _count_note(hud, "altered_fragment_guest_book_match")
+	var housekeeper_record_note_count: int = _count_note(hud, "housekeeper_unnumbered_record")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -666,6 +686,10 @@ func _run() -> void:
 	_assert(_count_note(hud, "unnumbered_guest_room") == unnumbered_room_note_count, "Repeated unnumbered room inspection does not duplicate note")
 	_assert(_count_note(hud, "unnumbered_trade_offered") == unnumbered_trade_offered_note_count, "Repeated unnumbered room inspection does not duplicate bed-trade offer note")
 	_assert(_count_note(hud, "altered_fragment_read") == altered_fragment_read_note_count, "Repeated altered-fragment reading does not duplicate comparison note")
+	_assert(_count_note(hud, "altered_fragment_guest_book_match") == altered_fragment_match_note_count, "Repeated altered-fragment reading does not duplicate blank-line match note")
+	housekeeper_folded_record.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "housekeeper_unnumbered_record") == housekeeper_record_note_count, "Repeated Housekeeper folded record reading does not duplicate household-record note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
