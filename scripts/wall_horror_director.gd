@@ -8,6 +8,7 @@ extends Node
 @export var dining_light_path: NodePath
 @export var kitchen_wall_path: NodePath
 @export var kitchen_light_path: NodePath
+@export var attic_void_wall_path: NodePath
 @export var hall_light_path: NodePath
 @export var door_path: NodePath
 
@@ -19,6 +20,7 @@ extends Node
 @onready var dining_light: OmniLight3D = get_node_or_null(dining_light_path)
 @onready var kitchen_wall: Node3D = get_node_or_null(kitchen_wall_path)
 @onready var kitchen_light: OmniLight3D = get_node_or_null(kitchen_light_path)
+@onready var attic_void_wall: Node3D = get_node_or_null(attic_void_wall_path)
 @onready var hall_light: OmniLight3D = get_node(hall_light_path)
 @onready var door: StaticBody3D = get_node(door_path)
 
@@ -31,6 +33,7 @@ var wall_recorded := false
 var library_wall_recorded := false
 var dining_room_recorded := false
 var kitchen_wall_recorded := false
+var attic_void_wall_recorded := false
 
 func _ready() -> void:
 	original_light_energy = hall_light.light_energy
@@ -49,6 +52,9 @@ func use_recorder(origin: Vector3) -> void:
 		return
 	if kitchen_wall != null and origin.distance_to(kitchen_wall.global_position) <= 5.4:
 		_record_kitchen_wall()
+		return
+	if attic_void_wall != null and origin.distance_to(attic_void_wall.global_position) <= 5.8:
+		_record_attic_void_wall()
 		return
 	var distance := origin.distance_to(whisper_wall.global_position)
 	if distance > 5.5:
@@ -130,6 +136,24 @@ func _record_kitchen_wall() -> void:
 	player.add_evidence("kitchen_wall_recording", "Kitchen Wall Recording", "The Kitchen identifies hunger and bargain as separate witnessed events.", "Recording")
 	player.add_journal_objective("find_second_watching_room", "Find the second room that watched Eleanor eat.")
 	player.reveal_map_area("cellar_stairs")
+
+func _record_attic_void_wall() -> void:
+	if not bool(get_tree().root.get_meta("attic_void_measurement_proved", false)):
+		player.show_message("The recorder hears wind through slate, but the void keeps its file closed.", 6.0)
+		return
+	if attic_void_wall_recorded:
+		player.show_message("The attic void replays the same careful filing voice. It has already named Mara.", 6.0)
+		return
+	attic_void_wall_recorded = true
+	get_tree().root.set_meta("attic_void_recorder_yield_found", true)
+	_mark_transcription_ready()
+	player.show_message("Playback: shelves moving. A patient male voice dictates, 'Item: one journalist, lapsed.'", 8.0)
+	player.add_journal_objective("record_attic_void_wall", "Use the recorder on the attic void wall.")
+	player.complete_journal_objective("record_attic_void_wall")
+	player.add_journal_note("attic_void_recorder_yield", "Playback from the attic void: shelving sounds, then a patient male voice dictating, 'Item: one journalist, lapsed.'")
+	player.add_ledger_entry("attic_void_recorder_yield", "The void did not open. The recorder returned with shelving sounds, a patient male voice, and Mara's name handled like a catalogue entry.", "2:47 AM - Filed Alive")
+	player.add_evidence("attic_void_recorder_yield", "Attic Void Recording", "Behind the clean wall: shelving sounds, a patient male dictation, and Mara filed as an item rather than a person.", "Recording")
+	player.add_journal_objective("return_void_recording_to_kitchen", "Return the attic void recording to the Kitchen evidence board.")
 
 func _process(delta: float) -> void:
 	if not scare_active:

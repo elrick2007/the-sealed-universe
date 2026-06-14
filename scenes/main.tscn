@@ -1879,6 +1879,7 @@ dining_place_path = NodePath("../Architecture/WestWingHallway/DiningRoom/DiningE
 dining_light_path = NodePath("../DiningLight")
 kitchen_wall_path = NodePath("../Architecture/WestWingHallway/Kitchen/KitchenWhisperWall")
 kitchen_light_path = NodePath("../KitchenLight")
+attic_void_wall_path = NodePath("../Architecture/Attic/LongAttic/LongAtticBackWall")
 hall_light_path = NodePath("../HallLight")
 door_path = NodePath("../Architecture/WestWingDoor")
 

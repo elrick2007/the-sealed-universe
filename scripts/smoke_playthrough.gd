@@ -52,6 +52,7 @@ func _run() -> void:
 	var north_mirror_chest: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/NorthSickRoom/NorthMirrorChest")
 	var south_mirror_chest: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest")
 	var water_tank: Node = scene.get_node("Architecture/Attic/LongAttic/WaterTankRoom/WaterTank")
+	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
 	var rose_trace: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/RoseScentTrace")
@@ -802,6 +803,14 @@ func _run() -> void:
 	_assert(_has_note(hud, "caton_overlay_attic_void"), "Attic void measurement adds void contradiction note")
 	_assert(_has_evidence(hud, "caton_overlay_attic_void"), "Attic void measurement pins void contradiction evidence")
 	_assert(_has_ledger_entry(hud, "caton_overlay_attic_void"), "Attic void measurement writes Living Ledger beat")
+	director.use_recorder(attic_void_wall.global_position)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("attic_void_recorder_yield_found", false)), "Attic void recorder yield sets filed-voice state")
+	_assert(_objective_complete(hud, "record_attic_void_wall"), "Attic void recording completes recorder objective")
+	_assert(_has_objective(hud, "return_void_recording_to_kitchen"), "Attic void recording opens Kitchen return objective")
+	_assert(_has_note(hud, "attic_void_recorder_yield"), "Attic void recording adds filed-voice note")
+	_assert(_has_evidence(hud, "attic_void_recorder_yield"), "Attic void recording pins filed-voice evidence")
+	_assert(_has_ledger_entry(hud, "attic_void_recorder_yield"), "Attic void recording writes Living Ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -841,6 +850,7 @@ func _run() -> void:
 	var caton_field_book_note_count: int = _count_note(hud, "caton_field_book_found")
 	var caton_overlay_west_wing_note_count: int = _count_note(hud, "caton_overlay_west_wing")
 	var caton_overlay_attic_void_note_count: int = _count_note(hud, "caton_overlay_attic_void")
+	var attic_void_recorder_note_count: int = _count_note(hud, "attic_void_recorder_yield")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -924,6 +934,9 @@ func _run() -> void:
 	player.use_tape_measure_on_surface("attic_void")
 	await process_frame
 	_assert(_count_note(hud, "caton_overlay_attic_void") == caton_overlay_attic_void_note_count, "Repeated Caton overlay measurement does not duplicate attic void note")
+	director.use_recorder(attic_void_wall.global_position)
+	await process_frame
+	_assert(_count_note(hud, "attic_void_recorder_yield") == attic_void_recorder_note_count, "Repeated attic void recording does not duplicate filed-voice note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
