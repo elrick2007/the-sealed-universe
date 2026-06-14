@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=77 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -49,6 +49,7 @@
 [ext_resource type="Script" path="res://scripts/water_tank_interaction.gd" id="47"]
 [ext_resource type="Script" path="res://scripts/mirror_chest_interaction.gd" id="48"]
 [ext_resource type="Script" path="res://scripts/filing_voice_source_interaction.gd" id="49"]
+[ext_resource type="Script" path="res://scripts/caton_pillar_interaction.gd" id="50"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1829,6 +1830,79 @@ surface_material_override/0 = SubResource("Mat_paper")
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -16.42, 6.94, -7.0)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_red")
+
+[node name="Cellar" type="Node3D" parent="Architecture"]
+
+[node name="CellarFloor" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 0.42, 12.5, -2.65, -3.0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Cellar/CellarFloor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CellarFloor"]
+shape = SubResource("BoxShape_floor")
+
+[node name="CellarBackWall" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(1.2, 0, 0, 0, 0.72, 0, 0, 0, 0.13, 12.5, -1.5, -6.45)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Cellar/CellarBackWall"]
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CellarBackWall"]
+shape = SubResource("BoxShape_wall_short")
+
+[node name="CellarLeftWall" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(0.14, 0, 0, 0, 0.72, 0, 0, 0, 0.42, 6.55, -1.5, -3.0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Cellar/CellarLeftWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CellarLeftWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="CellarRightWall" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(0.14, 0, 0, 0, 0.72, 0, 0, 0, 0.42, 18.45, -1.5, -3.0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Cellar/CellarRightWall"]
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CellarRightWall"]
+shape = SubResource("BoxShape_wall_long")
+
+[node name="CellarStairsStub" type="MeshInstance3D" parent="Architecture/Cellar"]
+transform = Transform3D(1.0, 0, 0, 0, 0.18, 0, 0, 0, 1.4, 12.5, -2.08, 0.25)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="CatonPillar" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(0.9, 0, 0, 0, 2.7, 0, 0, 0, 0.9, 11.25, -1.15, -3.25)
+script = ExtResource("50")
+
+[node name="PillarBody" type="MeshInstance3D" parent="Architecture/Cellar/CatonPillar"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="InitialsTop" type="MeshInstance3D" parent="Architecture/Cellar/CatonPillar"]
+transform = Transform3D(0.38, 0, 0, 0, 0.035, 0, 0, 0, 0.04, 0, 0.2, 0.86)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="InitialsMiddle" type="MeshInstance3D" parent="Architecture/Cellar/CatonPillar"]
+transform = Transform3D(0.38, 0, 0, 0, 0.035, 0, 0, 0, 0.04, 0, 0.0, 0.86)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="WaitingLine" type="MeshInstance3D" parent="Architecture/Cellar/CatonPillar"]
+transform = Transform3D(0.52, 0, 0, 0, 0.035, 0, 0, 0, 0.04, 0, -0.22, 0.86)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CatonPillar"]
+shape = SubResource("BoxShape_prop")
 
 [node name="Props" type="Node3D" parent="."]
 

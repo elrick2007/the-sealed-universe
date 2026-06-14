@@ -85,6 +85,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Attic Void recorder yield v1, capturing the wrong male filing voice behind the no-access wall after Caton's overlay proof.
 - Attic Void Kitchen return beat v1, pinning the filed-alive recording to the Kitchen evidence board and opening the filing-voice source lead.
 - Filing Voice Source Route v1, gating an attic filing shelf behind the Kitchen-pinned void recording and turning `CATON / LIVING / BELOW` into the next Caton Pillar route objective.
+- Caton Pillar / cellar route seed v1, unlocking the Cellar map tab and chisel thread after the filing voice points below.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -128,6 +129,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 37. Attic Void recorder yield v1: recording the void wall after Caton's proof captures shelving sounds and a patient male dictation, `Item: one journalist, lapsed`, pins the filed-voice evidence, writes `2:47 AM - Filed Alive`, and opens the Kitchen return objective for the void recording.
 38. Attic Void Kitchen return beat v1: returning to the Kitchen after the void recording completes the return objective, pins `Kitchen Pin: Filed Alive` to the board, writes `2:47 AM - Filed to the Board`, and opens the objective to trace where the filing voice is shelving Mara's name.
 39. Filing Voice Source Route v1: after the Kitchen board accepts the void recording, the Long Attic filing shelf answers with `CATON / LIVING / BELOW`, completes the filing-source objective, pins evidence, writes `2:47 AM - Filed Under Living`, and opens the Caton Pillar objective.
+40. Caton Pillar / cellar route seed v1: after the filing shelf points below, Mara can inspect the cellar pillar, complete the Caton Pillar objective, unlock the Cellar map tab, pin forty-seven initials evidence, write the Stone Ledger beat, and open the chisel objective.
 
 ## Important Documents
 
@@ -163,7 +165,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Filing Voice Source Route v1:
+Last known validation after Caton Pillar / cellar route seed v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -212,4 +214,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Caton Pillar / cellar route seeded by the filing-voice source.
+Build the chisel / consent-mark route from the Caton Pillar.

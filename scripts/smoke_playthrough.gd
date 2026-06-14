@@ -53,6 +53,7 @@ func _run() -> void:
 	var south_mirror_chest: Node = scene.get_node("Architecture/Attic/LongAttic/SickRooms/SouthSickRoom/SouthMirrorChest")
 	var water_tank: Node = scene.get_node("Architecture/Attic/LongAttic/WaterTankRoom/WaterTank")
 	var filing_voice_shelf: Node = scene.get_node("Architecture/Attic/LongAttic/FilingVoiceShelf")
+	var caton_pillar: Node = scene.get_node("Architecture/Cellar/CatonPillar")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -812,6 +813,9 @@ func _run() -> void:
 	_assert(_has_note(hud, "attic_void_recorder_yield"), "Attic void recording adds filed-voice note")
 	_assert(_has_evidence(hud, "attic_void_recorder_yield"), "Attic void recording pins filed-voice evidence")
 	_assert(_has_ledger_entry(hud, "attic_void_recorder_yield"), "Attic void recording writes Living Ledger beat")
+	caton_pillar.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("caton_pillar_found", false)), "Caton Pillar waits until the filing voice points below")
 	filing_voice_shelf.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("filing_voice_source_found", false)), "Filing voice shelf waits until the Kitchen board accepts the void recording")
@@ -834,6 +838,18 @@ func _run() -> void:
 	_assert(_has_note(hud, "filing_voice_source_found"), "Filing voice shelf adds Caton/Living/Below note")
 	_assert(_has_evidence(hud, "filing_voice_source_found"), "Filing voice shelf pins Caton/Living/Below evidence")
 	_assert(_has_ledger_entry(hud, "filing_voice_source_found"), "Filing voice shelf writes Living Ledger beat")
+	caton_pillar.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_pillar_found", false)), "Caton Pillar resolves after filing voice source")
+	_assert(bool(scene.get_tree().root.get_meta("cellar_plan_unlocked", false)), "Caton Pillar unlocks the cellar plan state")
+	_assert(bool(scene.get_tree().root.get_meta("caton_pillar_initials_read", false)), "Caton Pillar records the carved initials state")
+	_assert(bool(scene.get_tree().root.get_meta("caton_pillar_chisel_route_seeded", false)), "Caton Pillar seeds the chisel route")
+	_assert(hud.unlocked_map_floors.has("cellar"), "Caton Pillar unlocks cellar map tab")
+	_assert(_objective_complete(hud, "find_caton_pillar_below_filing_voice"), "Caton Pillar completes the below-filing objective")
+	_assert(_has_objective(hud, "find_chisel_for_caton_pillar"), "Caton Pillar opens the chisel objective")
+	_assert(_has_note(hud, "caton_pillar_found"), "Caton Pillar adds carved-initials note")
+	_assert(_has_evidence(hud, "caton_pillar_found"), "Caton Pillar pins cellar evidence")
+	_assert(_has_ledger_entry(hud, "caton_pillar_found"), "Caton Pillar writes Living Ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -876,6 +892,7 @@ func _run() -> void:
 	var attic_void_recorder_note_count: int = _count_note(hud, "attic_void_recorder_yield")
 	var attic_void_recording_pinned_note_count: int = _count_note(hud, "attic_void_recording_pinned")
 	var filing_voice_source_note_count: int = _count_note(hud, "filing_voice_source_found")
+	var caton_pillar_note_count: int = _count_note(hud, "caton_pillar_found")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -968,6 +985,9 @@ func _run() -> void:
 	filing_voice_shelf.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "filing_voice_source_found") == filing_voice_source_note_count, "Repeated filing shelf inspection does not duplicate source note")
+	caton_pillar.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "caton_pillar_found") == caton_pillar_note_count, "Repeated Caton Pillar inspection does not duplicate carved-initials note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
