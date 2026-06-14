@@ -71,6 +71,7 @@ Target runtime:
 21. Measure the attic void with Caton's overlay and prove the room is larger through the wire hole than it is from the outside.
 22. Record the attic void wall after the measurement proof and capture the wrong male voice filing Mara as an item.
 23. Return the void recording to the Kitchen evidence board so Mara can pin the filed-alive proof and open the filing-voice source lead.
+24. Trace the filing voice to the attic shelf labelled `CATON / LIVING / BELOW`, opening the Caton Pillar thread.
 
 ## Project Memory
 
@@ -101,7 +102,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the filing-voice source route opened by the attic void recording.
+- Build the Caton Pillar / cellar route seeded by the filing-voice source.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.
