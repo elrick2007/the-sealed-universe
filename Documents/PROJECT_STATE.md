@@ -80,6 +80,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Duplicated Sick Rooms v1, comparing Ada's recovered/deceased fever charts and opening the not-glass marble route.
 - Water Tank / Not-Glass Marble v1, gating the drowned tin behind Ada's contradiction and turning the not-glass marble into an inventory key for the mirror chest route.
 - Mirror Chest / Caton Field Book v1, using the not-glass marble in the north Sick Room chest so the south twin opens with Caton's Field Book and unlocks the Caton measurement overlay seed.
+- Caton Field Book overlay payoff v1, turning the Field Book into a tape-measure modifier that compares Caton's submitted dimensions against the house's true dimensions.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -118,6 +119,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 32. Duplicated Sick Rooms v1: after the blank bell wire is traced, Mara can read both mirrored fever charts. One lets Ada recover, one files her death at 2:47, resolving the first explicit attic contradiction and opening the not-glass marble objective.
 33. Water Tank / Not-Glass Marble v1: after Ada's contradiction is resolved, Mara can drain the Water Tank, recover a soldered tin and wrong marble, complete the not-glass objective, pin evidence, write a Living Ledger beat, and open the north mirror-chest objective.
 34. Mirror Chest / Caton Field Book v1: the north Sick Room chest accepts the not-glass marble, but the south twin opens instead. Mara loses the marble, gains Caton's Field Book, pins the mirrored-chest evidence, writes the `2:47 AM - Caton's Figures` ledger beat, and opens the objective to use Caton's figures with the tape measure.
+35. Caton Field Book overlay payoff v1: after the mirrored chest route, using the tape on the West Wing Hall now overlays Caton's submitted `42 ft` against the house's true `47 ft`, pins a submitted/true measurement proof, completes the Field Book objective, and opens the attic-void measurement lead.
 
 ## Important Documents
 
@@ -153,7 +155,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Mirror Chest / Caton Field Book v1:
+Last known validation after Caton Field Book overlay payoff v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -202,4 +204,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the first Caton Field Book overlay payoff from the mirror chest route.
+Build the attic void payoff for Caton's submitted/true measurement overlay.

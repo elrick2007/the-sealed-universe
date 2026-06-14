@@ -263,6 +263,8 @@ func _photograph_chandelier_handprint() -> void:
 	show_message("The camera catches the opened links. In the photo, the fingers look too close.", 7.0)
 
 func _apply_tape_measurement(surface_id: String) -> void:
+	if _try_apply_caton_overlay(surface_id):
+		return
 	if surface_id == "study" or surface_id == "study_wall":
 		show_message("Study: 12 ft by 9 ft. The numbers behave. That makes Mara more nervous.", 6.0)
 		add_journal_note("measure_study", "The Study measures true. Honest rooms may be control samples.")
@@ -322,6 +324,33 @@ func _apply_tape_measurement(surface_id: String) -> void:
 		show_message("The tape ticks against skirting and damp plaster. Nothing here argues with the plan yet.", 5.0)
 		add_journal_note("measure_entrance_hall", "The entrance hall has not started lying in numbers yet.")
 		add_ledger_entry("measure_entrance_ledger", "The entrance hall gave the tape no contradiction. Mara distrusted its manners.", "2:47 AM - Entrance Control")
+
+func _try_apply_caton_overlay(surface_id: String) -> bool:
+	if not bool(get_tree().root.get_meta("caton_overlay_unlocked", false)) and not has_item("caton_field_book"):
+		return false
+	if surface_id == "west_wing_hall" or surface_id == "west_wing_wall":
+		show_message("Caton's overlay writes over the tape: SUBMITTED 42 ft. TRUE 47 ft. The missing five feet are waiting.", 8.0)
+		get_tree().root.set_meta("caton_overlay_west_wing_read", true)
+		add_journal_note("caton_overlay_west_wing", "Caton's Field Book overlays submitted and true measurements: West Wing Hall submitted 42 ft, true 47 ft.")
+		add_evidence("caton_overlay_west_wing", "Caton Overlay: West Wing Hall", "Caton's Field Book proves the plan and the tape are recording two different Ashford Manors.", "Measurement")
+		add_ledger_entry("caton_overlay_west_wing", "Caton's figures did not correct the tape. They corrected Mara. Submitted: forty-two feet. True: forty-seven. The house had kept the missing five like a breath.", "2:47 AM - Submitted And True")
+		complete_journal_objective("use_caton_field_book")
+		add_journal_objective("measure_attic_void_with_caton", "Use Caton's overlay on the attic void that should not have dimensions.")
+		return true
+	if surface_id == "library_wall":
+		show_message("Caton's overlay finds the Library lie: SUBMITTED 14 ft. TRUE 13 ft 11 in. One inch was filed away.", 7.0)
+		get_tree().root.set_meta("caton_overlay_library_read", true)
+		add_journal_note("caton_overlay_library", "Caton's overlay confirms the Library shelf wall lost exactly one inch between survey and truth.")
+		add_evidence("caton_overlay_library", "Caton Overlay: Library Inch", "Submitted: 14 ft. True: 13 ft 11 in. Caton annotated the missing inch before Mara found it.", "Measurement")
+		complete_journal_objective("use_caton_field_book")
+		return true
+	if surface_id == "study" or surface_id == "study_wall":
+		show_message("Caton's overlay agrees with the tape: SUBMITTED 12 ft. TRUE 12 ft. A control sample.", 6.0)
+		get_tree().root.set_meta("caton_overlay_study_read", true)
+		add_journal_note("caton_overlay_study", "Caton's overlay agrees with the Study measurement. Some rooms tell the truth so the lies have something to stand beside.")
+		complete_journal_objective("use_caton_field_book")
+		return true
+	return false
 
 func _current_measurement_surface() -> String:
 	if not ray.is_colliding():

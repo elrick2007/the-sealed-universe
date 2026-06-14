@@ -784,6 +784,15 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "caton_field_book_found"), "Mirror chest pins Caton Field Book evidence")
 	_assert(_has_ledger_entry(hud, "caton_field_book_found"), "Mirror chest writes Caton Field Book ledger entry")
 
+	player.use_tape_measure_on_surface("west_wing_wall")
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("caton_overlay_west_wing_read", false)), "Caton overlay reads the west wing measurement lie")
+	_assert(_objective_complete(hud, "use_caton_field_book"), "Caton overlay completes Field Book objective")
+	_assert(_has_objective(hud, "measure_attic_void_with_caton"), "Caton overlay opens attic void measurement objective")
+	_assert(_has_note(hud, "caton_overlay_west_wing"), "Caton overlay adds submitted-vs-true note")
+	_assert(_has_evidence(hud, "caton_overlay_west_wing"), "Caton overlay pins submitted-vs-true evidence")
+	_assert(_has_ledger_entry(hud, "caton_overlay_west_wing"), "Caton overlay writes submitted-vs-true Living Ledger beat")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -820,6 +829,7 @@ func _run() -> void:
 	var ada_contradiction_note_count: int = _count_note(hud, "ada_sick_room_contradiction")
 	var water_tank_note_count: int = _count_note(hud, "water_tank_soldered_tin")
 	var caton_field_book_note_count: int = _count_note(hud, "caton_field_book_found")
+	var caton_overlay_west_wing_note_count: int = _count_note(hud, "caton_overlay_west_wing")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -897,6 +907,9 @@ func _run() -> void:
 	south_mirror_chest.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "caton_field_book_found") == caton_field_book_note_count, "Repeated mirror chest inspections do not duplicate Caton Field Book note")
+	player.use_tape_measure_on_surface("west_wing_wall")
+	await process_frame
+	_assert(_count_note(hud, "caton_overlay_west_wing") == caton_overlay_west_wing_note_count, "Repeated Caton overlay measurement does not duplicate west wing note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

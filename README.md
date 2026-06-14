@@ -67,6 +67,7 @@ Target runtime:
 17. Set a chosen 2:47 appointment at the restored hall clock, then resolve it at the Kitchen clock to prove the house can answer a time Mara chooses.
 18. Open the attic route, compare both duplicated Sick Room fever charts, then drain the Water Tank to recover the not-glass marble.
 19. Use the not-glass marble on the north Sick Room chest, then recover Caton's Field Book from its southern twin.
+20. Use Caton's Field Book with the tape measure to compare submitted dimensions against the house's true dimensions.
 
 ## Project Memory
 
@@ -97,7 +98,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the first Caton Field Book overlay payoff from the mirror chest route.
+- Build the attic void payoff for Caton's submitted/true measurement overlay.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.
