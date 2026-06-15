@@ -1,6 +1,7 @@
 extends StaticBody3D
 
 const NOTE_ID := "foundation_chamber_threshold"
+const CHOICE_NOTE_ID := "foundation_chamber_choices_seeded"
 const SOURCE_OBJECTIVE_ID := "inspect_foundation_chamber_threshold"
 const NEXT_OBJECTIVE_ID := "inspect_bricked_archway"
 
@@ -19,6 +20,9 @@ func interact(player: Node) -> void:
 		return
 
 	if bool(root.get_meta("foundation_chamber_threshold_inspected", false)):
+		if bool(root.get_meta("foundation_chamber_choice_seeded", false)) and not bool(root.get_meta("foundation_chamber_choices_read", false)):
+			_seed_foundation_choices(player)
+			return
 		if player.has_method("show_message"):
 			player.show_message("The threshold keeps its silence. The room beyond feels older than the house above it.", 6.0)
 		return
@@ -55,3 +59,32 @@ func interact(player: Node) -> void:
 		)
 	if player.has_method("show_message"):
 		player.show_message("At the breach, the room-tone stops. The Foundation Chamber waits in true silence.", 7.0)
+
+func _seed_foundation_choices(player: Node) -> void:
+	var root := get_tree().root
+	root.set_meta("foundation_chamber_choices_read", true)
+
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("read_foundation_chamber_choices")
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective("find_original_book", "Enter the Foundation Chamber when the house grants the breach.")
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			CHOICE_NOTE_ID,
+			"The chamber offers three shapes before Mara can see the room: pen, oil, and proof. None of them feel like keys."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_chamber_choices",
+			"Foundation Chamber: Three Offers",
+			"At the silent threshold, Mara understands the chamber as three affordances before she sees them: pen, oil, and the weight of proof.",
+			"Cellar"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_chamber_choices",
+			"The silence around the chamber arranged itself into three offers: write, burn, or witness. Mara disliked that each one felt polite.",
+			"2:47 AM - Three Offers"
+		)
+	if player.has_method("show_message"):
+		player.show_message("In the silence, three offers take shape before Mara can see them: pen, oil, proof.", 8.0)

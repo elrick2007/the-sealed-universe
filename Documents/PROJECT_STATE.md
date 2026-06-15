@@ -136,6 +136,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 41. Chisel / consent-mark route v1: once the Caton Pillar asks for a tool, Mara can recover Caton's chisel, add it to inventory, return to the pillar, carve a witness mark instead of her name, pin consent-mark evidence, write `2:47 AM - Consent in Stone`, and open the Foundation Chamber objective.
 42. Foundation Chamber / coal-below route v1: after the pillar is marked, Mara can clear the coal below Caton, reveal the Foundation Chamber threshold, pin cellar evidence, write `2:47 AM - Behind the Coal`, and open the threshold inspection objective.
 43. Foundation Chamber threshold / Bricked Archway route v1: after clearing coal, Mara can inspect the silent Foundation threshold, seed the bricked archway route, pull one loose brick from the blocked arch, confirm the permanent-wall rule, pin evidence, write `2:47 AM - Filed Under Later`, and open the bricked-archway recorder objective.
+44. Bricked Archway recorder / Foundation Chamber choice seed v1: recording the blocked archway now returns the bricklaying playback, pins the archway recording, writes `2:47 AM - Course By Course`, and re-checking the silent threshold seeds the chamber's future pen/oil/proof offers without opening the endgame room.
 
 ## Important Documents
 
@@ -220,4 +221,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the bricked archway recorder yield and the first Foundation Chamber interior choice seed.
+Build Foundation Chamber interior blockout v1: original book shelf, writing stand, oil can, and proof/send placeholder.

@@ -919,6 +919,23 @@ func _run() -> void:
 	_assert(_has_note(hud, "bricked_archway_loose_brick"), "Bricked archway adds loose-brick note")
 	_assert(_has_evidence(hud, "bricked_archway_loose_brick"), "Bricked archway pins loose-brick evidence")
 	_assert(_has_ledger_entry(hud, "bricked_archway_loose_brick"), "Bricked archway writes loose-brick ledger beat")
+	director.use_recorder(bricked_archway.global_position)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_recorded", false)), "Bricked archway recorder yield records permanent wall")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_choice_seeded", false)), "Bricked archway recorder seeds Foundation Chamber choices")
+	_assert(_objective_complete(hud, "record_bricked_archway"), "Bricked archway recording completes recorder objective")
+	_assert(_has_objective(hud, "read_foundation_chamber_choices"), "Bricked archway recording opens Foundation choice objective")
+	_assert(_has_note(hud, "bricked_archway_recording"), "Bricked archway recording adds bricklaying note")
+	_assert(_has_evidence(hud, "bricked_archway_recording"), "Bricked archway recording pins bricklaying evidence")
+	_assert(_has_ledger_entry(hud, "bricked_archway_recording"), "Bricked archway recording writes bricklaying ledger beat")
+	foundation_threshold.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_choices_read", false)), "Foundation threshold re-check reads chamber choice seed")
+	_assert(_objective_complete(hud, "read_foundation_chamber_choices"), "Foundation threshold completes choice reading objective")
+	_assert(_has_objective(hud, "find_original_book"), "Foundation threshold opens original book objective")
+	_assert(_has_note(hud, "foundation_chamber_choices_seeded"), "Foundation threshold adds three-offers note")
+	_assert(_has_evidence(hud, "foundation_chamber_choices"), "Foundation threshold pins three-offers evidence")
+	_assert(_has_ledger_entry(hud, "foundation_chamber_choices"), "Foundation threshold writes three-offers ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -967,6 +984,8 @@ func _run() -> void:
 	var foundation_chamber_note_count: int = _count_note(hud, "foundation_chamber_found")
 	var foundation_threshold_note_count: int = _count_note(hud, "foundation_chamber_threshold")
 	var bricked_archway_note_count: int = _count_note(hud, "bricked_archway_loose_brick")
+	var bricked_archway_recording_note_count: int = _count_note(hud, "bricked_archway_recording")
+	var foundation_choices_note_count: int = _count_note(hud, "foundation_chamber_choices_seeded")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1077,6 +1096,12 @@ func _run() -> void:
 	bricked_archway.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "bricked_archway_loose_brick") == bricked_archway_note_count, "Repeated bricked archway inspection does not duplicate loose-brick note")
+	director.use_recorder(bricked_archway.global_position)
+	await process_frame
+	_assert(_count_note(hud, "bricked_archway_recording") == bricked_archway_recording_note_count, "Repeated bricked archway recording does not duplicate bricklaying note")
+	foundation_threshold.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_chamber_choices_seeded") == foundation_choices_note_count, "Repeated Foundation choice read does not duplicate three-offers note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

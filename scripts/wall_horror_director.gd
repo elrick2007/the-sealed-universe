@@ -9,6 +9,7 @@ extends Node
 @export var kitchen_wall_path: NodePath
 @export var kitchen_light_path: NodePath
 @export var attic_void_wall_path: NodePath
+@export var bricked_archway_path: NodePath
 @export var hall_light_path: NodePath
 @export var door_path: NodePath
 
@@ -21,6 +22,7 @@ extends Node
 @onready var kitchen_wall: Node3D = get_node_or_null(kitchen_wall_path)
 @onready var kitchen_light: OmniLight3D = get_node_or_null(kitchen_light_path)
 @onready var attic_void_wall: Node3D = get_node_or_null(attic_void_wall_path)
+@onready var bricked_archway: Node3D = get_node_or_null(bricked_archway_path)
 @onready var hall_light: OmniLight3D = get_node(hall_light_path)
 @onready var door: StaticBody3D = get_node(door_path)
 
@@ -34,6 +36,7 @@ var library_wall_recorded := false
 var dining_room_recorded := false
 var kitchen_wall_recorded := false
 var attic_void_wall_recorded := false
+var bricked_archway_recorded := false
 
 func _ready() -> void:
 	original_light_energy = hall_light.light_energy
@@ -55,6 +58,9 @@ func use_recorder(origin: Vector3) -> void:
 		return
 	if attic_void_wall != null and origin.distance_to(attic_void_wall.global_position) <= 5.8:
 		_record_attic_void_wall()
+		return
+	if bricked_archway != null and origin.distance_to(bricked_archway.global_position) <= 5.8:
+		_record_bricked_archway()
 		return
 	var distance := origin.distance_to(whisper_wall.global_position)
 	if distance > 5.5:
@@ -154,6 +160,29 @@ func _record_attic_void_wall() -> void:
 	player.add_ledger_entry("attic_void_recorder_yield", "The void did not open. The recorder returned with shelving sounds, a patient male voice, and Mara's name handled like a catalogue entry.", "2:47 AM - Filed Alive")
 	player.add_evidence("attic_void_recorder_yield", "Attic Void Recording", "Behind the clean wall: shelving sounds, a patient male dictation, and Mara filed as an item rather than a person.", "Recording")
 	player.add_journal_objective("return_void_recording_to_kitchen", "Return the attic void recording to the Kitchen evidence board.")
+
+func _record_bricked_archway() -> void:
+	if not bool(get_tree().root.get_meta("bricked_archway_recorder_route_seeded", false)):
+		player.show_message("The recorder hears only dead mortar. The loose brick has not given Mara a place to listen.", 6.0)
+		return
+	if bricked_archway_recorded:
+		player.show_message("The archway replays the same careful brickwork. It has filed this answer already.", 6.0)
+		return
+	bricked_archway_recorded = true
+	var root := get_tree().root
+	root.set_meta("bricked_archway_recorded", true)
+	root.set_meta("foundation_chamber_choice_seeded", true)
+	root.set_meta("foundation_chamber_pen_seeded", true)
+	root.set_meta("foundation_chamber_oil_seeded", true)
+	root.set_meta("foundation_chamber_publish_seeded", true)
+	_mark_transcription_ready()
+	player.show_message("Playback: brick set onto brick. Beneath the trowel, the filing voice says, 'Filed under: later.'", 8.0)
+	player.add_journal_objective("record_bricked_archway", "Use the recorder on the bricked archway.")
+	player.complete_journal_objective("record_bricked_archway")
+	player.add_journal_note("bricked_archway_recording", "Playback from the bricked archway: brick being laid, course after course. Under it, the filing voice says, 'filed under: later.'")
+	player.add_ledger_entry("bricked_archway_recording", "The archway did not promise an opening. It gave Mara brickwork, patience, and a clerk's voice filing the far side under later.", "2:47 AM - Course By Course")
+	player.add_evidence("bricked_archway_recording", "Bricked Archway Recording", "Trowel sounds, patient brickwork, and the attic filing voice naming the sealed side as later rather than locked.", "Recording")
+	player.add_journal_objective("read_foundation_chamber_choices", "Return to the Foundation threshold and note what the chamber is offering.")
 
 func _process(delta: float) -> void:
 	if not scare_active:
