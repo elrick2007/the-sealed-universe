@@ -78,6 +78,14 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Attic Stair Door v1, joining the Housekeeper's chatelaine to the chosen 2:47 proof and unlocking the first attic-route stub.
 - Long Attic Wire Trace v1, resolving the blank-bell objective and seeding the duplicated Servant's Sick Rooms.
 - Duplicated Sick Rooms v1, comparing Ada's recovered/deceased fever charts and opening the not-glass marble route.
+
+## Blender / Godot Pipeline Status
+
+- Blender 5.1.1 is installed at `C:\Users\Jason\Documents\blender-5.1.1-windows-x64\blender.exe`.
+- Blender MCP add-on is reachable on `127.0.0.1:9876` when the add-on shows `Server is running`.
+- Live Blender MCP control was verified by `tools/blender_mcp_live_test.ps1`, which creates `WW_MCP_Live_Proof_Sphere` and `WW_MCP_Live_Proof_Base` in the open Blender scene.
+- Script-driven Blender export is also verified through `assets/blender_source/tests/build_blender_control_test.py`.
+- Godot should import exported GLB files from `assets/blender_exports`; Blender source files under `assets/blender_source` are ignored by Godot via `.gdignore`.
 - Water Tank / Not-Glass Marble v1, gating the drowned tin behind Ada's contradiction and turning the not-glass marble into an inventory key for the mirror chest route.
 - Mirror Chest / Caton Field Book v1, using the not-glass marble in the north Sick Room chest so the south twin opens with Caton's Field Book and unlocks the Caton measurement overlay seed.
 - Caton Field Book overlay payoff v1, turning the Field Book into a tape-measure modifier that compares Caton's submitted dimensions against the house's true dimensions.
