@@ -97,6 +97,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Publish choice lock v1, making the pen, oil, and proof bundle answer as locked ending affordances after the 3/3 proof chain, opening the missing-authority objective without selecting an ending.
 - Final-authority seed v1, making the original Testament Page reveal that proof is not authority after all three ending choices refuse Mara, opening the occupant-authority record lead while keeping endings inactive.
 - Occupant Authority Record v1, turning Caldwell's black-book record into a second-read proof that Caldwell recruits, while the current occupant must answer for Ashford Manor.
+- Current Occupant Proof v1, turning Mara's `Incomplete` entry into proof that she is the occupant held in abeyance, while the final Book 1 ending remains locked.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -153,6 +154,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 50. Publish choice lock v1: after the publish proof chain reaches `3 / 3`, re-testing the pen, oil, and proof bundle records each as a deliberately locked ending affordance. Once all three refuse Mara, the journal opens the final-authority objective while the ending-choice state remains inactive.
 51. Final-authority seed v1: re-reading the original Testament Page after all three locked ending affordances refuse Mara reveals the authority clause, completes the missing-authority objective, pins the clause as Foundation evidence, writes `2:47 AM - Authority Clause`, and opens the objective to find the record naming who may answer for Ashford Manor.
 52. Occupant Authority Record v1: re-checking Caldwell's black-book record after the authority clause completes the occupant-authority objective, pins the current-occupant proof, writes `2:47 AM - Current Occupant`, and opens the next proof that must establish whether Mara can answer for the house before any final ending can activate.
+53. Current Occupant Proof v1: re-reading Mara's `December 2 / Incomplete` entry after Caldwell is reduced to recruiter completes the current-occupant objective, pins Mara as the occupant held in abeyance, writes `2:47 AM - Current Occupant`, and opens the Foundation return objective while keeping every ending locked.
 
 Before Blender architecture replacement, keep the route links across Ground Floor, First Floor, Attic, Cellar, and the future Sealed Wing page aligned as one navigable house. Blockout proves mechanic order first; Blender should then make the rooms enclosed, correctly scaled, and visually consistent.
 
@@ -239,4 +241,8 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build current-occupant proof v1: use Mara's `Incomplete` status and the Living Ledger rules to prove whether she can answer for the house, without unlocking or selecting any final ending yet.
+Return current-occupant proof to the Foundation Chamber v1: let the original book acknowledge Mara can answer for Ashford Manor, while still keeping all Book 1 endings locked until the final choice sequence.
+
+## Anthology Ending Guardrail
+
+Book 1 must stay true to the publish-ending spine: Mara's register line resolves to `December 2nd: Incomplete`, then the Well Room/jar-list stinger points toward Book 2 (*The Ink Dwellers*) without explaining the full six-game anthology arc too early.

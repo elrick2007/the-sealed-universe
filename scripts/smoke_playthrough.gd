@@ -1116,6 +1116,17 @@ func _run() -> void:
 	_assert(_count_note(hud, "caldwell_living_record") == caldwell_note_count, "Repeated Caldwell record inspection does not duplicate note")
 	_assert(_count_note(hud, "occupant_authority_record") == occupant_authority_note_count, "Repeated occupant authority inspection does not duplicate note")
 
+	mara_incomplete_entry.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("mara_current_occupant_proved", false)), "Re-reading Mara's Incomplete entry after the authority record proves current-occupant state")
+	_assert(_objective_complete(hud, "prove_mara_current_occupant"), "Current-occupant proof completes Mara authority objective")
+	_assert(_has_objective(hud, "return_current_occupant_proof_to_foundation"), "Current-occupant proof opens Foundation return objective")
+	_assert(_has_note(hud, "current_occupant_proof"), "Current-occupant proof adds note")
+	_assert(_has_evidence(hud, "current_occupant_proof"), "Current-occupant proof pins evidence")
+	_assert(_has_ledger_entry(hud, "current_occupant_proof"), "Current-occupant proof writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Current-occupant proof still does not unlock endings")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Current-occupant proof does not select an ending")
+
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
@@ -1180,9 +1191,11 @@ func _run() -> void:
 	var foundation_choice_lock_publish_note_count: int = _count_note(hud, "foundation_choice_lock_publish")
 	var foundation_choice_lock_summary_note_count: int = _count_note(hud, "foundation_choice_lock_understood")
 	var foundation_final_authority_seed_note_count: int = _count_note(hud, "foundation_final_authority_seed")
+	var current_occupant_proof_note_count: int = _count_note(hud, "current_occupant_proof")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
+	_assert(_count_note(hud, "current_occupant_proof") == current_occupant_proof_note_count, "Repeated current-occupant proof reading does not duplicate note")
 	_assert(_count_note(hud, "two_forty_seven_reserved") == reserved_note_count, "Repeated Incomplete entry inspection does not duplicate 2:47 reservation")
 	kitchen_clock_247.interact(player)
 	await process_frame
