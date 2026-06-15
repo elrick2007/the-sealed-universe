@@ -12,13 +12,12 @@ Game 01 remains Book 1 only. The ending is one canon publish/send route that res
 
 ## Recommended Finish Order Before Blender
 
-1. Canon publish/send ending sequence v1.
-2. Well Room / Book 2 stinger v1.
-3. Save/load persistence pass.
-4. Full smoke route with save/reload checkpoint.
-5. Room-purpose lock for all mapped but unplanned rooms.
-6. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
-7. Blender replacement begins floor by floor.
+1. Well Room / Book 2 stinger v1.
+2. Save/load persistence pass.
+3. Full smoke route with save/reload checkpoint.
+4. Room-purpose lock for all mapped but unplanned rooms.
+5. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
+6. Blender replacement begins floor by floor.
 
 The key rule: do not start final Blender builds for rooms whose gameplay purpose is still unclear. Blockout first, art second.
 
@@ -157,4 +156,4 @@ These rooms already have clear enough gameplay purpose to become first Blender t
 
 ## Next Implementation Step
 
-Finish the canon publish/send ending sequence, then build the Well Room / Book 2 stinger. Those two beats close Book 1's playable route and make the rest of the pre-Blender pass safer to evaluate.
+Build the Well Room / Book 2 stinger now that the canon publish/send ending sequence is locked. That stinger closes Book 1's playable route and makes the rest of the pre-Blender pass safer to evaluate.

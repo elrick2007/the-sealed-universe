@@ -29,6 +29,10 @@ const FOUNDATION_OFFER_METAS := [
 ]
 
 func get_prompt(_player: Node) -> String:
+	if _can_send_final_register():
+		if bool(get_tree().root.get_meta("foundation_canon_publish_sent", false)):
+			return "E - Read sent register"
+		return "E - Send final register"
 	if _can_prepare_final_register():
 		if bool(get_tree().root.get_meta("foundation_final_register_prepared", false)):
 			return "E - Read prepared register"
@@ -50,6 +54,8 @@ func interact(player: Node) -> void:
 		if _try_mark_publish_bundle_witness(player):
 			return
 		if _try_mark_oil_final_witness(player):
+			return
+		if _try_send_final_register(player):
 			return
 		if _try_prepare_final_register(player):
 			return
@@ -200,6 +206,56 @@ func _try_prepare_final_register(player: Node) -> bool:
 		)
 	if player.has_method("show_message"):
 		player.show_message("The register is ready. It does not ask what ending Mara wants. It asks what she will publish.", 7.0)
+	return true
+
+func _can_send_final_register() -> bool:
+	if state_meta != "foundation_publish_offer_seen":
+		return false
+	var root := get_tree().root
+	return bool(root.get_meta("foundation_final_register_prepared", false)) and bool(root.get_meta("foundation_canon_publish_route_ready", false))
+
+func _try_send_final_register(player: Node) -> bool:
+	if not _can_send_final_register():
+		return false
+
+	var root := get_tree().root
+	if bool(root.get_meta("foundation_canon_publish_sent", false)):
+		if player.has_method("show_message"):
+			player.show_message("The final register is already sent. The last word remains: INCOMPLETE.", 6.0)
+		return true
+
+	root.set_meta("foundation_canon_publish_sent", true)
+	root.set_meta("book1_canon_ending_complete", true)
+	root.set_meta("foundation_register_final_word", "Incomplete")
+
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("find_final_authority_before_ending")
+		player.complete_journal_objective("send_final_register")
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective(
+			"follow_well_room_after_send",
+			"Follow the voices in the Well Room."
+		)
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"foundation_canon_publish_sent",
+			"Mara publishes the final register instead of choosing one of the chamber's offers. The house records her line as Voss, M. / December 2 / Incomplete."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_canon_publish_sent",
+			"Final Register Sent",
+			"The published register resolves Mara's line as December 2 / Incomplete. The pen and oil remain witnessed offers, not chosen endings.",
+			"Foundation Chamber"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_canon_publish_sent",
+			"Mara pressed send before the house could turn proof into permission. The final word did not complete her. It named the place where Book One stopped: Incomplete.",
+			"2:47 AM - Incomplete"
+		)
+	if player.has_method("show_message"):
+		player.show_message("Mara sends the register. The final line writes itself: INCOMPLETE.", 7.0)
 	return true
 
 func _can_show_choice_lock() -> bool:
@@ -359,7 +415,7 @@ func _check_choice_lock_summary(player: Node) -> void:
 	if player.has_method("add_journal_note"):
 		player.add_journal_note(
 			"foundation_choice_lock_understood",
-			"The chamber has three endings, but none will obey until Mara brings back the missing authority."
+			"The chamber has three ending-shaped offers, but none will obey until Mara brings back the missing authority."
 		)
 	if player.has_method("add_evidence"):
 		player.add_evidence(
@@ -371,11 +427,11 @@ func _check_choice_lock_summary(player: Node) -> void:
 	if player.has_method("add_ledger_entry"):
 		player.add_ledger_entry(
 			"foundation_choice_lock_understood",
-			"The chamber showed Mara all three endings and let none of them open. The cruelty was not refusal. The cruelty was timing.",
+			"The chamber showed Mara three ending-shaped offers and let none of them open. The cruelty was not refusal. The cruelty was timing.",
 			"2:47 AM - Not Yet"
 		)
 	if player.has_method("show_message"):
-		player.show_message("The chamber has three endings and none of them are ready to be chosen.", 7.0)
+		player.show_message("The chamber has three offers and none of them are ready to be chosen.", 7.0)
 
 func _check_foundation_offers(player: Node) -> void:
 	var root := get_tree().root
@@ -403,7 +459,7 @@ func _check_foundation_offers(player: Node) -> void:
 		player.add_evidence(
 			"foundation_chamber_affordances_seen",
 			"Foundation Chamber: Three Ways Out",
-			"The pen, the oil, and the proof bundle form three endings without becoming endings yet. The original book waits between them.",
+			"The pen, the oil, and the proof bundle form three ending-shaped offers without becoming choices. The original book waits between them.",
 			"Foundation Chamber"
 		)
 	if player.has_method("add_ledger_entry"):

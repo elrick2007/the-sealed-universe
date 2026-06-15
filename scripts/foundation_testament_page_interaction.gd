@@ -102,7 +102,7 @@ func _try_seed_final_authority(player: Node) -> bool:
 		player.add_evidence(
 			"foundation_final_authority_seed",
 			"Foundation Testament: Authority Clause",
-			"A new margin clause appears only after Mara tests all three endings. Proof can witness the house, but only the recorded occupant can choose its final state.",
+			"A new margin clause appears only after Mara tests all three ending-shaped offers. Proof can witness the house, but only the recorded occupant can send its final state.",
 			"Foundation"
 		)
 	if player.has_method("add_ledger_entry"):

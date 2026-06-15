@@ -95,11 +95,12 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Publish-meter proof chain v1, turning the proof bundle into the second Kitchen-board witness after the Testament Page is pinned.
 - Publish-meter final proof v1, turning the refused oil can into the third Kitchen-board witness while keeping the endgame choices inactive.
 - Publish choice lock v1, making the pen, oil, and proof bundle answer as locked ending affordances after the 3/3 proof chain, opening the missing-authority objective without selecting an ending.
-- Final-authority seed v1, making the original Testament Page reveal that proof is not authority after all three ending choices refuse Mara, opening the occupant-authority record lead while keeping endings inactive.
+- Final-authority seed v1, making the original Testament Page reveal that proof is not authority after all three chamber offers refuse Mara, opening the occupant-authority record lead while keeping endings inactive.
 - Occupant Authority Record v1, turning Caldwell's black-book record into a second-read proof that Caldwell recruits, while the current occupant must answer for Ashford Manor.
 - Current Occupant Proof v1, turning Mara's `Incomplete` entry into proof that she is the occupant held in abeyance, while the final Book 1 ending remains locked.
 - Foundation current-occupant return v1, letting the original book accept Mara's authority proof while keeping every final ending affordance inactive.
 - Final-register preparation beat v1, turning the completed proof bundle into Mara's prepared register line instead of an ending-choice branch.
+- Canon publish/send ending sequence v1, sending Mara's final register as the only Book 1 ending path and resolving the register line to `Incomplete` while pen/oil remain rejected witnessed offers.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -152,13 +153,14 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 46. Foundation Chamber first-read / testament page v1: after the pen/oil/proof affordances are all witnessed, Mara can read the first testament page, seed the publish-meter route, pin the proof seed, write `2:47 AM - Testament Page`, and open the Kitchen evidence-board return without choosing an ending.
 47. Foundation Chamber evidence-board return / publish-meter v1: returning to the Kitchen board after reading the Testament Page completes the return objective, pins the page as publish-route proof, reveals the first red thread on the physical board, shows `Publish route witness: 1 / 3`, writes `2:47 AM - The First Red Thread`, and opens the remaining publish-proof objective without choosing an ending.
 48. Publish-meter proof chain v1: after the Testament Page is pinned, re-checking the Foundation Chamber proof bundle turns it into evidence rather than an ending button. Returning that witness to the Kitchen board pins the proof bundle, reveals the second red thread, advances the meter to `Publish route witness: 2 / 3`, and keeps the final send/publish choice inactive.
-49. Publish-meter final proof v1: after the proof bundle is pinned, re-checking the oil can turns refusal into evidence instead of the burn ending. Returning that witness to the Kitchen board pins the oil refusal, reveals the third red thread, advances the meter to `Publish route witness: 3 / 3`, completes the publish witness chain objective, and still does not activate any ending choice.
+49. Publish-meter final proof v1: after the proof bundle is pinned, re-checking the oil can turns refusal into evidence instead of the burn offer. Returning that witness to the Kitchen board pins the oil refusal, reveals the third red thread, advances the meter to `Publish route witness: 3 / 3`, completes the publish witness chain objective, and still does not activate any ending choice.
 50. Publish choice lock v1: after the publish proof chain reaches `3 / 3`, re-testing the pen, oil, and proof bundle records each as a deliberately locked ending affordance. Once all three refuse Mara, the journal opens the final-authority objective while the ending-choice state remains inactive.
 51. Final-authority seed v1: re-reading the original Testament Page after all three locked ending affordances refuse Mara reveals the authority clause, completes the missing-authority objective, pins the clause as Foundation evidence, writes `2:47 AM - Authority Clause`, and opens the objective to find the record naming who may answer for Ashford Manor.
 52. Occupant Authority Record v1: re-checking Caldwell's black-book record after the authority clause completes the occupant-authority objective, pins the current-occupant proof, writes `2:47 AM - Current Occupant`, and opens the next proof that must establish whether Mara can answer for the house before any final ending can activate.
 53. Current Occupant Proof v1: re-reading Mara's `December 2 / Incomplete` entry after Caldwell is reduced to recruiter completes the current-occupant objective, pins Mara as the occupant held in abeyance, writes `2:47 AM - Current Occupant`, and opens the Foundation return objective while keeping every ending locked.
 54. Foundation current-occupant return v1: returning Mara's proof to the original book completes the Foundation return objective, pins the occupant-accepted evidence, writes `2:47 AM - Disposition: Hers`, and opens final-register preparation while keeping the ending choice inactive.
 55. Final-register preparation beat v1: after the current-occupant proof is accepted, the Foundation proof bundle becomes a prepared register line rather than a branch selector. It completes `prepare_final_register_without_choosing`, opens the canon send objective, pins `Prepared Final Register`, writes `2:47 AM - Final Register`, and still does not unlock or select an ending.
+56. Canon publish/send ending sequence v1: interacting with the prepared register sends Mara's final record, completes the Book 1 canon ending state, writes `Voss, M. / December 2 / Incomplete`, completes the send objective, and opens the Well Room handoff without activating alternate endings.
 
 Before Blender architecture replacement, keep the route links across Ground Floor, First Floor, Attic, Cellar, and the future Sealed Wing page aligned as one navigable house. Blockout proves mechanic order first; Blender should then make the rooms enclosed, correctly scaled, and visually consistent.
 
@@ -197,7 +199,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after final-register preparation beat v1:
+Last known validation after canon publish/send ending sequence v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -246,7 +248,7 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Canon publish/send ending sequence v1: use the prepared final register as the only Book 1 ending path, resolve Mara's line to `Incomplete`, and keep pen/oil framed as rejected witnessed offers rather than alternate true endings.
+Well Room / Book 2 stinger v1: follow the voices after Mara sends the final register, seed the jar-list / ink mythology bridge, and point toward Book 2 without opening another ending.
 
 ## Pre-Blender Room Tracking
 

@@ -558,10 +558,14 @@ func _refresh_evidence_board() -> void:
 func _add_foundation_publish_route_lines(lines: Array) -> void:
 	if not bool(get_tree().root.get_meta("foundation_publish_meter_board_started", false)):
 		return
+	if bool(get_tree().root.get_meta("foundation_canon_publish_sent", false)):
+		lines.append("[color=#d8b06f99]Final register sent: DECEMBER 2 / INCOMPLETE.[/color]")
+		lines.append("")
+		return
 	var proof_count: int = clamp(int(get_tree().root.get_meta("foundation_publish_meter_count", 1)), 1, 3)
 	lines.append("[color=#d8b06f99]Publish route witness: %d / 3[/color]" % proof_count)
 	if proof_count >= 3:
-		lines.append("[color=#d8b06f99]Red thread: the publish chain is complete. Mara still has to choose what proof means.[/color]")
+		lines.append("[color=#d8b06f99]Red thread: the publish chain is complete. Mara still has to prove she is the one allowed to send it.[/color]")
 	elif proof_count == 2:
 		lines.append("[color=#d8b06f99]Red thread: the Testament Page now leads to the proof bundle. One witness is missing.[/color]")
 	else:

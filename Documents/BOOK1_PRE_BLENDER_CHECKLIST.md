@@ -12,7 +12,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Game 01 has one canon ending path.
 - [x] The ending must lean into Book 1's final state: Mara's record resolves around `December 2nd: Incomplete`.
 - [x] The Book 2 bridge should point toward the Well Room / jar-list / voices / ink mythology without explaining the full anthology too early.
-- [ ] Remove any remaining design language that implies three true endings. Pen, oil, and publish can remain as witnessed offers, but publish / send is the canon route.
+- [x] Remove remaining playable/UI language that implies three true endings. Pen, oil, and publish can remain as witnessed offers, but publish / send is the canon route.
 
 ## Global Systems Done
 
@@ -33,7 +33,8 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Save/load persistence for all route meta, inventory, notes, evidence, map state, and ledger entries.
 - [ ] Accessibility pass: reduce flashing pulses, add subtitles/voice volume controls, and keep scare effects photosensitivity-safe.
 - [ ] Exportable Living Ledger prose.
-- [ ] Final Book 1 ending sequence and Book 2 stinger.
+- [x] Final Book 1 ending sequence.
+- [ ] Book 2 stinger.
 
 ## Ground Floor Done
 
@@ -103,8 +104,8 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Current Occupant Proof v1.
 - [x] Foundation current-occupant return v1.
 - [x] Final-register preparation beat.
-- [ ] Replace three-ending language with one canon publish/send resolution that still acknowledges pen/oil as rejected witnessed offers.
-- [ ] Build final Book 1 ending: `Incomplete` as the final word, not an optional branch.
+- [x] Replace three-ending language with one canon publish/send resolution that still acknowledges pen/oil as rejected witnessed offers.
+- [x] Build final Book 1 ending: `Incomplete` as the final word, not an optional branch.
 - [ ] Build Well Room / jar-list / Book 2 stinger.
 - [ ] Cellar Blender replacement: coal room, wine cellar, undercroft, cold store, well room, Caton Pillar, bricked archway, Foundation Chamber.
 
@@ -127,7 +128,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Attic route exists in playable blockout.
 - [x] Cellar / Foundation route exists in playable blockout.
 - [x] Core document archive and bibles are in the repository workspace.
-- [ ] Final Book 1 ending route must be playable and tested.
+- [x] Final Book 1 ending route must be playable and tested.
 - [ ] Save/load must preserve every meta flag used in the full smoke route.
 - [ ] One-ending canon must be reflected in UI language, evidence-board language, and objective text.
 - [ ] Map/floor labels must be checked against all floor-plan images.
@@ -138,8 +139,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 
 ## Recommended Next Code Steps
 
-1. Canon publish/send ending sequence with `Incomplete` final state.
-2. Well Room / Book 2 stinger.
-3. Save/load persistence pass.
-4. Full smoke route checkpoint after save/reload.
-5. Blender manifest lock and room-by-room architecture replacement.
+1. Well Room / Book 2 stinger.
+2. Save/load persistence pass.
+3. Full smoke route checkpoint after save/reload.
+4. Blender manifest lock and room-by-room architecture replacement.

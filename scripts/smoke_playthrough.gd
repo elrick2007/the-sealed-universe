@@ -1058,8 +1058,8 @@ func _run() -> void:
 	_assert(evidence_oil_final.visible, "Evidence board return reveals oil refusal scrap")
 	_assert(evidence_publish_thread_final.visible, "Evidence board return reveals final publish-route red thread")
 	_assert(hud.evidence_content.text.contains("Publish route witness: 3 / 3"), "Evidence board shows final publish-route meter")
-	_assert(_has_objective(hud, "test_locked_foundation_choices"), "Final publish proof sends Mara back to test locked ending choices")
-	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final publish proof does not unlock ending choices")
+	_assert(_has_objective(hud, "test_locked_foundation_choices"), "Final publish proof sends Mara back to test locked chamber offers")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final publish proof does not unlock chamber choices")
 
 	foundation_pen_offer.interact(player)
 	await process_frame
@@ -1150,6 +1150,20 @@ func _run() -> void:
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final register preparation still does not unlock endings")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final register preparation does not select an ending")
 
+	foundation_publish_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_canon_publish_sent", false)), "Final register send marks canon publish ending as sent")
+	_assert(bool(scene.get_tree().root.get_meta("book1_canon_ending_complete", false)), "Final register send completes Book 1 canon ending")
+	_assert(String(scene.get_tree().root.get_meta("foundation_register_final_word", "")) == "Incomplete", "Final register resolves Mara's line as Incomplete")
+	_assert(_objective_complete(hud, "find_final_authority_before_ending"), "Final send completes final-authority objective")
+	_assert(_objective_complete(hud, "send_final_register"), "Final send completes send objective")
+	_assert(_has_objective(hud, "follow_well_room_after_send"), "Final send opens Well Room handoff objective")
+	_assert(_has_note(hud, "foundation_canon_publish_sent"), "Final send adds canon publish note")
+	_assert(_has_evidence(hud, "foundation_canon_publish_sent"), "Final send pins canon publish evidence")
+	_assert(_has_ledger_entry(hud, "foundation_canon_publish_sent"), "Final send writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final send does not unlock alternate offers")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final send does not select an alternate ending")
+
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
@@ -1217,6 +1231,7 @@ func _run() -> void:
 	var current_occupant_proof_note_count: int = _count_note(hud, "current_occupant_proof")
 	var foundation_current_occupant_return_note_count: int = _count_note(hud, "foundation_current_occupant_return")
 	var foundation_final_register_note_count: int = _count_note(hud, "foundation_final_register_prepared")
+	var foundation_canon_publish_note_count: int = _count_note(hud, "foundation_canon_publish_sent")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1352,6 +1367,7 @@ func _run() -> void:
 	_assert(_count_note(hud, "foundation_publish_bundle_witness") == foundation_publish_bundle_witness_note_count, "Repeated proof bundle witness does not duplicate second-proof note")
 	_assert(_count_note(hud, "foundation_choice_lock_publish") == foundation_choice_lock_publish_note_count, "Repeated proof bundle lock test does not duplicate publish-lock note")
 	_assert(_count_note(hud, "foundation_final_register_prepared") == foundation_final_register_note_count, "Repeated final register preparation does not duplicate note")
+	_assert(_count_note(hud, "foundation_canon_publish_sent") == foundation_canon_publish_note_count, "Repeated final register send does not duplicate canon publish note")
 	_assert(_count_note(hud, "foundation_choice_lock_understood") == foundation_choice_lock_summary_note_count, "Repeated locked choice tests do not duplicate summary note")
 	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
 	foundation_testament_page.interact(player)
