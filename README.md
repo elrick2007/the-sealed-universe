@@ -86,6 +86,7 @@ Target runtime:
 36. Re-read the original book's testament page to reveal the authority clause: proof is not enough, and Mara must find the record naming who may answer for Ashford Manor.
 37. Re-check Caldwell's black-book record after the authority clause to learn that Caldwell recruits, but the current occupant must answer for Ashford Manor.
 38. Re-read Mara's December 2 / Incomplete entry to prove she is the current occupant held in abeyance, without unlocking or choosing the Book 1 ending yet.
+39. Return Mara's current-occupant proof to the Foundation Chamber so the original book accepts her authority while the final ending remains unwritten.
 
 ## Project Memory
 
@@ -118,7 +119,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Return Mara's current-occupant proof to the Foundation Chamber without activating the final ending yet.
+- Build the final-register preparation beat after the Foundation Chamber accepts Mara's current-occupant proof, without activating the final ending yet.
 - Keep the First Floor, Attic, Cellar, and future Sealed Wing map-route links aligned before Blender architecture replaces the blockout.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
