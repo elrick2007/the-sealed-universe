@@ -63,6 +63,7 @@ func _run() -> void:
 	var foundation_pen_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/WritingStandOffer")
 	var foundation_oil_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OilCanOffer")
 	var foundation_publish_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder")
+	var well_room_stinger: Node = scene.get_node("Architecture/Cellar/WellRoomStinger")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -1164,6 +1165,19 @@ func _run() -> void:
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final send does not unlock alternate offers")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final send does not select an alternate ending")
 
+	well_room_stinger.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("well_room_book2_stinger_complete", false)), "Well Room stinger completes after canon send")
+	_assert(bool(scene.get_tree().root.get_meta("well_room_network_recorded", false)), "Well Room records connected water voices")
+	_assert(bool(scene.get_tree().root.get_meta("well_room_jar_list_found", false)), "Well Room raises jar list")
+	_assert(bool(scene.get_tree().root.get_meta("book2_stinger_seeded", false)), "Well Room seeds Book 2 without branching ending")
+	_assert(_objective_complete(hud, "follow_well_room_after_send"), "Well Room stinger completes post-send objective")
+	_assert(_has_note(hud, "well_room_book2_stinger"), "Well Room stinger adds note")
+	_assert(_has_evidence(hud, "well_room_jar_list"), "Well Room stinger pins jar-list evidence")
+	_assert(_has_ledger_entry(hud, "well_room_book2_stinger"), "Well Room stinger writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Well Room stinger does not unlock alternate offers")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Well Room stinger does not select alternate ending")
+
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
@@ -1232,6 +1246,7 @@ func _run() -> void:
 	var foundation_current_occupant_return_note_count: int = _count_note(hud, "foundation_current_occupant_return")
 	var foundation_final_register_note_count: int = _count_note(hud, "foundation_final_register_prepared")
 	var foundation_canon_publish_note_count: int = _count_note(hud, "foundation_canon_publish_sent")
+	var well_room_stinger_note_count: int = _count_note(hud, "well_room_book2_stinger")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1370,6 +1385,9 @@ func _run() -> void:
 	_assert(_count_note(hud, "foundation_canon_publish_sent") == foundation_canon_publish_note_count, "Repeated final register send does not duplicate canon publish note")
 	_assert(_count_note(hud, "foundation_choice_lock_understood") == foundation_choice_lock_summary_note_count, "Repeated locked choice tests do not duplicate summary note")
 	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
+	well_room_stinger.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "well_room_book2_stinger") == well_room_stinger_note_count, "Repeated Well Room stinger does not duplicate note")
 	foundation_testament_page.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_testament_page") == foundation_testament_note_count, "Repeated testament page reading does not duplicate note")

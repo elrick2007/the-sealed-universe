@@ -34,7 +34,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Accessibility pass: reduce flashing pulses, add subtitles/voice volume controls, and keep scare effects photosensitivity-safe.
 - [ ] Exportable Living Ledger prose.
 - [x] Final Book 1 ending sequence.
-- [ ] Book 2 stinger.
+- [x] Book 2 stinger.
 
 ## Ground Floor Done
 
@@ -106,7 +106,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Final-register preparation beat.
 - [x] Replace three-ending language with one canon publish/send resolution that still acknowledges pen/oil as rejected witnessed offers.
 - [x] Build final Book 1 ending: `Incomplete` as the final word, not an optional branch.
-- [ ] Build Well Room / jar-list / Book 2 stinger.
+- [x] Build Well Room / jar-list / Book 2 stinger.
 - [ ] Cellar Blender replacement: coal room, wine cellar, undercroft, cold store, well room, Caton Pillar, bricked archway, Foundation Chamber.
 
 ## Sealed Wing Done
@@ -139,7 +139,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 
 ## Recommended Next Code Steps
 
-1. Well Room / Book 2 stinger.
-2. Save/load persistence pass.
-3. Full smoke route checkpoint after save/reload.
-4. Blender manifest lock and room-by-room architecture replacement.
+1. Save/load persistence pass.
+2. Full smoke route checkpoint after save/reload.
+3. Blender manifest lock and room-by-room architecture replacement.
+4. Accessibility pass for photosensitivity-safe scare effects.

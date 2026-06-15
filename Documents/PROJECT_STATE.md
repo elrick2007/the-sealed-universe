@@ -161,6 +161,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 54. Foundation current-occupant return v1: returning Mara's proof to the original book completes the Foundation return objective, pins the occupant-accepted evidence, writes `2:47 AM - Disposition: Hers`, and opens final-register preparation while keeping the ending choice inactive.
 55. Final-register preparation beat v1: after the current-occupant proof is accepted, the Foundation proof bundle becomes a prepared register line rather than a branch selector. It completes `prepare_final_register_without_choosing`, opens the canon send objective, pins `Prepared Final Register`, writes `2:47 AM - Final Register`, and still does not unlock or select an ending.
 56. Canon publish/send ending sequence v1: interacting with the prepared register sends Mara's final record, completes the Book 1 canon ending state, writes `Voss, M. / December 2 / Incomplete`, completes the send objective, and opens the Well Room handoff without activating alternate endings.
+57. Well Room / Book 2 stinger v1: after the canon register is sent, Mara can lower the recorder into the Well Room, raise the dry jar list, seed the five-symbol / moth-and-mountain bridge toward Book 2, complete the post-send handoff objective, and write the final connective Living Ledger beat without creating another ending.
 
 Before Blender architecture replacement, keep the route links across Ground Floor, First Floor, Attic, Cellar, and the future Sealed Wing page aligned as one navigable house. Blockout proves mechanic order first; Blender should then make the rooms enclosed, correctly scaled, and visually consistent.
 
@@ -199,7 +200,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after canon publish/send ending sequence v1:
+Last known validation after Well Room / Book 2 stinger v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -248,7 +249,7 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Well Room / Book 2 stinger v1: follow the voices after Mara sends the final register, seed the jar-list / ink mythology bridge, and point toward Book 2 without opening another ending.
+Save/load persistence pass: preserve route meta, inventory, journal objectives, notes, evidence, map state, Living Ledger entries, and the canon Book 1 ending / Book 2 stinger flags across a reload.
 
 ## Pre-Blender Room Tracking
 

@@ -12,12 +12,11 @@ Game 01 remains Book 1 only. The ending is one canon publish/send route that res
 
 ## Recommended Finish Order Before Blender
 
-1. Well Room / Book 2 stinger v1.
-2. Save/load persistence pass.
-3. Full smoke route with save/reload checkpoint.
-4. Room-purpose lock for all mapped but unplanned rooms.
-5. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
-6. Blender replacement begins floor by floor.
+1. Save/load persistence pass.
+2. Full smoke route with save/reload checkpoint.
+3. Room-purpose lock for all mapped but unplanned rooms.
+4. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
+5. Blender replacement begins floor by floor.
 
 The key rule: do not start final Blender builds for rooms whose gameplay purpose is still unclear. Blockout first, art second.
 
@@ -85,7 +84,7 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Wine Cellar | Mapped | Not yet individual route | No | Decide optional evidence or atmosphere-only room. |
 | Coal Room | Mapped | Playable route beat | Yes | Three-stage coal obstruction and Foundation breach. |
 | Cold Store | Mapped | Not yet playable | No | Decide hook-shadow scare or optional evidence. |
-| Well Room | Mapped | Planned next | Yes | Build Book 2 stinger: jar list, voices, recorder-lowering beat. |
+| Well Room | Mapped | Playable stinger | Yes | Blender replacement: well rim, windlass, recorder-lowering line, jar list, water/voice staging. |
 | Bricked Archway | Mapped | Playable | Yes | Loose brick, recorder yield, later phantom-stair relation. |
 | Foundation Chamber | Mapped | Playable blockout | Yes | Original book, proof bundle, pen/oil as rejected offers, final register/send. |
 
@@ -156,4 +155,4 @@ These rooms already have clear enough gameplay purpose to become first Blender t
 
 ## Next Implementation Step
 
-Build the Well Room / Book 2 stinger now that the canon publish/send ending sequence is locked. That stinger closes Book 1's playable route and makes the rest of the pre-Blender pass safer to evaluate.
+Build the save/load persistence pass next. The full Book 1 route now depends on many meta flags, inventory states, notes, evidence pins, map reveals, ledger entries, and the canon ending / Book 2 stinger state, so persistence should be proven before Blender replacement begins.
