@@ -51,6 +51,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Ground-floor Blender replacement: enclosed Entrance Hall, West Wing Hall, Library, Study, Dining Room, Kitchen, Conservatory, corridors, doors, ceilings, collision, and scale.
 - [ ] Physicalize key props: recorder, keys, manor plans, place card, black-book record, tape measure, camera, kitchen clock, evidence board, lemon tree.
 - [ ] Add authored scare timing and non-flashing atmospheric reactions for each major ground-floor route.
+- [x] Purpose-lock remaining mapped ground-floor rooms: Master Bedroom, Nursery, Chapel Room, and service links.
 
 ## First Floor Done
 
@@ -69,6 +70,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Servants' passage, maids' rooms, Gallery Landing, guest bedrooms, bathroom, and Eleanor's Morning Room need Blender layout.
 - [ ] Add east-side bolt / floor-folding loop once the First Floor is spatially authored.
 - [ ] Add unnumbered guest bedroom overnight trade as a polished visual sequence.
+- [x] Purpose-lock remaining First Floor side rooms before Blender replacement.
 
 ## Attics Done
 
@@ -85,6 +87,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Attic layout needs Blender replacement: Long Attic, Sick Rooms, Water Tank Room, roof-walk hatch, void wall, phantom stair indications.
 - [ ] Roof Walk / thirteen-windows night proof still needs a route if retained for Book 1 pacing.
 - [ ] Phantom Stair one-use descent behind the cellar bricked archway still needs final routing.
+- [x] Purpose-lock Roof Walk and Phantom Stair as optional evidence / structural scare routes.
 
 ## Cellar Done
 
@@ -108,6 +111,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Build final Book 1 ending: `Incomplete` as the final word, not an optional branch.
 - [x] Build Well Room / jar-list / Book 2 stinger.
 - [ ] Cellar Blender replacement: coal room, wine cellar, undercroft, cold store, well room, Caton Pillar, bricked archway, Foundation Chamber.
+- [x] Purpose-lock Wine Cellar and Cold Store before Blender replacement.
 
 ## Sealed Wing Done
 
@@ -120,6 +124,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Rose scent belongs here, not the Conservatory.
 - [ ] The compass / east-west contradiction should become a physical found object or readable proof before final Blender layout.
 - [ ] Sealed Wing should visually break Caton's survey style: Eleanor journal ink, wrong measurements, rooms that render from sketch into clay.
+- [x] Purpose-lock Sealed Wing side rooms while preserving one canon ending.
 
 ## Before Blender Starts
 
@@ -133,13 +138,13 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] One-ending canon must be reflected in UI language, evidence-board language, and objective text.
 - [ ] Map/floor labels must be checked against all floor-plan images.
 - [x] Create a room coverage matrix for every mapped room before Blender replacement.
+- [x] Create a room-purpose lock document for all mapped-but-unplanned spaces.
 - [ ] Decide whether `Books/` manuscript files belong in normal Git or Git LFS before they grow much larger.
 - [ ] Build a Blender room list from the manifest: room name, gameplay purpose, required props, collision doors, lighting mood, and export filename.
 - [ ] Establish one Godot import convention for Blender GLB rooms before replacing blockouts.
 
 ## Recommended Next Code Steps
 
-1. Room-purpose lock for mapped rooms that are not yet gameplay-locked.
-2. Blender manifest lock and room-by-room architecture replacement.
-3. Accessibility pass for photosensitivity-safe scare effects.
-4. Exportable Living Ledger prose.
+1. Blender manifest lock and room-by-room architecture replacement.
+2. Accessibility pass for photosensitivity-safe scare effects.
+3. Exportable Living Ledger prose.

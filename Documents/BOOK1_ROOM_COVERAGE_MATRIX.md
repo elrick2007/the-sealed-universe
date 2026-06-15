@@ -12,10 +12,10 @@ Game 01 remains Book 1 only. The ending is one canon publish/send route that res
 
 ## Recommended Finish Order Before Blender
 
-1. Room-purpose lock for all mapped but unplanned rooms.
-2. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
-3. Blender replacement begins floor by floor.
-4. Accessibility pass for photosensitivity-safe scare effects.
+1. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
+2. Blender replacement begins floor by floor.
+3. Accessibility pass for photosensitivity-safe scare effects.
+4. Exportable Living Ledger prose.
 
 The key rule: do not start final Blender builds for rooms whose gameplay purpose is still unclear. Blockout first, art second.
 
@@ -33,30 +33,30 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Locked East / Sealed Wing Door | Mapped as locked wing | Playable stub | Yes | Keep east/west contradiction readable; make compass/map lie into a physical clue. |
 | Cellar Stairs | Mapped | Playable as route unlock | Yes | Align stairs with cellar map and undercroft arrival. |
 | Grand / First Floor Stairs | Mapped | Playable as Act 2 stub | Yes | Align with Gallery Landing and Entrance Hall vertical view. |
-| Master Bedroom | Mapped | Not yet playable as its own room | No | Decide whether Book 1 needs a critical route, optional evidence, or locked/readable-only state. |
-| Nursery | Mapped | Not yet playable as its own room | No | Decide music-box/lullaby function or reserve for later polish. |
-| Chapel Room | Mapped | Not yet playable as its own room | No | Decide register/candle evidence purpose or keep as sealed until later act. |
-| Back Stair / Service Link | Implied | Partially represented through route logic | Partial | Clarify how it connects Kitchen, First Floor servants side, and Attic access. |
+| Master Bedroom | Mapped | Not yet playable as its own room | Yes | Optional evidence: marriage-room proof, jewellery box, mirror unease, Thomas/Eleanor residue. |
+| Nursery | Mapped | Not yet playable as its own room | Yes | Optional evidence / atmosphere: lullaby, music box, childhood absence, second-nursery echo. |
+| Chapel Room | Mapped | Not yet playable as its own room | Yes | Optional evidence: register/candle proof and false-blessing/key-tag contradiction. |
+| Back Stair / Service Link | Implied | Partially represented through route logic | Yes | Structural service circulation between Kitchen, servants side, attic access, and cellar misdirection. |
 
 ## First Floor
 
 | Room or Area | Map Status | Godot Status | Purpose Locked? | Still Needed Before Blender |
 |---|---|---|---|---|
 | Gallery Landing | Mapped | Playable | Yes | Chandelier view down to Entrance Hall, handprint sightline, landing scale. |
-| Servants' Passage | Mapped | Route-implied | Partial | Needs full traversal role, bell board placement, and connection to maid rooms. |
-| Maid's Room I | Mapped | Not yet individual room | No | Decide whether it holds fever/household clue or dressing only. |
-| Maid's Room II | Mapped | Not yet individual room | No | Decide route purpose or fold into servants' wing atmosphere. |
-| Maid's Room III | Mapped | Not yet individual room | No | Decide route purpose or fold into servants' wing atmosphere. |
-| Maid's Room IV | Mapped | Not yet individual room | Partial | Candidate scorch/black-window evidence from T1; needs route lock. |
+| Servants' Passage | Mapped | Route-implied | Yes | Required evidence hub: bell board, blank bell, and maid-room spine. |
+| Maid's Room I | Mapped | Not yet individual room | Yes | Optional evidence: Ada diary / recovered fever-chart context. |
+| Maid's Room II | Mapped | Not yet individual room | Yes | Optional evidence: struck rule, snapped mirror head, hidden servant testimony. |
+| Maid's Room III | Mapped | Not yet individual room | Yes | Optional evidence: blacked-window and conservatory sightline. |
+| Maid's Room IV | Mapped | Not yet individual room | Yes | Required evidence: scorch, height mark, and thirteen-window proof. |
 | Housekeeper's Room | Mapped | Playable puzzle beat | Yes | Sewing-box puzzle dressing, chatelaine/pendulum props, household record placement. |
-| Box Room | Mapped | Not yet playable as room | No | Decide case/agreement evidence purpose or optional lore room. |
-| Dumbwaiter / D.W. | Mapped | System-implied | Partial | Needs traversal/puzzle purpose if we keep it in Act 2. |
+| Box Room | Mapped | Not yet playable as room | Yes | Optional evidence: left-behind luggage and Caldwell agreement traces. |
+| Dumbwaiter / D.W. | Mapped | System-implied | Yes | Structural puzzle support: sound-carrying shaft and remote-recorder logic. |
 | Connecting Door / East-Side Bolt | Mapped | Planned, not fully spatialized | Partial | Build the bolted-from-east loop once first floor layout is authored. |
 | Guest Bedroom, unnumbered | Mapped accident/canon | Playable | Yes | Overnight bed-trade visual polish and guest-book prop dressing. |
-| Guest Bedroom I | Mapped | Not yet playable | Partial | Decide Whitmore clue or locked room purpose. |
-| Bathroom | Mapped | Not yet playable | No | Decide mirror/steam clue or atmosphere-only state. |
-| Guest Bedroom II | Mapped | Not yet playable | Partial | Candidate toy-theatre/height-mark room from T1; needs route purpose. |
-| Eleanor's Morning Room | Mapped | Not yet playable | No | Decide whether it foreshadows Sealed Wing or remains inaccessible until later. |
+| Guest Bedroom I | Mapped | Not yet playable | Yes | Optional evidence: Whitmore confession/dosage traces and unreliable guest records. |
+| Bathroom | Mapped | Not yet playable | Yes | Atmosphere / optional evidence: steam or mirror clue. |
+| Guest Bedroom II | Mapped | Not yet playable | Yes | Optional evidence: child/toy-theatre/height-mark proof. |
+| Eleanor's Morning Room | Mapped | Not yet playable | Yes | Required evidence: drafts, seal, and verification authority for publish logic. |
 | Stair to Attics | Mapped | Playable route unlock | Yes | Align with Attic Stair Door and chatelaine gate. |
 
 ## Attic
@@ -69,9 +69,9 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Servant's Sick Room South | Mapped duplicated room | Playable | Yes | Mirrored fever-chart contradiction and room duplication dressing. |
 | Water Tank Room | Mapped | Playable | Yes | Tank, valves, tin, not-glass marble, wet clay effects. |
 | Void / No Access Room | Mapped | Playable recorder/measurement wall | Yes | Make exterior dimensions physically impossible; no openable interior. |
-| Hatch and Ladder to Roof Walk | Mapped | Not yet routed | Partial | Decide if roof walk/thirteen-windows proof stays in Book 1 playable route. |
-| Roof Walk | Implied by hatch | Not yet playable | Partial | If retained, build night window proof and safe traversal. |
-| Phantom Stair to Ground Floor | Mapped text | Not yet final-routed | Partial | One-use Act 4 descent should arrive behind or near cellar bricked archway. |
+| Hatch and Ladder to Roof Walk | Mapped | Not yet routed | Yes | Structural / optional evidence gate to the Roof Walk. |
+| Roof Walk | Implied by hatch | Not yet playable | Yes | Optional high-value evidence: night proof for the thirteen-windows contradiction. |
+| Phantom Stair to Ground Floor | Mapped text | Not yet final-routed | Yes | Structural scare: one-use geometry payoff near the cellar bricked archway. |
 
 ## Cellar
 
@@ -80,9 +80,9 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Cellar Stairs | Mapped | Playable route | Yes | Align with ground-floor stair position and undercroft arrival. |
 | Undercroft | Mapped | Playable route space | Yes | Pillar array, hooks, low ceiling, route readability. |
 | Caton Pillar | Mapped | Playable | Yes | Forty-seven initials, chisel mark surface, consent-mark affordance. |
-| Wine Cellar | Mapped | Not yet individual route | No | Decide optional evidence or atmosphere-only room. |
+| Wine Cellar | Mapped | Not yet individual route | Yes | Atmosphere / optional evidence: keeper labels, old bottles, and date residue. |
 | Coal Room | Mapped | Playable route beat | Yes | Three-stage coal obstruction and Foundation breach. |
-| Cold Store | Mapped | Not yet playable | No | Decide hook-shadow scare or optional evidence. |
+| Cold Store | Mapped | Not yet playable | Yes | Optional evidence / scare: hook-shadow preservation room. |
 | Well Room | Mapped | Playable stinger | Yes | Blender replacement: well rim, windlass, recorder-lowering line, jar list, water/voice staging. |
 | Bricked Archway | Mapped | Playable | Yes | Loose brick, recorder yield, later phantom-stair relation. |
 | Foundation Chamber | Mapped | Playable blockout | Yes | Original book, proof bundle, pen/oil as rejected offers, final register/send. |
@@ -96,31 +96,16 @@ The ground map labels the locked wing as East, while the story language says Wes
 | Sealed Wing Boundary | Mapped as locked wing | Playable stub | Yes | Physical wrong-compass/east-west proof. |
 | Drafted Threshold | Implied by route | Playable stub | Yes | Sketch-to-clay rendering language. |
 | Impossible Corridor | Planned in Vol 5 | Playable measurement proof | Yes | Full corridor geometry, `42 ft / it is not` marker, authored measurement volumes. |
-| Five Doors | Planned in Vol 5 | Not yet playable | Partial | Decide which doors are real, false, delayed, or journal-only. |
-| Bare Bedroom | Planned in T1 | Not yet playable | Partial | Decide accumulation states and route value. |
-| Sewing Room | Planned in T1 | Not yet playable | Partial | Decide hem-stitch puzzle role. |
-| Second Nursery / Boston Letter | Planned in T1 | Not yet playable | Partial | Decide lore purpose and Book 2 seed limits. |
+| Five Doors | Planned in Vol 5 | Not yet playable | Yes | Critical route framework: witnessed rejected statements plus route to Thomas/Eleanor. |
+| Bare Bedroom | Planned in T1 | Not yet playable | Yes | Witnessed temptation: accumulated-Mara keeper room, not an alternate ending branch. |
+| Sewing Room | Planned in T1 | Not yet playable | Yes | Optional evidence: mourning-dress hem and compassion/witness action. |
+| Second Nursery / Boston Letter | Planned in T1 | Not yet playable | Yes | Required evidence: Boston letter and bounded Book 2 seed. |
 | Thomas's Private Study | Planned in Vol 5/T1 | Not yet playable | Yes | Diary/contract self-writing scene that leads toward cellar/foundation logic. |
 | Eleanor's Room | Planned in Vol 5/T1 | Not yet playable | Yes | Witnessing sequence; should be a late showcase room, not early blockout noise. |
 
-## Rooms Still Needing Gameplay Purpose
+## Room Purpose Locks
 
-These rooms are on the maps or technical manifest but do not yet have a locked Book 1 gameplay purpose:
-
-- Master Bedroom.
-- Nursery.
-- Chapel Room.
-- First Floor Maid's Rooms I-III.
-- First Floor Maid's Room IV, unless we lock the scorch/black-window evidence route.
-- Box Room.
-- Bathroom.
-- Guest Bedroom I.
-- Guest Bedroom II.
-- Eleanor's Morning Room.
-- Wine Cellar.
-- Cold Store.
-- Roof Walk, if retained.
-- Sealed Wing five-door side rooms: Bare Bedroom, Sewing Room, second Nursery/Boston Letter.
+All mapped rooms now have a Book 1 gameplay category before Blender replacement. See `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` for the floor-by-floor lock pass.
 
 ## Rooms Ready For Blender After Final Route Lock
 
@@ -154,4 +139,4 @@ These rooms already have clear enough gameplay purpose to become first Blender t
 
 ## Next Implementation Step
 
-Build the room-purpose lock pass next. Save/load now protects the full Book 1 route, so the remaining pre-Blender work is deciding which mapped rooms are required routes, optional evidence rooms, locked/readable-only spaces, or atmosphere-only dressing.
+Build the Blender room manifest next. Save/load protects the full Book 1 route and the mapped rooms now have locked purposes, so the next pre-Blender work is one row per room: final scale target, doors, ceilings, collision, required props, lighting mood, gameplay triggers, and export filename.

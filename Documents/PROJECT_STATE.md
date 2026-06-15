@@ -179,6 +179,7 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/Technical_Bible_T3_Art_Shader_Pipeline.md`
 - `Documents/Technical_Bible_T4_Milestone1_PROVISIONAL.md`
 - `Documents/BOOK1_ROOM_COVERAGE_MATRIX.md`
+- `Documents/BOOK1_ROOM_PURPOSE_LOCK.md`
 
 ## Validation Commands
 
@@ -249,9 +250,16 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Room-purpose lock pass: decide the remaining mapped-but-unplanned rooms before Blender replacement, especially Master Bedroom, Nursery, Chapel Room, First Floor side rooms, Cold Store, Wine Cellar, Roof Walk, and the Sealed Wing side rooms.
+Blender manifest lock: create the pre-export room list before architecture replacement. Each mapped room now needs final scale target, door connections, ceiling/collision notes, required props, lighting mood, gameplay triggers, and export filename.
 
 ## Latest Build Step
+
+### Room-purpose lock pass v1
+
+- Added `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` as the pre-Blender purpose lock for remaining mapped rooms.
+- Locked Master Bedroom, Nursery, Chapel Room, service links, First Floor side rooms, Roof Walk, Phantom Stair, Wine Cellar, Cold Store, and Sealed Wing side rooms into critical, required-evidence, optional-evidence, atmosphere, or structural roles.
+- Preserved the one-ending guardrail: Sealed Wing side rooms can witness rejected offers or temptations, but they do not create alternate true endings.
+- Updated the pre-Blender checklist and room coverage matrix so the next step is the Blender room manifest.
 
 ### Save/load persistence v1
 
@@ -262,7 +270,7 @@ Room-purpose lock pass: decide the remaining mapped-but-unplanned rooms before B
 
 ## Pre-Blender Room Tracking
 
-`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, unplanned rooms, and the recommended finish order before Blender replacement. Use it alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
+`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, and Blender readiness. `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` records the role of every mapped-but-previously-unplanned room. Use both alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
 
 ## Anthology Ending Guardrail
 
