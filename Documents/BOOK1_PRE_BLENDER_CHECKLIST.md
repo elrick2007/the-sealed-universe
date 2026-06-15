@@ -142,11 +142,12 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Create a room coverage matrix for every mapped room before Blender replacement.
 - [x] Create a room-purpose lock document for all mapped-but-unplanned spaces.
 - [ ] Decide whether `Books/` manuscript files belong in normal Git or Git LFS before they grow much larger.
-- [ ] Build a Blender room list from the manifest: room name, gameplay purpose, required props, collision doors, lighting mood, and export filename.
+- [x] Build a Blender room list from the manifest: room name, gameplay purpose, required props, collision doors, lighting mood, and export filename.
 - [ ] Establish one Godot import convention for Blender GLB rooms before replacing blockouts.
 
 ## Recommended Next Code Steps
 
-1. Blender manifest lock and room-by-room architecture replacement.
-2. Accessibility pass for photosensitivity-safe scare effects.
-3. Exportable Living Ledger prose.
+1. Godot GLB import convention v1.
+2. Blender room-by-room architecture replacement.
+3. Accessibility pass for photosensitivity-safe scare effects.
+4. Exportable Living Ledger prose.
