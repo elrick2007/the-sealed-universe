@@ -99,6 +99,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Occupant Authority Record v1, turning Caldwell's black-book record into a second-read proof that Caldwell recruits, while the current occupant must answer for Ashford Manor.
 - Current Occupant Proof v1, turning Mara's `Incomplete` entry into proof that she is the occupant held in abeyance, while the final Book 1 ending remains locked.
 - Foundation current-occupant return v1, letting the original book accept Mara's authority proof while keeping every final ending affordance inactive.
+- Final-register preparation beat v1, turning the completed proof bundle into Mara's prepared register line instead of an ending-choice branch.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -157,6 +158,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 52. Occupant Authority Record v1: re-checking Caldwell's black-book record after the authority clause completes the occupant-authority objective, pins the current-occupant proof, writes `2:47 AM - Current Occupant`, and opens the next proof that must establish whether Mara can answer for the house before any final ending can activate.
 53. Current Occupant Proof v1: re-reading Mara's `December 2 / Incomplete` entry after Caldwell is reduced to recruiter completes the current-occupant objective, pins Mara as the occupant held in abeyance, writes `2:47 AM - Current Occupant`, and opens the Foundation return objective while keeping every ending locked.
 54. Foundation current-occupant return v1: returning Mara's proof to the original book completes the Foundation return objective, pins the occupant-accepted evidence, writes `2:47 AM - Disposition: Hers`, and opens final-register preparation while keeping the ending choice inactive.
+55. Final-register preparation beat v1: after the current-occupant proof is accepted, the Foundation proof bundle becomes a prepared register line rather than a branch selector. It completes `prepare_final_register_without_choosing`, opens the canon send objective, pins `Prepared Final Register`, writes `2:47 AM - Final Register`, and still does not unlock or select an ending.
 
 Before Blender architecture replacement, keep the route links across Ground Floor, First Floor, Attic, Cellar, and the future Sealed Wing page aligned as one navigable house. Blockout proves mechanic order first; Blender should then make the rooms enclosed, correctly scaled, and visually consistent.
 
@@ -194,7 +196,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after final-authority seed v1:
+Last known validation after final-register preparation beat v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -243,7 +245,7 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Return current-occupant proof to the Foundation Chamber v1: let the original book acknowledge Mara can answer for Ashford Manor, while still keeping all Book 1 endings locked until the final choice sequence.
+Canon publish/send ending sequence v1: use the prepared final register as the only Book 1 ending path, resolve Mara's line to `Incomplete`, and keep pen/oil framed as rejected witnessed offers rather than alternate true endings.
 
 ## Anthology Ending Guardrail
 

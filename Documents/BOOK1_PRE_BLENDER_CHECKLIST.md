@@ -102,8 +102,8 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Occupant Authority Record v1.
 - [x] Current Occupant Proof v1.
 - [x] Foundation current-occupant return v1.
+- [x] Final-register preparation beat.
 - [ ] Replace three-ending language with one canon publish/send resolution that still acknowledges pen/oil as rejected witnessed offers.
-- [ ] Build final-register preparation beat.
 - [ ] Build final Book 1 ending: `Incomplete` as the final word, not an optional branch.
 - [ ] Build Well Room / jar-list / Book 2 stinger.
 - [ ] Cellar Blender replacement: coal room, wine cellar, undercroft, cold store, well room, Caton Pillar, bricked archway, Foundation Chamber.
@@ -137,9 +137,8 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 
 ## Recommended Next Code Steps
 
-1. Final-register preparation beat.
-2. Canon publish/send ending sequence with `Incomplete` final state.
-3. Well Room / Book 2 stinger.
-4. Save/load persistence pass.
-5. Full smoke route checkpoint after save/reload.
-6. Blender manifest lock and room-by-room architecture replacement.
+1. Canon publish/send ending sequence with `Incomplete` final state.
+2. Well Room / Book 2 stinger.
+3. Save/load persistence pass.
+4. Full smoke route checkpoint after save/reload.
+5. Blender manifest lock and room-by-room architecture replacement.

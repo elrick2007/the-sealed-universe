@@ -29,6 +29,10 @@ const FOUNDATION_OFFER_METAS := [
 ]
 
 func get_prompt(_player: Node) -> String:
+	if _can_prepare_final_register():
+		if bool(get_tree().root.get_meta("foundation_final_register_prepared", false)):
+			return "E - Read prepared register"
+		return "E - Prepare final register"
 	if _can_show_choice_lock():
 		return "E - Test locked ending"
 	if state_meta != "" and bool(get_tree().root.get_meta(state_meta, false)):
@@ -46,6 +50,8 @@ func interact(player: Node) -> void:
 		if _try_mark_publish_bundle_witness(player):
 			return
 		if _try_mark_oil_final_witness(player):
+			return
+		if _try_prepare_final_register(player):
 			return
 		if _try_show_publish_choice_lock(player):
 			return
@@ -142,6 +148,58 @@ func _try_mark_oil_final_witness(player: Node) -> bool:
 		)
 	if player.has_method("show_message"):
 		player.show_message("The oil can is final proof now, not permission to burn.", 7.0)
+	return true
+
+func _can_prepare_final_register() -> bool:
+	if state_meta != "foundation_publish_offer_seen":
+		return false
+	var root := get_tree().root
+	if not bool(root.get_meta("foundation_current_occupant_proof_returned", false)):
+		return false
+	if int(root.get_meta("foundation_publish_meter_count", 0)) < 3:
+		return false
+	return bool(root.get_meta("foundation_choice_lock_understood", false))
+
+func _try_prepare_final_register(player: Node) -> bool:
+	if not _can_prepare_final_register():
+		return false
+
+	var root := get_tree().root
+	if bool(root.get_meta("foundation_final_register_prepared", false)):
+		if player.has_method("show_message"):
+			player.show_message("The register waits for the final send. The other offers stay silent.", 6.0)
+		return true
+
+	root.set_meta("foundation_final_register_prepared", true)
+	root.set_meta("foundation_canon_publish_route_ready", true)
+
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("prepare_final_register_without_choosing")
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective(
+			"send_final_register",
+			"Publish Mara's final register when every witness is ready."
+		)
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"foundation_final_register_prepared",
+			"The proof bundle becomes a register line, not a choice: Voss, M. / December 2 / Incomplete. The pen and oil remain offers Mara has refused."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_final_register_prepared",
+			"Prepared Final Register",
+			"Mara's occupant proof binds to the completed witness bundle. The final action is no longer choosing between endings; it is publishing the house's record.",
+			"Foundation Chamber"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_final_register_prepared",
+			"The proof bundle stopped pretending to be a choice. It made a register line instead, with Mara's name on it and the last word waiting like wet ink.",
+			"2:47 AM - Final Register"
+		)
+	if player.has_method("show_message"):
+		player.show_message("The register is ready. It does not ask what ending Mara wants. It asks what she will publish.", 7.0)
 	return true
 
 func _can_show_choice_lock() -> bool:

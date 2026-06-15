@@ -1138,6 +1138,18 @@ func _run() -> void:
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Foundation return still does not unlock endings")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Foundation return does not select an ending")
 
+	foundation_publish_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_final_register_prepared", false)), "Proof bundle prepares final register after occupant proof return")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_canon_publish_route_ready", false)), "Final register marks canon publish route as ready")
+	_assert(_objective_complete(hud, "prepare_final_register_without_choosing"), "Final register preparation completes preparation objective")
+	_assert(_has_objective(hud, "send_final_register"), "Final register preparation opens send objective")
+	_assert(_has_note(hud, "foundation_final_register_prepared"), "Final register preparation adds note")
+	_assert(_has_evidence(hud, "foundation_final_register_prepared"), "Final register preparation pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_final_register_prepared"), "Final register preparation writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final register preparation still does not unlock endings")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final register preparation does not select an ending")
+
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
 	var fired_note_count: int = _count_note(hud, "two_forty_seven_incomplete")
@@ -1204,6 +1216,7 @@ func _run() -> void:
 	var foundation_final_authority_seed_note_count: int = _count_note(hud, "foundation_final_authority_seed")
 	var current_occupant_proof_note_count: int = _count_note(hud, "current_occupant_proof")
 	var foundation_current_occupant_return_note_count: int = _count_note(hud, "foundation_current_occupant_return")
+	var foundation_final_register_note_count: int = _count_note(hud, "foundation_final_register_prepared")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1338,6 +1351,7 @@ func _run() -> void:
 	_assert(_count_note(hud, "foundation_publish_offer") == foundation_publish_note_count, "Repeated proof bundle inspection does not duplicate publish-offer note")
 	_assert(_count_note(hud, "foundation_publish_bundle_witness") == foundation_publish_bundle_witness_note_count, "Repeated proof bundle witness does not duplicate second-proof note")
 	_assert(_count_note(hud, "foundation_choice_lock_publish") == foundation_choice_lock_publish_note_count, "Repeated proof bundle lock test does not duplicate publish-lock note")
+	_assert(_count_note(hud, "foundation_final_register_prepared") == foundation_final_register_note_count, "Repeated final register preparation does not duplicate note")
 	_assert(_count_note(hud, "foundation_choice_lock_understood") == foundation_choice_lock_summary_note_count, "Repeated locked choice tests do not duplicate summary note")
 	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
 	foundation_testament_page.interact(player)
