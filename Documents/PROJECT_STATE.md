@@ -183,6 +183,8 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/BOOK1_ROOM_COVERAGE_MATRIX.md`
 - `Documents/BOOK1_ROOM_PURPOSE_LOCK.md`
 - `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md`
+- `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md`
+- `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md`
 
 ## Validation Commands
 
@@ -253,22 +255,29 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Godot GLB import convention v1: lock the actual Godot folder paths, imported scene placement pattern, collision naming expectations, and replacement workflow before the first Blender export lands. After that, start Blender replacement with Entrance Hall and West Wing Hall.
+Entrance Hall / West Wing Hall Blender source v1: create the first claymation source file at `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`, export `gf_entrance_hall.glb` and `gf_west_wing_hall.glb`, then import wrappers side-by-side in Godot before replacing the blockout.
 
 ## Latest Build Step
+
+### Godot GLB import convention v1 and first replacement pass started
+
+- Added `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md`.
+- Created the initial `assets/blender_source`, `assets/blender_exports`, and `assets/imported_scenes` folder contract.
+- Added `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md` for the first claymation architecture replacement target.
+- Locked the first room pair: Entrance Hall and West Wing Hall, preserving starter-loop gameplay while replacing blockout with enclosed claymation architecture.
 
 ### Cinematics and setup references archived
 
 - Added `Documents/Technical_Bible_T5_Cinematics.md` as reference-only guidance for rostrum intros, in-engine scares, and limited character-performance cinematics.
 - Confirmed `Documents/M0_to_M1_Setup_Checklist.md` is already in the project archive for Blender/Godot setup reference.
-- Kept the active next build step unchanged: Godot GLB import convention v1 before the first Blender room replacement.
+- Superseded by the later GLB convention lock; the active next build step is now the Entrance Hall / West Wing Hall Blender source pass.
 
 ### Blender room manifest lock v1
 
 - Added `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md`.
 - Converted every mapped Book 1 room and structural connector into a Blender build target with export filename, connections, required props, lighting mood, and gameplay hooks.
 - Locked the first Blender build order around the proven route first: Entrance Hall, West Wing Hall, Kitchen, Library, Study, Dining, Conservatory, then the First Floor, Attic, and Cellar proof rooms.
-- Left only pre-export decisions open: Conservatory placement, Roof Walk status, Phantom Stair visibility, Git LFS for manuscripts, and the Godot GLB import convention.
+- Left only pre-export decisions open at the time: Conservatory placement, Roof Walk status, Phantom Stair visibility, Git LFS for manuscripts, and the Godot GLB import convention. The GLB convention is now locked in `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md`.
 
 ### Full map label audit v1
 
@@ -293,7 +302,7 @@ Godot GLB import convention v1: lock the actual Godot folder paths, imported sce
 
 ## Pre-Blender Room Tracking
 
-`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, and Blender readiness. `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` records the role of every mapped-but-previously-unplanned room. `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md` converts those rooms into export targets for Blender. Use all three alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
+`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, and Blender readiness. `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` records the role of every mapped-but-previously-unplanned room. `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md` converts those rooms into export targets for Blender. `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md` locks how those exports land in Godot, and `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md` starts the first replacement pair. Use these alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
 
 ## Anthology Ending Guardrail
 

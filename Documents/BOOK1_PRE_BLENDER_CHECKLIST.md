@@ -49,6 +49,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Martin Caldwell living record: recruiter, `Status: Living`.
 - [x] Mara December 2 / Incomplete seed and 2:47 writeback.
 - [ ] Ground-floor Blender replacement: enclosed Entrance Hall, West Wing Hall, Library, Study, Dining Room, Kitchen, Conservatory, corridors, doors, ceilings, collision, and scale.
+- [ ] Entrance Hall / West Wing Hall Blender replacement pass v1: source file, GLB exports, wrapper scenes, and side-by-side route test.
 - [ ] Physicalize key props: recorder, keys, manor plans, place card, black-book record, tape measure, camera, kitchen clock, evidence board, lemon tree.
 - [ ] Add authored scare timing and non-flashing atmospheric reactions for each major ground-floor route.
 - [x] Purpose-lock remaining mapped ground-floor rooms: Master Bedroom, Nursery, Chapel Room, and service links.
@@ -143,11 +144,12 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Create a room-purpose lock document for all mapped-but-unplanned spaces.
 - [ ] Decide whether `Books/` manuscript files belong in normal Git or Git LFS before they grow much larger.
 - [x] Build a Blender room list from the manifest: room name, gameplay purpose, required props, collision doors, lighting mood, and export filename.
-- [ ] Establish one Godot import convention for Blender GLB rooms before replacing blockouts.
+- [x] Establish one Godot import convention for Blender GLB rooms before replacing blockouts.
 
 ## Recommended Next Code Steps
 
-1. Godot GLB import convention v1.
-2. Blender room-by-room architecture replacement.
-3. Accessibility pass for photosensitivity-safe scare effects.
+1. Build the Entrance Hall / West Wing Hall Blender source file and test GLB exports.
+2. Import first GLBs into Godot wrapper scenes.
+3. Run the side-by-side route test against the existing blockout.
+4. Accessibility pass for photosensitivity-safe scare effects.
 4. Exportable Living Ledger prose.
