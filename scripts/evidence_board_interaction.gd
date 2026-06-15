@@ -131,6 +131,7 @@ func _try_pin_oil_final(player: Node) -> bool:
 	root.set_meta("foundation_publish_meter_count", max(3, int(root.get_meta("foundation_publish_meter_count", 0))))
 	player.complete_journal_objective("return_oil_witness_to_evidence_board")
 	player.complete_journal_objective("complete_publish_witness_chain")
+	player.add_journal_objective("test_locked_foundation_choices", "Return to the Foundation Chamber and test the three choices that still refuse Mara.")
 	player.add_journal_note("foundation_oil_final_board_return", "Pinned as refusal, the oil can closes the publish chain without becoming the burn ending.")
 	player.add_evidence(
 		"foundation_oil_final_board_return",

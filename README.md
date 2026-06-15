@@ -82,6 +82,7 @@ Target runtime:
 32. Return the Testament Page proof to the Kitchen evidence board to start the first red-thread publish-meter payoff.
 33. Re-check the proof bundle after the Testament Page is pinned, then return it to the Kitchen evidence board as the second publish-route witness.
 34. Re-check the oil can after the proof bundle is pinned, then return its refusal witness to the Kitchen evidence board as the third publish-route proof.
+35. Return to the Foundation Chamber and test the pen, oil, and proof bundle again; all three ending choices refuse Mara until the missing authority is found.
 
 ## Project Memory
 
@@ -112,7 +113,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build publish choice lock v1: keep pen/oil/send visibly present but inactive until the full ending choice is deliberately authored.
+- Build the final-authority seed that explains what unlocks the pen/oil/send ending choices later.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

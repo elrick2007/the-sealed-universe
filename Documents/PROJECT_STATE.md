@@ -1,6 +1,6 @@
 # Project State - The Sealed Universe / Game 01
 
-Last updated: 2026-06-14
+Last updated: 2026-06-15
 
 ## Repository
 
@@ -94,6 +94,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Foundation Chamber evidence-board return / publish-meter v1, turning the Testament Page into pinned Kitchen proof and starting the first red-thread publish-meter payoff.
 - Publish-meter proof chain v1, turning the proof bundle into the second Kitchen-board witness after the Testament Page is pinned.
 - Publish-meter final proof v1, turning the refused oil can into the third Kitchen-board witness while keeping the endgame choices inactive.
+- Publish choice lock v1, making the pen, oil, and proof bundle answer as locked ending affordances after the 3/3 proof chain, opening the missing-authority objective without selecting an ending.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -147,6 +148,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 47. Foundation Chamber evidence-board return / publish-meter v1: returning to the Kitchen board after reading the Testament Page completes the return objective, pins the page as publish-route proof, reveals the first red thread on the physical board, shows `Publish route witness: 1 / 3`, writes `2:47 AM - The First Red Thread`, and opens the remaining publish-proof objective without choosing an ending.
 48. Publish-meter proof chain v1: after the Testament Page is pinned, re-checking the Foundation Chamber proof bundle turns it into evidence rather than an ending button. Returning that witness to the Kitchen board pins the proof bundle, reveals the second red thread, advances the meter to `Publish route witness: 2 / 3`, and keeps the final send/publish choice inactive.
 49. Publish-meter final proof v1: after the proof bundle is pinned, re-checking the oil can turns refusal into evidence instead of the burn ending. Returning that witness to the Kitchen board pins the oil refusal, reveals the third red thread, advances the meter to `Publish route witness: 3 / 3`, completes the publish witness chain objective, and still does not activate any ending choice.
+50. Publish choice lock v1: after the publish proof chain reaches `3 / 3`, re-testing the pen, oil, and proof bundle records each as a deliberately locked ending affordance. Once all three refuse Mara, the journal opens the final-authority objective while the ending-choice state remains inactive.
 
 ## Important Documents
 
@@ -182,7 +184,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after publish-meter final proof v1:
+Last known validation after publish choice lock v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.

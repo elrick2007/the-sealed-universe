@@ -2128,6 +2128,7 @@ ledger_id = "foundation_pen_offer"
 ledger_text = "There was a pen ready for Mara, neat and usable. The room had mistaken preparation for consent."
 ledger_timestamp = "2:47 AM - The Pen"
 counts_toward_foundation_offers = true
+ending_choice_id = "serve"
 
 [node name="Stand" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/WritingStandOffer"]
 mesh = SubResource("BoxMesh_prop")
@@ -2164,6 +2165,7 @@ ledger_id = "foundation_oil_offer"
 ledger_text = "The oil had been kept full. Even failure had been restocked before Mara arrived."
 ledger_timestamp = "2:47 AM - The Oil"
 counts_toward_foundation_offers = true
+ending_choice_id = "destroy"
 
 [node name="Can" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OilCanOffer"]
 mesh = SubResource("BoxMesh_prop")
@@ -2195,6 +2197,7 @@ ledger_id = "foundation_publish_offer"
 ledger_text = "The third offer was not an object so much as a question: who would believe Mara if she sent the house to them whole?"
 ledger_timestamp = "2:47 AM - The Proof"
 counts_toward_foundation_offers = true
+ending_choice_id = "publish"
 
 [node name="Bundle" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
 mesh = SubResource("BoxMesh_prop")

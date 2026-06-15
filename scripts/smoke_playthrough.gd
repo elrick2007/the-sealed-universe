@@ -1058,6 +1058,35 @@ func _run() -> void:
 	_assert(evidence_oil_final.visible, "Evidence board return reveals oil refusal scrap")
 	_assert(evidence_publish_thread_final.visible, "Evidence board return reveals final publish-route red thread")
 	_assert(hud.evidence_content.text.contains("Publish route witness: 3 / 3"), "Evidence board shows final publish-route meter")
+	_assert(_has_objective(hud, "test_locked_foundation_choices"), "Final publish proof sends Mara back to test locked ending choices")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final publish proof does not unlock ending choices")
+
+	foundation_pen_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_choice_lock_seen_serve", false)), "Writing stand records locked serve choice")
+	_assert(_has_note(hud, "foundation_choice_lock_serve"), "Locked serve choice adds note")
+	_assert(_has_evidence(hud, "foundation_choice_lock_serve"), "Locked serve choice pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_choice_lock_serve"), "Locked serve choice writes Living Ledger beat")
+	foundation_oil_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_choice_lock_seen_destroy", false)), "Oil can records locked destroy choice")
+	_assert(_has_note(hud, "foundation_choice_lock_destroy"), "Locked destroy choice adds note")
+	_assert(_has_evidence(hud, "foundation_choice_lock_destroy"), "Locked destroy choice pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_choice_lock_destroy"), "Locked destroy choice writes Living Ledger beat")
+	foundation_publish_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_choice_lock_seen_publish", false)), "Proof bundle records locked publish choice")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_choice_lock_understood", false)), "Testing all three ending affordances records the choice-lock summary")
+	_assert(_objective_complete(hud, "test_locked_foundation_choices"), "Choice-lock summary completes test objective")
+	_assert(_has_objective(hud, "find_final_authority_before_ending"), "Choice-lock summary opens final-authority objective")
+	_assert(_has_note(hud, "foundation_choice_lock_publish"), "Locked publish choice adds note")
+	_assert(_has_evidence(hud, "foundation_choice_lock_publish"), "Locked publish choice pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_choice_lock_publish"), "Locked publish choice writes Living Ledger beat")
+	_assert(_has_note(hud, "foundation_choice_lock_understood"), "Choice-lock summary adds note")
+	_assert(_has_evidence(hud, "foundation_choice_lock_understood"), "Choice-lock summary pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_choice_lock_understood"), "Choice-lock summary writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Locked choices still do not unlock endings")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Locked choices do not select an ending")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -1123,6 +1152,10 @@ func _run() -> void:
 	var foundation_oil_final_witness_note_count: int = _count_note(hud, "foundation_oil_final_witness")
 	var foundation_oil_final_board_note_count: int = _count_note(hud, "foundation_oil_final_board_return")
 	var foundation_publish_thread_final_evidence_present := _has_evidence(hud, "foundation_publish_thread_final")
+	var foundation_choice_lock_serve_note_count: int = _count_note(hud, "foundation_choice_lock_serve")
+	var foundation_choice_lock_destroy_note_count: int = _count_note(hud, "foundation_choice_lock_destroy")
+	var foundation_choice_lock_publish_note_count: int = _count_note(hud, "foundation_choice_lock_publish")
+	var foundation_choice_lock_summary_note_count: int = _count_note(hud, "foundation_choice_lock_understood")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1245,14 +1278,18 @@ func _run() -> void:
 	foundation_pen_offer.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_pen_offer") == foundation_pen_note_count, "Repeated writing stand inspection does not duplicate pen-offer note")
+	_assert(_count_note(hud, "foundation_choice_lock_serve") == foundation_choice_lock_serve_note_count, "Repeated writing stand lock test does not duplicate serve-lock note")
 	foundation_oil_offer.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_oil_offer") == foundation_oil_note_count, "Repeated oil can inspection does not duplicate destruction-offer note")
 	_assert(_count_note(hud, "foundation_oil_final_witness") == foundation_oil_final_witness_note_count, "Repeated oil can final witness does not duplicate third-proof note")
+	_assert(_count_note(hud, "foundation_choice_lock_destroy") == foundation_choice_lock_destroy_note_count, "Repeated oil lock test does not duplicate destroy-lock note")
 	foundation_publish_offer.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_publish_offer") == foundation_publish_note_count, "Repeated proof bundle inspection does not duplicate publish-offer note")
 	_assert(_count_note(hud, "foundation_publish_bundle_witness") == foundation_publish_bundle_witness_note_count, "Repeated proof bundle witness does not duplicate second-proof note")
+	_assert(_count_note(hud, "foundation_choice_lock_publish") == foundation_choice_lock_publish_note_count, "Repeated proof bundle lock test does not duplicate publish-lock note")
+	_assert(_count_note(hud, "foundation_choice_lock_understood") == foundation_choice_lock_summary_note_count, "Repeated locked choice tests do not duplicate summary note")
 	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
 	foundation_testament_page.interact(player)
 	await process_frame
