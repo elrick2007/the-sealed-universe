@@ -40,6 +40,8 @@ func interact(player: Node) -> void:
 		return
 
 	if state_meta != "" and bool(root.get_meta(state_meta, false)):
+		if _try_mark_publish_bundle_witness(player):
+			return
 		if player.has_method("show_message"):
 			player.show_message(repeat_message if repeat_message != "" else message, 6.0)
 		return
@@ -62,6 +64,42 @@ func interact(player: Node) -> void:
 
 	if counts_toward_foundation_offers:
 		_check_foundation_offers(player)
+
+func _try_mark_publish_bundle_witness(player: Node) -> bool:
+	if state_meta != "foundation_publish_offer_seen":
+		return false
+	var root := get_tree().root
+	if not bool(root.get_meta("foundation_testament_returned_to_board", false)):
+		return false
+	if bool(root.get_meta("foundation_publish_bundle_witnessed", false)):
+		return false
+	root.set_meta("foundation_publish_bundle_witnessed", true)
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective(
+			"return_publish_bundle_to_evidence_board",
+			"Return the proof bundle witness to the Kitchen evidence board."
+		)
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"foundation_publish_bundle_witness",
+			"The proof bundle is no longer blank. It has begun to list the things Mara can prove without asking her to send them yet."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_publish_bundle_witness",
+			"Foundation Proof Bundle",
+			"The bundle accepts the Testament Page as its first attachment. It is becoming a witness packet, not an ending button.",
+			"Publish"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_publish_bundle_witness",
+			"The proof bundle had learned Mara's order of evidence. That was worse than being empty. Empty paper can still be innocent.",
+			"2:47 AM - Second Proof"
+		)
+	if player.has_method("show_message"):
+		player.show_message("The proof bundle is ready for the Kitchen board. It is evidence now, not a choice.", 7.0)
+	return true
 
 func _check_foundation_offers(player: Node) -> void:
 	var root := get_tree().root

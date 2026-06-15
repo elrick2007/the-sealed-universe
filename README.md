@@ -80,6 +80,7 @@ Target runtime:
 30. Enter the Foundation Chamber blockout, inspect the original book shelf, and study the pen/oil/proof affordances without choosing an ending yet.
 31. Read the original book's first testament page to seed the publish route without choosing an ending.
 32. Return the Testament Page proof to the Kitchen evidence board to start the first red-thread publish-meter payoff.
+33. Re-check the proof bundle after the Testament Page is pinned, then return it to the Kitchen evidence board as the second publish-route witness.
 
 ## Project Memory
 
@@ -110,7 +111,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build publish-meter proof chain v1: connect the next endgame proof to the Kitchen evidence board without choosing an ending.
+- Build publish-meter final proof v1: connect the third endgame proof to the Kitchen evidence board without choosing an ending.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

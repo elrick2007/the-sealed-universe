@@ -560,7 +560,12 @@ func _add_foundation_publish_route_lines(lines: Array) -> void:
 		return
 	var proof_count: int = clamp(int(get_tree().root.get_meta("foundation_publish_meter_count", 1)), 1, 3)
 	lines.append("[color=#d8b06f99]Publish route witness: %d / 3[/color]" % proof_count)
-	lines.append("[color=#d8b06f99]Red thread: the Testament Page has become proof, not memory.[/color]")
+	if proof_count >= 3:
+		lines.append("[color=#d8b06f99]Red thread: the publish chain is complete. Mara still has to choose what proof means.[/color]")
+	elif proof_count == 2:
+		lines.append("[color=#d8b06f99]Red thread: the Testament Page now leads to the proof bundle. One witness is missing.[/color]")
+	else:
+		lines.append("[color=#d8b06f99]Red thread: the Testament Page has become proof, not memory.[/color]")
 	lines.append("")
 
 func _add_incomplete_casebook_line(lines: Array) -> void:
