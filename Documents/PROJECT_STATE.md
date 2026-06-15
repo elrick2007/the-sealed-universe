@@ -254,6 +254,13 @@ Blender manifest lock: create the pre-export room list before architecture repla
 
 ## Latest Build Step
 
+### Full map label audit v1
+
+- Checked the Ground Floor, First Floor, Attic, and Cellar map labels against the room coverage matrix and purpose lock before Blender planning.
+- Added the cellar Hook Room / Hanging Closet and Foundation Annex / Do-Not-Store Alcove as locked spaces.
+- Added the attic Measured-Thrice Room / Larger-Inside Space, hatched eaves/storage voids, and contradictory ground-floor descent marks as locked spaces or structural notes.
+- Marked the full map/floor label audit complete in the pre-Blender checklist.
+
 ### Room-purpose lock pass v1
 
 - Added `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` as the pre-Blender purpose lock for remaining mapped rooms.

@@ -88,6 +88,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Roof Walk / thirteen-windows night proof still needs a route if retained for Book 1 pacing.
 - [ ] Phantom Stair one-use descent behind the cellar bricked archway still needs final routing.
 - [x] Purpose-lock Roof Walk and Phantom Stair as optional evidence / structural scare routes.
+- [x] Audit attic map labels: measured-thrice room, hatched storage voids, and both "To Ground Floor" descent marks are now captured.
 
 ## Cellar Done
 
@@ -112,6 +113,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Build Well Room / jar-list / Book 2 stinger.
 - [ ] Cellar Blender replacement: coal room, wine cellar, undercroft, cold store, well room, Caton Pillar, bricked archway, Foundation Chamber.
 - [x] Purpose-lock Wine Cellar and Cold Store before Blender replacement.
+- [x] Audit cellar map labels: Hook Room / Hanging Closet and Foundation Annex / Do-Not-Store Alcove are now captured.
 
 ## Sealed Wing Done
 
@@ -136,7 +138,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Final Book 1 ending route must be playable and tested.
 - [x] Save/load must preserve every meta flag used in the full smoke route.
 - [ ] One-ending canon must be reflected in UI language, evidence-board language, and objective text.
-- [ ] Map/floor labels must be checked against all floor-plan images.
+- [x] Map/floor labels must be checked against all floor-plan images.
 - [x] Create a room coverage matrix for every mapped room before Blender replacement.
 - [x] Create a room-purpose lock document for all mapped-but-unplanned spaces.
 - [ ] Decide whether `Books/` manuscript files belong in normal Git or Git LFS before they grow much larger.

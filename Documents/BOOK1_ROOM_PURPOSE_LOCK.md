@@ -46,14 +46,19 @@ Game 01 remains Book 1 only. The canon ending is the publish/send register route
 |---|---|---|
 | Hatch and Ladder to Roof Walk | Structural / Optional Evidence Gate | Exit point for the Roof Walk if retained. It should feel dangerous and conditional, not like a normal ladder. |
 | Roof Walk | Optional High-Value Evidence | Night proof for the thirteen-windows contradiction. Retain as a strong optional evidence route unless pacing demands it become required. |
+| Measured-Thrice Room / Larger-Inside Space | Required Evidence | The map's handwritten "measured thrice" note becomes Caton's late proof room: the tape measure and Field Book confirm the space is larger inside the measurements, feeding the house-geometry thesis without opening the void. |
 | Phantom Stair to Ground Floor | Structural Scare | One-use Act 4 descent or impossible shortcut, ideally arriving behind or near the cellar bricked archway. It is a house-geometry payoff, not a normal staircase. |
+| Ground-Floor Descent Marks | Structural Scare | The two attic "To Ground Floor" labels are contradictory descent promises. Only one becomes the Phantom Stair payoff; the other should remain an impossible map note. |
+| Attic Hatched Storage Voids / Sloped Eaves | Structural / Read-Only | Non-playable roof mass and crawl voids that frame the Long Attic, hide wire runs, and sell the low clay attic silhouette. |
 
 ## Cellar
 
 | Room or Area | Locked Role | Purpose |
 |---|---|---|
 | Wine Cellar | Atmosphere / Optional Evidence | Keeper labels, old bottles, and date residue. Use as quiet dread and timeline texture. |
+| Hook Room / Hanging Closet | Optional Evidence / Scare | The small hook-marked room between Cellar Stairs and Cold Store. Use for hook-shadow proof, stored keys, hanging silhouettes, and preservation dread. |
 | Cold Store | Optional Evidence / Scare | Hook-shadow preservation room. It should show the house filing bodies as inventory without requiring combat. |
+| Foundation Annex / Do-Not-Store Alcove | Required Evidence / Atmosphere | The octagonal warning alcove attached to the Foundation Chamber. It stages the "do not store goods here" note and can hold refused proof or final-register stillness. |
 
 ## Sealed Wing / East Wing
 

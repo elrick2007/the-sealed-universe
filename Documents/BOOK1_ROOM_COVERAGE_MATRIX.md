@@ -69,9 +69,12 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Servant's Sick Room South | Mapped duplicated room | Playable | Yes | Mirrored fever-chart contradiction and room duplication dressing. |
 | Water Tank Room | Mapped | Playable | Yes | Tank, valves, tin, not-glass marble, wet clay effects. |
 | Void / No Access Room | Mapped | Playable recorder/measurement wall | Yes | Make exterior dimensions physically impossible; no openable interior. |
+| Measured-Thrice Room / Larger-Inside Space | Mapped handwriting / hatched space | Planned, not yet individual route | Yes | Caton overlay / tape proof that the attic is larger inside the measurements. |
 | Hatch and Ladder to Roof Walk | Mapped | Not yet routed | Yes | Structural / optional evidence gate to the Roof Walk. |
 | Roof Walk | Implied by hatch | Not yet playable | Yes | Optional high-value evidence: night proof for the thirteen-windows contradiction. |
 | Phantom Stair to Ground Floor | Mapped text | Not yet final-routed | Yes | Structural scare: one-use geometry payoff near the cellar bricked archway. |
+| Ground-Floor Descent Marks | Mapped as two "To Ground Floor" labels | Planned as phantom stair logic | Yes | Treat as contradictory descent promises; only one becomes the one-use Phantom Stair payoff. |
+| Attic Hatched Storage Voids / Sloped Eaves | Mapped as hatched structural space | Not playable | Yes | Read-only roof mass/crawl voids for wire hiding and silhouette; no full room route. |
 
 ## Cellar
 
@@ -82,10 +85,12 @@ The key rule: do not start final Blender builds for rooms whose gameplay purpose
 | Caton Pillar | Mapped | Playable | Yes | Forty-seven initials, chisel mark surface, consent-mark affordance. |
 | Wine Cellar | Mapped | Not yet individual route | Yes | Atmosphere / optional evidence: keeper labels, old bottles, and date residue. |
 | Coal Room | Mapped | Playable route beat | Yes | Three-stage coal obstruction and Foundation breach. |
+| Hook Room / Hanging Closet | Mapped by hook/key symbols, unlabeled | Not yet individual route | Yes | Small scare/evidence alcove between Cellar Stairs and Cold Store. |
 | Cold Store | Mapped | Not yet playable | Yes | Optional evidence / scare: hook-shadow preservation room. |
 | Well Room | Mapped | Playable stinger | Yes | Blender replacement: well rim, windlass, recorder-lowering line, jar list, water/voice staging. |
 | Bricked Archway | Mapped | Playable | Yes | Loose brick, recorder yield, later phantom-stair relation. |
 | Foundation Chamber | Mapped | Playable blockout | Yes | Original book, proof bundle, pen/oil as rejected offers, final register/send. |
+| Foundation Annex / Do-Not-Store Alcove | Mapped as warning alcove | Planned as chamber sub-area | Yes | Warning alcove for final-register stillness/refused proof staging. |
 
 ## Sealed Wing / East Wing
 
@@ -125,15 +130,20 @@ These rooms already have clear enough gameplay purpose to become first Blender t
 - Both Servant's Sick Rooms.
 - Water Tank Room.
 - Attic Void exterior wall.
+- Measured-Thrice Room / Larger-Inside Space.
+- Attic Hatched Storage Voids / Sloped Eaves.
 - Undercroft / Caton Pillar.
 - Coal Room.
+- Hook Room / Hanging Closet.
 - Bricked Archway.
 - Foundation Chamber.
+- Foundation Annex / Do-Not-Store Alcove.
 
 ## Map Decision Notes
 
 - The current maps are enough to proceed. Do not generate a new full-floor map yet unless a route becomes impossible to explain.
 - The two ground-floor stair routes should be treated as separate circulation logic: the grand stair leads toward the Gallery Landing / family-side first floor, while the service/cellar stair ties Kitchen, undercroft, servants side, and later attic/cellar misdirection together.
+- Map audit 2026-06-15 found the remaining semi-labelled spaces: the cellar Hook Room / Hanging Closet, the Foundation Annex / Do-Not-Store Alcove, the attic Measured-Thrice Room, the attic hatched eaves/voids, and the two contradictory attic descent marks. These are now locked as room or structural-purpose entries.
 - The missing Sealed Wing map should remain a different document type: Eleanor's journal page, not Caton's survey. This preserves the visual break for Act 3.
 - Conservatory placement should be clarified before Blender. Canonically, Eleanor's murder belongs with lemon trees, while rose scent belongs to the Sealed Wing door.
 
