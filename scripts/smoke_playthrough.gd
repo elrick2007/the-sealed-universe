@@ -56,6 +56,8 @@ func _run() -> void:
 	var caton_pillar: Node = scene.get_node("Architecture/Cellar/CatonPillar")
 	var caton_chisel: Node = scene.get_node("Architecture/Cellar/CatonChisel")
 	var coal_below_caton: Node = scene.get_node("Architecture/Cellar/CoalBelowCaton")
+	var foundation_threshold: Node = scene.get_node("Architecture/Cellar/FoundationChamberThreshold")
+	var bricked_archway: Node = scene.get_node("Architecture/Cellar/BrickedArchway")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -824,6 +826,12 @@ func _run() -> void:
 	coal_below_caton.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_chamber_found", false)), "Coal below Caton waits until the pillar is marked")
+	foundation_threshold.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_chamber_threshold_inspected", false)), "Foundation threshold waits until coal is cleared")
+	bricked_archway.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("bricked_archway_loose_brick_read", false)), "Bricked archway waits until the threshold route seeds it")
 	filing_voice_shelf.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("filing_voice_source_found", false)), "Filing voice shelf waits until the Kitchen board accepts the void recording")
@@ -891,6 +899,26 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "foundation_chamber_found"), "Foundation Chamber pins coal-below evidence")
 	_assert(_has_ledger_entry(hud, "foundation_chamber_found"), "Foundation Chamber writes Living Ledger beat")
 	_assert(hud.discovered_map.has("foundation_chamber"), "Foundation Chamber is revealed on the map")
+	foundation_threshold.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_threshold_inspected", false)), "Foundation threshold inspection records true silence")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_silent_threshold", false)), "Foundation threshold sets silent threshold state")
+	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_route_seeded", false)), "Foundation threshold seeds bricked archway route")
+	_assert(_objective_complete(hud, "inspect_foundation_chamber_threshold"), "Foundation threshold completes threshold objective")
+	_assert(_has_objective(hud, "inspect_bricked_archway"), "Foundation threshold opens bricked archway objective")
+	_assert(_has_note(hud, "foundation_chamber_threshold"), "Foundation threshold adds true-silence note")
+	_assert(_has_evidence(hud, "foundation_chamber_threshold"), "Foundation threshold pins true-silence evidence")
+	_assert(_has_ledger_entry(hud, "foundation_chamber_threshold"), "Foundation threshold writes true-silence ledger beat")
+	bricked_archway.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_loose_brick_read", false)), "Bricked archway loose brick can be inspected")
+	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_permanent_wall", false)), "Bricked archway records permanent wall rule")
+	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_recorder_route_seeded", false)), "Bricked archway seeds recorder route")
+	_assert(_objective_complete(hud, "inspect_bricked_archway"), "Bricked archway completes archway objective")
+	_assert(_has_objective(hud, "record_bricked_archway"), "Bricked archway opens recorder objective")
+	_assert(_has_note(hud, "bricked_archway_loose_brick"), "Bricked archway adds loose-brick note")
+	_assert(_has_evidence(hud, "bricked_archway_loose_brick"), "Bricked archway pins loose-brick evidence")
+	_assert(_has_ledger_entry(hud, "bricked_archway_loose_brick"), "Bricked archway writes loose-brick ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -937,6 +965,8 @@ func _run() -> void:
 	var caton_chisel_note_count: int = _count_note(hud, "caton_chisel_found")
 	var caton_consent_note_count: int = _count_note(hud, "caton_pillar_consent_mark")
 	var foundation_chamber_note_count: int = _count_note(hud, "foundation_chamber_found")
+	var foundation_threshold_note_count: int = _count_note(hud, "foundation_chamber_threshold")
+	var bricked_archway_note_count: int = _count_note(hud, "bricked_archway_loose_brick")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1041,6 +1071,12 @@ func _run() -> void:
 	coal_below_caton.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_chamber_found") == foundation_chamber_note_count, "Repeated coal-below inspection does not duplicate Foundation Chamber note")
+	foundation_threshold.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_chamber_threshold") == foundation_threshold_note_count, "Repeated Foundation threshold inspection does not duplicate true-silence note")
+	bricked_archway.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "bricked_archway_loose_brick") == bricked_archway_note_count, "Repeated bricked archway inspection does not duplicate loose-brick note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

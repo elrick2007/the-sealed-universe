@@ -88,6 +88,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Caton Pillar / cellar route seed v1, unlocking the Cellar map tab and chisel thread after the filing voice points below.
 - Chisel / consent-mark route v1, turning Caton's chisel into a witness-mark payoff and opening the Foundation Chamber lead.
 - Foundation Chamber / coal-below route v1, clearing the coal below Caton's witness mark and opening the chamber threshold.
+- Foundation Chamber threshold / Bricked Archway route v1, making the chamber's true silence a clue and confirming the archway as a permanent wall.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -134,6 +135,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 40. Caton Pillar / cellar route seed v1: after the filing shelf points below, Mara can inspect the cellar pillar, complete the Caton Pillar objective, unlock the Cellar map tab, pin forty-seven initials evidence, write the Stone Ledger beat, and open the chisel objective.
 41. Chisel / consent-mark route v1: once the Caton Pillar asks for a tool, Mara can recover Caton's chisel, add it to inventory, return to the pillar, carve a witness mark instead of her name, pin consent-mark evidence, write `2:47 AM - Consent in Stone`, and open the Foundation Chamber objective.
 42. Foundation Chamber / coal-below route v1: after the pillar is marked, Mara can clear the coal below Caton, reveal the Foundation Chamber threshold, pin cellar evidence, write `2:47 AM - Behind the Coal`, and open the threshold inspection objective.
+43. Foundation Chamber threshold / Bricked Archway route v1: after clearing coal, Mara can inspect the silent Foundation threshold, seed the bricked archway route, pull one loose brick from the blocked arch, confirm the permanent-wall rule, pin evidence, write `2:47 AM - Filed Under Later`, and open the bricked-archway recorder objective.
 
 ## Important Documents
 
@@ -169,7 +171,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Foundation Chamber / coal-below route v1:
+Last known validation after Foundation Chamber threshold / Bricked Archway route v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -218,4 +220,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build the Foundation Chamber threshold inspection and bricked archway route.
+Build the bricked archway recorder yield and the first Foundation Chamber interior choice seed.
