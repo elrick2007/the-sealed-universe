@@ -255,9 +255,18 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Entrance Hall / West Wing Hall Blender source v1: create the first claymation source file at `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`, export `gf_entrance_hall.glb` and `gf_west_wing_hall.glb`, then import wrappers side-by-side in Godot before replacing the blockout.
+Godot wrapper import test v1: create wrapper scenes for `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb` under `assets/imported_scenes/rooms/ground`, instance them side-by-side with the current blockout, and verify route prompts, marker names, scale, visibility, and collision before replacing the playable rooms.
 
 ## Latest Build Step
+
+### Entrance Hall / West Wing Hall Blender source v1
+
+- Added `assets/blender_source/rooms/ground/build_entrance_westwing.py`.
+- Generated `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`.
+- Exported `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb`.
+- First pass includes enclosed floors, walls, ceilings, clay material variants, runners, doorway frames, starter props, breathing-wall tags, route markers, a measurement marker, and simple collision helper meshes.
+- UPBGE printed a Logic Nodes registration warning during headless startup, but the `.blend` save and both GLB exports completed successfully.
+- Next step is a Godot wrapper import test before the working blockout is replaced.
 
 ### Godot GLB import convention v1 and first replacement pass started
 

@@ -8,6 +8,7 @@ This is the first production-style claymation architecture pass. It replaces onl
 
 ## Source And Exports
 
+- Build script: `assets/blender_source/rooms/ground/build_entrance_westwing.py`.
 - Source file: `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`.
 - Exports:
   - `assets/blender_exports/rooms/ground/gf_entrance_hall.glb`
@@ -58,11 +59,18 @@ West Wing Hall:
 
 ## First Blender Build Checklist
 
-- [ ] Block accurate floor rectangles against the ground-floor map.
-- [ ] Add wall thickness and ceilings.
-- [ ] Place door frames and gameplay marker empties.
-- [ ] Assign clay material variants.
-- [ ] Add simple collision meshes.
-- [ ] Export test GLBs.
+- [x] Block accurate floor rectangles against the ground-floor map.
+- [x] Add wall thickness and ceilings.
+- [x] Place door frames and gameplay marker empties.
+- [x] Assign clay material variants.
+- [x] Add simple collision meshes.
+- [x] Export test GLBs.
 - [ ] Create Godot wrapper scenes.
 - [ ] Run side-by-side route test before replacing the blockout.
+
+## Generated v1 Notes
+
+- Generated with UPBGE/Blender 5.0.1 in headless mode.
+- Includes enclosed floors, walls, ceilings, simple trim, rug runners, doorway frames, starter props, breathing-wall markers, route markers, and simple collision helper meshes.
+- Godot remains the owner of dynamic lighting, gameplay logic, and final collision verification.
+- UPBGE printed a Logic Nodes registration warning during headless startup, but the `.blend` save and both GLB exports completed successfully.
