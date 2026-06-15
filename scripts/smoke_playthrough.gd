@@ -1087,6 +1087,16 @@ func _run() -> void:
 	_assert(_has_ledger_entry(hud, "foundation_choice_lock_understood"), "Choice-lock summary writes Living Ledger beat")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Locked choices still do not unlock endings")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Locked choices do not select an ending")
+	foundation_testament_page.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_final_authority_seeded", false)), "Re-reading the Testament Page after locked choices seeds final-authority state")
+	_assert(_objective_complete(hud, "find_final_authority_before_ending"), "Final-authority seed completes missing-authority objective")
+	_assert(_has_objective(hud, "find_occupant_authority_record"), "Final-authority seed opens occupant-authority record objective")
+	_assert(_has_note(hud, "foundation_final_authority_seed"), "Final-authority seed adds authority-clause note")
+	_assert(_has_evidence(hud, "foundation_final_authority_seed"), "Final-authority seed pins authority-clause evidence")
+	_assert(_has_ledger_entry(hud, "foundation_final_authority_seed"), "Final-authority seed writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final-authority seed still does not unlock endings")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final-authority seed does not select an ending")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -1156,6 +1166,7 @@ func _run() -> void:
 	var foundation_choice_lock_destroy_note_count: int = _count_note(hud, "foundation_choice_lock_destroy")
 	var foundation_choice_lock_publish_note_count: int = _count_note(hud, "foundation_choice_lock_publish")
 	var foundation_choice_lock_summary_note_count: int = _count_note(hud, "foundation_choice_lock_understood")
+	var foundation_final_authority_seed_note_count: int = _count_note(hud, "foundation_final_authority_seed")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1295,6 +1306,8 @@ func _run() -> void:
 	await process_frame
 	_assert(_count_note(hud, "foundation_testament_page") == foundation_testament_note_count, "Repeated testament page reading does not duplicate note")
 	_assert(_count_note(hud, "foundation_publish_meter_seed") == foundation_publish_meter_note_count, "Repeated testament page reading does not duplicate publish-meter seed note")
+	_assert(_count_note(hud, "foundation_final_authority_seed") == foundation_final_authority_seed_note_count, "Repeated authority-clause reading does not duplicate final-authority note")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Repeated authority-clause reading still does not unlock endings")
 	evidence_board.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_testament_board_return") == foundation_board_return_note_count, "Repeated Testament board return does not duplicate note")

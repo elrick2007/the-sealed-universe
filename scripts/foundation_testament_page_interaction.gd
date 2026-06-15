@@ -3,9 +3,13 @@ extends StaticBody3D
 const REQUIRED_META := "foundation_chamber_affordances_seen"
 const READ_META := "foundation_testament_page_read"
 const PUBLISH_SEED_META := "foundation_publish_meter_seeded"
+const CHOICE_LOCK_META := "foundation_choice_lock_understood"
+const AUTHORITY_SEED_META := "foundation_final_authority_seeded"
 
 
 func get_prompt(_player: Node) -> String:
+	if bool(get_tree().root.get_meta(CHOICE_LOCK_META, false)) and not bool(get_tree().root.get_meta(AUTHORITY_SEED_META, false)):
+		return "E - Re-read for authority"
 	if bool(get_tree().root.get_meta(READ_META, false)):
 		return "E - Re-read testament page"
 	return "E - Read testament page"
@@ -17,6 +21,8 @@ func interact(player: Node) -> void:
 		return
 
 	if bool(get_tree().root.get_meta(READ_META, false)):
+		if _try_seed_final_authority(player):
+			return
 		player.show_message("The testament page keeps the same sentence. That feels new.")
 		return
 
@@ -59,3 +65,40 @@ func interact(player: Node) -> void:
 			"2:47 AM - Testament Page"
 		)
 	player.show_message("The first readable page names the offers as if someone has already chosen them.")
+
+
+func _try_seed_final_authority(player: Node) -> bool:
+	if not bool(get_tree().root.get_meta(CHOICE_LOCK_META, false)):
+		return false
+	if bool(get_tree().root.get_meta(AUTHORITY_SEED_META, false)):
+		return false
+
+	get_tree().root.set_meta(AUTHORITY_SEED_META, true)
+
+	if player.has_method("complete_journal_objective"):
+		player.complete_journal_objective("find_final_authority_before_ending")
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective(
+			"find_occupant_authority_record",
+			"Find the record that names who may answer for Ashford Manor."
+		)
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"foundation_final_authority_seed",
+			"The first book adds a margin line after the choices refuse Mara: proof is not authority. The right to answer belongs to the current occupant, witnessed in the house's own hand."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_final_authority_seed",
+			"Foundation Testament: Authority Clause",
+			"A new margin clause appears only after Mara tests all three endings. Proof can witness the house, but only the recorded occupant can choose its final state.",
+			"Foundation"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_final_authority_seed",
+			"The page did not give Mara permission. It gave her a problem with her name already close to the answer.",
+			"2:47 AM - Authority Clause"
+		)
+	player.show_message("A new margin line appears: proof is not authority. Find the record that names who may answer.")
+	return true

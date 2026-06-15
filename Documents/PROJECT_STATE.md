@@ -95,6 +95,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Publish-meter proof chain v1, turning the proof bundle into the second Kitchen-board witness after the Testament Page is pinned.
 - Publish-meter final proof v1, turning the refused oil can into the third Kitchen-board witness while keeping the endgame choices inactive.
 - Publish choice lock v1, making the pen, oil, and proof bundle answer as locked ending affordances after the 3/3 proof chain, opening the missing-authority objective without selecting an ending.
+- Final-authority seed v1, making the original Testament Page reveal that proof is not authority after all three ending choices refuse Mara, opening the occupant-authority record lead while keeping endings inactive.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -149,6 +150,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 48. Publish-meter proof chain v1: after the Testament Page is pinned, re-checking the Foundation Chamber proof bundle turns it into evidence rather than an ending button. Returning that witness to the Kitchen board pins the proof bundle, reveals the second red thread, advances the meter to `Publish route witness: 2 / 3`, and keeps the final send/publish choice inactive.
 49. Publish-meter final proof v1: after the proof bundle is pinned, re-checking the oil can turns refusal into evidence instead of the burn ending. Returning that witness to the Kitchen board pins the oil refusal, reveals the third red thread, advances the meter to `Publish route witness: 3 / 3`, completes the publish witness chain objective, and still does not activate any ending choice.
 50. Publish choice lock v1: after the publish proof chain reaches `3 / 3`, re-testing the pen, oil, and proof bundle records each as a deliberately locked ending affordance. Once all three refuse Mara, the journal opens the final-authority objective while the ending-choice state remains inactive.
+51. Final-authority seed v1: re-reading the original Testament Page after all three locked ending affordances refuse Mara reveals the authority clause, completes the missing-authority objective, pins the clause as Foundation evidence, writes `2:47 AM - Authority Clause`, and opens the objective to find the record naming who may answer for Ashford Manor.
 
 ## Important Documents
 
@@ -184,7 +186,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after publish choice lock v1:
+Last known validation after final-authority seed v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -233,4 +235,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build publish choice lock v1: keep pen/oil/send visibly present but inactive until the full ending choice is deliberately authored.
+Build occupant authority record v1: turn the authority clause into a later proof that names who may answer for Ashford Manor, without unlocking or selecting any final ending yet.
