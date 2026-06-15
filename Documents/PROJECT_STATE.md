@@ -89,6 +89,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Chisel / consent-mark route v1, turning Caton's chisel into a witness-mark payoff and opening the Foundation Chamber lead.
 - Foundation Chamber / coal-below route v1, clearing the coal below Caton's witness mark and opening the chamber threshold.
 - Foundation Chamber threshold / Bricked Archway route v1, making the chamber's true silence a clue and confirming the archway as a permanent wall.
+- Foundation Chamber interior blockout with original book shelf and pen/oil/proof affordance seed.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -137,6 +138,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 42. Foundation Chamber / coal-below route v1: after the pillar is marked, Mara can clear the coal below Caton, reveal the Foundation Chamber threshold, pin cellar evidence, write `2:47 AM - Behind the Coal`, and open the threshold inspection objective.
 43. Foundation Chamber threshold / Bricked Archway route v1: after clearing coal, Mara can inspect the silent Foundation threshold, seed the bricked archway route, pull one loose brick from the blocked arch, confirm the permanent-wall rule, pin evidence, write `2:47 AM - Filed Under Later`, and open the bricked-archway recorder objective.
 44. Bricked Archway recorder / Foundation Chamber choice seed v1: recording the blocked archway now returns the bricklaying playback, pins the archway recording, writes `2:47 AM - Course By Course`, and re-checking the silent threshold seeds the chamber's future pen/oil/proof offers without opening the endgame room.
+45. Foundation Chamber interior blockout v1: after the three offers are seeded, Mara can inspect the original book shelf and study the writing stand, oil can, and proof bundle, completing the chamber-affordance objective and opening the testament-page lead.
 
 ## Important Documents
 
@@ -172,7 +174,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Foundation Chamber threshold / Bricked Archway route v1:
+Last known validation after Foundation Chamber interior blockout v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -221,4 +223,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build Foundation Chamber interior blockout v1: original book shelf, writing stand, oil can, and proof/send placeholder.
+Build Foundation Chamber first-read / testament page v1: original book/keeper testament page and publish-meter seed.

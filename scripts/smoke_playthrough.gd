@@ -58,6 +58,10 @@ func _run() -> void:
 	var coal_below_caton: Node = scene.get_node("Architecture/Cellar/CoalBelowCaton")
 	var foundation_threshold: Node = scene.get_node("Architecture/Cellar/FoundationChamberThreshold")
 	var bricked_archway: Node = scene.get_node("Architecture/Cellar/BrickedArchway")
+	var foundation_book: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf")
+	var foundation_pen_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/WritingStandOffer")
+	var foundation_oil_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OilCanOffer")
+	var foundation_publish_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -919,6 +923,9 @@ func _run() -> void:
 	_assert(_has_note(hud, "bricked_archway_loose_brick"), "Bricked archway adds loose-brick note")
 	_assert(_has_evidence(hud, "bricked_archway_loose_brick"), "Bricked archway pins loose-brick evidence")
 	_assert(_has_ledger_entry(hud, "bricked_archway_loose_brick"), "Bricked archway writes loose-brick ledger beat")
+	foundation_book.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_original_book_found", false)), "Original book waits until chamber choices are read")
 	director.use_recorder(bricked_archway.global_position)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("bricked_archway_recorded", false)), "Bricked archway recorder yield records permanent wall")
@@ -936,6 +943,40 @@ func _run() -> void:
 	_assert(_has_note(hud, "foundation_chamber_choices_seeded"), "Foundation threshold adds three-offers note")
 	_assert(_has_evidence(hud, "foundation_chamber_choices"), "Foundation threshold pins three-offers evidence")
 	_assert(_has_ledger_entry(hud, "foundation_chamber_choices"), "Foundation threshold writes three-offers ledger beat")
+	foundation_book.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_original_book_found", false)), "Original book shelf can be inspected after the three offers")
+	_assert(_objective_complete(hud, "find_original_book"), "Original book inspection completes original-book objective")
+	_assert(_has_objective(hud, "understand_foundation_offers"), "Original book opens chamber-affordance objective")
+	_assert(_has_note(hud, "foundation_original_book"), "Original book adds shelf note")
+	_assert(_has_evidence(hud, "foundation_original_book"), "Original book pins first-ledger evidence")
+	_assert(_has_ledger_entry(hud, "foundation_original_book"), "Original book writes first-ledger beat")
+	foundation_pen_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_pen_offer_seen", false)), "Writing stand offer can be inspected")
+	_assert(not _objective_complete(hud, "understand_foundation_offers"), "Pen alone does not complete chamber-affordance objective")
+	_assert(_has_note(hud, "foundation_pen_offer"), "Writing stand adds pen-offer note")
+	_assert(_has_evidence(hud, "foundation_pen_offer"), "Writing stand pins pen-offer evidence")
+	_assert(_has_ledger_entry(hud, "foundation_pen_offer"), "Writing stand writes pen-offer beat")
+	foundation_oil_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_oil_offer_seen", false)), "Oil can offer can be inspected")
+	_assert(not _objective_complete(hud, "understand_foundation_offers"), "Pen and oil do not complete chamber-affordance objective")
+	_assert(_has_note(hud, "foundation_oil_offer"), "Oil can adds destruction-offer note")
+	_assert(_has_evidence(hud, "foundation_oil_offer"), "Oil can pins destruction-offer evidence")
+	_assert(_has_ledger_entry(hud, "foundation_oil_offer"), "Oil can writes destruction-offer beat")
+	foundation_publish_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_publish_offer_seen", false)), "Proof bundle offer can be inspected")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_affordances_seen", false)), "Seeing all three offers completes chamber affordances")
+	_assert(_objective_complete(hud, "understand_foundation_offers"), "All three offers complete chamber-affordance objective")
+	_assert(_has_objective(hud, "read_foundation_testament_pages"), "All three offers open testament-page objective")
+	_assert(_has_note(hud, "foundation_publish_offer"), "Proof bundle adds publish-offer note")
+	_assert(_has_evidence(hud, "foundation_publish_offer"), "Proof bundle pins publish-offer evidence")
+	_assert(_has_ledger_entry(hud, "foundation_publish_offer"), "Proof bundle writes publish-offer beat")
+	_assert(_has_note(hud, "foundation_chamber_affordances_seen"), "All three offers add chamber-affordance summary note")
+	_assert(_has_evidence(hud, "foundation_chamber_affordances_seen"), "All three offers pin chamber-affordance evidence")
+	_assert(_has_ledger_entry(hud, "foundation_chamber_affordances_seen"), "All three offers write chamber-affordance ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -986,6 +1027,11 @@ func _run() -> void:
 	var bricked_archway_note_count: int = _count_note(hud, "bricked_archway_loose_brick")
 	var bricked_archway_recording_note_count: int = _count_note(hud, "bricked_archway_recording")
 	var foundation_choices_note_count: int = _count_note(hud, "foundation_chamber_choices_seeded")
+	var foundation_book_note_count: int = _count_note(hud, "foundation_original_book")
+	var foundation_pen_note_count: int = _count_note(hud, "foundation_pen_offer")
+	var foundation_oil_note_count: int = _count_note(hud, "foundation_oil_offer")
+	var foundation_publish_note_count: int = _count_note(hud, "foundation_publish_offer")
+	var foundation_affordances_note_count: int = _count_note(hud, "foundation_chamber_affordances_seen")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1102,6 +1148,19 @@ func _run() -> void:
 	foundation_threshold.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_chamber_choices_seeded") == foundation_choices_note_count, "Repeated Foundation choice read does not duplicate three-offers note")
+	foundation_book.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_original_book") == foundation_book_note_count, "Repeated original book inspection does not duplicate shelf note")
+	foundation_pen_offer.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_pen_offer") == foundation_pen_note_count, "Repeated writing stand inspection does not duplicate pen-offer note")
+	foundation_oil_offer.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_oil_offer") == foundation_oil_note_count, "Repeated oil can inspection does not duplicate destruction-offer note")
+	foundation_publish_offer.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_publish_offer") == foundation_publish_note_count, "Repeated proof bundle inspection does not duplicate publish-offer note")
+	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

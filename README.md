@@ -77,6 +77,7 @@ Target runtime:
 27. Clear the coal below Caton's new mark to reveal the Foundation Chamber threshold.
 28. Inspect the Foundation Chamber threshold, then test the bricked archway's loose brick and learn the wall is permanent.
 29. Record the bricked archway and re-check the Foundation threshold to seed the chamber's three offers: pen, oil, proof.
+30. Enter the Foundation Chamber blockout, inspect the original book shelf, and study the pen/oil/proof affordances without choosing an ending yet.
 
 ## Project Memory
 
@@ -107,7 +108,7 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build Foundation Chamber interior blockout v1: original book shelf, writing stand, oil can, and proof/send placeholder.
+- Build Foundation Chamber first-read / testament page v1.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=82 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -54,6 +54,7 @@
 [ext_resource type="Script" path="res://scripts/cellar_coal_interaction.gd" id="52"]
 [ext_resource type="Script" path="res://scripts/foundation_chamber_threshold_interaction.gd" id="53"]
 [ext_resource type="Script" path="res://scripts/bricked_archway_interaction.gd" id="54"]
+[ext_resource type="Script" path="res://scripts/foundation_chamber_offer_interaction.gd" id="55"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1976,6 +1977,174 @@ surface_material_override/0 = SubResource("Mat_red")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/BrickedArchway"]
 shape = SubResource("BoxShape_door")
+
+[node name="FoundationChamberInterior" type="Node3D" parent="Architecture/Cellar"]
+
+[node name="ChamberFloor" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.62, 0, 0, 0, 0.14, 0, 0, 0, 0.34, 14.8, -2.42, -8.55)
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="ChamberBackWall" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.62, 0, 0, 0, 0.72, 0, 0, 0, 0.11, 14.8, -1.45, -10.75)
+mesh = SubResource("BoxMesh_wall_short")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="ChamberLeftWall" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.11, 0, 0, 0, 0.72, 0, 0, 0, 0.34, 11.95, -1.45, -8.55)
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="ChamberRightWall" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.11, 0, 0, 0, 0.72, 0, 0, 0, 0.34, 17.65, -1.45, -8.55)
+mesh = SubResource("BoxMesh_wall_long")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="ChamberCeiling" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.62, 0, 0, 0, 0.12, 0, 0, 0, 0.34, 14.8, 0.05, -8.55)
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="OriginalBookShelf" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(1.35, 0, 0, 0, 0.82, 0, 0, 0, 0.42, 14.8, -1.58, -10.18)
+script = ExtResource("55")
+state_meta = "foundation_original_book_found"
+prompt = "E - Inspect original book"
+repeat_prompt = "E - Re-check original book"
+gate_message = "The room stays unmade until the threshold names its three offers."
+repeat_message = "The original book waits in the shelf like a wound with pages."
+message = "The original book is not shelved. It is grown into the stone."
+complete_objective_id = "find_original_book"
+next_objective_id = "understand_foundation_offers"
+next_objective_text = "Study the chamber's three offers: pen, oil, proof."
+note_id = "foundation_original_book"
+note_text = "The original book is fused into a stone shelf. It looks less placed than grown."
+evidence_id = "foundation_original_book"
+evidence_title = "Foundation Chamber: Original Book"
+evidence_text = "The first ledger is bound into stone. It is not a prop to carry; it is the room's oldest surface."
+ledger_id = "foundation_original_book"
+ledger_text = "Mara found the original book and understood, with sudden dislike, that it had never needed hands to turn its pages."
+ledger_timestamp = "2:47 AM - The First Ledger"
+
+[node name="StoneShelf" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="OriginalBook" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf"]
+transform = Transform3D(0.72, 0, 0, 0, 0.18, 0, 0, 0, 0.55, 0, 0.62, 0.05)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="PageEdge" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf"]
+transform = Transform3D(0.62, 0, 0, 0, 0.04, 0, 0, 0, 0.48, 0, 0.78, 0.1)
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf"]
+shape = SubResource("BoxShape_prop")
+
+[node name="WritingStandOffer" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.88, 0, 0, 0, 0.46, 0, 0, 0, 0.62, 13.25, -2, -8.6)
+script = ExtResource("55")
+state_meta = "foundation_pen_offer_seen"
+prompt = "E - Inspect writing stand"
+repeat_prompt = "E - Re-check writing stand"
+gate_message = "The writing stand is only a silhouette until the chamber makes its offer."
+repeat_message = "The pen is good. That makes it feel worse."
+message = "The writing stand offers a clean pen and no explanation."
+note_id = "foundation_pen_offer"
+note_text = "A good pen waits on the writing stand beside a dry inkwell. The chamber makes service look tidy."
+evidence_id = "foundation_pen_offer"
+evidence_title = "Foundation Offer: Pen"
+evidence_text = "A clean pen and dry inkwell suggest the choice to serve by writing, but the ending is not active yet."
+ledger_id = "foundation_pen_offer"
+ledger_text = "There was a pen ready for Mara, neat and usable. The room had mistaken preparation for consent."
+ledger_timestamp = "2:47 AM - The Pen"
+counts_toward_foundation_offers = true
+
+[node name="Stand" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/WritingStandOffer"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_wood")
+
+[node name="Pen" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/WritingStandOffer"]
+transform = Transform3D(0.72, 0, 0, 0, 0.06, 0, 0, 0, 0.08, 0, 0.66, 0.02)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="Inkwell" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/WritingStandOffer"]
+transform = Transform3D(0.18, 0, 0, 0, 0.16, 0, 0, 0, 0.18, -0.32, 0.66, 0)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/WritingStandOffer"]
+shape = SubResource("BoxShape_prop")
+
+[node name="OilCanOffer" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.58, 0, 0, 0, 0.72, 0, 0, 0, 0.46, 16.28, -1.9, -8.78)
+script = ExtResource("55")
+state_meta = "foundation_oil_offer_seen"
+prompt = "E - Inspect oil can"
+repeat_prompt = "E - Re-check oil can"
+gate_message = "The oil can stays out of reach until the chamber's three offers are named."
+repeat_message = "The oil smells ready to catch."
+message = "The oil can is full. The matches beside it are dry."
+note_id = "foundation_oil_offer"
+note_text = "A coal-oil can and dry matches wait together. Destruction has been arranged like housekeeping."
+evidence_id = "foundation_oil_offer"
+evidence_title = "Foundation Offer: Oil"
+evidence_text = "The coal-oil can and matches suggest the choice to destroy the original book, but the ending is not active yet."
+ledger_id = "foundation_oil_offer"
+ledger_text = "The oil had been kept full. Even failure had been restocked before Mara arrived."
+ledger_timestamp = "2:47 AM - The Oil"
+counts_toward_foundation_offers = true
+
+[node name="Can" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OilCanOffer"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="Matchbox" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OilCanOffer"]
+transform = Transform3D(0.48, 0, 0, 0, 0.12, 0, 0, 0, 0.32, 0.54, 0.46, 0)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/OilCanOffer"]
+shape = SubResource("BoxShape_prop")
+
+[node name="ProofSendPlaceholder" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.95, 0, 0, 0, 0.32, 0, 0, 0, 0.62, 14.8, -2.08, -8.05)
+script = ExtResource("55")
+state_meta = "foundation_publish_offer_seen"
+prompt = "E - Inspect proof bundle"
+repeat_prompt = "E - Re-check proof bundle"
+gate_message = "The proof bundle stays blank until the chamber's offers are understood."
+repeat_message = "The proof bundle waits for a future send key."
+message = "The proof bundle has a place for every record Mara has pinned upstairs."
+note_id = "foundation_publish_offer"
+note_text = "A proof bundle waits on a small stand. It is not a button yet, but it knows what a final witness would require."
+evidence_id = "foundation_publish_offer"
+evidence_title = "Foundation Offer: Proof"
+evidence_text = "The proof bundle marks the future publish route: evidence first, send later. No ending choice is active in this slice."
+ledger_id = "foundation_publish_offer"
+ledger_text = "The third offer was not an object so much as a question: who would believe Mara if she sent the house to them whole?"
+ledger_timestamp = "2:47 AM - The Proof"
+counts_toward_foundation_offers = true
+
+[node name="Bundle" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="ThreadLine" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
+transform = Transform3D(0.92, 0, 0, 0, 0.06, 0, 0, 0, 0.04, 0, 0.38, 0.58)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="SendPlate" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
+transform = Transform3D(0.38, 0, 0, 0, 0.08, 0, 0, 0, 0.24, 0.48, 0.39, -0.08)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
+shape = SubResource("BoxShape_prop")
 
 [node name="Props" type="Node3D" parent="."]
 
