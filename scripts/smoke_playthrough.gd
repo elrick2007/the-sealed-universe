@@ -59,6 +59,7 @@ func _run() -> void:
 	var foundation_threshold: Node = scene.get_node("Architecture/Cellar/FoundationChamberThreshold")
 	var bricked_archway: Node = scene.get_node("Architecture/Cellar/BrickedArchway")
 	var foundation_book: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf")
+	var foundation_testament_page: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OriginalBookTestamentPage")
 	var foundation_pen_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/WritingStandOffer")
 	var foundation_oil_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/OilCanOffer")
 	var foundation_publish_offer: Node = scene.get_node("Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder")
@@ -951,6 +952,9 @@ func _run() -> void:
 	_assert(_has_note(hud, "foundation_original_book"), "Original book adds shelf note")
 	_assert(_has_evidence(hud, "foundation_original_book"), "Original book pins first-ledger evidence")
 	_assert(_has_ledger_entry(hud, "foundation_original_book"), "Original book writes first-ledger beat")
+	foundation_testament_page.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_testament_page_read", false)), "Foundation testament page waits until all three offers are seen")
 	foundation_pen_offer.interact(player)
 	await process_frame
 	_assert(bool(scene.get_tree().root.get_meta("foundation_pen_offer_seen", false)), "Writing stand offer can be inspected")
@@ -977,6 +981,17 @@ func _run() -> void:
 	_assert(_has_note(hud, "foundation_chamber_affordances_seen"), "All three offers add chamber-affordance summary note")
 	_assert(_has_evidence(hud, "foundation_chamber_affordances_seen"), "All three offers pin chamber-affordance evidence")
 	_assert(_has_ledger_entry(hud, "foundation_chamber_affordances_seen"), "All three offers write chamber-affordance ledger beat")
+	foundation_testament_page.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_testament_page_read", false)), "Foundation testament page can be read after all three offers")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_publish_meter_seeded", false)), "Foundation testament page seeds publish meter state")
+	_assert(_objective_complete(hud, "read_foundation_testament_pages"), "Foundation testament page completes testament objective")
+	_assert(_has_objective(hud, "return_testament_to_evidence_board"), "Foundation testament page opens evidence-board return objective")
+	_assert(_has_note(hud, "foundation_testament_page"), "Foundation testament page adds note")
+	_assert(_has_note(hud, "foundation_publish_meter_seed"), "Foundation testament page adds publish-meter seed note")
+	_assert(_has_evidence(hud, "foundation_testament_page"), "Foundation testament page pins evidence")
+	_assert(_has_evidence(hud, "foundation_publish_meter_seed"), "Foundation testament page pins publish-meter seed evidence")
+	_assert(_has_ledger_entry(hud, "foundation_testament_page"), "Foundation testament page writes Living Ledger beat")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -1032,6 +1047,8 @@ func _run() -> void:
 	var foundation_oil_note_count: int = _count_note(hud, "foundation_oil_offer")
 	var foundation_publish_note_count: int = _count_note(hud, "foundation_publish_offer")
 	var foundation_affordances_note_count: int = _count_note(hud, "foundation_chamber_affordances_seen")
+	var foundation_testament_note_count: int = _count_note(hud, "foundation_testament_page")
+	var foundation_publish_meter_note_count: int = _count_note(hud, "foundation_publish_meter_seed")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1161,6 +1178,10 @@ func _run() -> void:
 	await process_frame
 	_assert(_count_note(hud, "foundation_publish_offer") == foundation_publish_note_count, "Repeated proof bundle inspection does not duplicate publish-offer note")
 	_assert(_count_note(hud, "foundation_chamber_affordances_seen") == foundation_affordances_note_count, "Repeated chamber offers do not duplicate affordance summary note")
+	foundation_testament_page.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_testament_page") == foundation_testament_note_count, "Repeated testament page reading does not duplicate note")
+	_assert(_count_note(hud, "foundation_publish_meter_seed") == foundation_publish_meter_note_count, "Repeated testament page reading does not duplicate publish-meter seed note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

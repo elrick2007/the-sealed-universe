@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=83 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -55,6 +55,7 @@
 [ext_resource type="Script" path="res://scripts/foundation_chamber_threshold_interaction.gd" id="53"]
 [ext_resource type="Script" path="res://scripts/bricked_archway_interaction.gd" id="54"]
 [ext_resource type="Script" path="res://scripts/foundation_chamber_offer_interaction.gd" id="55"]
+[ext_resource type="Script" path="res://scripts/foundation_testament_page_interaction.gd" id="56"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -2041,6 +2042,27 @@ mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_paper")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookShelf"]
+shape = SubResource("BoxShape_prop")
+
+[node name="OriginalBookTestamentPage" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
+transform = Transform3D(0.75, 0, 0, 0, 0.14, 0, 0, 0, 0.48, 14.8, -1.68, -9.65)
+script = ExtResource("56")
+
+[node name="PageSlab" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookTestamentPage"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_paper")
+
+[node name="InkLine" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookTestamentPage"]
+transform = Transform3D(0.62, 0, 0, 0, 0.035, 0, 0, 0, 0.055, 0, 0.58, -0.08)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="RedThreadSeed" type="MeshInstance3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookTestamentPage"]
+transform = Transform3D(0.32, 0, 0, 0, 0.025, 0, 0, 0, 0.035, 0.18, 0.6, 0.12)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/OriginalBookTestamentPage"]
 shape = SubResource("BoxShape_prop")
 
 [node name="WritingStandOffer" type="StaticBody3D" parent="Architecture/Cellar/FoundationChamberInterior"]
