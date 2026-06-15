@@ -259,6 +259,15 @@ Godot wrapper import test v1: create wrapper scenes for `assets/blender_exports/
 
 ## Latest Build Step
 
+### Blender control proof and source ignore v1
+
+- Confirmed Blender 5.1.1 is available at `C:\Users\Jason\Documents\blender-5.1.1-windows-x64\blender.exe`.
+- Added `assets/blender_source/tests/build_blender_control_test.py`.
+- Generated `assets/blender_source/tests/blender_control_test.blend`.
+- Exported `assets/blender_exports/tests/blender_control_test.glb`.
+- Added `assets/blender_source/.gdignore` so Godot does not try to import `.blend` source files and ask for a Blender executable path. Godot should import exported GLB files from `assets/blender_exports` instead.
+- Local Blender MCP/live-editor control did not respond on `localhost:9876` from this session, so the current reliable route is script-driven Blender generation/export.
+
 ### Entrance Hall / West Wing Hall Blender source v1
 
 - Added `assets/blender_source/rooms/ground/build_entrance_westwing.py`.
