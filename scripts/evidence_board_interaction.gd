@@ -13,7 +13,9 @@ var evidence_visuals := {
 	"caldwell_living_record": ["EvidenceScrapCaldwell", "EvidencePinCaldwell"],
 	"mara_incomplete_entry": ["EvidenceScrapIncomplete", "EvidencePinIncomplete"],
 	"act_2_first_floor_gate": ["EvidenceScrapAct2Gate", "EvidencePinAct2Gate"],
-	"attic_void_recording_pinned": ["EvidenceScrapAtticVoid", "EvidencePinAtticVoid"]
+	"attic_void_recording_pinned": ["EvidenceScrapAtticVoid", "EvidencePinAtticVoid"],
+	"foundation_testament_board_return": ["EvidenceScrapFoundationTestament", "EvidencePinFoundationTestament"],
+	"foundation_publish_thread_seed": ["EvidenceThreadPublishSeed"]
 }
 
 func _ready() -> void:
@@ -30,15 +32,53 @@ func get_prompt(_player: Node) -> String:
 	return "E - Open evidence board"
 
 func interact(player: Node) -> void:
+	var pinned_testament := _try_pin_foundation_testament(player)
 	if inspected:
-		player.show_message(_progress_message(player.evidence_completion_percent()), 5.0)
+		if pinned_testament:
+			player.show_message("The Testament Page pulls the first red thread across the board.", 6.0)
+		else:
+			player.show_message(_progress_message(player.evidence_completion_percent()), 5.0)
 		player.open_evidence_board()
 		return
 	inspected = true
 	player.add_journal_note("evidence_board_found", "The Kitchen wall is becoming an evidence board. Mara needs proof, not just impressions.")
 	player.add_ledger_entry("evidence_board_found", "Mara pinned the first scraps to the Kitchen wall and pretended arrangement was the same thing as control.", "2:47 AM - Proof")
-	player.show_message(_progress_message(player.evidence_completion_percent()), 7.0)
+	if pinned_testament:
+		player.show_message("The Testament Page pulls the first red thread across the board.", 7.0)
+	else:
+		player.show_message(_progress_message(player.evidence_completion_percent()), 7.0)
 	player.open_evidence_board()
+
+func _try_pin_foundation_testament(player: Node) -> bool:
+	var root := get_tree().root
+	if not bool(root.get_meta("foundation_testament_page_read", false)):
+		return false
+	if bool(root.get_meta("foundation_testament_returned_to_board", false)):
+		return false
+	root.set_meta("foundation_testament_returned_to_board", true)
+	root.set_meta("foundation_publish_meter_board_started", true)
+	root.set_meta("foundation_publish_meter_count", max(1, int(root.get_meta("foundation_publish_meter_count", 0))))
+	player.complete_journal_objective("return_testament_to_evidence_board")
+	player.add_journal_objective("complete_publish_witness_chain", "Find the remaining publish-route proofs before Mara presses send.")
+	player.add_journal_note("foundation_testament_board_return", "Pinned to the Kitchen board, the Testament Page pulls the first red thread toward the floor plan.")
+	player.add_evidence(
+		"foundation_testament_board_return",
+		"Kitchen Pin: Testament Page",
+		"The Testament Page belongs on the board, not in Mara's hand. It starts the publish route as physical proof.",
+		"Publish"
+	)
+	player.add_evidence(
+		"foundation_publish_thread_seed",
+		"Publish Meter: First Red Thread",
+		"The board accepts the Testament Page as the first proof Mara can publish.",
+		"Publish"
+	)
+	player.add_ledger_entry(
+		"foundation_testament_board_return",
+		"Mara brought the Testament Page back to the Kitchen board. The first red thread crossed the map without her tying it.",
+		"2:47 AM - The First Red Thread"
+	)
+	return true
 
 func _on_evidence_added(id: String) -> void:
 	_reveal_evidence_visual(id)

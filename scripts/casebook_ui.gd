@@ -539,6 +539,7 @@ func _refresh_evidence_board() -> void:
 	_add_incomplete_casebook_line(lines)
 	if incomplete_countdown_active():
 		lines.append("")
+	_add_foundation_publish_route_lines(lines)
 	if unread_evidence_items > 0:
 		var proof_word := "piece" if unread_evidence_items == 1 else "pieces"
 		lines.append("[i]%d new %s of proof pinned since Mara last looked.[/i]" % [unread_evidence_items, proof_word])
@@ -553,6 +554,14 @@ func _refresh_evidence_board() -> void:
 			lines.append("")
 	lines.append("[center]Press ESC to return to game[/center]")
 	evidence_content.text = "\n".join(lines)
+
+func _add_foundation_publish_route_lines(lines: Array) -> void:
+	if not bool(get_tree().root.get_meta("foundation_publish_meter_board_started", false)):
+		return
+	var proof_count: int = clamp(int(get_tree().root.get_meta("foundation_publish_meter_count", 1)), 1, 3)
+	lines.append("[color=#d8b06f99]Publish route witness: %d / 3[/color]" % proof_count)
+	lines.append("[color=#d8b06f99]Red thread: the Testament Page has become proof, not memory.[/color]")
+	lines.append("")
 
 func _add_incomplete_casebook_line(lines: Array) -> void:
 	var status := incomplete_status_line()

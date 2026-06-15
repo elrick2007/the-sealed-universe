@@ -91,6 +91,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Foundation Chamber threshold / Bricked Archway route v1, making the chamber's true silence a clue and confirming the archway as a permanent wall.
 - Foundation Chamber interior blockout with original book shelf and pen/oil/proof affordance seed.
 - Foundation Chamber first-read / testament page v1, seeding the publish route from the original book without activating any ending choice.
+- Foundation Chamber evidence-board return / publish-meter v1, turning the Testament Page into pinned Kitchen proof and starting the first red-thread publish-meter payoff.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -141,6 +142,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 44. Bricked Archway recorder / Foundation Chamber choice seed v1: recording the blocked archway now returns the bricklaying playback, pins the archway recording, writes `2:47 AM - Course By Course`, and re-checking the silent threshold seeds the chamber's future pen/oil/proof offers without opening the endgame room.
 45. Foundation Chamber interior blockout v1: after the three offers are seeded, Mara can inspect the original book shelf and study the writing stand, oil can, and proof bundle, completing the chamber-affordance objective and opening the testament-page lead.
 46. Foundation Chamber first-read / testament page v1: after the pen/oil/proof affordances are all witnessed, Mara can read the first testament page, seed the publish-meter route, pin the proof seed, write `2:47 AM - Testament Page`, and open the Kitchen evidence-board return without choosing an ending.
+47. Foundation Chamber evidence-board return / publish-meter v1: returning to the Kitchen board after reading the Testament Page completes the return objective, pins the page as publish-route proof, reveals the first red thread on the physical board, shows `Publish route witness: 1 / 3`, writes `2:47 AM - The First Red Thread`, and opens the remaining publish-proof objective without choosing an ending.
 
 ## Important Documents
 
@@ -176,7 +178,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Foundation Chamber first-read / testament page v1:
+Last known validation after Foundation Chamber evidence-board return / publish-meter v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -225,4 +227,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build Foundation Chamber evidence-board return / publish-meter v1: take the testament proof back to the Kitchen evidence board and show the first red-thread floor-plan payoff.
+Build publish-meter proof chain v1: connect the next endgame proof to the Kitchen evidence board without choosing an ending.

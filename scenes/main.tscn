@@ -969,6 +969,11 @@ transform = Transform3D(0.5, 0, 0, 0, 0.95, 0, 0, 0, 0.08, 8.92, 2.08, -22.18)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_paper")
 
+[node name="EvidenceScrapFoundationTestament" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.54, 0, 0, 0, 1.0, 0, 0, 0, 0.08, 7.68, 1.78, -22.1)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
 [node name="EvidencePinWallWarning" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 7.02, 1.86, -22.13)
 mesh = SubResource("BoxMesh_key")
@@ -1024,6 +1029,11 @@ transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 9.04, 2.2, -22.13)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_pin")
 
+[node name="EvidencePinFoundationTestament" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 7.8, 1.9, -22.06)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
 [node name="EvidenceThreadAB" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(1.65, 0, 0.02, 0, 0.035, 0, -0.02, 0, 0.04, 7.42, 1.65, -22.12)
 mesh = SubResource("BoxMesh_key")
@@ -1038,6 +1048,11 @@ surface_material_override/0 = SubResource("Mat_red")
 transform = Transform3D(2.15, 0, 0.02, 0, 0.035, 0, -0.02, 0, 0.04, 7.92, 1.42, -22.11)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_pin")
+
+[node name="EvidenceThreadPublishSeed" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(1.05, 0, -0.035, 0, 0.035, 0, 0.035, 0, 0.04, 7.92, 1.84, -22.05)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
 
 [node name="KitchenEntryTrigger" type="Area3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(1.08, 0, 0, 0, 1, 0, 0, 0, 1.1, 5.4, 1.0, -21.0)
