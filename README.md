@@ -84,6 +84,7 @@ Target runtime:
 34. Re-check the oil can after the proof bundle is pinned, then return its refusal witness to the Kitchen evidence board as the third publish-route proof.
 35. Return to the Foundation Chamber and test the pen, oil, and proof bundle again; all three ending choices refuse Mara until the missing authority is found.
 36. Re-read the original book's testament page to reveal the authority clause: proof is not enough, and Mara must find the record naming who may answer for Ashford Manor.
+37. Re-check Caldwell's black-book record after the authority clause to learn that Caldwell recruits, but the current occupant must answer for Ashford Manor.
 
 ## Project Memory
 
@@ -114,7 +115,8 @@ Main scene load:
 
 - Keep building Act 1 ground-floor routes in blockout before Blender art replacement.
 - Add the Conservatory rose-scent misdirection and sealed-wing clue chain.
-- Build the occupant-authority record that explains who can choose the house's final state later.
+- Build the current-occupant proof that can eventually let Mara answer the Foundation Chamber without activating the final ending yet.
+- Keep the First Floor, Attic, Cellar, and future Sealed Wing map-route links aligned before Blender architecture replaces the blockout.
 - Expand the Living Ledger into exportable prose.
 - Replace blockout room chunks with Blender-authored claymation GLB architecture once mechanics are locked.
 - Add voiceover, music, and SFX late, after route pacing is stable.

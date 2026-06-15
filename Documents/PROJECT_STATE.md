@@ -96,6 +96,7 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Publish-meter final proof v1, turning the refused oil can into the third Kitchen-board witness while keeping the endgame choices inactive.
 - Publish choice lock v1, making the pen, oil, and proof bundle answer as locked ending affordances after the 3/3 proof chain, opening the missing-authority objective without selecting an ending.
 - Final-authority seed v1, making the original Testament Page reveal that proof is not authority after all three ending choices refuse Mara, opening the occupant-authority record lead while keeping endings inactive.
+- Occupant Authority Record v1, turning Caldwell's black-book record into a second-read proof that Caldwell recruits, while the current occupant must answer for Ashford Manor.
 - Act 1 progression lock and next-route gate.
 
 ## Current Playable Route
@@ -151,6 +152,9 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 49. Publish-meter final proof v1: after the proof bundle is pinned, re-checking the oil can turns refusal into evidence instead of the burn ending. Returning that witness to the Kitchen board pins the oil refusal, reveals the third red thread, advances the meter to `Publish route witness: 3 / 3`, completes the publish witness chain objective, and still does not activate any ending choice.
 50. Publish choice lock v1: after the publish proof chain reaches `3 / 3`, re-testing the pen, oil, and proof bundle records each as a deliberately locked ending affordance. Once all three refuse Mara, the journal opens the final-authority objective while the ending-choice state remains inactive.
 51. Final-authority seed v1: re-reading the original Testament Page after all three locked ending affordances refuse Mara reveals the authority clause, completes the missing-authority objective, pins the clause as Foundation evidence, writes `2:47 AM - Authority Clause`, and opens the objective to find the record naming who may answer for Ashford Manor.
+52. Occupant Authority Record v1: re-checking Caldwell's black-book record after the authority clause completes the occupant-authority objective, pins the current-occupant proof, writes `2:47 AM - Current Occupant`, and opens the next proof that must establish whether Mara can answer for the house before any final ending can activate.
+
+Before Blender architecture replacement, keep the route links across Ground Floor, First Floor, Attic, Cellar, and the future Sealed Wing page aligned as one navigable house. Blockout proves mechanic order first; Blender should then make the rooms enclosed, correctly scaled, and visually consistent.
 
 ## Important Documents
 
@@ -235,4 +239,4 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Build occupant authority record v1: turn the authority clause into a later proof that names who may answer for Ashford Manor, without unlocking or selecting any final ending yet.
+Build current-occupant proof v1: use Mara's `Incomplete` status and the Living Ledger rules to prove whether she can answer for the house, without unlocking or selecting any final ending yet.

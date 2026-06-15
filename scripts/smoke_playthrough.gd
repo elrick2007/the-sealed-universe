@@ -1098,10 +1098,23 @@ func _run() -> void:
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Final-authority seed still does not unlock endings")
 	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Final-authority seed does not select an ending")
 
+	caldwell_record.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("occupant_authority_record_found", false)), "Re-checking Caldwell's record after the authority clause seeds occupant-authority state")
+	_assert(_objective_complete(hud, "find_occupant_authority_record"), "Occupant authority record completes record objective")
+	_assert(_has_objective(hud, "prove_mara_current_occupant"), "Occupant authority record opens current-occupant proof objective")
+	_assert(_has_note(hud, "occupant_authority_record"), "Occupant authority record adds authority note")
+	_assert(_has_evidence(hud, "occupant_authority_record"), "Occupant authority record pins authority evidence")
+	_assert(_has_ledger_entry(hud, "occupant_authority_record"), "Occupant authority record writes Living Ledger beat")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_unlocked", false)), "Occupant authority record still does not unlock endings")
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_ending_choice_made", false)), "Occupant authority record does not select an ending")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
+	var occupant_authority_note_count: int = _count_note(hud, "occupant_authority_record")
 	caldwell_record.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "caldwell_living_record") == caldwell_note_count, "Repeated Caldwell record inspection does not duplicate note")
+	_assert(_count_note(hud, "occupant_authority_record") == occupant_authority_note_count, "Repeated occupant authority inspection does not duplicate note")
 
 	var incomplete_note_count: int = _count_note(hud, "mara_incomplete_entry")
 	var reserved_note_count: int = _count_note(hud, "two_forty_seven_reserved")
