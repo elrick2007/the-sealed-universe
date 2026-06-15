@@ -93,6 +93,7 @@ Target runtime:
 For future chats or new contributors, start with:
 
 - `Documents/PROJECT_STATE.md`
+- `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md`
 - `Documents/Game_Bible_Vol1_Ground_Floor.md`
 - `Documents/Continuity_Lore_Audit_Book1.md`
 - `Documents/Technical_Bible_T2_Systems.md`
