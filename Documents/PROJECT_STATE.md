@@ -178,6 +178,8 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/Technical_Bible_T2_Systems.md`
 - `Documents/Technical_Bible_T3_Art_Shader_Pipeline.md`
 - `Documents/Technical_Bible_T4_Milestone1_PROVISIONAL.md`
+- `Documents/Technical_Bible_T5_Cinematics.md`
+- `Documents/M0_to_M1_Setup_Checklist.md`
 - `Documents/BOOK1_ROOM_COVERAGE_MATRIX.md`
 - `Documents/BOOK1_ROOM_PURPOSE_LOCK.md`
 - `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md`
@@ -254,6 +256,12 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 Godot GLB import convention v1: lock the actual Godot folder paths, imported scene placement pattern, collision naming expectations, and replacement workflow before the first Blender export lands. After that, start Blender replacement with Entrance Hall and West Wing Hall.
 
 ## Latest Build Step
+
+### Cinematics and setup references archived
+
+- Added `Documents/Technical_Bible_T5_Cinematics.md` as reference-only guidance for rostrum intros, in-engine scares, and limited character-performance cinematics.
+- Confirmed `Documents/M0_to_M1_Setup_Checklist.md` is already in the project archive for Blender/Godot setup reference.
+- Kept the active next build step unchanged: Godot GLB import convention v1 before the first Blender room replacement.
 
 ### Blender room manifest lock v1
 
