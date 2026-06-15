@@ -131,6 +131,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [ ] Save/load must preserve every meta flag used in the full smoke route.
 - [ ] One-ending canon must be reflected in UI language, evidence-board language, and objective text.
 - [ ] Map/floor labels must be checked against all floor-plan images.
+- [x] Create a room coverage matrix for every mapped room before Blender replacement.
 - [ ] Decide whether `Books/` manuscript files belong in normal Git or Git LFS before they grow much larger.
 - [ ] Build a Blender room list from the manifest: room name, gameplay purpose, required props, collision doors, lighting mood, and export filename.
 - [ ] Establish one Godot import convention for Blender GLB rooms before replacing blockouts.

@@ -175,6 +175,7 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/Technical_Bible_T2_Systems.md`
 - `Documents/Technical_Bible_T3_Art_Shader_Pipeline.md`
 - `Documents/Technical_Bible_T4_Milestone1_PROVISIONAL.md`
+- `Documents/BOOK1_ROOM_COVERAGE_MATRIX.md`
 
 ## Validation Commands
 
@@ -246,6 +247,10 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 ## Next Build Step
 
 Canon publish/send ending sequence v1: use the prepared final register as the only Book 1 ending path, resolve Mara's line to `Incomplete`, and keep pen/oil framed as rejected witnessed offers rather than alternate true endings.
+
+## Pre-Blender Room Tracking
+
+`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, unplanned rooms, and the recommended finish order before Blender replacement. Use it alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
 
 ## Anthology Ending Guardrail
 
