@@ -979,6 +979,11 @@ transform = Transform3D(0.5, 0, 0, 0, 0.92, 0, 0, 0, 0.08, 8.22, 1.76, -22.1)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_paper")
 
+[node name="EvidenceScrapOilFinal" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.46, 0, 0, 0, 0.84, 0, 0, 0, 0.08, 8.68, 1.72, -22.1)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_paper")
+
 [node name="EvidencePinWallWarning" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 7.02, 1.86, -22.13)
 mesh = SubResource("BoxMesh_key")
@@ -1044,6 +1049,11 @@ transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 8.34, 1.88, -22.06)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_pin")
 
+[node name="EvidencePinOilFinal" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 8.78, 1.84, -22.06)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_pin")
+
 [node name="EvidenceThreadAB" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(1.65, 0, 0.02, 0, 0.035, 0, -0.02, 0, 0.04, 7.42, 1.65, -22.12)
 mesh = SubResource("BoxMesh_key")
@@ -1066,6 +1076,11 @@ surface_material_override/0 = SubResource("Mat_red")
 
 [node name="EvidenceThreadPublishSecond" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
 transform = Transform3D(0.76, 0, 0.03, 0, 0.035, 0, -0.03, 0, 0.04, 8.1, 1.88, -22.04)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="EvidenceThreadPublishFinal" type="MeshInstance3D" parent="Architecture/WestWingHallway/Kitchen"]
+transform = Transform3D(0.86, 0, -0.025, 0, 0.035, 0, 0.025, 0, 0.04, 8.48, 1.84, -22.035)
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_red")
 

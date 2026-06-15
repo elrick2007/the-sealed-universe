@@ -17,7 +17,9 @@ var evidence_visuals := {
 	"foundation_testament_board_return": ["EvidenceScrapFoundationTestament", "EvidencePinFoundationTestament"],
 	"foundation_publish_thread_seed": ["EvidenceThreadPublishSeed"],
 	"foundation_publish_bundle_board_return": ["EvidenceScrapPublishBundle", "EvidencePinPublishBundle"],
-	"foundation_publish_thread_second": ["EvidenceThreadPublishSecond"]
+	"foundation_publish_thread_second": ["EvidenceThreadPublishSecond"],
+	"foundation_oil_final_board_return": ["EvidenceScrapOilFinal", "EvidencePinOilFinal"],
+	"foundation_publish_thread_final": ["EvidenceThreadPublishFinal"]
 }
 
 func _ready() -> void:
@@ -36,9 +38,10 @@ func get_prompt(_player: Node) -> String:
 func interact(player: Node) -> void:
 	var pinned_testament := _try_pin_foundation_testament(player)
 	var pinned_publish_bundle := _try_pin_publish_bundle(player)
+	var pinned_oil_final := _try_pin_oil_final(player)
 	if inspected:
-		if pinned_testament or pinned_publish_bundle:
-			player.show_message(_pin_message(pinned_testament, pinned_publish_bundle), 6.0)
+		if pinned_testament or pinned_publish_bundle or pinned_oil_final:
+			player.show_message(_pin_message(pinned_testament, pinned_publish_bundle, pinned_oil_final), 6.0)
 		else:
 			player.show_message(_progress_message(player.evidence_completion_percent()), 5.0)
 		player.open_evidence_board()
@@ -46,8 +49,8 @@ func interact(player: Node) -> void:
 	inspected = true
 	player.add_journal_note("evidence_board_found", "The Kitchen wall is becoming an evidence board. Mara needs proof, not just impressions.")
 	player.add_ledger_entry("evidence_board_found", "Mara pinned the first scraps to the Kitchen wall and pretended arrangement was the same thing as control.", "2:47 AM - Proof")
-	if pinned_testament or pinned_publish_bundle:
-		player.show_message(_pin_message(pinned_testament, pinned_publish_bundle), 7.0)
+	if pinned_testament or pinned_publish_bundle or pinned_oil_final:
+		player.show_message(_pin_message(pinned_testament, pinned_publish_bundle, pinned_oil_final), 7.0)
 	else:
 		player.show_message(_progress_message(player.evidence_completion_percent()), 7.0)
 	player.open_evidence_board()
@@ -117,7 +120,42 @@ func _try_pin_publish_bundle(player: Node) -> bool:
 	)
 	return true
 
-func _pin_message(pinned_testament: bool, pinned_publish_bundle: bool) -> String:
+func _try_pin_oil_final(player: Node) -> bool:
+	var root := get_tree().root
+	if not bool(root.get_meta("foundation_oil_final_witnessed", false)):
+		return false
+	if bool(root.get_meta("foundation_oil_final_returned_to_board", false)):
+		return false
+	root.set_meta("foundation_oil_final_returned_to_board", true)
+	root.set_meta("foundation_publish_meter_board_started", true)
+	root.set_meta("foundation_publish_meter_count", max(3, int(root.get_meta("foundation_publish_meter_count", 0))))
+	player.complete_journal_objective("return_oil_witness_to_evidence_board")
+	player.complete_journal_objective("complete_publish_witness_chain")
+	player.add_journal_note("foundation_oil_final_board_return", "Pinned as refusal, the oil can closes the publish chain without becoming the burn ending.")
+	player.add_evidence(
+		"foundation_oil_final_board_return",
+		"Kitchen Pin: Oil Refusal",
+		"The oil can is proof because Mara did not use it. The publish route now has three witnesses and still no chosen ending.",
+		"Publish"
+	)
+	player.add_evidence(
+		"foundation_publish_thread_final",
+		"Publish Meter: Third Red Thread",
+		"The red thread closes the route from Testament Page to proof bundle to refused oil. Send remains locked behind the final story choice.",
+		"Publish"
+	)
+	player.add_ledger_entry(
+		"foundation_oil_final_board_return",
+		"Mara pinned the oil beside the proof bundle as a refusal, not a promise. The board accepted restraint as evidence.",
+		"2:47 AM - The Third Red Thread"
+	)
+	return true
+
+func _pin_message(pinned_testament: bool, pinned_publish_bundle: bool, pinned_oil_final: bool) -> String:
+	if pinned_oil_final:
+		if pinned_testament and pinned_publish_bundle:
+			return "Three red threads cross the board. The proof chain is complete, but no ending has been chosen."
+		return "The third red thread closes the publish chain. Send still waits."
 	if pinned_testament and pinned_publish_bundle:
 		return "Two red threads cross the board. The publish route is no longer theoretical."
 	if pinned_publish_bundle:

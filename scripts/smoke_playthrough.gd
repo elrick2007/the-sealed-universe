@@ -83,6 +83,8 @@ func _run() -> void:
 	var evidence_publish_thread_seed: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceThreadPublishSeed")
 	var evidence_publish_bundle: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapPublishBundle")
 	var evidence_publish_thread_second: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceThreadPublishSecond")
+	var evidence_oil_final: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceScrapOilFinal")
+	var evidence_publish_thread_final: Node3D = scene.get_node("Architecture/WestWingHallway/Kitchen/EvidenceThreadPublishFinal")
 
 	_assert(not player.has_recorder, "Player starts without recorder")
 	_assert(not player.has_item("service_key"), "Player starts without service key")
@@ -103,6 +105,8 @@ func _run() -> void:
 	_assert(not evidence_publish_thread_seed.visible, "Evidence board starts with publish-route thread hidden")
 	_assert(not evidence_publish_bundle.visible, "Evidence board starts with publish bundle scrap hidden")
 	_assert(not evidence_publish_thread_second.visible, "Evidence board starts with second publish-route thread hidden")
+	_assert(not evidence_oil_final.visible, "Evidence board starts with final oil proof scrap hidden")
+	_assert(not evidence_publish_thread_final.visible, "Evidence board starts with final publish-route thread hidden")
 	next_route_gate.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("next_route_gate_open", false)), "Next route gate starts closed")
@@ -1034,6 +1038,27 @@ func _run() -> void:
 	_assert(evidence_publish_thread_second.visible, "Evidence board return reveals second publish-route red thread")
 	_assert(hud.evidence_content.text.contains("Publish route witness: 2 / 3"), "Evidence board shows second publish-route meter")
 
+	foundation_oil_offer.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_oil_final_witnessed", false)), "Oil can becomes final publish witness after second proof is pinned")
+	_assert(_has_objective(hud, "return_oil_witness_to_evidence_board"), "Oil final witness opens final board-return objective")
+	_assert(_has_note(hud, "foundation_oil_final_witness"), "Oil final witness adds note")
+	_assert(_has_evidence(hud, "foundation_oil_final_witness"), "Oil final witness pins evidence")
+	_assert(_has_ledger_entry(hud, "foundation_oil_final_witness"), "Oil final witness writes Living Ledger beat")
+	evidence_board.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("foundation_oil_final_returned_to_board", false)), "Evidence board accepts oil refusal as final publish proof")
+	_assert(int(scene.get_tree().root.get_meta("foundation_publish_meter_count", 0)) == 3, "Evidence board records final publish-route proof")
+	_assert(_objective_complete(hud, "return_oil_witness_to_evidence_board"), "Evidence board completes oil witness return objective")
+	_assert(_objective_complete(hud, "complete_publish_witness_chain"), "Evidence board completes publish witness chain objective")
+	_assert(_has_note(hud, "foundation_oil_final_board_return"), "Evidence board return adds oil refusal pin note")
+	_assert(_has_evidence(hud, "foundation_oil_final_board_return"), "Evidence board return pins oil refusal evidence")
+	_assert(_has_evidence(hud, "foundation_publish_thread_final"), "Evidence board return pins final publish thread")
+	_assert(_has_ledger_entry(hud, "foundation_oil_final_board_return"), "Evidence board return writes oil refusal Living Ledger beat")
+	_assert(evidence_oil_final.visible, "Evidence board return reveals oil refusal scrap")
+	_assert(evidence_publish_thread_final.visible, "Evidence board return reveals final publish-route red thread")
+	_assert(hud.evidence_content.text.contains("Publish route witness: 3 / 3"), "Evidence board shows final publish-route meter")
+
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
 	await process_frame
@@ -1095,6 +1120,9 @@ func _run() -> void:
 	var foundation_publish_bundle_witness_note_count: int = _count_note(hud, "foundation_publish_bundle_witness")
 	var foundation_publish_bundle_board_note_count: int = _count_note(hud, "foundation_publish_bundle_board_return")
 	var foundation_publish_thread_second_evidence_present := _has_evidence(hud, "foundation_publish_thread_second")
+	var foundation_oil_final_witness_note_count: int = _count_note(hud, "foundation_oil_final_witness")
+	var foundation_oil_final_board_note_count: int = _count_note(hud, "foundation_oil_final_board_return")
+	var foundation_publish_thread_final_evidence_present := _has_evidence(hud, "foundation_publish_thread_final")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1220,6 +1248,7 @@ func _run() -> void:
 	foundation_oil_offer.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_oil_offer") == foundation_oil_note_count, "Repeated oil can inspection does not duplicate destruction-offer note")
+	_assert(_count_note(hud, "foundation_oil_final_witness") == foundation_oil_final_witness_note_count, "Repeated oil can final witness does not duplicate third-proof note")
 	foundation_publish_offer.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "foundation_publish_offer") == foundation_publish_note_count, "Repeated proof bundle inspection does not duplicate publish-offer note")
@@ -1235,7 +1264,9 @@ func _run() -> void:
 	_assert(_has_evidence(hud, "foundation_publish_thread_seed") == foundation_publish_thread_evidence_present, "Repeated Testament board return does not change publish-thread evidence state")
 	_assert(_count_note(hud, "foundation_publish_bundle_board_return") == foundation_publish_bundle_board_note_count, "Repeated proof bundle board return does not duplicate note")
 	_assert(_has_evidence(hud, "foundation_publish_thread_second") == foundation_publish_thread_second_evidence_present, "Repeated proof bundle board return does not change second-thread evidence state")
-	_assert(int(scene.get_tree().root.get_meta("foundation_publish_meter_count", 0)) == 2, "Repeated evidence board keeps publish-route proof count at two")
+	_assert(_count_note(hud, "foundation_oil_final_board_return") == foundation_oil_final_board_note_count, "Repeated oil witness board return does not duplicate note")
+	_assert(_has_evidence(hud, "foundation_publish_thread_final") == foundation_publish_thread_final_evidence_present, "Repeated oil witness board return does not change final-thread evidence state")
+	_assert(int(scene.get_tree().root.get_meta("foundation_publish_meter_count", 0)) == 3, "Repeated evidence board keeps publish-route proof count at three")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")

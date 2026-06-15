@@ -42,6 +42,8 @@ func interact(player: Node) -> void:
 	if state_meta != "" and bool(root.get_meta(state_meta, false)):
 		if _try_mark_publish_bundle_witness(player):
 			return
+		if _try_mark_oil_final_witness(player):
+			return
 		if player.has_method("show_message"):
 			player.show_message(repeat_message if repeat_message != "" else message, 6.0)
 		return
@@ -99,6 +101,42 @@ func _try_mark_publish_bundle_witness(player: Node) -> bool:
 		)
 	if player.has_method("show_message"):
 		player.show_message("The proof bundle is ready for the Kitchen board. It is evidence now, not a choice.", 7.0)
+	return true
+
+func _try_mark_oil_final_witness(player: Node) -> bool:
+	if state_meta != "foundation_oil_offer_seen":
+		return false
+	var root := get_tree().root
+	if not bool(root.get_meta("foundation_publish_bundle_returned_to_board", false)):
+		return false
+	if bool(root.get_meta("foundation_oil_final_witnessed", false)):
+		return false
+	root.set_meta("foundation_oil_final_witnessed", true)
+	if player.has_method("add_journal_objective"):
+		player.add_journal_objective(
+			"return_oil_witness_to_evidence_board",
+			"Return the oil-can witness to the Kitchen evidence board."
+		)
+	if player.has_method("add_journal_note"):
+		player.add_journal_note(
+			"foundation_oil_final_witness",
+			"The oil can stops being a temptation when Mara refuses to use it. It becomes proof that the house keeps destruction ready."
+		)
+	if player.has_method("add_evidence"):
+		player.add_evidence(
+			"foundation_oil_final_witness",
+			"Foundation Oil Can Refusal",
+			"The full oil can and dry matches prove the destroy route exists, but Mara has not chosen it. Refusal becomes the third publish witness.",
+			"Publish"
+		)
+	if player.has_method("add_ledger_entry"):
+		player.add_ledger_entry(
+			"foundation_oil_final_witness",
+			"The oil did not need to burn to testify. Mara wrote that down before the room could call restraint cowardice.",
+			"2:47 AM - The Third Proof"
+		)
+	if player.has_method("show_message"):
+		player.show_message("The oil can is final proof now, not permission to burn.", 7.0)
 	return true
 
 func _check_foundation_offers(player: Node) -> void:
