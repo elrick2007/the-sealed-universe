@@ -12,11 +12,10 @@ Game 01 remains Book 1 only. The ending is one canon publish/send route that res
 
 ## Recommended Finish Order Before Blender
 
-1. Save/load persistence pass.
-2. Full smoke route with save/reload checkpoint.
-3. Room-purpose lock for all mapped but unplanned rooms.
-4. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
-5. Blender replacement begins floor by floor.
+1. Room-purpose lock for all mapped but unplanned rooms.
+2. Blender room manifest pass: final dimensions, doors, ceilings, collision, lighting, required props, and export names.
+3. Blender replacement begins floor by floor.
+4. Accessibility pass for photosensitivity-safe scare effects.
 
 The key rule: do not start final Blender builds for rooms whose gameplay purpose is still unclear. Blockout first, art second.
 
@@ -155,4 +154,4 @@ These rooms already have clear enough gameplay purpose to become first Blender t
 
 ## Next Implementation Step
 
-Build the save/load persistence pass next. The full Book 1 route now depends on many meta flags, inventory states, notes, evidence pins, map reveals, ledger entries, and the canon ending / Book 2 stinger state, so persistence should be proven before Blender replacement begins.
+Build the room-purpose lock pass next. Save/load now protects the full Book 1 route, so the remaining pre-Blender work is deciding which mapped rooms are required routes, optional evidence rooms, locked/readable-only spaces, or atmosphere-only dressing.

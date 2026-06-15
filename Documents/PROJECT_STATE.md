@@ -200,7 +200,7 @@ Menu scene load:
 & "C:\Users\Jason\Downloads\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe" --headless --path "C:\Users\Jason\Documents\New project 6" --scene res://scenes/menu.tscn --quit-after 3
 ```
 
-Last known validation after Well Room / Book 2 stinger v1:
+Last known validation after save/load persistence v1:
 
 - Smoke playthrough passed.
 - Main scene headless load passed.
@@ -249,7 +249,16 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Save/load persistence pass: preserve route meta, inventory, journal objectives, notes, evidence, map state, Living Ledger entries, and the canon Book 1 ending / Book 2 stinger flags across a reload.
+Room-purpose lock pass: decide the remaining mapped-but-unplanned rooms before Blender replacement, especially Master Bedroom, Nursery, Chapel Room, First Floor side rooms, Cold Store, Wine Cellar, Roof Walk, and the Sealed Wing side rooms.
+
+## Latest Build Step
+
+### Save/load persistence v1
+
+- Added compact JSON persistence at `user://book1_save.json`.
+- F5 quick-saves and F9 quick-loads during play.
+- Save/load preserves root story flags, player position/facing/camera pitch, player inventory, recorder state, casebook objectives, notes, Living Ledger, evidence board, map reveals, visited rooms, and unlocked floor tabs.
+- The smoke playthrough now saves after the full Book 1 route and Well Room / Book 2 stinger, deliberately clears late-game state, reloads, and verifies the canon ending and anthology bridge return.
 
 ## Pre-Blender Room Tracking
 

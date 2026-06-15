@@ -152,6 +152,46 @@ func evidence_unread_count() -> int:
 func is_act_1_ready() -> bool:
 	return act_1_ready
 
+func get_persisted_state() -> Dictionary:
+	return {
+		"objectives": objectives.duplicate(true),
+		"notes": notes.duplicate(true),
+		"ledger_entries": ledger_entries.duplicate(true),
+		"evidence_items": evidence_items.duplicate(true),
+		"inventory_items": inventory_items.duplicate(true),
+		"discovered_map": discovered_map.duplicate(true),
+		"unlocked_map_floors": unlocked_map_floors.duplicate(true),
+		"visited_map": visited_map.duplicate(true),
+		"current_map_area": current_map_area,
+		"active_map_floor": active_map_floor,
+		"unread_ledger_entries": unread_ledger_entries,
+		"unread_evidence_items": unread_evidence_items,
+		"act_1_ready": act_1_ready
+	}
+
+func apply_persisted_state(state: Dictionary) -> void:
+	objectives = _array_from_state(state, "objectives", objectives)
+	notes = _array_from_state(state, "notes", notes)
+	ledger_entries = _array_from_state(state, "ledger_entries", ledger_entries)
+	evidence_items = _array_from_state(state, "evidence_items", evidence_items)
+	inventory_items = _dictionary_from_state(state, "inventory_items", inventory_items)
+	discovered_map = _dictionary_from_state(state, "discovered_map", discovered_map)
+	unlocked_map_floors = _dictionary_from_state(state, "unlocked_map_floors", unlocked_map_floors)
+	visited_map = _dictionary_from_state(state, "visited_map", visited_map)
+	current_map_area = String(state.get("current_map_area", current_map_area))
+	active_map_floor = String(state.get("active_map_floor", active_map_floor))
+	unread_ledger_entries = int(state.get("unread_ledger_entries", unread_ledger_entries))
+	unread_evidence_items = int(state.get("unread_evidence_items", unread_evidence_items))
+	act_1_ready = bool(state.get("act_1_ready", act_1_ready))
+	get_tree().root.set_meta("act_1_ready", act_1_ready)
+	_close_panels()
+	_refresh_journal()
+	_refresh_inventory()
+	_refresh_map()
+	_refresh_ledger()
+	_refresh_evidence_board()
+	_update_act_1_progression()
+
 func incomplete_countdown_active() -> bool:
 	return bool(get_tree().root.get_meta("incomplete_countdown_seeded", false))
 
@@ -384,6 +424,18 @@ func _close_panels() -> void:
 	if evidence_panel:
 		evidence_panel.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _array_from_state(state: Dictionary, key: String, fallback: Array) -> Array:
+	var value = state.get(key, fallback)
+	if typeof(value) != TYPE_ARRAY:
+		return fallback
+	return value.duplicate(true)
+
+func _dictionary_from_state(state: Dictionary, key: String, fallback: Dictionary) -> Dictionary:
+	var value = state.get(key, fallback)
+	if typeof(value) != TYPE_DICTIONARY:
+		return fallback
+	return value.duplicate(true)
 
 func _refresh_journal() -> void:
 	if journal_content == null:

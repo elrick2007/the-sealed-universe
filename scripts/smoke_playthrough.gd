@@ -1427,6 +1427,56 @@ func _run() -> void:
 	await process_frame
 	_assert(_count_note(hud, "kitchen_wall_playback") == kitchen_note_count, "Repeated Kitchen recorder response does not duplicate note")
 
+	var saved_position := Vector3(2.25, 0.95, -4.5)
+	var saved_rotation_y := 0.7
+	var saved_look_pitch := -0.18
+	var saved_note_count: int = hud.notes.size()
+	var saved_ledger_count: int = hud.ledger_entries.size()
+	var saved_evidence_count: int = hud.evidence_items.size()
+	var saved_objective_count: int = hud.objectives.size()
+	var saved_current_map_area: String = hud.current_map_area
+	player.global_position = saved_position
+	player.rotation.y = saved_rotation_y
+	player.look_pitch = saved_look_pitch
+	player.camera.rotation.x = saved_look_pitch
+	_assert(player.save_game(), "Save game succeeds after full route")
+
+	scene.get_tree().root.set_meta("well_room_book2_stinger_complete", false)
+	scene.get_tree().root.set_meta("book2_stinger_seeded", false)
+	scene.get_tree().root.set_meta("foundation_canon_publish_sent", false)
+	player.global_position = Vector3.ZERO
+	player.rotation.y = 0.0
+	player.look_pitch = 0.0
+	player.camera.rotation.x = 0.0
+	player.inventory.clear()
+	player.has_recorder = false
+	hud.objectives.clear()
+	hud.notes.clear()
+	hud.ledger_entries.clear()
+	hud.evidence_items.clear()
+	hud.inventory_items.clear()
+	hud.discovered_map.clear()
+	hud.visited_map.clear()
+	hud.unlocked_map_floors.clear()
+	hud.current_map_area = ""
+	_assert(player.load_game(), "Load game succeeds from saved ledger")
+	await process_frame
+	_assert(player.global_position.distance_to(saved_position) < 0.05, "Load restores player position")
+	_assert(abs(player.rotation.y - saved_rotation_y) < 0.01, "Load restores player facing")
+	_assert(abs(player.look_pitch - saved_look_pitch) < 0.01, "Load restores camera pitch")
+	_assert(player.has_recorder, "Load restores recorder state")
+	_assert(player.has_item("tape_measure"), "Load restores player inventory")
+	_assert(hud.objectives.size() == saved_objective_count, "Load restores objectives")
+	_assert(hud.notes.size() == saved_note_count, "Load restores journal notes")
+	_assert(hud.ledger_entries.size() == saved_ledger_count, "Load restores Living Ledger entries")
+	_assert(hud.evidence_items.size() == saved_evidence_count, "Load restores evidence board")
+	_assert(hud.current_map_area == saved_current_map_area, "Load restores current map room")
+	_assert(hud.unlocked_map_floors.has("cellar"), "Load restores unlocked map floors")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_canon_publish_sent", false)), "Load restores canon publish ending state")
+	_assert(bool(scene.get_tree().root.get_meta("well_room_book2_stinger_complete", false)), "Load restores Book 2 bridge state")
+	_assert(bool(scene.get_tree().root.get_meta("book2_stinger_seeded", false)), "Load restores anthology bridge seed")
+	_assert(_has_note(hud, "well_room_book2_stinger"), "Load restores Book 2 bridge note")
+
 	if failures.is_empty():
 		print("SMOKE PLAYTHROUGH PASSED")
 		quit(0)

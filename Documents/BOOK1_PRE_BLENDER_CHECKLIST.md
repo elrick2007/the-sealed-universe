@@ -30,7 +30,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] 2:47 scheduler hook with chosen-time payoff.
 - [x] Kitchen return loop for ledger/evidence/transcription updates.
 - [x] Smoke playthrough covering the current full blockout route.
-- [ ] Save/load persistence for all route meta, inventory, notes, evidence, map state, and ledger entries.
+- [x] Save/load persistence for all route meta, inventory, notes, evidence, map state, and ledger entries.
 - [ ] Accessibility pass: reduce flashing pulses, add subtitles/voice volume controls, and keep scare effects photosensitivity-safe.
 - [ ] Exportable Living Ledger prose.
 - [x] Final Book 1 ending sequence.
@@ -129,7 +129,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Cellar / Foundation route exists in playable blockout.
 - [x] Core document archive and bibles are in the repository workspace.
 - [x] Final Book 1 ending route must be playable and tested.
-- [ ] Save/load must preserve every meta flag used in the full smoke route.
+- [x] Save/load must preserve every meta flag used in the full smoke route.
 - [ ] One-ending canon must be reflected in UI language, evidence-board language, and objective text.
 - [ ] Map/floor labels must be checked against all floor-plan images.
 - [x] Create a room coverage matrix for every mapped room before Blender replacement.
@@ -139,7 +139,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 
 ## Recommended Next Code Steps
 
-1. Save/load persistence pass.
-2. Full smoke route checkpoint after save/reload.
-3. Blender manifest lock and room-by-room architecture replacement.
-4. Accessibility pass for photosensitivity-safe scare effects.
+1. Room-purpose lock for mapped rooms that are not yet gameplay-locked.
+2. Blender manifest lock and room-by-room architecture replacement.
+3. Accessibility pass for photosensitivity-safe scare effects.
+4. Exportable Living Ledger prose.

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const GameStatePersistence := preload("res://scripts/game_state_persistence.gd")
+
 @export var mouse_sensitivity := 0.0025
 @export var keyboard_turn_speed := 2.2
 @export var walk_speed := 3.2
@@ -24,7 +26,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ray.collide_with_areas = true
 	add_inventory_item("camera", "Camera", "Press C to photograph proof the house tries to move.")
-	show_message("Press J for journal. Press L for the Living Ledger once the Kitchen reveals it.", 6.0)
+	show_message("Press J for journal. F5 saves, F9 loads. Press L for the Living Ledger once the Kitchen reveals it.", 6.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var ui_panel_open: bool = bool(get_tree().root.get_meta("ui_panel_open", false))
@@ -36,6 +38,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if event is InputEventMouseButton and event.pressed and not ui_panel_open:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if event.is_action_pressed("quick_save"):
+		save_game()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("quick_load"):
+		load_game()
+		get_viewport().set_input_as_handled()
+		return
 	if ui_panel_open:
 		return
 	if event.is_action_pressed("interact"):
@@ -150,6 +160,22 @@ func visit_map_area(id: String) -> void:
 func unlock_map_floor(id: String) -> void:
 	if journal_ui.has_method("unlock_map_floor"):
 		journal_ui.unlock_map_floor(id)
+
+func save_game() -> bool:
+	var ok := GameStatePersistence.save_game(self, journal_ui)
+	if ok:
+		show_message("Mara folds this version of the house into the ledger.", 4.0)
+	else:
+		show_message("The ledger refuses to hold this version.", 4.0)
+	return ok
+
+func load_game() -> bool:
+	var ok := GameStatePersistence.load_game(self, journal_ui)
+	if ok:
+		show_message("Mara finds the house where the ledger left it.", 4.0)
+	else:
+		show_message("No saved ledger page answers yet.", 4.0)
+	return ok
 
 func use_recorder_from_inventory() -> void:
 	_use_recorder()
