@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=79 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -51,6 +51,7 @@
 [ext_resource type="Script" path="res://scripts/filing_voice_source_interaction.gd" id="49"]
 [ext_resource type="Script" path="res://scripts/caton_pillar_interaction.gd" id="50"]
 [ext_resource type="Script" path="res://scripts/caton_chisel_interaction.gd" id="51"]
+[ext_resource type="Script" path="res://scripts/cellar_coal_interaction.gd" id="52"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -1925,6 +1926,27 @@ surface_material_override/0 = SubResource("Mat_shadow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CatonChisel"]
 shape = SubResource("BoxShape_prop")
+
+[node name="CoalBelowCaton" type="StaticBody3D" parent="Architecture/Cellar"]
+transform = Transform3D(1.25, 0, 0, 0, 0.34, 0, 0, 0, 0.75, 10.35, -2.03, -5.45)
+script = ExtResource("52")
+
+[node name="CoalMass" type="MeshInstance3D" parent="Architecture/Cellar/CoalBelowCaton"]
+mesh = SubResource("BoxMesh_prop")
+surface_material_override/0 = SubResource("Mat_shadow")
+
+[node name="CoalEdge" type="MeshInstance3D" parent="Architecture/Cellar/CoalBelowCaton"]
+transform = Transform3D(0.75, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.55, 0.42, -0.18)
+mesh = SubResource("BoxMesh_key")
+surface_material_override/0 = SubResource("Mat_metal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/CoalBelowCaton"]
+shape = SubResource("BoxShape_prop")
+
+[node name="FoundationChamberMouth" type="MeshInstance3D" parent="Architecture/Cellar"]
+transform = Transform3D(1.6, 0, 0, 0, 1.2, 0, 0, 0, 0.18, 14.8, -1.45, -6.28)
+mesh = SubResource("BoxMesh_door")
+surface_material_override/0 = SubResource("Mat_shadow")
 
 [node name="Props" type="Node3D" parent="."]
 

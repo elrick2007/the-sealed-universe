@@ -55,6 +55,7 @@ func _run() -> void:
 	var filing_voice_shelf: Node = scene.get_node("Architecture/Attic/LongAttic/FilingVoiceShelf")
 	var caton_pillar: Node = scene.get_node("Architecture/Cellar/CatonPillar")
 	var caton_chisel: Node = scene.get_node("Architecture/Cellar/CatonChisel")
+	var coal_below_caton: Node = scene.get_node("Architecture/Cellar/CoalBelowCaton")
 	var attic_void_wall: Node3D = scene.get_node("Architecture/Attic/LongAttic/LongAtticBackWall")
 	var conservatory_trigger: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/ConservatoryEntryTrigger")
 	var lemon_tree: Node = scene.get_node("Architecture/WestWingHallway/Conservatory/LemonTree")
@@ -820,6 +821,9 @@ func _run() -> void:
 	caton_pillar.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("caton_pillar_found", false)), "Caton Pillar waits until the filing voice points below")
+	coal_below_caton.interact(player)
+	await process_frame
+	_assert(not bool(scene.get_tree().root.get_meta("foundation_chamber_found", false)), "Coal below Caton waits until the pillar is marked")
 	filing_voice_shelf.interact(player)
 	await process_frame
 	_assert(not bool(scene.get_tree().root.get_meta("filing_voice_source_found", false)), "Filing voice shelf waits until the Kitchen board accepts the void recording")
@@ -875,6 +879,18 @@ func _run() -> void:
 	_assert(_has_note(hud, "caton_pillar_consent_mark"), "Caton Pillar adds consent-mark note")
 	_assert(_has_evidence(hud, "caton_pillar_consent_mark"), "Caton Pillar pins consent-mark evidence")
 	_assert(_has_ledger_entry(hud, "caton_pillar_consent_mark"), "Caton Pillar writes consent-mark ledger beat")
+	coal_below_caton.interact(player)
+	await process_frame
+	_assert(bool(scene.get_tree().root.get_meta("coal_below_caton_cleared", false)), "Coal below Caton clears after the witness mark")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_found", false)), "Coal below Caton reveals the Foundation Chamber")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_chamber_unlocked", false)), "Foundation Chamber route unlocks")
+	_assert(bool(scene.get_tree().root.get_meta("foundation_threshold_route_seeded", false)), "Foundation threshold follow-up seeds")
+	_assert(_objective_complete(hud, "find_foundation_chamber"), "Foundation Chamber completes coal-below objective")
+	_assert(_has_objective(hud, "inspect_foundation_chamber_threshold"), "Foundation Chamber opens threshold objective")
+	_assert(_has_note(hud, "foundation_chamber_found"), "Foundation Chamber adds coal-below note")
+	_assert(_has_evidence(hud, "foundation_chamber_found"), "Foundation Chamber pins coal-below evidence")
+	_assert(_has_ledger_entry(hud, "foundation_chamber_found"), "Foundation Chamber writes Living Ledger beat")
+	_assert(hud.discovered_map.has("foundation_chamber"), "Foundation Chamber is revealed on the map")
 
 	var caldwell_note_count: int = _count_note(hud, "caldwell_living_record")
 	caldwell_record.interact(player)
@@ -920,6 +936,7 @@ func _run() -> void:
 	var caton_pillar_note_count: int = _count_note(hud, "caton_pillar_found")
 	var caton_chisel_note_count: int = _count_note(hud, "caton_chisel_found")
 	var caton_consent_note_count: int = _count_note(hud, "caton_pillar_consent_mark")
+	var foundation_chamber_note_count: int = _count_note(hud, "foundation_chamber_found")
 	mara_incomplete_entry.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "mara_incomplete_entry") == incomplete_note_count, "Repeated Incomplete entry inspection does not duplicate note")
@@ -1021,6 +1038,9 @@ func _run() -> void:
 	caton_pillar.interact(player)
 	await process_frame
 	_assert(_count_note(hud, "caton_pillar_consent_mark") == caton_consent_note_count, "Repeated marked pillar inspection does not duplicate consent-mark note")
+	coal_below_caton.interact(player)
+	await process_frame
+	_assert(_count_note(hud, "foundation_chamber_found") == foundation_chamber_note_count, "Repeated coal-below inspection does not duplicate Foundation Chamber note")
 	hud.open_ledger()
 	await process_frame
 	_assert(hud.ledger_content.text.contains("BLACK BOOK: MARA VOSS / DECEMBER 2 / INCOMPLETE / 2:47 WROTE: INCOMPLETE"), "Living Ledger shows subtle Incomplete scheduler line")
