@@ -269,9 +269,17 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Entrance Hall material/lighting pass: apply richer clay/plaster/wood texture treatment and tune Godot lighting so the starting area moves closer to the generated reference photos instead of reading as flat clay blocks.
+Visual QA in Godot: inspect the v6 textured Entrance Hall in the running editor/game view, then tune material scale, texture contrast, candle placement, and any oversized/blocky doorway pieces before moving to the next room.
 
 ## Latest Build Step
+
+### Entrance Hall texture and lighting pass v6
+
+- Added generated packed image textures to the Blender material generator so walls, floorboards, wood trim, fabric, parchment, metal, and candles no longer export as flat colors only.
+- Re-exported the Entrance Hall and West Wing GLBs; Blender emitted texture PNG sidecars beside each GLB and Godot imported them.
+- Retuned Godot lighting by reducing broad ambient/hall light and adding four small warm Entrance Hall candle lights.
+- Refreshed the running Blender window through `tools/blender_mcp_exec.py`; the source blend now reports 585 objects, 13 materials, and 12 packed images.
+- Validation passed: smoke playthrough, main scene headless load, and menu scene headless load. Godot still prints the known ObjectDB warning on headless quit for smoke/main.
 
 ### Entrance Hall starting-area dressing v5
 

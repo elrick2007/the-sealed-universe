@@ -155,3 +155,16 @@ West Wing Hall:
   - `res://scenes/main.tscn` loaded headless for 3 seconds.
   - `res://scenes/menu.tscn` loaded headless for 3 seconds.
   - Godot still prints the known ObjectDB warning on headless quit for main; no gameplay-blocking error was observed.
+
+## v6 Texture And Lighting Notes
+
+- Added generated packed image textures to the Blender material pipeline for clay wall, damaged plaster, floorboards, wood trim, dark wood, burgundy fabric, parchment, metal, and candle/wax materials.
+- The GLB export now emits texture PNG sidecars next to each room export; these are intentional for this proof pass so the material source can be inspected and Godot can import the actual texture images.
+- Reduced broad ambient and hall light intensity in Godot so the room stops reading as a flat brown wash.
+- Added four small warm Entrance Hall candle lights matching the Blender sconce positions.
+- Re-exported `gf_entrance_hall.glb` and `gf_west_wing_hall.glb` with the textured material pass.
+- Validation passed on 2026-06-16:
+  - Smoke playthrough passed.
+  - `res://scenes/main.tscn` loaded headless for 3 seconds.
+  - `res://scenes/menu.tscn` loaded headless for 3 seconds.
+  - Godot still prints the known ObjectDB warning on headless quit for main/smoke; no gameplay-blocking error was observed.

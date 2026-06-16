@@ -1,6 +1,6 @@
 """
 The Weeping Walls - Book 1
-Entrance Hall / West Wing Hall Blender replacement pass v4.
+Entrance Hall / West Wing Hall Blender replacement pass v6.
 
 This script intentionally starts from a factory-clean Blender scene each run.
 It overwrites the old .blend and GLB exports while preserving gameplay marker
@@ -29,6 +29,7 @@ PROJECT_ROOT = SCRIPT_PATH.parents[4]
 SOURCE_PATH = PROJECT_ROOT / "assets" / "blender_source" / "rooms" / "ground" / "ww_gf_entrance_westwing.blend"
 EXPORT_DIR = PROJECT_ROOT / "assets" / "blender_exports" / "rooms" / "ground"
 RNG = random.Random(247)
+TEXTURE_SIZE = 512
 
 
 def reset_scene() -> None:
@@ -37,14 +38,104 @@ def reset_scene() -> None:
     bpy.context.scene.unit_settings.scale_length = 1.0
 
 
-def clay_material(name: str, color: tuple[float, float, float], roughness: float = 0.9) -> bpy.types.Material:
+def clamp01(value: float) -> float:
+    return max(0.0, min(1.0, value))
+
+
+def mix_color(a: tuple[float, float, float], b: tuple[float, float, float], t: float) -> tuple[float, float, float]:
+    return tuple(a[i] * (1.0 - t) + b[i] * t for i in range(3))
+
+
+def make_surface_image(
+    name: str,
+    base: tuple[float, float, float],
+    style: str,
+    size: int = TEXTURE_SIZE,
+) -> bpy.types.Image:
+    rng = random.Random(f"ww_texture::{name}")
+    image = bpy.data.images.new(f"{name}_Texture", width=size, height=size, alpha=True)
+    image.colorspace_settings.name = "sRGB"
+    dark = tuple(max(0.0, channel * 0.38) for channel in base)
+    light = tuple(min(1.0, channel * 1.42 + 0.05) for channel in base)
+    cracks = [
+        (rng.random(), rng.random(), rng.uniform(-1.2, 1.2), rng.uniform(0.002, 0.008), rng.uniform(0.18, 0.52))
+        for _ in range(22 if style in {"wall", "plaster"} else 9)
+    ]
+    pixels: list[float] = []
+    for y in range(size):
+        v = y / max(1, size - 1)
+        for x in range(size):
+            u = x / max(1, size - 1)
+            grain = rng.uniform(-0.12, 0.12)
+            wave = math.sin((u * 18.0 + v * 7.0) + rng.uniform(-0.05, 0.05)) * 0.035
+            color = mix_color(dark, light, clamp01(0.48 + grain + wave))
+            if style == "wall":
+                pock = rng.random()
+                if pock < 0.030:
+                    color = mix_color(color, dark, rng.uniform(0.45, 0.85))
+                elif pock > 0.985:
+                    color = mix_color(color, light, rng.uniform(0.35, 0.75))
+                for cx, cy, angle, width, length in cracks:
+                    dx = u - cx
+                    dy = v - cy
+                    along = dx * math.cos(angle) + dy * math.sin(angle)
+                    across = abs(-dx * math.sin(angle) + dy * math.cos(angle))
+                    if abs(along) < length and across < width * (1.0 + abs(along) * 5.0):
+                        color = mix_color(color, dark, 0.88)
+            elif style == "wood":
+                board = int(u * 7.0)
+                board_shift = (board % 3 - 1) * 0.045
+                ring = math.sin((v * 44.0) + math.sin(u * 18.0) * 2.0) * 0.09
+                color = mix_color(dark, light, clamp01(0.43 + ring + board_shift + grain * 0.55))
+                if abs((u * 7.0) % 1.0) < 0.018:
+                    color = mix_color(color, dark, 0.82)
+                if rng.random() < 0.010:
+                    color = mix_color(color, dark, 0.72)
+            elif style == "floor":
+                board = int(u * 10.0)
+                board_shift = (board % 4 - 1.5) * 0.035
+                streak = math.sin(v * 58.0 + u * 9.0) * 0.08
+                color = mix_color(dark, light, clamp01(0.38 + streak + board_shift + grain * 0.45))
+                if abs((u * 10.0) % 1.0) < 0.012:
+                    color = mix_color(color, dark, 0.9)
+            elif style == "fabric":
+                thread = math.sin(u * 80.0) * 0.05 + math.sin(v * 120.0) * 0.04
+                color = mix_color(dark, light, clamp01(0.34 + thread + grain))
+                if rng.random() < 0.020:
+                    color = mix_color(color, dark, 0.80)
+            elif style == "paper":
+                stain = math.sin(u * 12.0 + v * 15.0) * 0.05
+                color = mix_color(dark, light, clamp01(0.58 + stain + grain * 0.6))
+                if rng.random() < 0.015:
+                    color = mix_color(color, dark, 0.42)
+            else:
+                color = mix_color(dark, light, clamp01(0.5 + grain))
+            pixels.extend([clamp01(color[0]), clamp01(color[1]), clamp01(color[2]), 1.0])
+    image.pixels.foreach_set(pixels)
+    image.pack()
+    return image
+
+
+def clay_material(
+    name: str,
+    color: tuple[float, float, float],
+    roughness: float = 0.9,
+    style: str = "wall",
+) -> bpy.types.Material:
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
     bsdf = mat.node_tree.nodes.get("Principled BSDF")
     if bsdf:
         bsdf.inputs["Base Color"].default_value = (*color, 1.0)
         bsdf.inputs["Roughness"].default_value = roughness
+        tex = nodes.new(type="ShaderNodeTexImage")
+        tex.name = f"{name}_PackedTexture"
+        tex.image = make_surface_image(name, color, style)
+        links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
     mat["ww_material_family"] = "clay"
+    mat["ww_texture_style"] = style
     return mat
 
 
@@ -62,18 +153,18 @@ def glass_material(name: str, color: tuple[float, float, float]) -> bpy.types.Ma
 
 def build_materials() -> dict[str, bpy.types.Material]:
     return {
-        "wall": clay_material("WW_Mat_Clay_Wall", (0.36, 0.29, 0.22), 0.98),
-        "wall_dark": clay_material("WW_Mat_Clay_Wall_Fingerprint_Dark", (0.13, 0.095, 0.07), 0.99),
-        "wall_light": clay_material("WW_Mat_Clay_Wall_Patch_Light", (0.57, 0.48, 0.36), 0.98),
-        "floor": clay_material("WW_Mat_Clay_Floor", (0.13, 0.09, 0.06), 0.96),
-        "wood": clay_material("WW_Mat_Clay_Wood", (0.24, 0.13, 0.07), 0.91),
-        "wood_dark": clay_material("WW_Mat_Clay_Wood_Dark", (0.11, 0.06, 0.035), 0.94),
-        "fabric": clay_material("WW_Mat_Clay_Fabric_Burgundy", (0.22, 0.018, 0.028), 0.99),
-        "fabric_dark": clay_material("WW_Mat_Clay_Fabric_Burgundy_Dark", (0.075, 0.008, 0.014), 0.99),
-        "metal": clay_material("WW_Mat_Clay_Dark_Metal", (0.04, 0.038, 0.036), 0.78),
-        "candle": clay_material("WW_Mat_Clay_Candle_Amber", (0.92, 0.55, 0.17), 0.7),
-        "parchment": clay_material("WW_Mat_Clay_Parchment", (0.64, 0.54, 0.37), 0.96),
-        "sealed": clay_material("WW_Mat_Clay_Rose_Charcoal", (0.12, 0.035, 0.042), 0.96),
+        "wall": clay_material("WW_Mat_Clay_Wall", (0.36, 0.29, 0.22), 0.98, "wall"),
+        "wall_dark": clay_material("WW_Mat_Clay_Wall_Fingerprint_Dark", (0.13, 0.095, 0.07), 0.99, "wall"),
+        "wall_light": clay_material("WW_Mat_Clay_Wall_Patch_Light", (0.57, 0.48, 0.36), 0.98, "wall"),
+        "floor": clay_material("WW_Mat_Clay_Floor", (0.13, 0.09, 0.06), 0.96, "floor"),
+        "wood": clay_material("WW_Mat_Clay_Wood", (0.24, 0.13, 0.07), 0.91, "wood"),
+        "wood_dark": clay_material("WW_Mat_Clay_Wood_Dark", (0.11, 0.06, 0.035), 0.94, "wood"),
+        "fabric": clay_material("WW_Mat_Clay_Fabric_Burgundy", (0.22, 0.018, 0.028), 0.99, "fabric"),
+        "fabric_dark": clay_material("WW_Mat_Clay_Fabric_Burgundy_Dark", (0.075, 0.008, 0.014), 0.99, "fabric"),
+        "metal": clay_material("WW_Mat_Clay_Dark_Metal", (0.04, 0.038, 0.036), 0.78, "metal"),
+        "candle": clay_material("WW_Mat_Clay_Candle_Amber", (0.92, 0.55, 0.17), 0.7, "wax"),
+        "parchment": clay_material("WW_Mat_Clay_Parchment", (0.64, 0.54, 0.37), 0.96, "paper"),
+        "sealed": clay_material("WW_Mat_Clay_Rose_Charcoal", (0.12, 0.035, 0.042), 0.96, "wall"),
         "glass": glass_material("Glass_slick", (0.45, 0.65, 0.75)),
         "collision": glass_material("Collision_Debug", (0.10, 0.45, 0.75)),
     }
