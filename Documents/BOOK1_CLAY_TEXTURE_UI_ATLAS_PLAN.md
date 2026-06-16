@@ -1,0 +1,136 @@
+# Book 1 Clay Texture and UI Atlas Plan
+
+Last updated: 2026-06-16
+Status: Locked v1 for Blender/Godot replacement pass
+
+## Decision
+
+Use atlas templates, but do not use one giant tile sheet for the whole game.
+
+Split atlases by purpose:
+
+- `Clay_Surface_Atlas_01` for reusable manor surface materials.
+- `Clay_Detail_Decal_Atlas_01` for grime, fingerprints, cracks, writing, stains, and wall details.
+- `UI_Parchment_Atlas_01` for ledger, evidence board, map, menu, and journal UI pieces.
+- `Prop_Label_Atlas_01` later, only if small readable prop labels become numerous.
+
+Do not atlas large readable floor maps, evidence photos, main menu hero images, rostrum/video frames, character faces/eyes, or unique paintings. Those stay as standalone textures so they remain legible and easy to replace.
+
+## Why This Fits the Game
+
+The game needs to feel handmade, coherent, and claymation-led across every room. Atlases help because the same fingerprints, seam marks, thumb smears, parchment edges, and worn clay surfaces can appear everywhere without every asset becoming a bespoke texture job.
+
+This keeps the Blender pass fast, keeps Godot imports predictable, and lets the whole manor share one visual language even while rooms are built one by one.
+
+## Atlas Pack
+
+### Clay Surface Atlas
+
+Suggested source size: 4096 x 4096.
+Suggested runtime size: 2048 x 2048 unless close-up quality needs more.
+
+Companion maps:
+
+- Albedo.
+- Normal, including fingerprints and hand-formed clay irregularity.
+- Roughness.
+
+Initial slots:
+
+- Aged plaster.
+- Damp plaster.
+- Cracked plaster.
+- Red-painted wall panel.
+- Dark timber.
+- Worn oak floor.
+- Stone flags.
+- Quarry tile.
+- Iron and brass.
+- Cloth/fabric.
+- Lemon leaf and lemon fruit clay.
+- Black book leather.
+
+### Clay Detail Decal Atlas
+
+Suggested size: 2048 x 2048.
+
+Transparent decal cards or projected details:
+
+- Fingerprints.
+- Thumb smears.
+- Clay seams.
+- Hairline cracks.
+- Deep wall splits.
+- Scratches.
+- Damp blooms.
+- Soot.
+- Ash.
+- Ink writing.
+- Chalk measurement marks.
+- Red thread shadow.
+- Lemon stains.
+- Rose trace.
+- Wall-vein marks.
+
+### UI Parchment Atlas
+
+Suggested size: 2048 x 2048 for v1, 4096 x 4096 if the ledger UI needs more room.
+
+UI pieces:
+
+- Nine-slice parchment panels.
+- Torn corners.
+- Tab strips.
+- Evidence-card backs.
+- Pins.
+- Red thread pieces.
+- Tape strips.
+- Ink underlines.
+- Ledger page edges.
+- Photo border.
+- Menu button hover strip.
+- Map fog masks.
+
+### Prop Label Atlas
+
+Defer this until there are enough repeated small labels to justify it.
+
+Examples:
+
+- Key tags.
+- Bottle labels.
+- Drawer labels.
+- Shipping labels.
+- Evidence tags.
+
+## Repo Paths
+
+Use these paths for source and runtime assets:
+
+- `assets/texture_sources/atlases/`
+- `assets/textures/atlases/`
+- `assets/materials/clay/`
+- `assets/ui/atlas/`
+
+Source files stay editable and high resolution. Runtime textures are the compressed Godot-ready versions.
+
+## Blender Rules
+
+- Modular room kit materials should use the clay surface atlas wherever possible.
+- Detail grime, writing, cracks, stains, and hand marks should usually be decal cards or projected meshes.
+- Never bake gameplay prompts, journal text, evidence labels, or objective text into room textures.
+- Use material names beginning with `WW_Mat_Clay_`.
+- Apply transforms before GLB export.
+- Keep UVs simple and visible. If a room needs custom UV artistry, document why.
+
+## Godot Rules
+
+- 3D surface atlases use mipmaps and GPU compression.
+- UI atlases avoid mipmaps where crisp text, panel edges, or icons need clean rendering.
+- Maps and evidence photos remain standalone readable textures.
+- Imported GLBs own geometry and material assignment.
+- Godot owns lights, interaction logic, UI, prompts, collision checks, and save state.
+
+## Immediate Next Step
+
+Create placeholder source atlas layouts for the clay surface, clay decals, and parchment UI. Then apply the first clay surface/decal pass to the live Entrance Hall shell before promoting West Wing Hall as the second controlled replacement.

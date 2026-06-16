@@ -193,6 +193,9 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md`
 - `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md`
 - `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md`
+- `Documents/Technical_Bible_T6_Blender_Environment_Construction.md`
+- `Documents/Weeping_Walls_Room_Manifest - Room Manifest.pdf`
+- `Documents/BOOK1_CLAY_TEXTURE_UI_ATLAS_PLAN.md`
 
 ## Validation Commands
 
@@ -263,9 +266,16 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Entrance Hall alignment/collision tuning v2: play the live visual shell against the preserved blockout gameplay, tune transforms/material visibility if needed, then promote West Wing Hall as the second controlled replacement.
+Clay texture/UI atlas template v1: create the first atlas templates for clay surfaces, clay decals, and parchment UI, then apply the first surface/decal set to the Entrance Hall shell before promoting West Wing Hall as the second controlled replacement.
 
 ## Latest Build Step
+
+### Clay texture/UI atlas plan v1
+
+- Archived `Documents/Technical_Bible_T6_Blender_Environment_Construction.md` and `Documents/Weeping_Walls_Room_Manifest - Room Manifest.pdf` as Blender/environment references.
+- Added `Documents/BOOK1_CLAY_TEXTURE_UI_ATLAS_PLAN.md` to lock the atlas strategy: clay surface atlas, clay decal atlas, parchment/UI atlas, and optional prop-label atlas.
+- Confirmed large readable assets stay standalone: floor-plan maps, menu hero image, evidence photos, rostrum/video frames, character faces, and unique paintings.
+- Set the next visual-production step to create placeholder atlas templates and apply the first clay surface/decal pass to the live Entrance Hall shell.
 
 ### Entrance Hall controlled replacement v1
 
