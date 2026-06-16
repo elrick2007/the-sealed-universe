@@ -1,4 +1,4 @@
-﻿# Clay Material Placeholders
+# Clay Material Placeholders
 
 These are Godot-side placeholder materials for imported GLB rooms. Blender remains the source of truth for UV layout and final baked texture assignments.
 

@@ -5,6 +5,17 @@ param(
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
 
+function Write-Utf8NoBom {
+    param(
+        [string]$Path,
+        [string]$Content
+    )
+
+    $fullPath = [System.IO.Path]::GetFullPath($Path)
+    $encoding = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($fullPath, $Content, $encoding)
+}
+
 function Ensure-Dir {
     param([string]$Path)
     New-Item -ItemType Directory -Force -Path $Path | Out-Null
@@ -185,7 +196,8 @@ function Write-SlotJson {
         slots = (Add-UvData -Slots $Slots -Width $Width -Height $Height)
     }
 
-    $data | ConvertTo-Json -Depth 8 | Set-Content -Encoding UTF8 -Path $Path
+    $json = $data | ConvertTo-Json -Depth 8
+    Write-Utf8NoBom -Path $Path -Content ($json + [Environment]::NewLine)
 }
 
 function Write-LayoutDoc {
@@ -212,7 +224,7 @@ function Write-LayoutDoc {
     }
     $lines += ""
 
-    $lines | Set-Content -Encoding UTF8 -Path $Path
+    Write-Utf8NoBom -Path $Path -Content (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }
 
 function Write-Material {
@@ -228,14 +240,16 @@ function Write-Material {
     $g = [math]::Round($c.G / 255, 4)
     $b = [math]::Round($c.B / 255, 4)
 
-    @(
+    $lines = @(
         '[gd_resource type="StandardMaterial3D" format=3]'
         ''
         '[resource]'
         "resource_name = `"$Name`""
         "albedo_color = Color($r, $g, $b, 1)"
         "roughness = $Roughness"
-    ) | Set-Content -Encoding UTF8 -Path $Path
+    )
+
+    Write-Utf8NoBom -Path $Path -Content (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }
 
 $sourceDir = Join-Path $Root "assets\texture_sources\atlases"
@@ -318,7 +332,7 @@ Write-Material -Path (Join-Path $materialDir "WW_Mat_Clay_Wood.tres") -Name "WW_
 Write-Material -Path (Join-Path $materialDir "WW_Mat_Clay_Floor.tres") -Name "WW_Mat_Clay_Floor" -Color "#3d2418" -Roughness "0.93"
 Write-Material -Path (Join-Path $materialDir "WW_Mat_Clay_Dark.tres") -Name "WW_Mat_Clay_Dark" -Color "#18100d" -Roughness "0.98"
 
-@(
+$materialReadme = @(
     "# Clay Material Placeholders"
     ""
     "These are Godot-side placeholder materials for imported GLB rooms. Blender remains the source of truth for UV layout and final baked texture assignments."
@@ -329,6 +343,7 @@ Write-Material -Path (Join-Path $materialDir "WW_Mat_Clay_Dark.tres") -Name "WW_
     "- Use ``WW_Mat_Clay_Dark`` for unwritten, hidden, or not-yet-rendered house geometry."
     ""
     "Atlas slot definitions live in ``assets/textures/atlases`` and ``assets/ui/atlas`` as JSON. Keep slot names stable once Blender meshes start using them."
-) | Set-Content -Encoding UTF8 -Path (Join-Path $materialDir "README.md")
+)
+Write-Utf8NoBom -Path (Join-Path $materialDir "README.md") -Content (($materialReadme -join [Environment]::NewLine) + [Environment]::NewLine)
 
 Write-Host "Clay atlas templates generated."

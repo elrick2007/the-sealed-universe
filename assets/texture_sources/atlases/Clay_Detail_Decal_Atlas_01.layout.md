@@ -1,4 +1,4 @@
-﻿# Clay_Detail_Decal_Atlas_01 Layout
+# Clay_Detail_Decal_Atlas_01 Layout
 
 Generated placeholder atlas. Replace the painted contents later, but keep slot names and bounds stable unless the Godot and Blender references are updated in the same commit.
 
