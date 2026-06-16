@@ -1,10 +1,12 @@
-# Entrance Hall / West Wing Hall Blender Replacement Pass v1
+# Entrance Hall / West Wing Hall Blender Replacement Pass v2
 
 Last updated: 2026-06-16
 
 ## Purpose
 
-This is the first production-style claymation architecture pass. It replaces only the Entrance Hall and West Wing Hall blockout after the Godot GLB import convention has passed a side-by-side route test.
+This is the first production-style claymation architecture replacement pair, now moving from v1 proof-of-pipeline into v2 readable set construction.
+
+`Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` governs this pass: Blender is the source of truth for final visible room architecture. Godot blockouts remain gameplay/collision/trigger scaffolds and should not be polished as final room visuals.
 
 ## Source And Exports
 
@@ -57,16 +59,18 @@ West Wing Hall:
 - `Door_GF_WestWingHall__GF_Kitchen`
 - `Door_GF_WestWingHall__CellarStairs`
 
-## First Blender Build Checklist
+## v2 Blender Build Checklist
 
-- [x] Block accurate floor rectangles against the ground-floor map.
-- [x] Add wall thickness and ceilings.
-- [x] Place door frames and gameplay marker empties.
-- [x] Assign clay material variants.
-- [x] Add simple collision meshes.
-- [x] Export test GLBs.
-- [x] Create Godot wrapper scenes.
-- [x] Run side-by-side route test before replacing the blockout.
+- [x] Keep block-accurate floor rectangles against the ground-floor map.
+- [x] Upgrade walls and ceilings from plain boxes into irregular clay set surfaces.
+- [x] Add/readably improve wall thickness, doorframes, baseboards/skirting, cornice, and trim.
+- [x] Add the West Wing door as a sculpted visual shell while preserving the existing scripted Godot door anchor.
+- [x] Improve red runners/carpets so they read as cloth strips, not flat debug planes.
+- [x] Add sconces/candle holders as sculpted fixed props while leaving final lighting to Godot.
+- [x] Preserve recorder, key, manor plans, tape-measure, trigger, door, clock, and sightline marker locations.
+- [x] Use the `WW_Mat_Clay_*` material naming family in the Blender export.
+- [x] Export updated GLBs and verify wrapper scene paths.
+- [x] Run smoke and scene-load validation after import.
 
 ## Generated v1 Notes
 
@@ -89,3 +93,22 @@ West Wing Hall:
 - Kept the original Entrance Hall blockout collision and gameplay anchors authoritative.
 - Hid only the duplicate preview entrance import under `BlenderImportPreview`.
 - Left West Wing Hall preview-only for the second controlled replacement pass.
+
+## v2 Requirements
+
+- Enclosed Entrance Hall and West Wing Hall with ceilings and readable wall thickness.
+- Doorframes, baseboards/skirting, cornice/trim, West Wing door visual shell, red runners, sconces/candle holders, and preserved gameplay prop locations.
+- Subtle handmade clay irregularity on walls, trim, edges, doors, and carpets.
+- Godot remains responsible for final lighting, gameplay scripts, trigger behavior, and collision verification.
+
+## v2 Generated Notes
+
+- Updated `assets/blender_source/rooms/ground/build_entrance_westwing.py` to generate a richer clay set shell using bevel/displace surface modifiers, fingerprint smears, baseboards, cornice strips, door panels, handles, sconces/candle holders, clock face detail, pendulum bob, runner fringe, and the West Wing door visual leaf.
+- Regenerated `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`.
+- Re-exported `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb`.
+- Updated wrapper metadata to mark the Entrance Hall as the controlled v2 visual shell and West Wing Hall as controlled v2 preview.
+- Validation passed on 2026-06-16:
+  - Smoke playthrough passed.
+  - `res://scenes/main.tscn` loaded headless for 3 seconds.
+  - `res://scenes/menu.tscn` loaded headless for 3 seconds.
+  - Godot still prints the known ObjectDB warning on headless quit for main/smoke; no gameplay-blocking error was observed.

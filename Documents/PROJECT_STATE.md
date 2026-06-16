@@ -86,6 +86,8 @@ The intended full series is six interlinked games under *The Sealed Universe*. T
 - Live Blender MCP control was verified by `tools/blender_mcp_live_test.ps1`, which creates `WW_MCP_Live_Proof_Sphere` and `WW_MCP_Live_Proof_Base` in the open Blender scene.
 - Script-driven Blender export is also verified through `assets/blender_source/tests/build_blender_control_test.py`.
 - Godot should import exported GLB files from `assets/blender_exports`; Blender source files under `assets/blender_source` are ignored by Godot via `.gdignore`.
+- `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` locks the current production rule: Blender is the source of truth for final visible room architecture, while Godot blockouts remain gameplay/collision/trigger scaffolds.
+- Do not hand-build final room visuals from Godot primitive CSG or MeshInstance blockouts. Final room shells must be authored in Blender, exported as GLB, and routed through Godot wrapper scenes that preserve gameplay anchors.
 - Water Tank / Not-Glass Marble v1, gating the drowned tin behind Ada's contradiction and turning the not-glass marble into an inventory key for the mirror chest route.
 - Mirror Chest / Caton Field Book v1, using the not-glass marble in the north Sick Room chest so the south twin opens with Caton's Field Book and unlocks the Caton measurement overlay seed.
 - Caton Field Book overlay payoff v1, turning the Field Book into a tape-measure modifier that compares Caton's submitted dimensions against the house's true dimensions.
@@ -190,6 +192,7 @@ Before Blender architecture replacement, keep the route links across Ground Floo
 - `Documents/M0_to_M1_Setup_Checklist.md`
 - `Documents/BOOK1_ROOM_COVERAGE_MATRIX.md`
 - `Documents/BOOK1_ROOM_PURPOSE_LOCK.md`
+- `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md`
 - `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md`
 - `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md`
 - `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md`
@@ -266,9 +269,27 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Clay texture/UI atlas template v1: create the first atlas templates for clay surfaces, clay decals, and parchment UI, then apply the first surface/decal set to the Entrance Hall shell before promoting West Wing Hall as the second controlled replacement.
+Playable visual inspection and West Wing controlled promotion: inspect the v2 Entrance Hall / West Wing Hall GLBs in Godot, then promote the West Wing Hall visual shell only when the current Godot gameplay anchors and route triggers remain authoritative.
 
 ## Latest Build Step
+
+### Entrance Hall / West Wing Hall Blender replacement v2
+
+- Updated `assets/blender_source/rooms/ground/build_entrance_westwing.py` from v1 proof geometry into a richer v2 clay set generator.
+- Added bevel/displace clay surface treatment, fingerprint smears, baseboards/skirting, cornice strips, door panels, handles, sconces/candle holders, clock face detail, pendulum bob, runner fringe, and the West Wing door visual leaf.
+- Switched Blender export material names into the `WW_Mat_Clay_*` family while preserving the existing marker names for recorder, key, manor plans, West Wing threshold scare, doors, measurement volume, clock, and chandelier sightline.
+- Regenerated `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`.
+- Re-exported `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb`.
+- Updated wrapper metadata: Entrance Hall is a controlled v2 visual shell; West Wing Hall remains a controlled v2 preview until the gameplay anchor handoff is explicitly promoted.
+- Validation passed: smoke playthrough, main scene headless load, and menu scene headless load.
+
+### Room art source-of-truth lock v1
+
+- Added `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md`.
+- Locked Blender as the source of truth for final visible room architecture.
+- Re-stated that Godot blockouts are gameplay/collision/trigger scaffolds only.
+- Final room visuals must be Blender-authored, exported as GLB, and brought into Godot through wrapper scenes that preserve gameplay anchors.
+- The active visual-production step is now the Entrance Hall / West Wing Hall Blender Replacement Pass v2.
 
 ### Clay texture/UI atlas plan v1
 
@@ -367,7 +388,7 @@ Clay texture/UI atlas template v1: create the first atlas templates for clay sur
 
 ## Pre-Blender Room Tracking
 
-`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, and Blender readiness. `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` records the role of every mapped-but-previously-unplanned room. `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md` converts those rooms into export targets for Blender. `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md` locks how those exports land in Godot, and `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md` starts the first replacement pair. Use these alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
+`Documents/BOOK1_ROOM_COVERAGE_MATRIX.md` is the current source for mapped rooms, playable rooms, and Blender readiness. `Documents/BOOK1_ROOM_PURPOSE_LOCK.md` records the role of every mapped-but-previously-unplanned room. `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` locks Blender as the source of truth for final visible room architecture. `Documents/BOOK1_BLENDER_ROOM_MANIFEST.md` converts rooms into export targets for Blender. `Documents/BOOK1_GODOT_GLB_IMPORT_CONVENTION.md` locks how those exports land in Godot, and `Documents/BOOK1_ENTRANCE_WESTWING_BLENDER_PASS.md` tracks the first replacement pair. Use these alongside `Documents/BOOK1_PRE_BLENDER_CHECKLIST.md` before creating final room assets.
 
 ## Anthology Ending Guardrail
 

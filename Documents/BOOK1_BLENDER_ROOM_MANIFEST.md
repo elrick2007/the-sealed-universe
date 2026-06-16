@@ -1,8 +1,10 @@
 # Book 1 Blender Room Manifest
 
-Last updated: 2026-06-15
+Last updated: 2026-06-16
 
 This is the pre-export architecture manifest for Game 01 / Book 1. It converts the floor-plan rooms into Blender build targets before blockout replacement begins.
+
+`Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` is authoritative for production ownership: Blender owns final visible room architecture; Godot blockouts remain gameplay, collision, trigger, and route scaffolds.
 
 Use this with:
 
@@ -16,7 +18,7 @@ Use this with:
 - 1 Blender unit = 1 metre.
 - Apply transforms before export.
 - Godot owns gameplay lighting, final collision checks, and interaction scripts.
-- Blender owns enclosed architecture, room silhouette, material assignment, UVs, prop placement empties, and named trigger/measurement helper volumes.
+- Blender owns enclosed final architecture, room silhouette, wall thickness, ceilings, trim, doorframes, fixed prop shells, material assignment, UVs, prop placement empties, clay imperfection, and named trigger/measurement helper volumes.
 - Export as `.glb` with `export_extras=True`.
 - Room export path pattern: `assets/blender_exports/rooms/<floor>/<export_name>.glb`.
 - Main room collection name pattern: `Room_<floor>_<room_id>`.
@@ -26,6 +28,7 @@ Use this with:
 - Breathable wall meshes: name `Wall_*` and set `ww_breathing=1`.
 - Interactables: set `ww_interact="<verb>"`.
 - Hero props: set `ww_prop="<prop_id>"`.
+- Final room visuals must not be hand-built from Godot primitive CSG or MeshInstance blockout pieces.
 
 ## Scale Targets
 

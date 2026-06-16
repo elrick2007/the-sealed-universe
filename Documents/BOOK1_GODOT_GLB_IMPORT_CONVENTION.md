@@ -1,15 +1,18 @@
 # Book 1 Godot GLB Import Convention
 
-Last updated: 2026-06-15
+Last updated: 2026-06-16
 
 This locks how Blender room exports land in Godot before replacing any working blockout rooms.
+
+See also `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md`. Blender is the source of truth for final visible room architecture; Godot blockouts are gameplay/collision/trigger scaffolds and should not be promoted into final room art.
 
 ## Scope
 
 - Applies to Game 01 / Book 1 only.
 - Covers room architecture GLBs, connector GLBs, hero prop GLBs, marker empties, and collision helper meshes.
-- Blender owns geometry, UVs, material assignment, clay surface detail, prop placement empties, and named gameplay markers.
+- Blender owns final visible room architecture, wall thickness, ceilings, trim, doorframes, UVs, material assignment, clay surface detail, prop placement empties, and named gameplay markers.
 - Godot owns final lighting, scripts, collision verification, UI, save/load, gameplay state, and material overrides when needed.
+- Godot wrapper scenes own import metadata and gameplay anchor preservation. They are the handoff layer between imported Blender art and the proven gameplay scaffold.
 
 ## Folder Contract
 
@@ -75,3 +78,4 @@ This locks how Blender room exports land in Godot before replacing any working b
 - Interactions still raycast from the first-person camera.
 - Saved flags still mark objectives, notes, evidence, and map visits correctly.
 - The world reads as handmade claymation architecture rather than a flat greybox.
+- No final visible room shell is built only from Godot primitive blockout geometry.
