@@ -1,0 +1,283 @@
+﻿{
+    "atlas":  "Clay_Detail_Decal_Atlas_01",
+    "image":  "res://assets/textures/atlases/Clay_Detail_Decal_Atlas_01.png",
+    "size":  [
+                 2048,
+                 2048
+             ],
+    "coordinate_space":  "pixels_from_top_left_and_normalized_uv",
+    "slots":  [
+                  {
+                      "name":  "fingerprint_smear",
+                      "x":  0,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#6f574a",
+                      "notes":  "Soft thumbprint and dragged clay marks.",
+                      "uv_min":  [
+                                     0,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "thumbprint_whorl",
+                      "x":  512,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#8b7565",
+                      "notes":  "Close clay whorl detail from Mara references.",
+                      "uv_min":  [
+                                     0.25,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "hairline_cracks",
+                      "x":  1024,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#221712",
+                      "notes":  "Thin surface cracks.",
+                      "uv_min":  [
+                                     0.5,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "wall_weeps",
+                      "x":  1536,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#30100e",
+                      "notes":  "Dark red/brown wall seep marks.",
+                      "uv_min":  [
+                                     0.75,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "black_mold",
+                      "x":  0,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#111513",
+                      "notes":  "Mold and corner dirt.",
+                      "uv_min":  [
+                                     0,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "soot_edge",
+                      "x":  512,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#1e1712",
+                      "notes":  "Burnt edge and fireplace residue.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "wax_drip",
+                      "x":  1024,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#d8be82",
+                      "notes":  "Candle drips and warm highlights.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "red_thread",
+                      "x":  1536,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#7b1715",
+                      "notes":  "Evidence board red thread and thin horror lines.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "handwriting_lines",
+                      "x":  0,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#241610",
+                      "notes":  "Ledger strokes and wall-script decals.",
+                      "uv_min":  [
+                                     0,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "tape_measure_marks",
+                      "x":  512,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#c9a96d",
+                      "notes":  "Caton measure ticks and ruler marks.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "compass_scratch",
+                      "x":  1024,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#b19865",
+                      "notes":  "Compass lie scratches and map nicks.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "rose_trace",
+                      "x":  1536,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#5b1b24",
+                      "notes":  "Sealed wing rose scent only.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "lemon_pollen",
+                      "x":  0,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#d8b957",
+                      "notes":  "Conservatory lemon pollen marks.",
+                      "uv_min":  [
+                                     0,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "nail_marks",
+                      "x":  512,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#2a1713",
+                      "notes":  "Dragged fingernail scratches.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "paper_tape",
+                      "x":  1024,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#b99b6f",
+                      "notes":  "Archive repair tape and parchment seams.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "reserve_detail",
+                      "x":  1536,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#514234",
+                      "notes":  "Reserved for room-specific discoveries.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     1
+                                 ]
+                  }
+              ]
+}

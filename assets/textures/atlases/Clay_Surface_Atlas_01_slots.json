@@ -1,0 +1,283 @@
+﻿{
+    "atlas":  "Clay_Surface_Atlas_01",
+    "image":  "res://assets/textures/atlases/Clay_Surface_Atlas_01.png",
+    "size":  [
+                 2048,
+                 2048
+             ],
+    "coordinate_space":  "pixels_from_top_left_and_normalized_uv",
+    "slots":  [
+                  {
+                      "name":  "plaster_warm",
+                      "x":  0,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#8a6748",
+                      "notes":  "Primary clay-plaster wall tone.",
+                      "uv_min":  [
+                                     0,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "plaster_cold",
+                      "x":  512,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#665b4f",
+                      "notes":  "Dim blue-grey plaster for colder rooms.",
+                      "uv_min":  [
+                                     0.25,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "aged_wood",
+                      "x":  1024,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#4b2d1d",
+                      "notes":  "Door frames, panels, shelves, bannisters.",
+                      "uv_min":  [
+                                     0.5,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "floor_clay_boards",
+                      "x":  1536,
+                      "y":  0,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#3d2418",
+                      "notes":  "Clay floorboards and darker timber.",
+                      "uv_min":  [
+                                     0.75,
+                                     0
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.25
+                                 ]
+                  },
+                  {
+                      "name":  "burgundy_runner",
+                      "x":  0,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#681b18",
+                      "notes":  "Rugs, runners, red thresholds.",
+                      "uv_min":  [
+                                     0,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "dark_room_clay",
+                      "x":  512,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#18100d",
+                      "notes":  "Unwritten/underlit room massing.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "iron_aged",
+                      "x":  1024,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#38312a",
+                      "notes":  "Keys, locks, hinges, and plates.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "candle_wax",
+                      "x":  1536,
+                      "y":  512,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#d9c495",
+                      "notes":  "Candles and pale wax buildup.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.25
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.5
+                                 ]
+                  },
+                  {
+                      "name":  "lemon_leaf",
+                      "x":  0,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#475636",
+                      "notes":  "Conservatory lemon foliage.",
+                      "uv_min":  [
+                                     0,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "lemon_peel",
+                      "x":  512,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#c7a137",
+                      "notes":  "Lemon fruit and yellowed labels.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "black_book_cover",
+                      "x":  1024,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#110d0b",
+                      "notes":  "Register, hidden books, void props.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "raw_plaster",
+                      "x":  1536,
+                      "y":  1024,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#b69670",
+                      "notes":  "Exposed clay, chipped walls, repair areas.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.5
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     0.75
+                                 ]
+                  },
+                  {
+                      "name":  "soot_stain",
+                      "x":  0,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#211b16",
+                      "notes":  "Burn marks and chimney-dark surfaces.",
+                      "uv_min":  [
+                                     0,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.25,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "damp_stone",
+                      "x":  512,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#504b41",
+                      "notes":  "Cellar, well, and water tank stone.",
+                      "uv_min":  [
+                                     0.25,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.5,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "clay_flesh",
+                      "x":  1024,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#c49b7b",
+                      "notes":  "Puppet skin base.",
+                      "uv_min":  [
+                                     0.5,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     0.75,
+                                     1
+                                 ]
+                  },
+                  {
+                      "name":  "reserve_surface",
+                      "x":  1536,
+                      "y":  1536,
+                      "w":  512,
+                      "h":  512,
+                      "color":  "#7b6a58",
+                      "notes":  "Reserved for first Blender discovery.",
+                      "uv_min":  [
+                                     0.75,
+                                     0.75
+                                 ],
+                      "uv_max":  [
+                                     1,
+                                     1
+                                 ]
+                  }
+              ]
+}

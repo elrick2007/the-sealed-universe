@@ -290,6 +290,15 @@ Clay texture/UI atlas template v1: create the first atlas templates for clay sur
 - Verified both wrapper scenes reference exported GLBs and carry preview metadata rather than gameplay bindings.
 - Cleared the first replacement pair for controlled swap-in: Entrance Hall first, West Wing Hall second.
 
+### Clay texture and UI atlas templates v1
+
+- Added `tools/build_clay_atlas_templates.ps1` as the repeatable atlas-template generator.
+- Generated repo-owned template atlases for `Clay_Surface_Atlas_01`, `Clay_Detail_Decal_Atlas_01`, and `UI_Parchment_Atlas_01`.
+- Runtime PNGs and slot JSON live under `assets/textures/atlases/` and `assets/ui/atlas/`; editable layout notes live under `assets/texture_sources/atlases/`.
+- Added placeholder Godot clay materials under `assets/materials/clay/` using the locked `WW_Mat_Clay_` naming convention.
+- ChatGPT or Google Flow can generate richer source textures later, but the slot names, bounds, and atlas filenames should remain the repo-owned contract.
+- Next step is applying these atlas/material conventions to the Entrance Hall shell first, then West Wing Hall.
+
 ### Godot wrapper import test v1
 
 - Added wrapper scenes for `gf_entrance_hall.glb` and `gf_west_wing_hall.glb` under `assets/imported_scenes/rooms/ground/`.

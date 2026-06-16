@@ -1,0 +1,6 @@
+﻿[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+resource_name = "WW_Mat_Clay_Wall"
+albedo_color = Color(0.5412, 0.4039, 0.2824, 1)
+roughness = 0.95
