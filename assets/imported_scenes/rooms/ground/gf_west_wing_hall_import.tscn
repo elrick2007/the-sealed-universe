@@ -5,7 +5,7 @@
 [node name="GF_WestWingHall_Import" type="Node3D"]
 metadata/ww_room_id = "GF_WestWingHall"
 metadata/ww_source_glb = "res://assets/blender_exports/rooms/ground/gf_west_wing_hall.glb"
-metadata/ww_import_status = "controlled_v3_preview"
-metadata/ww_art_source = "Blender GLB; promote only after gameplay anchor handoff"
+metadata/ww_import_status = "controlled_v4_runtime_aligned_visual_shell"
+metadata/ww_art_source = "Blender GLB; Godot gameplay anchors remain authoritative"
 
 [node name="ImportedGLB" parent="." instance=ExtResource("1_glb")]

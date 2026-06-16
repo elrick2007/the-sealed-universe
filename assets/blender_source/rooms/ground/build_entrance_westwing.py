@@ -1,6 +1,6 @@
 """
 The Weeping Walls - Book 1
-Entrance Hall / West Wing Hall Blender replacement pass v3.
+Entrance Hall / West Wing Hall Blender replacement pass v4.
 
 This script intentionally starts from a factory-clean Blender scene each run.
 It overwrites the old .blend and GLB exports while preserving gameplay marker
@@ -416,25 +416,26 @@ def add_grandfather_clock(col: bpy.types.Collection, mats: dict[str, bpy.types.M
 def add_entrance_hall(col: bpy.types.Collection, mats: dict[str, bpy.types.Material]) -> None:
     height = 3.0
     center = (0.0, 0.0)
-    size = (6.0, 8.0)
+    size = (10.0, 16.0)
     add_room_shell("GF_EntranceHall", col, mats, center, size, height, breathable=True)
-    add_ragged_runner("GF_EntranceHall", (-0.28, 0.15), 6.7, 1.45, col, mats)
-    add_door("GF_EntranceHall_FrontDoor", (0.0, -3.94, 1.08), col, mats, "south", width=1.35, height=2.18, props={"ww_interact": "inspect"})
-    add_door("GF_EntranceHall_SealedBoundary", (2.94, 1.35, 1.18), col, mats, "east", width=1.70, height=2.35, props={"ww_interact": "inspect"})
-    add_open_threshold("EntranceToWestWing", (-3.02, 0.1, 1.08), col, mats, "west", width=1.30, height=2.14, glimpse="dark")
-    add_grandfather_clock(col, mats, (-2.15, 2.45, 0.0))
-    add_sconce("GF_EntranceHall_WestFront", (-2.88, -1.45, 1.48), col, mats, "west")
-    add_sconce("GF_EntranceHall_EastFront", (2.88, -1.25, 1.48), col, mats, "east")
-    add_sconce("GF_EntranceHall_Back", (-0.8, 3.84, 1.48), col, mats, "north")
-    add_handprint("EntranceWhisperNorth", (-2.4, 3.70, 1.58), "north", col, mats)
-    box("Mesh_ClayMetalDark_GF_EntranceHall_ChandelierSightline", (0.28, 0.28, 0.08), (-0.3, 1.0, 2.84), mats["metal"], col, wobble=0.006)
-    box("Prop_Recorder", (0.32, 0.18, 0.08), (-1.45, -2.35, 0.09), mats["metal"], col, {"ww_interact": "take", "ww_prop": "recorder"}, wobble=0.006)
-    box("Prop_IronKey", (0.28, 0.06, 0.04), (1.35, -2.2, 0.08), mats["metal"], col, {"ww_interact": "take", "ww_prop": "iron_key"}, wobble=0.004)
+    add_ragged_runner("GF_EntranceHall", (-0.18, 0.0), 13.5, 1.55, col, mats)
+    add_door("GF_EntranceHall_FrontDoor", (0.0, -7.84, 1.08), col, mats, "south", width=1.55, height=2.20, props={"ww_interact": "inspect"})
+    add_door("GF_EntranceHall_SealedBoundary", (4.88, -1.35, 1.18), col, mats, "east", width=2.10, height=2.35, props={"ww_interact": "inspect"})
+    add_open_threshold("EntranceToWestWing", (0.0, 7.84, 1.08), col, mats, "north", width=1.70, height=2.14, glimpse="dark")
+    add_grandfather_clock(col, mats, (-4.55, -3.2, 0.0))
+    add_sconce("GF_EntranceHall_WestFront", (-4.82, -2.2, 1.48), col, mats, "west")
+    add_sconce("GF_EntranceHall_EastFront", (4.82, -2.1, 1.48), col, mats, "east")
+    add_sconce("GF_EntranceHall_WestBack", (-4.82, 4.4, 1.48), col, mats, "west")
+    add_sconce("GF_EntranceHall_NorthDoor", (1.9, 7.70, 1.48), col, mats, "north")
+    add_handprint("EntranceWhisperEast", (4.70, -1.4, 1.58), "east", col, mats)
+    box("Mesh_ClayMetalDark_GF_EntranceHall_ChandelierSightline", (0.28, 0.28, 0.08), (-0.3, 5.2, 2.84), mats["metal"], col, wobble=0.006)
+    box("Prop_Recorder", (0.32, 0.18, 0.08), (-2.2, -1.2, 0.09), mats["metal"], col, {"ww_interact": "take", "ww_prop": "recorder"}, wobble=0.006)
+    box("Prop_IronKey", (0.28, 0.06, 0.04), (2.7, 2.4, 0.08), mats["metal"], col, {"ww_interact": "take", "ww_prop": "iron_key"}, wobble=0.004)
     empty("Spawn_GF_EntranceHall", (0.0, -2.5, 1.6), col, {"ww_spawn": "player"})
-    empty("Door_GF_EntranceHall__GF_WestWingHall", (-3.05, 0.1, 1.0), col, {"ww_interact": "open", "ww_door": "west_wing"})
-    empty("Wall_Whisper_Entrance", (-2.85, 1.4, 1.35), col, {"ww_breathing": 1, "ww_interact": "inspect"})
-    empty("Trigger_ChandelierHandprintSightline", (-0.3, 1.0, 1.6), col, {"ww_trigger": "chandelier_handprint"})
-    box("Col_GF_EntranceHall_Floor", (5.8, 7.8, 0.1), (0.0, 0.0, -0.05), mats["collision"], col, {"ww_collision": "static"})
+    empty("Door_GF_EntranceHall__GF_WestWingHall", (0.0, 7.84, 1.0), col, {"ww_interact": "open", "ww_door": "west_wing"})
+    empty("Wall_Whisper_Entrance", (4.82, -1.4, 1.35), col, {"ww_breathing": 1, "ww_interact": "inspect"})
+    empty("Trigger_ChandelierHandprintSightline", (-0.3, 5.2, 1.6), col, {"ww_trigger": "chandelier_handprint"})
+    box("Col_GF_EntranceHall_Floor", (9.8, 15.8, 0.1), (0.0, 0.0, -0.05), mats["collision"], col, {"ww_collision": "static"})
 
 
 def add_room_glimpse(prefix: str, col: bpy.types.Collection, mats: dict[str, bpy.types.Material], loc: tuple[float, float, float], side: str, kind: str) -> None:
@@ -456,30 +457,30 @@ def add_room_glimpse(prefix: str, col: bpy.types.Collection, mats: dict[str, bpy
 
 def add_west_wing_hall(col: bpy.types.Collection, mats: dict[str, bpy.types.Material]) -> None:
     height = 2.9
-    center = (-5.2, 1.0)
-    size = (2.55, 8.6)
+    center = (0.0, 14.0)
+    size = (4.25, 12.2)
     add_room_shell("GF_WestWingHall", col, mats, center, size, height, breathable=True)
-    add_ragged_runner("GF_WestWingHall", (-5.2, 1.0), 7.75, 1.08, col, mats)
-    add_open_threshold("WestWingToEntrance", (-5.2, -3.36, 1.05), col, mats, "south", width=1.28, height=2.10, glimpse="dark")
-    add_room_glimpse("WestHallToLibrary", col, mats, (-6.42, -1.35, 1.05), "west", "Library")
-    add_room_glimpse("WestHallToDining", col, mats, (-3.98, 0.35, 1.05), "east", "Dining")
-    add_room_glimpse("WestHallToKitchen", col, mats, (-3.98, 2.75, 1.05), "east", "Kitchen")
-    add_door("GF_WestWingHall_CellarDoor", (-4.45, 3.98, 0.96), col, mats, "north", width=0.95, height=1.86, props={"ww_interact": "inspect"})
-    box("Mesh_ClayShadow_GF_WestWingHall_EndDarkness", (2.15, 0.08, 2.35), (-5.2, 4.12, 1.22), mats["wall_dark"], col, wobble=0.01)
-    for idx, y in enumerate((-2.15, -0.65, 1.05, 2.55)):
-        add_sconce(f"GF_WestWingHall_Left_{idx}", (-6.28, y, 1.45), col, mats, "west")
-    for idx, y in enumerate((-1.45, 0.45, 2.15, 3.45)):
-        add_sconce(f"GF_WestWingHall_Right_{idx}", (-4.12, y, 1.45), col, mats, "east")
-    add_handprint("WestWingThresholdA", (-6.27, -2.28, 1.55), "west", col, mats)
-    add_handprint("WestWingCeilingA", (-5.42, -0.2, height + 0.17), "north", col, mats)
-    box("Prop_ManorPlans", (0.48, 0.30, 0.035), (-4.72, -1.1, 0.09), mats["parchment"], col, {"ww_interact": "take", "ww_prop": "manor_plans"}, wobble=0.004)
-    box("Measure_GF_WestWingHall_42_47", (1.75, 6.25, 0.05), (-5.2, 0.75, 0.09), mats["glass"], col, {"ww_measure": "42_47"}, wobble=0.0, bevel=0.0)
-    empty("Trigger_WestWingThresholdScare", (-4.8, -2.1, 1.2), col, {"ww_trigger": "west_wing_threshold"})
-    empty("Door_GF_WestWingHall__GF_Library", (-6.45, -1.35, 1.0), col, {"ww_door": "library"})
-    empty("Door_GF_WestWingHall__GF_DiningRoom", (-3.95, 0.35, 1.0), col, {"ww_door": "dining"})
-    empty("Door_GF_WestWingHall__GF_Kitchen", (-3.95, 2.75, 1.0), col, {"ww_door": "kitchen"})
-    empty("Door_GF_WestWingHall__CellarStairs", (-4.55, 3.85, 1.0), col, {"ww_door": "cellar_stairs"})
-    box("Col_GF_WestWingHall_Floor", (2.25, 8.2, 0.1), (-5.2, 1.0, -0.05), mats["collision"], col, {"ww_collision": "static"})
+    add_ragged_runner("GF_WestWingHall", (0.0, 14.0), 11.45, 1.18, col, mats)
+    add_open_threshold("WestWingToEntrance", (0.0, 7.94, 1.05), col, mats, "south", width=1.70, height=2.10, glimpse="dark")
+    add_room_glimpse("WestHallToLibrary", col, mats, (-2.10, 14.2, 1.05), "west", "Library")
+    add_room_glimpse("WestHallToDining", col, mats, (2.10, 14.4, 1.05), "east", "Dining")
+    add_room_glimpse("WestHallToKitchen", col, mats, (2.10, 18.8, 1.05), "east", "Kitchen")
+    add_door("GF_WestWingHall_CellarDoor", (0.75, 19.55, 0.96), col, mats, "north", width=0.95, height=1.86, props={"ww_interact": "inspect"})
+    box("Mesh_ClayShadow_GF_WestWingHall_EndDarkness", (3.45, 0.08, 2.35), (0.0, 20.08, 1.22), mats["wall_dark"], col, wobble=0.01)
+    for idx, y in enumerate((8.9, 11.2, 13.6, 16.2)):
+        add_sconce(f"GF_WestWingHall_Left_{idx}", (-1.98, y, 1.45), col, mats, "west")
+    for idx, y in enumerate((10.1, 12.8, 15.4, 18.1)):
+        add_sconce(f"GF_WestWingHall_Right_{idx}", (1.98, y, 1.45), col, mats, "east")
+    add_handprint("WestWingThresholdA", (-1.98, 10.3, 1.55), "west", col, mats)
+    add_handprint("WestWingCeilingA", (-0.25, 13.2, height + 0.17), "north", col, mats)
+    box("Prop_ManorPlans", (0.48, 0.30, 0.035), (0.95, 18.3, 0.09), mats["parchment"], col, {"ww_interact": "take", "ww_prop": "manor_plans"}, wobble=0.004)
+    box("Measure_GF_WestWingHall_42_47", (1.75, 10.6, 0.05), (0.0, 14.0, 0.09), mats["glass"], col, {"ww_measure": "42_47"}, wobble=0.0, bevel=0.0)
+    empty("Trigger_WestWingThresholdScare", (0.0, 10.3, 1.2), col, {"ww_trigger": "west_wing_threshold"})
+    empty("Door_GF_WestWingHall__GF_Library", (-2.10, 14.2, 1.0), col, {"ww_door": "library"})
+    empty("Door_GF_WestWingHall__GF_DiningRoom", (2.10, 14.4, 1.0), col, {"ww_door": "dining"})
+    empty("Door_GF_WestWingHall__GF_Kitchen", (2.10, 18.8, 1.0), col, {"ww_door": "kitchen"})
+    empty("Door_GF_WestWingHall__CellarStairs", (0.75, 19.55, 1.0), col, {"ww_door": "cellar_stairs"})
+    box("Col_GF_WestWingHall_Floor", (4.0, 11.9, 0.1), (0.0, 14.0, -0.05), mats["collision"], col, {"ww_collision": "static"})
 
 
 def export_collection(col: bpy.types.Collection, filepath: Path) -> None:

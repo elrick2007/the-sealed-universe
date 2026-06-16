@@ -269,9 +269,18 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Playable visual inspection and lighting/placement pass: inspect the v3 Entrance Hall / West Wing Hall GLBs in Godot and Blender, then tune Godot shell placement/lighting so the reference-image detail reads during play before promoting the West Wing Hall gameplay handoff.
+Next room-art pass: build the next ground-floor room from the prompt/reference workflow, then import it through the same Blender-source-to-GLB wrapper path while keeping gameplay/collision anchors authoritative.
 
 ## Latest Build Step
+
+### Entrance Hall / West Wing Hall runtime alignment v4
+
+- Retuned `assets/blender_source/rooms/ground/build_entrance_westwing.py` to the proven Godot runtime footprint: 10m x 16m Entrance Hall and a 4.25m x 12.2m West Wing corridor.
+- Regenerated `ww_gf_entrance_westwing.blend`, `gf_entrance_hall.glb`, and `gf_west_wing_hall.glb` from a factory-clean Blender scene.
+- Promoted `gf_west_wing_hall_import.tscn` into the live Architecture tree as `WestWingHallClayShell`.
+- Hid the old Entrance Hall and West Wing corridor blockout mesh surfaces while preserving their collision, triggers, scripts, and gameplay anchors.
+- Updated wrapper metadata to v4 runtime-aligned visual-shell status.
+- Validation passed: smoke playthrough, main scene headless load, and menu scene headless load. Godot still prints the known ObjectDB warning on headless quit for smoke/main.
 
 ### Entrance Hall / West Wing Hall Blender replacement v3
 

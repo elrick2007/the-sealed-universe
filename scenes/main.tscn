@@ -239,13 +239,19 @@ shadow_enabled = true
 [node name="Architecture" type="Node3D" parent="."]
 
 [node name="EntranceHallClayShell" parent="Architecture" instance=ExtResource("58_entrance_import")]
-metadata/ww_replacement_status = "controlled_v1"
+metadata/ww_replacement_status = "controlled_v4_runtime_aligned"
 metadata/ww_gameplay_binding = "visual_shell_only_blockout_gameplay_preserved"
 metadata/ww_note = "Live visual shell; original blockout collision and scripted anchors remain authoritative."
+
+[node name="WestWingHallClayShell" parent="Architecture" instance=ExtResource("59_west_import")]
+metadata/ww_replacement_status = "controlled_v4_runtime_aligned"
+metadata/ww_gameplay_binding = "visual_shell_only_blockout_gameplay_preserved"
+metadata/ww_note = "Live visual shell; original blockout corridor collision and scripted anchors remain authoritative."
 
 [node name="Floor" type="StaticBody3D" parent="Architecture"]
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/Floor"]
+visible = false
 mesh = SubResource("BoxMesh_floor")
 surface_material_override/0 = SubResource("Mat_floor")
 
@@ -256,6 +262,7 @@ shape = SubResource("BoxShape_floor")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.7, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/LeftWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -267,6 +274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.7, 0)
 script = ExtResource("10")
 
 [node name="WallSkin" type="MeshInstance3D" parent="Architecture/WhisperWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 script = ExtResource("8")
@@ -278,6 +286,7 @@ shape = SubResource("BoxShape_wall_long")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 8)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/BackWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_short")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -289,16 +298,19 @@ transform = Transform3D(0.62, 0, 0, 0, 1.45, 0, 0, 0, 0.32, -4.75, 1.2, 3.2)
 script = ExtResource("43")
 
 [node name="Case" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
+visible = false
 mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_wood")
 
 [node name="Face" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
 transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.06, 0, 0.32, -0.2)
+visible = false
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_plate")
 
 [node name="PendulumShadow" type="MeshInstance3D" parent="Architecture/HallGrandfatherClock"]
 transform = Transform3D(0.08, 0, 0, 0, 0.88, 0, 0, 0, 0.04, 0, -0.28, -0.2)
+visible = false
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_shadow")
 
@@ -309,6 +321,7 @@ shape = SubResource("BoxShape_prop")
 transform = Transform3D(0.36, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.7, -8)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/FrontWallLeft"]
+visible = false
 mesh = SubResource("BoxMesh_wall_short")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -319,6 +332,7 @@ shape = SubResource("BoxShape_wall_short")
 transform = Transform3D(0.36, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1.7, -8)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/FrontWallRight"]
+visible = false
 mesh = SubResource("BoxMesh_wall_short")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -330,6 +344,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -7.84)
 script = ExtResource("3")
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingDoor"]
+visible = false
 mesh = SubResource("BoxMesh_door")
 surface_material_override/0 = SubResource("Mat_wood")
 
@@ -342,6 +357,7 @@ shape = SubResource("BoxShape_door")
 transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 0.76, 0, 0, -14.0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallFloor"]
+visible = false
 mesh = SubResource("BoxMesh_floor")
 surface_material_override/0 = SubResource("Mat_floor")
 
@@ -352,6 +368,7 @@ shape = SubResource("BoxShape_floor")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.28, -2.1, 1.7, -10.1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallLeftWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -362,6 +379,7 @@ shape = SubResource("BoxShape_wall_long")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.12, -2.1, 1.7, -19.15)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallLeftWallRear"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -372,6 +390,7 @@ shape = SubResource("BoxShape_wall_long")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.22, 2.1, 1.7, -10.15)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallRightWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -382,6 +401,7 @@ shape = SubResource("BoxShape_wall_long")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.22, 2.1, 1.7, -18.15)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallRightWallRear"]
+visible = false
 mesh = SubResource("BoxMesh_wall_long")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -1269,6 +1289,7 @@ shape = SubResource("BoxShape_key")
 transform = Transform3D(0.42, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -20.1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/WestWingHallway/HallEndWall"]
+visible = false
 mesh = SubResource("BoxMesh_wall_short")
 surface_material_override/0 = SubResource("Mat_wall")
 
@@ -2272,6 +2293,8 @@ metadata/ww_promoted_to_live_shell = true
 
 [node name="GF_WestWingHall_Import" parent="BlenderImportPreview" instance=ExtResource("59_west_import")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
+visible = false
+metadata/ww_promoted_to_live_shell = true
 
 [node name="Props" type="Node3D" parent="."]
 

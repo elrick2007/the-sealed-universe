@@ -1,10 +1,10 @@
-# Entrance Hall / West Wing Hall Blender Replacement Pass v3
+# Entrance Hall / West Wing Hall Blender Replacement Pass v4
 
 Last updated: 2026-06-16
 
 ## Purpose
 
-This is the first production-style claymation architecture replacement pair, now moving from v1/v2 proof-of-pipeline into a fresh v3 rebuild from the generated art reference sets.
+This is the first production-style claymation architecture replacement pair, now moving from v1/v2 proof-of-pipeline and the fresh v3 rebuild into a v4 runtime-aligned live shell.
 
 `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` governs this pass: Blender is the source of truth for final visible room architecture. Godot blockouts remain gameplay/collision/trigger scaffolds and should not be polished as final room visuals.
 
@@ -21,8 +21,8 @@ This is the first production-style claymation architecture replacement pair, now
 
 ## Layout Targets
 
-- Entrance Hall target footprint: roughly 6m x 8m, with a 3m ceiling.
-- West Wing Hall target width: roughly 2m, with a 3m ceiling and claustrophobic sightlines.
+- Entrance Hall target footprint: roughly 10m x 16m, matching the proven Godot starter hall collision.
+- West Wing Hall target footprint: roughly 4.25m x 12.2m, matching the proven Godot west corridor collision.
 - Door height: 2.1m.
 - Minimum playable clearance: 0.9m; preferred clearance: 1.2m.
 - Wall thickness should read as physical set construction, not paper-thin planes.
@@ -121,6 +121,21 @@ West Wing Hall:
 - Added stronger modeled wainscoting, floorboard lines, layered cornice, chunky doorframes, raised door panels, repeated sconces, ragged runner edges, carpet foot-smears, plaster patches, ceiling cracks, wall-memory handprints, room glimpses for Library/Dining/Kitchen, and a darker West Wing end wall for the threshold scare.
 - Preserved existing gameplay marker names and export paths.
 - Updated wrapper metadata to `controlled_v3_visual_shell` for Entrance Hall and `controlled_v3_preview` for West Wing Hall.
+- Validation passed on 2026-06-16:
+  - Smoke playthrough passed.
+  - `res://scenes/main.tscn` loaded headless for 3 seconds.
+  - `res://scenes/menu.tscn` loaded headless for 3 seconds.
+  - Godot still prints the known ObjectDB warning on headless quit for main/smoke; no gameplay-blocking error was observed.
+
+## v4 Runtime Alignment Notes
+
+- Retuned the Blender generator to the proven Godot blockout footprint rather than the early compact art-preview footprint.
+- Entrance Hall now exports at the same 10m x 16m footprint as the playable starter hall.
+- West Wing Hall now exports down the existing West Wing route, centered on the blockout corridor and aligned to the scripted West Wing door.
+- Promoted `gf_west_wing_hall_import.tscn` as `Architecture/WestWingHallClayShell`.
+- Kept original blockout collision, pickup areas, trigger areas, door scripts, and interaction scripts authoritative.
+- Hid the old Entrance Hall and West Wing corridor blockout mesh surfaces so the GLB shells provide the visible architecture.
+- Left later-room blockout visuals visible for Library, Dining, Kitchen, Conservatory, and onward rooms until those rooms receive their own Blender replacement passes.
 - Validation passed on 2026-06-16:
   - Smoke playthrough passed.
   - `res://scenes/main.tscn` loaded headless for 3 seconds.
