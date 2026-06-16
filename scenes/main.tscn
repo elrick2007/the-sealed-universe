@@ -238,6 +238,11 @@ shadow_enabled = true
 
 [node name="Architecture" type="Node3D" parent="."]
 
+[node name="EntranceHallClayShell" parent="Architecture" instance=ExtResource("58_entrance_import")]
+metadata/ww_replacement_status = "controlled_v1"
+metadata/ww_gameplay_binding = "visual_shell_only_blockout_gameplay_preserved"
+metadata/ww_note = "Live visual shell; original blockout collision and scripted anchors remain authoritative."
+
 [node name="Floor" type="StaticBody3D" parent="Architecture"]
 
 [node name="Mesh" type="MeshInstance3D" parent="Architecture/Floor"]
@@ -2262,6 +2267,8 @@ metadata/ww_do_not_bind_gameplay = true
 metadata/ww_note = "Side-by-side GLB import proof. Keep current blockout as playable source until route test passes."
 
 [node name="GF_EntranceHall_Import" parent="BlenderImportPreview" instance=ExtResource("58_entrance_import")]
+visible = false
+metadata/ww_promoted_to_live_shell = true
 
 [node name="GF_WestWingHall_Import" parent="BlenderImportPreview" instance=ExtResource("59_west_import")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)

@@ -1,6 +1,6 @@
 # Project State - The Sealed Universe / Game 01
 
-Last updated: 2026-06-15
+Last updated: 2026-06-16
 
 ## Repository
 
@@ -263,9 +263,15 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Entrance Hall controlled replacement v1: replace only the Entrance Hall blockout shell with the imported GLB wrapper while preserving the current gameplay nodes, route prompts, pickups, wall inspection, door logic, and smoke-playthrough path.
+Entrance Hall alignment/collision tuning v2: play the live visual shell against the preserved blockout gameplay, tune transforms/material visibility if needed, then promote West Wing Hall as the second controlled replacement.
 
 ## Latest Build Step
+
+### Entrance Hall controlled replacement v1
+
+- Promoted the Entrance Hall GLB wrapper into the live Architecture tree as `EntranceHallClayShell`.
+- Preserved original blockout collision/gameplay anchors for prompts, pickups, wall inspection, clock, and West Wing door.
+- Hid the duplicate preview Entrance Hall import; West Wing Hall remains preview-only.
 
 ### Godot side-by-side GLB route proof v1
 

@@ -82,3 +82,10 @@ West Wing Hall:
 - The smoke playthrough still passes, so the playable starter route remains bound to the proven blockout while the imported GLBs are preview-only.
 - Wrapper scenes reference only exported GLBs from `assets/blender_exports/rooms/ground/` and carry preview metadata.
 - Replacement can now begin as a controlled pass: swap the Entrance Hall shell first, verify route prompts/collision, then swap the West Wing Hall shell.
+
+## Entrance Hall Controlled Replacement v1
+
+- Promoted `gf_entrance_hall_import.tscn` as `Architecture/EntranceHallClayShell`.
+- Kept the original Entrance Hall blockout collision and gameplay anchors authoritative.
+- Hid only the duplicate preview entrance import under `BlenderImportPreview`.
+- Left West Wing Hall preview-only for the second controlled replacement pass.
