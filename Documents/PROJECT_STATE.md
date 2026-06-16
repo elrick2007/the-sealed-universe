@@ -263,9 +263,16 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Godot wrapper import test v1: create wrapper scenes for `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb` under `assets/imported_scenes/rooms/ground`, instance them side-by-side with the current blockout, and verify route prompts, marker names, scale, visibility, and collision before replacing the playable rooms.
+Godot side-by-side GLB route proof v1: run the playable starter route while the Entrance Hall and West Wing Hall GLB wrapper previews are instanced beside the blockout, then verify player scale, sightlines, route prompts, marker names, visibility, and collision before replacing the playable rooms.
 
 ## Latest Build Step
+
+### Godot wrapper import test v1
+
+- Added wrapper scenes for `gf_entrance_hall.glb` and `gf_west_wing_hall.glb` under `assets/imported_scenes/rooms/ground/`.
+- Instanced both wrappers under `BlenderImportPreview` in `scenes/main.tscn`, offset beside the current blockout.
+- Marked the preview node as non-gameplay metadata so the working route remains bound to the original blockout until the side-by-side route proof passes.
+- Next step is a playable inspection pass before any replacement of starter-room architecture.
 
 ### Blender control proof and source ignore v1
 

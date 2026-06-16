@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/blender_exports/rooms/ground/gf_entrance_hall.glb" id="1_glb"]
+
+[node name="GF_EntranceHall_Import" type="Node3D"]
+metadata/ww_room_id = "GF_EntranceHall"
+metadata/ww_source_glb = "res://assets/blender_exports/rooms/ground/gf_entrance_hall.glb"
+metadata/ww_import_status = "preview"
+
+[node name="ImportedGLB" parent="." instance=ExtResource("1_glb")]

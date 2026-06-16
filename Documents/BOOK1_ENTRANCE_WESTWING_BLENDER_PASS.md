@@ -65,7 +65,7 @@ West Wing Hall:
 - [x] Assign clay material variants.
 - [x] Add simple collision meshes.
 - [x] Export test GLBs.
-- [ ] Create Godot wrapper scenes.
+- [x] Create Godot wrapper scenes.
 - [ ] Run side-by-side route test before replacing the blockout.
 
 ## Generated v1 Notes
@@ -74,3 +74,4 @@ West Wing Hall:
 - Includes enclosed floors, walls, ceilings, simple trim, rug runners, doorway frames, starter props, breathing-wall markers, route markers, and simple collision helper meshes.
 - Godot remains the owner of dynamic lighting, gameplay logic, and final collision verification.
 - UPBGE printed a Logic Nodes registration warning during headless startup, but the `.blend` save and both GLB exports completed successfully.
+- Added Godot wrapper scenes under `assets/imported_scenes/rooms/ground/` and instanced both exports under `BlenderImportPreview` in `scenes/main.tscn` for side-by-side inspection beside the playable blockout.

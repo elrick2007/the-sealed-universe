@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://whispering_walls_slice"]
+[gd_scene load_steps=86 format=3 uid="uid://whispering_walls_slice"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="2"]
@@ -57,6 +57,8 @@
 [ext_resource type="Script" path="res://scripts/foundation_chamber_offer_interaction.gd" id="55"]
 [ext_resource type="Script" path="res://scripts/foundation_testament_page_interaction.gd" id="56"]
 [ext_resource type="Script" path="res://scripts/well_room_stinger_interaction.gd" id="57"]
+[ext_resource type="PackedScene" path="res://assets/imported_scenes/rooms/ground/gf_entrance_hall_import.tscn" id="58_entrance_import"]
+[ext_resource type="PackedScene" path="res://assets/imported_scenes/rooms/ground/gf_west_wing_hall_import.tscn" id="59_west_import"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 16)
@@ -2252,6 +2254,17 @@ surface_material_override/0 = SubResource("Mat_metal")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Cellar/FoundationChamberInterior/ProofSendPlaceholder"]
 shape = SubResource("BoxShape_prop")
+
+[node name="BlenderImportPreview" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
+metadata/ww_preview_only = true
+metadata/ww_do_not_bind_gameplay = true
+metadata/ww_note = "Side-by-side GLB import proof. Keep current blockout as playable source until route test passes."
+
+[node name="GF_EntranceHall_Import" parent="BlenderImportPreview" instance=ExtResource("58_entrance_import")]
+
+[node name="GF_WestWingHall_Import" parent="BlenderImportPreview" instance=ExtResource("59_west_import")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
 
 [node name="Props" type="Node3D" parent="."]
 
