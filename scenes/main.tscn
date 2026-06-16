@@ -2303,6 +2303,7 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.2, 0.35
 script = ExtResource("5")
 
 [node name="Mesh" type="MeshInstance3D" parent="Props/Recorder"]
+visible = false
 mesh = SubResource("BoxMesh_prop")
 surface_material_override/0 = SubResource("Mat_red")
 
@@ -2319,6 +2320,7 @@ message = "Mara takes the service key. The true iron key belongs somewhere deepe
 completion_objective = "find_service_key"
 
 [node name="Mesh" type="MeshInstance3D" parent="Props/ServiceKey"]
+visible = false
 mesh = SubResource("BoxMesh_key")
 surface_material_override/0 = SubResource("Mat_wood")
 

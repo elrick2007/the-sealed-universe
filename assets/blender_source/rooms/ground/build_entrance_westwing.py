@@ -62,14 +62,14 @@ def glass_material(name: str, color: tuple[float, float, float]) -> bpy.types.Ma
 
 def build_materials() -> dict[str, bpy.types.Material]:
     return {
-        "wall": clay_material("WW_Mat_Clay_Wall", (0.43, 0.34, 0.25), 0.96),
-        "wall_dark": clay_material("WW_Mat_Clay_Wall_Fingerprint_Dark", (0.18, 0.14, 0.11), 0.98),
-        "wall_light": clay_material("WW_Mat_Clay_Wall_Patch_Light", (0.62, 0.52, 0.40), 0.97),
-        "floor": clay_material("WW_Mat_Clay_Floor", (0.20, 0.15, 0.11), 0.94),
+        "wall": clay_material("WW_Mat_Clay_Wall", (0.36, 0.29, 0.22), 0.98),
+        "wall_dark": clay_material("WW_Mat_Clay_Wall_Fingerprint_Dark", (0.13, 0.095, 0.07), 0.99),
+        "wall_light": clay_material("WW_Mat_Clay_Wall_Patch_Light", (0.57, 0.48, 0.36), 0.98),
+        "floor": clay_material("WW_Mat_Clay_Floor", (0.13, 0.09, 0.06), 0.96),
         "wood": clay_material("WW_Mat_Clay_Wood", (0.24, 0.13, 0.07), 0.91),
         "wood_dark": clay_material("WW_Mat_Clay_Wood_Dark", (0.11, 0.06, 0.035), 0.94),
-        "fabric": clay_material("WW_Mat_Clay_Fabric_Burgundy", (0.35, 0.035, 0.035), 0.98),
-        "fabric_dark": clay_material("WW_Mat_Clay_Fabric_Burgundy_Dark", (0.16, 0.015, 0.018), 0.99),
+        "fabric": clay_material("WW_Mat_Clay_Fabric_Burgundy", (0.22, 0.018, 0.028), 0.99),
+        "fabric_dark": clay_material("WW_Mat_Clay_Fabric_Burgundy_Dark", (0.075, 0.008, 0.014), 0.99),
         "metal": clay_material("WW_Mat_Clay_Dark_Metal", (0.04, 0.038, 0.036), 0.78),
         "candle": clay_material("WW_Mat_Clay_Candle_Amber", (0.92, 0.55, 0.17), 0.7),
         "parchment": clay_material("WW_Mat_Clay_Parchment", (0.64, 0.54, 0.37), 0.96),
@@ -368,6 +368,114 @@ def add_open_threshold(
     box(f"Mesh_ClayShadow_{prefix}_RoomGlimpse", shadow_size, shadow_loc, fill_mat, col, wobble=0.01, bevel=0.006)
 
 
+def add_arch_threshold(
+    prefix: str,
+    loc: tuple[float, float, float],
+    col: bpy.types.Collection,
+    mats: dict[str, bpy.types.Material],
+    orientation: str,
+    width: float = 1.9,
+    height: float = 2.34,
+) -> None:
+    x, y, z = loc
+    if orientation in ("north", "south"):
+        side_depth = 0.24
+        box(f"Mesh_ClayStone_{prefix}_LeftPillar", (0.24, side_depth, height), (x - width / 2.0, y, z), mats["wood_dark"], col, wobble=0.018, bevel=0.03)
+        box(f"Mesh_ClayStone_{prefix}_RightPillar", (0.24, side_depth, height), (x + width / 2.0, y, z), mats["wood_dark"], col, wobble=0.018, bevel=0.03)
+        for idx in range(9):
+            t = idx / 8.0
+            px = x - width / 2.0 + t * width
+            lift = math.sin(t * math.pi) * 0.42
+            block_w = 0.25 if idx in (0, 8) else 0.32
+            box(f"Mesh_ClayStone_{prefix}_ArchBlock_{idx:02d}", (block_w, side_depth + 0.06, 0.22), (px, y, z + height / 2.0 + 0.03 + lift), mats["wood_dark"], col, rot_z=(t - 0.5) * 0.18, wobble=0.017, bevel=0.025)
+        box(f"Mesh_ClayShadow_{prefix}_DeepHall", (width - 0.36, 0.035, height - 0.34), (x, y - 0.12 if orientation == "north" else y + 0.12, z - 0.08), mats["wall_dark"], col, wobble=0.01, bevel=0.006)
+    else:
+        side_depth = 0.24
+        box(f"Mesh_ClayStone_{prefix}_LeftPillar", (side_depth, 0.24, height), (x, y - width / 2.0, z), mats["wood_dark"], col, wobble=0.018, bevel=0.03)
+        box(f"Mesh_ClayStone_{prefix}_RightPillar", (side_depth, 0.24, height), (x, y + width / 2.0, z), mats["wood_dark"], col, wobble=0.018, bevel=0.03)
+        for idx in range(9):
+            t = idx / 8.0
+            py = y - width / 2.0 + t * width
+            lift = math.sin(t * math.pi) * 0.42
+            block_w = 0.25 if idx in (0, 8) else 0.32
+            box(f"Mesh_ClayStone_{prefix}_ArchBlock_{idx:02d}", (side_depth + 0.06, block_w, 0.22), (x, py, z + height / 2.0 + 0.03 + lift), mats["wood_dark"], col, rot_z=(t - 0.5) * 0.18, wobble=0.017, bevel=0.025)
+        box(f"Mesh_ClayShadow_{prefix}_DeepHall", (0.035, width - 0.36, height - 0.34), (x - 0.12 if orientation == "east" else x + 0.12, y, z - 0.08), mats["wall_dark"], col, wobble=0.01, bevel=0.006)
+
+
+def add_reference_plaster_field(
+    prefix: str,
+    col: bpy.types.Collection,
+    mats: dict[str, bpy.types.Material],
+    center: tuple[float, float],
+    size: tuple[float, float],
+    height: float,
+    count: int,
+) -> None:
+    cx, cy = center
+    sx, sy = size
+    sides = ("north", "south", "east", "west")
+    for idx in range(count):
+        side = sides[idx % len(sides)]
+        long = RNG.uniform(0.28, 1.35)
+        thin = RNG.uniform(0.018, 0.045)
+        z = RNG.uniform(1.05, height - 0.18)
+        mat = mats["wall_dark"] if idx % 4 in (0, 1) else mats["wall_light"]
+        if side == "north":
+            x = cx + RNG.uniform(-sx * 0.43, sx * 0.43)
+            y = cy + sy / 2.0 - 0.323
+            box(f"Mesh_ClayRaisedCrack_{prefix}_{idx:02d}", (long, 0.018, thin), (x, y, z), mat, col, rot_z=RNG.uniform(-0.7, 0.7), wobble=0.018, bevel=0.006)
+        elif side == "south":
+            x = cx + RNG.uniform(-sx * 0.43, sx * 0.43)
+            y = cy - sy / 2.0 + 0.323
+            box(f"Mesh_ClayRaisedCrack_{prefix}_{idx:02d}", (long, 0.018, thin), (x, y, z), mat, col, rot_z=RNG.uniform(-0.7, 0.7), wobble=0.018, bevel=0.006)
+        elif side == "east":
+            x = cx + sx / 2.0 - 0.323
+            y = cy + RNG.uniform(-sy * 0.43, sy * 0.43)
+            box(f"Mesh_ClayRaisedCrack_{prefix}_{idx:02d}", (0.018, long, thin), (x, y, z), mat, col, rot_z=RNG.uniform(-0.7, 0.7), wobble=0.018, bevel=0.006)
+        else:
+            x = cx - sx / 2.0 + 0.323
+            y = cy + RNG.uniform(-sy * 0.43, sy * 0.43)
+            box(f"Mesh_ClayRaisedCrack_{prefix}_{idx:02d}", (0.018, long, thin), (x, y, z), mat, col, rot_z=RNG.uniform(-0.7, 0.7), wobble=0.018, bevel=0.006)
+
+
+def add_ceiling_collapse(prefix: str, col: bpy.types.Collection, mats: dict[str, bpy.types.Material], center: tuple[float, float], height: float) -> None:
+    cx, cy = center
+    for idx, (x, y, sx, sy) in enumerate((
+        (cx - 1.3, cy + 5.35, 2.2, 0.82),
+        (cx + 1.8, cy + 5.15, 1.55, 0.62),
+        (cx + 3.25, cy - 4.85, 1.25, 0.48),
+    )):
+        box(f"Mesh_ClayCeilingMissingPatch_{prefix}_{idx}", (sx, sy, 0.055), (x, y, height + 0.195), mats["wall_dark"], col, rot_z=RNG.uniform(-0.08, 0.08), wobble=0.018, bevel=0.01)
+        box(f"Mesh_ClayCeilingRawEdge_{prefix}_{idx}", (sx + 0.18, 0.055, 0.045), (x, y + sy / 2.0, height + 0.22), mats["wall_light"], col, rot_z=RNG.uniform(-0.08, 0.08), wobble=0.012, bevel=0.006)
+        box(f"Mesh_ClayCeilingRawEdgeB_{prefix}_{idx}", (sx + 0.18, 0.055, 0.045), (x, y - sy / 2.0, height + 0.22), mats["wall_light"], col, rot_z=RNG.uniform(-0.08, 0.08), wobble=0.012, bevel=0.006)
+
+
+def add_chair(prefix: str, loc: tuple[float, float, float], col: bpy.types.Collection, mats: dict[str, bpy.types.Material], rot_z: float = 0.0) -> None:
+    x, y, z = loc
+    box(f"Prop_{prefix}_ChairSeat", (0.44, 0.42, 0.10), (x, y, z + 0.45), mats["wood"], col, rot_z=rot_z, wobble=0.011, bevel=0.015)
+    box(f"Prop_{prefix}_ChairBack", (0.48, 0.08, 0.76), (x, y + 0.20, z + 0.86), mats["wood_dark"], col, rot_z=rot_z, wobble=0.012, bevel=0.015)
+    for idx, (lx, ly) in enumerate(((-0.17, -0.15), (0.17, -0.15), (-0.17, 0.15), (0.17, 0.15))):
+        box(f"Prop_{prefix}_ChairLeg_{idx}", (0.055, 0.055, 0.48), (x + lx, y + ly, z + 0.22), mats["wood_dark"], col, rot_z=rot_z, wobble=0.006, bevel=0.008)
+
+
+def add_entrance_reference_dressing(col: bpy.types.Collection, mats: dict[str, bpy.types.Material]) -> None:
+    height = 3.0
+    add_reference_plaster_field("GF_EntranceHall_Reference", col, mats, (0.0, 0.0), (10.0, 16.0), height, 54)
+    add_ceiling_collapse("GF_EntranceHall", col, mats, (0.0, 0.0), height)
+    add_arch_threshold("EntranceToWestWing_ReferenceArch", (0.0, 7.78, 1.08), col, mats, "north", width=2.22, height=2.28)
+    add_chair("GF_EntranceHall_LeftWall", (-4.35, -5.55, 0.0), col, mats, rot_z=0.05)
+    add_chair("GF_EntranceHall_RightWall", (4.25, 5.55, 0.0), col, mats, rot_z=math.pi)
+    box("Prop_GF_EntranceHall_RightSideTable", (0.62, 0.36, 0.11), (4.32, 4.55, 0.58), mats["wood"], col, rot_z=0.0, wobble=0.01, bevel=0.014)
+    box("Prop_GF_EntranceHall_RightSideTableLegA", (0.055, 0.055, 0.56), (4.08, 4.42, 0.28), mats["wood_dark"], col, wobble=0.006, bevel=0.006)
+    box("Prop_GF_EntranceHall_RightSideTableLegB", (0.055, 0.055, 0.56), (4.56, 4.42, 0.28), mats["wood_dark"], col, wobble=0.006, bevel=0.006)
+    box("Prop_GF_EntranceHall_RightSideTableLegC", (0.055, 0.055, 0.56), (4.08, 4.68, 0.28), mats["wood_dark"], col, wobble=0.006, bevel=0.006)
+    box("Prop_GF_EntranceHall_RightSideTableLegD", (0.055, 0.055, 0.56), (4.56, 4.68, 0.28), mats["wood_dark"], col, wobble=0.006, bevel=0.006)
+    sphere("Prop_GF_EntranceHall_DuckLampBody", 0.10, (4.32, 4.55, 0.72), mats["parchment"], col, scale=(1.5, 0.8, 0.7))
+    box("Prop_GF_EntranceHall_DuckLampShade", (0.20, 0.16, 0.11), (4.38, 4.62, 0.88), mats["candle"], col, rot_z=0.2, wobble=0.006, bevel=0.008)
+    for idx in range(28):
+        box(f"Mesh_ClayDebris_GF_EntranceHall_{idx:02d}", (RNG.uniform(0.035, 0.13), RNG.uniform(0.025, 0.16), RNG.uniform(0.018, 0.045)), (RNG.uniform(-4.2, 4.2), RNG.uniform(-6.8, 6.8), 0.08), mats["wall_light"] if idx % 2 else mats["wall_dark"], col, rot_z=RNG.uniform(-0.8, 0.8), wobble=0.006, bevel=0.004)
+
+
 def add_sconce(prefix: str, loc: tuple[float, float, float], col: bpy.types.Collection, mats: dict[str, bpy.types.Material], axis: str) -> None:
     x, y, z = loc
     if axis in ("north", "south"):
@@ -431,6 +539,7 @@ def add_entrance_hall(col: bpy.types.Collection, mats: dict[str, bpy.types.Mater
     box("Mesh_ClayMetalDark_GF_EntranceHall_ChandelierSightline", (0.28, 0.28, 0.08), (-0.3, 5.2, 2.84), mats["metal"], col, wobble=0.006)
     box("Prop_Recorder", (0.32, 0.18, 0.08), (-2.2, -1.2, 0.09), mats["metal"], col, {"ww_interact": "take", "ww_prop": "recorder"}, wobble=0.006)
     box("Prop_IronKey", (0.28, 0.06, 0.04), (2.7, 2.4, 0.08), mats["metal"], col, {"ww_interact": "take", "ww_prop": "iron_key"}, wobble=0.004)
+    add_entrance_reference_dressing(col, mats)
     empty("Spawn_GF_EntranceHall", (0.0, -2.5, 1.6), col, {"ww_spawn": "player"})
     empty("Door_GF_EntranceHall__GF_WestWingHall", (0.0, 7.84, 1.0), col, {"ww_interact": "open", "ww_door": "west_wing"})
     empty("Wall_Whisper_Entrance", (4.82, -1.4, 1.35), col, {"ww_breathing": 1, "ww_interact": "inspect"})

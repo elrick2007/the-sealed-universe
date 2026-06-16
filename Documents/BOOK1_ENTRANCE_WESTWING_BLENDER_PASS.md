@@ -141,3 +141,17 @@ West Wing Hall:
   - `res://scenes/main.tscn` loaded headless for 3 seconds.
   - `res://scenes/menu.tscn` loaded headless for 3 seconds.
   - Godot still prints the known ObjectDB warning on headless quit for main/smoke; no gameplay-blocking error was observed.
+
+## v5 Starting-Area Dressing Notes
+
+- Confirmed live Blender control through the MCP socket on `localhost:9876`.
+- Opened `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend` in the running Blender window, replacing the old unsaved MCP proof scene with the real mansion source scene.
+- Darkened the clay wall/floor/fabric material palette so the Entrance Hall reads less like a clean blockout.
+- Added a reference-driven Entrance Hall dressing pass: denser plaster cracks, raised wall scars, ceiling collapse patches, an arched West Wing threshold, side chairs, a side table/lamp, and floor debris.
+- Hid the old Godot recorder/key pickup meshes while preserving their pickup Areas, collisions, scripts, and route logic; the Blender-authored prop visuals now carry the starting-area art.
+- Regenerated `ww_gf_entrance_westwing.blend`, `gf_entrance_hall.glb`, and `gf_west_wing_hall.glb`.
+- Validation passed on 2026-06-16:
+  - Smoke playthrough passed.
+  - `res://scenes/main.tscn` loaded headless for 3 seconds.
+  - `res://scenes/menu.tscn` loaded headless for 3 seconds.
+  - Godot still prints the known ObjectDB warning on headless quit for main; no gameplay-blocking error was observed.

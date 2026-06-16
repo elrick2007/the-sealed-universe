@@ -269,9 +269,19 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Next room-art pass: build the next ground-floor room from the prompt/reference workflow, then import it through the same Blender-source-to-GLB wrapper path while keeping gameplay/collision anchors authoritative.
+Entrance Hall material/lighting pass: apply richer clay/plaster/wood texture treatment and tune Godot lighting so the starting area moves closer to the generated reference photos instead of reading as flat clay blocks.
 
 ## Latest Build Step
+
+### Entrance Hall starting-area dressing v5
+
+- Confirmed live control of the running Blender window through the MCP socket on `localhost:9876`.
+- Opened the generated mansion source `.blend` in Blender, replacing the old unsaved proof scene with the real Entrance Hall / West Wing source scene.
+- Added `tools/blender_mcp_exec.py` as a small repeatable helper for sending checked Python scripts to the running Blender MCP socket.
+- Upgraded the Entrance Hall generator with a darker palette, denser plaster cracks, raised wall scars, ceiling collapse patches, an arched West Wing threshold, side chairs, a side table/lamp, and floor debris.
+- Hid the old Godot recorder/key pickup meshes while preserving their gameplay nodes and collision.
+- Regenerated the source `.blend` and both room GLBs, then reimported them in Godot.
+- Validation passed: smoke playthrough, main scene headless load, and menu scene headless load. Godot still prints the known ObjectDB warning on headless quit for main.
 
 ### Entrance Hall / West Wing Hall runtime alignment v4
 
