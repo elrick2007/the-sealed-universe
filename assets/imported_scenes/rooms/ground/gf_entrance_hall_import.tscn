@@ -5,7 +5,7 @@
 [node name="GF_EntranceHall_Import" type="Node3D"]
 metadata/ww_room_id = "GF_EntranceHall"
 metadata/ww_source_glb = "res://assets/blender_exports/rooms/ground/gf_entrance_hall.glb"
-metadata/ww_import_status = "controlled_v2_visual_shell"
+metadata/ww_import_status = "controlled_v3_visual_shell"
 metadata/ww_art_source = "Blender GLB; Godot gameplay anchors remain authoritative"
 
 [node name="ImportedGLB" parent="." instance=ExtResource("1_glb")]

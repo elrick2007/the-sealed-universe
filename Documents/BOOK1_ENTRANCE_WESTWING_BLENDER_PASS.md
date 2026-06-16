@@ -1,10 +1,10 @@
-# Entrance Hall / West Wing Hall Blender Replacement Pass v2
+# Entrance Hall / West Wing Hall Blender Replacement Pass v3
 
 Last updated: 2026-06-16
 
 ## Purpose
 
-This is the first production-style claymation architecture replacement pair, now moving from v1 proof-of-pipeline into v2 readable set construction.
+This is the first production-style claymation architecture replacement pair, now moving from v1/v2 proof-of-pipeline into a fresh v3 rebuild from the generated art reference sets.
 
 `Documents/BOOK1_ROOM_ART_SOURCE_OF_TRUTH.md` governs this pass: Blender is the source of truth for final visible room architecture. Godot blockouts remain gameplay/collision/trigger scaffolds and should not be polished as final room visuals.
 
@@ -107,6 +107,20 @@ West Wing Hall:
 - Regenerated `assets/blender_source/rooms/ground/ww_gf_entrance_westwing.blend`.
 - Re-exported `assets/blender_exports/rooms/ground/gf_entrance_hall.glb` and `assets/blender_exports/rooms/ground/gf_west_wing_hall.glb`.
 - Updated wrapper metadata to mark the Entrance Hall as the controlled v2 visual shell and West Wing Hall as controlled v2 preview.
+- Validation passed on 2026-06-16:
+  - Smoke playthrough passed.
+  - `res://scenes/main.tscn` loaded headless for 3 seconds.
+  - `res://scenes/menu.tscn` loaded headless for 3 seconds.
+  - Godot still prints the known ObjectDB warning on headless quit for main/smoke; no gameplay-blocking error was observed.
+
+## v3 Fresh Rebuild Notes
+
+- Replaced `assets/blender_source/rooms/ground/build_entrance_westwing.py` with a cleaner v3 generator that starts from `bpy.ops.wm.read_factory_settings(use_empty=True)` on every run.
+- The old generated Blender scene is not appended to or reused; the script overwrites `ww_gf_entrance_westwing.blend` and both GLBs from a fresh scene.
+- Used `Documents/art_reference_intake/GF_EntranceHall.md` and `Documents/art_reference_intake/GF_WestWingHall.md` as the visual target.
+- Added stronger modeled wainscoting, floorboard lines, layered cornice, chunky doorframes, raised door panels, repeated sconces, ragged runner edges, carpet foot-smears, plaster patches, ceiling cracks, wall-memory handprints, room glimpses for Library/Dining/Kitchen, and a darker West Wing end wall for the threshold scare.
+- Preserved existing gameplay marker names and export paths.
+- Updated wrapper metadata to `controlled_v3_visual_shell` for Entrance Hall and `controlled_v3_preview` for West Wing Hall.
 - Validation passed on 2026-06-16:
   - Smoke playthrough passed.
   - `res://scenes/main.tscn` loaded headless for 3 seconds.

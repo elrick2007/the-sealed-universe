@@ -269,9 +269,19 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Playable visual inspection and West Wing controlled promotion: inspect the v2 Entrance Hall / West Wing Hall GLBs in Godot, then promote the West Wing Hall visual shell only when the current Godot gameplay anchors and route triggers remain authoritative.
+Playable visual inspection and lighting/placement pass: inspect the v3 Entrance Hall / West Wing Hall GLBs in Godot and Blender, then tune Godot shell placement/lighting so the reference-image detail reads during play before promoting the West Wing Hall gameplay handoff.
 
 ## Latest Build Step
+
+### Entrance Hall / West Wing Hall Blender replacement v3
+
+- Rebuilt `assets/blender_source/rooms/ground/build_entrance_westwing.py` as a fresh scene generator rather than a small v2 patch.
+- Each run factory-resets Blender and overwrites `ww_gf_entrance_westwing.blend`, `gf_entrance_hall.glb`, and `gf_west_wing_hall.glb` from scratch.
+- Used the new Entrance Hall and West Wing Hall reference intake docs as the visual target.
+- Added stronger modeled wainscoting, floorboard lines, layered cornice, chunky doorframes, raised door panels, repeated sconces, ragged runner edges, carpet foot-smears, plaster patches, ceiling cracks, wall-memory handprints, room glimpses, and darker West Wing threshold-scare staging.
+- Preserved the existing marker names for recorder, key, whisper wall, chandelier sightline, manor plans, West Wing scare, Caton 42/47 measurement, and route doors.
+- Updated wrapper metadata to v3 status.
+- Validation passed: smoke playthrough, main scene headless load, and menu scene headless load.
 
 ### Entrance Hall / West Wing Hall Blender replacement v2
 
