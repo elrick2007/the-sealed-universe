@@ -263,9 +263,16 @@ Add Git LFS later before committing large `.blend`, `.wav`, `.mp4`, or final hig
 
 ## Next Build Step
 
-Godot side-by-side GLB route proof v1: run the playable starter route while the Entrance Hall and West Wing Hall GLB wrapper previews are instanced beside the blockout, then verify player scale, sightlines, route prompts, marker names, visibility, and collision before replacing the playable rooms.
+Entrance Hall controlled replacement v1: replace only the Entrance Hall blockout shell with the imported GLB wrapper while preserving the current gameplay nodes, route prompts, pickups, wall inspection, door logic, and smoke-playthrough path.
 
 ## Latest Build Step
+
+### Godot side-by-side GLB route proof v1
+
+- Confirmed `res://scenes/main.tscn` loads with `BlenderImportPreview` and both GLB wrapper scenes present.
+- Confirmed the smoke playthrough still passes while the imported GLBs are preview-only.
+- Verified both wrapper scenes reference exported GLBs and carry preview metadata rather than gameplay bindings.
+- Cleared the first replacement pair for controlled swap-in: Entrance Hall first, West Wing Hall second.
 
 ### Godot wrapper import test v1
 

@@ -1,6 +1,6 @@
 # Book 1 Pre-Blender Checklist
 
-Last updated: 2026-06-15
+Last updated: 2026-06-16
 
 This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider six-book mythology should be embedded as evidence, echoes, names, and endgame stingers, but Game 01 has one canon ending that follows Book 1 and leads into Book 2.
 
@@ -49,7 +49,7 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 - [x] Martin Caldwell living record: recruiter, `Status: Living`.
 - [x] Mara December 2 / Incomplete seed and 2:47 writeback.
 - [ ] Ground-floor Blender replacement: enclosed Entrance Hall, West Wing Hall, Library, Study, Dining Room, Kitchen, Conservatory, corridors, doors, ceilings, collision, and scale.
-- [ ] Entrance Hall / West Wing Hall Blender replacement pass v1: source file, GLB exports, wrapper scenes, and side-by-side route test.
+- [x] Entrance Hall / West Wing Hall Blender replacement pass v1: source file, GLB exports, wrapper scenes, and side-by-side route test.
 - [ ] Physicalize key props: recorder, keys, manor plans, place card, black-book record, tape measure, camera, kitchen clock, evidence board, lemon tree.
 - [ ] Add authored scare timing and non-flashing atmospheric reactions for each major ground-floor route.
 - [x] Purpose-lock remaining mapped ground-floor rooms: Master Bedroom, Nursery, Chapel Room, and service links.
@@ -148,8 +148,8 @@ This checklist is for Game 01 / Book 1 only: *The Whispering Walls*. The wider s
 
 ## Recommended Next Code Steps
 
-1. Build the Entrance Hall / West Wing Hall Blender source file and test GLB exports.
-2. Import first GLBs into Godot wrapper scenes.
-3. Run the side-by-side route test against the existing blockout.
+1. Replace the Entrance Hall blockout shell with the imported GLB wrapper while preserving current gameplay nodes.
+2. Verify recorder/key/wall/door prompts and collision in the replaced Entrance Hall.
+3. Replace the West Wing Hall blockout shell once the Entrance Hall proof passes.
 4. Accessibility pass for photosensitivity-safe scare effects.
-4. Exportable Living Ledger prose.
+5. Exportable Living Ledger prose.

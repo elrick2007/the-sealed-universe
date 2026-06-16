@@ -1,6 +1,6 @@
 # Entrance Hall / West Wing Hall Blender Replacement Pass v1
 
-Last updated: 2026-06-15
+Last updated: 2026-06-16
 
 ## Purpose
 
@@ -66,7 +66,7 @@ West Wing Hall:
 - [x] Add simple collision meshes.
 - [x] Export test GLBs.
 - [x] Create Godot wrapper scenes.
-- [ ] Run side-by-side route test before replacing the blockout.
+- [x] Run side-by-side route test before replacing the blockout.
 
 ## Generated v1 Notes
 
@@ -75,3 +75,10 @@ West Wing Hall:
 - Godot remains the owner of dynamic lighting, gameplay logic, and final collision verification.
 - UPBGE printed a Logic Nodes registration warning during headless startup, but the `.blend` save and both GLB exports completed successfully.
 - Added Godot wrapper scenes under `assets/imported_scenes/rooms/ground/` and instanced both exports under `BlenderImportPreview` in `scenes/main.tscn` for side-by-side inspection beside the playable blockout.
+
+## Side-By-Side Route Proof v1
+
+- Godot loads `res://scenes/main.tscn` with the `BlenderImportPreview` wrappers present.
+- The smoke playthrough still passes, so the playable starter route remains bound to the proven blockout while the imported GLBs are preview-only.
+- Wrapper scenes reference only exported GLBs from `assets/blender_exports/rooms/ground/` and carry preview metadata.
+- Replacement can now begin as a controlled pass: swap the Entrance Hall shell first, verify route prompts/collision, then swap the West Wing Hall shell.
